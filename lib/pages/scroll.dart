@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 class Example extends StatefulWidget {
-  Example({Key key, this.title}) : super(key: key);
+  static const routeName = '/scroll';
 
-  final String title;
+  Example({Key key}) : super(key: key);
 
   @override
   _ExampleState createState() => _ExampleState();
@@ -35,7 +35,7 @@ class _ExampleState extends State<Example> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('widget.title'),
       ),
       body: ListView(
         scrollDirection: scrollDirection,

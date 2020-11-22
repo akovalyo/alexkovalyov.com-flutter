@@ -6,6 +6,7 @@ import 'package:mysite/theme/adaptive.dart';
 import 'package:mysite/theme/theme.dart';
 import 'package:mysite/theme/image_placeholder.dart';
 import 'package:mysite/widgets/my_app_bar.dart';
+import 'package:mysite/widgets/drawer.dart';
 
 class MyHomePage extends StatefulWidget {
   static const routeName = '/';
@@ -35,20 +36,17 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     var _screenSize = MediaQuery.of(context).size;
-
     opacity = _scrollPos > _screenSize.height * 0.5
         ? 1
-        : _scrollPos / (_screenSize.height * 0.50);
-    print(_scrollPos);
+        : _scrollPos / (_screenSize.height * 0.5);
     return Scaffold(
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
-        preferredSize:
-            Size(_screenSize.width, isSmallScreen(context) ? 50 : 70),
-        child: MyAppBar(opacity),
+        preferredSize: Size(_screenSize.width, 70),
+        child: AkAppBar(opacity),
       ),
-      drawer: Drawer(),
+      drawer: AkDrawer(),
       body: Center(
         child: Container(
             height: 400,

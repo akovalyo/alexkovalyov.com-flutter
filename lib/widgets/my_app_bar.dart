@@ -2,23 +2,25 @@ import 'package:flutter/material.dart';
 
 import 'package:mysite/theme/adaptive.dart';
 
-class MyAppBar extends StatefulWidget {
+class AkAppBar extends StatefulWidget {
   final double opacity;
 
-  MyAppBar(this.opacity);
+  AkAppBar(this.opacity);
 
   @override
-  _MyAppBarState createState() => _MyAppBarState();
+  _AkAppBarState createState() => _AkAppBarState();
 }
 
-class _MyAppBarState extends State<MyAppBar> {
+class _AkAppBarState extends State<AkAppBar> {
   @override
   Widget build(BuildContext context) {
     var _screenSize = MediaQuery.of(context).size;
     return isSmallScreen(context)
-        ? AppBar()
+        ? AppBar(
+            backgroundColor: Theme.of(context).primaryColor,
+          )
         : Container(
-            color: Colors.black,
+            color: Theme.of(context).primaryColor,
           );
   }
 }

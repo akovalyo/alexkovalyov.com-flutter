@@ -20,23 +20,36 @@ const akAlertD = Color(0xFFA43C28);
 
 //
 
-final ThemeData lightTheme = _myLightTheme();
-final ThemeData darkTheme = _myDarkTheme();
+final ThemeData lightTheme = _akLightTheme();
+final ThemeData darkTheme = _akDarkTheme();
 
-ThemeData _myLightTheme() {
+ThemeData _akLightTheme() {
   final base = ThemeData.light();
 
   return base.copyWith(
     primaryColor: akBlackL,
     errorColor: akAlertL,
-    textTheme: GoogleFonts.davidLibreTextTheme(
-      base.textTheme.copyWith(
-        headline1: base.textTheme.headline1.copyWith(fontSize: 64),
-      ),
+    accentColor: akAccent,
+    textTheme: _akTextTheme(base.textTheme),
+    primaryIconTheme: _akIconTheme(base.iconTheme, akAccent),
+    // buttonTheme: const ButtonThemeData(
+    //   textTheme: ButtonTextTheme.accent,
+    //),
+  );
+}
+
+ThemeData _akDarkTheme() {
+  return ThemeData.dark().copyWith();
+}
+
+TextTheme _akTextTheme(TextTheme base) {
+  return GoogleFonts.davidLibreTextTheme(
+    base.copyWith(
+      headline1: base.headline1.copyWith(fontSize: 64),
     ),
   );
 }
 
-ThemeData _myDarkTheme() {
-  return ThemeData.dark().copyWith();
+IconThemeData _akIconTheme(IconThemeData original, Color color) {
+  return original.copyWith(color: color);
 }
