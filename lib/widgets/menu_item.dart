@@ -26,7 +26,7 @@ class MenuItem extends StatelessWidget {
         },
         child: Text(
           title,
-          style: TextStyle(fontSize: fontSize),
+          style: TextStyle(fontSize: fontSize, color: Colors.white),
         ),
       ),
     );

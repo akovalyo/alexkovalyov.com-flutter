@@ -10,14 +10,13 @@ class AkMenu {
   List<Widget> _getMenu(bool col) {
     return [
       MenuItem(
-        title: 'menu_1',
+        title: 'Posts',
         path: '/',
         fontSize: fontSize,
         column: col,
       ),
-      Divider(),
       MenuItem(
-        title: 'menu_2',
+        title: 'Docs',
         path: '/scroll',
         fontSize: fontSize,
         column: col,

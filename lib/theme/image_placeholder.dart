@@ -18,7 +18,8 @@ class FadeInImageAny extends StatelessWidget {
     this.width,
     this.height,
     this.fit,
-  });
+  })  : assert(image != null),
+        assert(placeholder != null);
 
   @override
   Widget build(BuildContext context) {

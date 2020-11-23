@@ -2,30 +2,34 @@ import 'package:flutter/material.dart';
 
 import 'package:mysite/widgets/ak_app_bar.dart';
 import 'package:mysite/widgets/drawer.dart';
+import 'package:mysite/widgets/scrollbar.dart';
 
 class LayoutTemplate extends StatefulWidget {
-  LayoutTemplate({Key key}) : super(key: key);
+  //LayoutTemplate({Key key}) : super(key: key);
+  final Widget child;
+
+  LayoutTemplate({@required this.child}) : assert(child != null);
 
   @override
   _LayoutTemplateState createState() => _LayoutTemplateState();
 }
 
 class _LayoutTemplateState extends State<LayoutTemplate> {
-  ScrollController _scrollController;
+  ScrollController scrollController;
   double _scrollPos = 0;
   double opacity = 0;
 
   _scrollListener() {
     setState(() {
-      _scrollPos = _scrollController.position.pixels;
+      _scrollPos = scrollController.position.pixels;
     });
   }
 
   @override
   void initState() {
     super.initState();
-    _scrollController = ScrollController();
-    _scrollController.addListener(_scrollListener);
+    scrollController = ScrollController();
+    scrollController.addListener(_scrollListener);
   }
 
   @override
@@ -42,13 +46,16 @@ class _LayoutTemplateState extends State<LayoutTemplate> {
         child: AkAppBar(opacity),
       ),
       drawer: AkDrawer(),
-      body: Center(
-        child: Container(
-            height: 400,
-            child: Text(
-              'Hello',
-              style: Theme.of(context).textTheme.headline1,
-            )),
+      body: AkScrollbar(
+        scrollController: scrollController,
+        width: 10,
+        backgroundColor: Theme.of(context).primaryColor.withOpacity(0.5),
+        color: Theme.of(context).primaryColor,
+        child: SingleChildScrollView(
+          physics: ClampingScrollPhysics(),
+          controller: scrollController,
+          child: widget.child,
+        ),
       ),
     );
   }

@@ -53,6 +53,7 @@ flutter:
     - google_fonts/
     - assets/posts/2020-10-30-torch_tf_verify.md
     - assets/images/site/ak.png
+    - assets/images/site/akM.png
     - assets/images/site/main.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
