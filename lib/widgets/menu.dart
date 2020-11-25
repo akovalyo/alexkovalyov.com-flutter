@@ -21,6 +21,12 @@ class AkMenu {
         fontSize: fontSize,
         column: col,
       ),
+      MenuItem(
+        title: 'Docs',
+        path: '/scroll',
+        fontSize: fontSize,
+        column: col,
+      ),
     ];
   }
 
@@ -31,7 +37,8 @@ class AkMenu {
   }
 
   Widget row() {
-    return Row(
+    return ListView(
+      scrollDirection: Axis.horizontal,
       children: _getMenu(false),
     );
   }

@@ -16,9 +16,9 @@ class MenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: column
-          ? EdgeInsets.only(bottom: 10, top: 10)
-          : EdgeInsets.only(right: 10, left: 10),
+      // padding: column
+      //     ? EdgeInsets.only(bottom: 10, top: 10)
+      //     : EdgeInsets.only(right: 10, left: 10),
       child: FlatButton(
         onPressed: () {
           //Navigator.of(context).pushNamed(elem['link']);

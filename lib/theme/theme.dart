@@ -32,9 +32,9 @@ ThemeData _akLightTheme() {
     accentColor: akAccent,
     textTheme: _akTextTheme(base.textTheme),
     primaryIconTheme: _akIconTheme(base.iconTheme, Colors.white),
-    // buttonTheme: const ButtonThemeData(
-    //   textTheme: ButtonTextTheme.accent,
-    //),
+    buttonTheme: const ButtonThemeData(
+      textTheme: ButtonTextTheme.primary,
+    ),
   );
 }
 

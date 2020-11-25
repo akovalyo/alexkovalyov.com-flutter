@@ -15,21 +15,27 @@ class LayoutTemplate extends StatefulWidget {
 }
 
 class _LayoutTemplateState extends State<LayoutTemplate> {
-  ScrollController scrollController;
+  // ScrollController controller;
   double _scrollPos = 0;
   double opacity = 0;
 
-  _scrollListener() {
-    setState(() {
-      _scrollPos = scrollController.position.pixels;
-    });
-  }
+  // _scrollListener() {
+  //   setState(() {
+  //     _scrollPos = controller.position.pixels;
+  //   });
+  // }
 
-  @override
-  void initState() {
-    super.initState();
-    scrollController = ScrollController();
-    scrollController.addListener(_scrollListener);
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   controller = ScrollController();
+  //   controller.addListener(_scrollListener);
+  // }
+
+  _updateScroll(ScrollMetrics metrics) {
+    setState(() {
+      _scrollPos = metrics.pixels;
+    });
   }
 
   @override
@@ -46,17 +52,43 @@ class _LayoutTemplateState extends State<LayoutTemplate> {
         child: AkAppBar(opacity),
       ),
       drawer: AkDrawer(),
-      body: AkScrollbar(
-        scrollController: scrollController,
-        width: 10,
-        backgroundColor: Theme.of(context).primaryColor.withOpacity(0.5),
-        color: Theme.of(context).primaryColor,
-        child: SingleChildScrollView(
-          physics: ClampingScrollPhysics(),
-          controller: scrollController,
-          child: widget.child,
+      body: Scrollbar(
+        radius: Radius.circular(20),
+        child: NotificationListener<ScrollNotification>(
+          onNotification: (scrollNotification) {
+            _updateScroll(scrollNotification.metrics);
+            return false;
+          },
+          child: Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
+              widget.child,
+              // SingleChildScrollView(
+              //   physics: ClampingScrollPhysics(),
+              //   controller: controller,
+              //   child: widget.child,
+              // ),
+            ],
+          ),
         ),
       ),
+
+      // body: Stack(
+      //   alignment: Alignment.center,
+      //   children: <Widget>[
+      //     SingleChildScrollView(
+      //       physics: ClampingScrollPhysics(),
+      //       controller: controller,
+      //       child: widget.child,
+      //     ),
+      //     AkScrollbar(
+      //       scrollController: controller,
+      //       width: 10,
+      //       backgroundColor: Theme.of(context).primaryColor.withOpacity(0.5),
+      //       color: Theme.of(context).primaryColor,
+      //     ),
+      //   ],
+      // ),
     );
   }
 }
