@@ -1,22 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-//
-
-const paddingLarge = 200.0;
-const paddingSmall = 30.0;
-
-// Colors
-
-const akBlackL = Color(0xFF3F3F3F);
-const akBlackD = Color(0xFF202020);
-
-const akAccent = Color(0xFFFFDF6C);
-
-const akGrey = Color(0xFF707070);
-
-const akAlertL = Color(0xFFA43C28);
-const akAlertD = Color(0xFFA43C28);
+import 'package:mysite/theme/colors.dart';
 
 //
 
@@ -28,10 +13,12 @@ ThemeData _akLightTheme() {
 
   return base.copyWith(
     primaryColor: akBlackL,
+    primaryColorDark: akBlackLAcc,
     errorColor: akAlertL,
     accentColor: akAccent,
     textTheme: _akTextTheme(base.textTheme),
-    primaryIconTheme: _akIconTheme(base.iconTheme, Colors.white),
+    canvasColor: akBlackL,
+    iconTheme: _akIconTheme(base.iconTheme, Colors.white),
     buttonTheme: const ButtonThemeData(
       textTheme: ButtonTextTheme.primary,
     ),
@@ -46,6 +33,7 @@ TextTheme _akTextTheme(TextTheme base) {
   return GoogleFonts.davidLibreTextTheme(
     base.copyWith(
       headline1: base.headline1.copyWith(fontSize: 64),
+      bodyText2: base.bodyText2.copyWith(color: Colors.white),
     ),
   );
 }

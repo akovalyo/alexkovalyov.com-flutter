@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:mysite/widgets/ak_app_bar.dart';
 import 'package:mysite/widgets/drawer.dart';
 import 'package:mysite/widgets/scrollbar.dart';
+import 'package:mysite/layout/screen_size.dart';
+import 'package:mysite/theme/consts.dart';
 
 class LayoutTemplate extends StatefulWidget {
   //LayoutTemplate({Key key}) : super(key: key);
@@ -15,22 +17,8 @@ class LayoutTemplate extends StatefulWidget {
 }
 
 class _LayoutTemplateState extends State<LayoutTemplate> {
-  // ScrollController controller;
   double _scrollPos = 0;
   double opacity = 0;
-
-  // _scrollListener() {
-  //   setState(() {
-  //     _scrollPos = controller.position.pixels;
-  //   });
-  // }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   controller = ScrollController();
-  //   controller.addListener(_scrollListener);
-  // }
 
   _updateScroll(ScrollMetrics metrics) {
     setState(() {
@@ -40,7 +28,7 @@ class _LayoutTemplateState extends State<LayoutTemplate> {
 
   @override
   Widget build(BuildContext context) {
-    var _screenSize = MediaQuery.of(context).size;
+    var _screenSize = screenSize(context);
     opacity = _scrollPos > _screenSize.height * 0.5
         ? 1
         : _scrollPos / (_screenSize.height * 0.5);
@@ -48,7 +36,7 @@ class _LayoutTemplateState extends State<LayoutTemplate> {
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
-        preferredSize: Size(_screenSize.width, 70),
+        preferredSize: Size(_screenSize.width, appBarHeight),
         child: AkAppBar(opacity),
       ),
       drawer: AkDrawer(),

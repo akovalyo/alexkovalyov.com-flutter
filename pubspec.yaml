@@ -27,6 +27,7 @@ dependencies:
   google_fonts: ^1.1.1
   scroll_to_index: ^1.0.6
   dynamic_theme: ^1.0.1
+  hovering: ^1.0.2
 
 
   # The following adds the Cupertino Icons font to your application.

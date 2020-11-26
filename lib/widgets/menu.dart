@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:mysite/widgets/menu_item.dart';
+import 'package:mysite/router/routes.dart';
 
 class AkMenu {
   final double fontSize;
@@ -10,20 +11,20 @@ class AkMenu {
   List<Widget> _getMenu(bool col) {
     return [
       MenuItem(
-        title: 'Posts',
-        path: '/',
+        title: 'Home',
+        path: routeHome,
         fontSize: fontSize,
         column: col,
       ),
       MenuItem(
-        title: 'Docs',
-        path: '/scroll',
+        title: 'Scroll',
+        path: routeScroll,
         fontSize: fontSize,
         column: col,
       ),
       MenuItem(
-        title: 'Docs',
-        path: '/scroll',
+        title: 'Home',
+        path: routeHome2,
         fontSize: fontSize,
         column: col,
       ),

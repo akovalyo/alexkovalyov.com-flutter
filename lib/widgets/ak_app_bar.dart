@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:mysite/theme/adaptive.dart';
-import 'package:mysite/theme/image_placeholder.dart';
+import 'package:mysite/layout/adaptive.dart';
+import 'package:mysite/layout/image_placeholder.dart';
 import 'package:mysite/widgets/menu.dart';
+import 'package:mysite/router/routes.dart';
 
 class AkAppBar extends StatelessWidget {
   final double opacity;
@@ -12,6 +13,24 @@ class AkAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const String _image = 'assets/images/site/akM.png';
+    final Widget _mainIcon = Container(
+      alignment: Alignment.center,
+      child: FlatButton(
+        splashColor: Color(0x00000000),
+        hoverColor: Color(0x00000000),
+        onPressed: () => navKey.currentState.pushNamed(routeHome),
+        child: FadeInImageAny(
+          image: AssetImage(_image),
+          placeholder: SizedBox(
+            width: 40,
+            height: 60,
+          ),
+          width: 40,
+          height: 60,
+        ),
+      ),
+    );
+
     return isSmallScreen(context)
         ? Container(
             color: Theme.of(context).primaryColor.withOpacity(opacity),
@@ -28,7 +47,6 @@ class AkAppBar extends StatelessWidget {
                         builder: (BuildContext context) {
                           return IconButton(
                             icon: const Icon(Icons.menu),
-                            color: Theme.of(context).primaryIconTheme.color,
                             onPressed: () {
                               Scaffold.of(context).openDrawer();
                             },
@@ -38,18 +56,7 @@ class AkAppBar extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: FadeInImageAny(
-                        image: AssetImage(_image),
-                        placeholder: SizedBox(
-                          width: 40,
-                          height: 60,
-                        ),
-                        width: 40,
-                        height: 60,
-                      ),
-                    ),
+                    child: _mainIcon,
                   ),
                   Expanded(
                     child: Container(),
@@ -70,18 +77,7 @@ class AkAppBar extends StatelessWidget {
                     child: Container(),
                   ),
                   Expanded(
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: FadeInImageAny(
-                        image: AssetImage(_image),
-                        placeholder: SizedBox(
-                          width: 40,
-                          height: 60,
-                        ),
-                        width: 40,
-                        height: 60,
-                      ),
-                    ),
+                    child: _mainIcon,
                   ),
                   Expanded(
                     child: AkMenu(18).row(),
@@ -90,7 +86,6 @@ class AkAppBar extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: IconButton(
                       icon: Icon(Icons.settings),
-                      color: Theme.of(context).primaryIconTheme.color,
                       onPressed: () {},
                     ),
                   ),

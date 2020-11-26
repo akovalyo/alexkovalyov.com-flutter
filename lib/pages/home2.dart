@@ -1,9 +1,8 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:mysite/layout/image_placeholder.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var _screenSize = MediaQuery.of(context).size;
@@ -12,20 +11,20 @@ class HomePage extends StatelessWidget {
       child: Center(
         child: Column(
           children: [
-            SizedBox(
-              width: _screenSize.width,
-              height: _screenSize.height * 0.4,
-              child: FadeInImageAny(
-                image: AssetImage('assets/images/site/main.jpg'),
-                placeholder: SizedBox(
-                  width: _screenSize.width,
-                  height: _screenSize.height * 0.4,
-                ),
-                width: _screenSize.width,
-                height: _screenSize.height * 0.4,
-                fit: BoxFit.cover,
-              ),
-            ),
+            // SizedBox(
+            //   width: _screenSize.width,
+            //   height: _screenSize.height * 0.4,
+            //   child: FadeInImageAny(
+            //     image: AssetImage('assets/images/site/main.jpg'),
+            //     placeholder: SizedBox(
+            //       width: _screenSize.width,
+            //       height: _screenSize.height * 0.4,
+            //     ),
+            //     width: _screenSize.width,
+            //     height: _screenSize.height * 0.4,
+            //     fit: BoxFit.cover,
+            //   ),
+            // ),
             SizedBox(
               height: 70,
             ),

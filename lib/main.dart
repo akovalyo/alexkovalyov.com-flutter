@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: routeHome,
       navigatorKey: navKey,
-      onGenerateRoute: RouteGenerator.generateRoute,
+      onGenerateRoute: generateRoute,
 
       // home: LayoutTemplate(child: HomePage()),
       // routes: {
