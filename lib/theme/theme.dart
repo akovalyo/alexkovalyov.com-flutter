@@ -33,7 +33,7 @@ TextTheme _akTextTheme(TextTheme base) {
   return GoogleFonts.davidLibreTextTheme(
     base.copyWith(
       headline1: base.headline1.copyWith(fontSize: 64),
-      bodyText2: base.bodyText2.copyWith(color: Colors.white),
+      button: base.button.copyWith(color: Colors.white),
     ),
   );
 }

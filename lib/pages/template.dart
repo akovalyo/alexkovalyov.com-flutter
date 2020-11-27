@@ -7,10 +7,10 @@ import 'package:mysite/layout/screen_size.dart';
 import 'package:mysite/theme/consts.dart';
 
 class LayoutTemplate extends StatefulWidget {
-  //LayoutTemplate({Key key}) : super(key: key);
+  LayoutTemplate({Key key, @required this.child}) : super(key: key);
   final Widget child;
 
-  LayoutTemplate({@required this.child}) : assert(child != null);
+  // LayoutTemplate({@required this.child}) : assert(child != null);
 
   @override
   _LayoutTemplateState createState() => _LayoutTemplateState();

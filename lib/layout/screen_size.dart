@@ -5,7 +5,7 @@ Size screenSize(BuildContext context) {
 }
 
 double screenWidthDivided({
-  BuildContext context,
+  @required BuildContext context,
   double dividedBy = 1,
   double reducedBy = 0.0,
 }) {
@@ -13,7 +13,7 @@ double screenWidthDivided({
 }
 
 double screenHeightDevided({
-  BuildContext context,
+  @required BuildContext context,
   double dividedBy = 1,
   double reducedBy = 0.0,
 }) {

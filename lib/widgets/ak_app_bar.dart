@@ -4,6 +4,8 @@ import 'package:mysite/layout/adaptive.dart';
 import 'package:mysite/layout/image_placeholder.dart';
 import 'package:mysite/widgets/menu.dart';
 import 'package:mysite/router/routes.dart';
+import 'package:mysite/theme/consts.dart';
+import 'package:mysite/widgets/overlay_menu.dart';
 
 class AkAppBar extends StatelessWidget {
   final double opacity;
@@ -12,6 +14,9 @@ class AkAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // bool showMenu = false;
+    // OverlayEntry overlayEntry = showWeixinButtonView();
+
     const String _image = 'assets/images/site/akM.png';
     final Widget _mainIcon = Container(
       alignment: Alignment.center,
@@ -35,7 +40,7 @@ class AkAppBar extends StatelessWidget {
         ? Container(
             color: Theme.of(context).primaryColor.withOpacity(opacity),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
+              padding: const EdgeInsets.symmetric(horizontal: appBarPadding),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -68,7 +73,7 @@ class AkAppBar extends StatelessWidget {
         : Container(
             color: Theme.of(context).primaryColor.withOpacity(opacity),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
+              padding: const EdgeInsets.symmetric(horizontal: appBarPadding),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -83,10 +88,18 @@ class AkAppBar extends StatelessWidget {
                     child: AkMenu(18).row(),
                   ),
                   Container(
+                    width: 40,
+                    height: 40,
                     alignment: Alignment.centerLeft,
-                    child: IconButton(
-                      icon: Icon(Icons.settings),
-                      onPressed: () {},
+                    child: OverlayMenu(
+                      icons: [
+                        Icon(Icons.brightness_6_outlined),
+                      ],
+                      backgroundColor: Theme.of(context).primaryColor,
+                      iconColor: Theme.of(context).iconTheme.color,
+                      onChange: (index) {
+                        print(index);
+                      },
                     ),
                   ),
                 ],
