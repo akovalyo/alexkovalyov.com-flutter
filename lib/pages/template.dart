@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:mysite/widgets/ak_app_bar.dart';
 import 'package:mysite/widgets/drawer.dart';
-import 'package:mysite/widgets/scrollbar.dart';
 import 'package:mysite/layout/screen_size.dart';
 import 'package:mysite/theme/consts.dart';
 
@@ -33,7 +32,7 @@ class _LayoutTemplateState extends State<LayoutTemplate> {
         ? 1
         : _scrollPos / (_screenSize.height * 0.5);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).backgroundColor,
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
         preferredSize: Size(_screenSize.width, appBarHeight),

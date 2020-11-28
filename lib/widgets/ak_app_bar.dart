@@ -6,6 +6,7 @@ import 'package:mysite/widgets/menu.dart';
 import 'package:mysite/router/routes.dart';
 import 'package:mysite/theme/consts.dart';
 import 'package:mysite/widgets/overlay_menu.dart';
+import 'package:mysite/theme/change_theme.dart';
 
 class AkAppBar extends StatelessWidget {
   final double opacity;
@@ -14,9 +15,6 @@ class AkAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // bool showMenu = false;
-    // OverlayEntry overlayEntry = showWeixinButtonView();
-
     const String _image = 'assets/images/site/akM.png';
     final Widget _mainIcon = Container(
       alignment: Alignment.center,
@@ -98,7 +96,9 @@ class AkAppBar extends StatelessWidget {
                       backgroundColor: Theme.of(context).primaryColor,
                       iconColor: Theme.of(context).iconTheme.color,
                       onChange: (index) {
-                        print(index);
+                        if (index == 0) {
+                          changeTheme(context);
+                        }
                       },
                     ),
                   ),

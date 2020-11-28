@@ -26,7 +26,7 @@ class MenuItem extends StatelessWidget {
               fontSize: fontSize,
             )),
         textColor: Theme.of(context).textTheme.button.color,
-        hoverTextColor: Colors.red,
+        hoverTextColor: Theme.of(context).accentColor,
         hoverElevation: 0,
         focusElevation: 0,
         hoverColor: Color(0x00000000),

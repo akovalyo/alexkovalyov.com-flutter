@@ -5,31 +5,47 @@ import 'package:mysite/theme/colors.dart';
 
 //
 
-final ThemeData lightTheme = _akLightTheme();
-final ThemeData darkTheme = _akDarkTheme();
+// final ThemeData lightTheme = _akLightTheme();
+// final ThemeData darkTheme = _akDarkTheme();
 
-ThemeData _akLightTheme() {
-  final base = ThemeData.light();
+ThemeData akTheme(Brightness brightness) {
+  // final base = ThemeData.light();
 
-  return base.copyWith(
-    primaryColor: akBlackL,
-    primaryColorDark: akBlackLAcc,
-    errorColor: akAlertL,
-    accentColor: akAccent,
-    textTheme: _akTextTheme(base.textTheme),
-    canvasColor: akBlackL,
-    iconTheme: _akIconTheme(base.iconTheme, Colors.white),
-    buttonTheme: const ButtonThemeData(
-      textTheme: ButtonTextTheme.primary,
-    ),
-  );
+  return brightness == Brightness.light
+      ? ThemeData.light().copyWith(
+          brightness: brightness,
+          primaryColor: akBlackL,
+          primaryColorDark: akBlackLAcc,
+          backgroundColor: Colors.white,
+          errorColor: akAlertL,
+          accentColor: akAccent,
+          textTheme: _akTextTheme(ThemeData.light().textTheme, Colors.white),
+          canvasColor: akBlackL,
+          iconTheme: _akIconTheme(ThemeData.light().iconTheme, Colors.white),
+          buttonTheme: const ButtonThemeData(
+            textTheme: ButtonTextTheme.primary,
+          ),
+        )
+      : ThemeData.dark().copyWith(
+          brightness: brightness,
+          primaryColor: akBlackD,
+          primaryColorDark: akBlackDAcc,
+          errorColor: akAlertD,
+          accentColor: akAccent,
+          textTheme: _akTextTheme(ThemeData.dark().textTheme, Colors.black),
+          canvasColor: akBlackL,
+          iconTheme: _akIconTheme(ThemeData.dark().iconTheme, Colors.white),
+          buttonTheme: const ButtonThemeData(
+            textTheme: ButtonTextTheme.primary,
+          ),
+        );
 }
 
-ThemeData _akDarkTheme() {
-  return ThemeData.dark().copyWith();
-}
+// ThemeData _akDarkTheme() {
+//   return ThemeData.dark().copyWith();
+// }
 
-TextTheme _akTextTheme(TextTheme base) {
+TextTheme _akTextTheme(TextTheme base, Color color) {
   return GoogleFonts.davidLibreTextTheme(
     base.copyWith(
       headline1: base.headline1.copyWith(fontSize: 64),
