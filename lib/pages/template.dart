@@ -50,32 +50,10 @@ class _LayoutTemplateState extends State<LayoutTemplate> {
             alignment: Alignment.center,
             children: <Widget>[
               widget.child,
-              // SingleChildScrollView(
-              //   physics: ClampingScrollPhysics(),
-              //   controller: controller,
-              //   child: widget.child,
-              // ),
             ],
           ),
         ),
       ),
-
-      // body: Stack(
-      //   alignment: Alignment.center,
-      //   children: <Widget>[
-      //     SingleChildScrollView(
-      //       physics: ClampingScrollPhysics(),
-      //       controller: controller,
-      //       child: widget.child,
-      //     ),
-      //     AkScrollbar(
-      //       scrollController: controller,
-      //       width: 10,
-      //       backgroundColor: Theme.of(context).primaryColor.withOpacity(0.5),
-      //       color: Theme.of(context).primaryColor,
-      //     ),
-      //   ],
-      // ),
     );
   }
 }

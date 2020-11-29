@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:mysite/layout/image_placeholder.dart';
+import 'package:mysite/view/posts_view.dart';
+import 'package:mysite/layout/adaptive.dart';
+import 'package:mysite/theme/consts.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -27,48 +30,13 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 70,
+                height: 40,
               ),
-              SizedBox(
-                height: 300,
-                child: PopupMenuButton(
-                  itemBuilder: (_) => <PopupMenuEntry<String>>[
-                    PopupMenuItem(
-                      child: Text('First'),
-                    ),
-                    PopupMenuItem(
-                      child: Text('Second'),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 300,
-                child: DropdownButton(items: [
-                  DropdownMenuItem(value: "1", child: Text("1")),
-                  DropdownMenuItem(value: "2", child: Text("2")),
-                ], onChanged: (value) {}),
-              ),
-              SizedBox(
-                height: 300,
-                child: Text(
-                  'Hello3',
-                  style: Theme.of(context).textTheme.headline1,
-                ),
-              ),
-              SizedBox(
-                height: 300,
-                child: Text(
-                  'Hello',
-                  style: Theme.of(context).textTheme.headline1,
-                ),
-              ),
-              SizedBox(
-                height: 300,
-                child: Text(
-                  'Hello',
-                  style: Theme.of(context).textTheme.headline1,
-                ),
+              Container(
+                padding: EdgeInsets.symmetric(
+                    horizontal:
+                        isSmallScreen(context) ? paddingSmall : paddingLarge),
+                child: PostsListView(),
               ),
             ],
           ),

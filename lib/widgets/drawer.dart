@@ -4,6 +4,8 @@ import 'package:mysite/widgets/menu.dart';
 import 'package:mysite/layout/screen_size.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:mysite/widgets/choice_chip.dart';
+import 'package:mysite/layout/image_placeholder.dart';
+import 'package:mysite/theme/consts.dart';
 
 class AkDrawer extends StatelessWidget {
   @override
@@ -49,7 +51,15 @@ class AkDrawer extends StatelessWidget {
                     ),
                   ),
                   Center(
-                    child: Text('Alex Kovalyov'),
+                    child: FadeInImageAny(
+                      image: AssetImage(mainImage),
+                      placeholder: SizedBox(
+                        width: 80,
+                        height: 80,
+                      ),
+                      width: 80,
+                      height: 80,
+                    ),
                   ),
                 ],
               ),
@@ -61,18 +71,22 @@ class AkDrawer extends StatelessWidget {
                 child: AkMenu(24).column(),
               ),
             ),
+            Divider(),
 
+            Container(
+              alignment: Alignment.center,
+              padding: EdgeInsets.only(bottom: 10),
+              child: Text(
+                'Select Theme',
+                style: TextStyle(color: Colors.white, fontSize: 24),
+              ),
+            ),
             Container(
               alignment: Alignment.center,
               child: ThemeChoiceChip(onSelectedTheme: (brightness) {
                 DynamicTheme.of(context).setBrightness(brightness);
               }),
             ),
-            // BrightnessSwitcherDialog(
-            //   onSelectedTheme: (brightness) {
-            //     DynamicTheme.of(context).setBrightness(brightness);
-            //   },
-            // ),
           ],
         ),
       ),

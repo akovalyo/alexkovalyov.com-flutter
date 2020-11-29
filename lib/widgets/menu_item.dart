@@ -34,27 +34,12 @@ class MenuItem extends StatelessWidget {
         disabledColor: Color(0x00000000),
         focusColor: Color(0x00000000),
         splashColor: Color(0x00000000),
-
         onpressed: () {
           navKey.currentState.pushNamed(path);
           if (column) {
             Scaffold.of(context).openEndDrawer();
           }
         },
-
-        // child: FlatButton(
-
-        //   onPressed: () {
-        //     navKey.currentState.pushNamed(path);
-        //     if (column) {
-        //       Scaffold.of(context).openEndDrawer();
-        //     }
-        //   },
-        //   child: Text(
-        //     title,
-        //     style: TextStyle(fontSize: fontSize, color: Colors.white),
-        //   ),
-        // ),
       ),
     );
   }

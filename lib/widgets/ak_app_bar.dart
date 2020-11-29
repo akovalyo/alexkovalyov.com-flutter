@@ -15,7 +15,6 @@ class AkAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const String _image = 'assets/images/site/akM.png';
     final Widget _mainIcon = Container(
       alignment: Alignment.center,
       child: FlatButton(
@@ -23,7 +22,7 @@ class AkAppBar extends StatelessWidget {
         hoverColor: Color(0x00000000),
         onPressed: () => navKey.currentState.pushNamed(routeHome),
         child: FadeInImageAny(
-          image: AssetImage(_image),
+          image: AssetImage(mainImage),
           placeholder: SizedBox(
             width: 40,
             height: 60,

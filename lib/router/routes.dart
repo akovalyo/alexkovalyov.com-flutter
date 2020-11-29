@@ -7,6 +7,7 @@ import 'package:mysite/pages/scroll.dart';
 const String routeHome = '/';
 const String routeScroll = '/scroll';
 const String routeHome2 = '/home2';
+const String routePosts = '/posts';
 
 var routes = {
   routeHome: HomePage(),
