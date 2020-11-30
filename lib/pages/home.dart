@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(
                     horizontal:
                         isSmallScreen(context) ? paddingSmall : paddingLarge),
-                child: PostsListView(),
+                child: PostsGetter(),
               ),
             ],
           ),
