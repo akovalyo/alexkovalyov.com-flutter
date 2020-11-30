@@ -4,11 +4,14 @@ import 'package:mysite/widgets/ak_app_bar.dart';
 import 'package:mysite/widgets/drawer.dart';
 import 'package:mysite/layout/screen_size.dart';
 import 'package:mysite/theme/consts.dart';
+import 'package:mysite/widgets/main_inherited.dart';
 
 class LayoutTemplate extends StatefulWidget {
-  LayoutTemplate({Key key, @required this.child}) : super(key: key);
-  final Widget child;
+  //final Widget child;
+  //final List posts;
 
+  //LayoutTemplate({Key key, @required this.child, @required this.posts})
+  //    : super(key: key);
   // LayoutTemplate({@required this.child}) : assert(child != null);
 
   @override
@@ -27,6 +30,8 @@ class _LayoutTemplateState extends State<LayoutTemplate> {
 
   @override
   Widget build(BuildContext context) {
+    final myInheritedWidget = MainInheritedWidget.of(context);
+
     var _screenSize = screenSize(context);
     opacity = _scrollPos > _screenSize.height * 0.5
         ? 1
@@ -49,7 +54,7 @@ class _LayoutTemplateState extends State<LayoutTemplate> {
           child: Stack(
             alignment: Alignment.center,
             children: <Widget>[
-              widget.child,
+              myInheritedWidget.ch,
             ],
           ),
         ),

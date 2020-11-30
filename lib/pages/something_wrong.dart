@@ -10,14 +10,10 @@ class SomethingWentWrong extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: akTheme(Brightness.light),
       home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).primaryColor,
-          leading: Container(),
-        ),
         body: Center(
           child: Container(
             child: Text('Oops! Something went wrong',
-                style: Theme.of(context).textTheme.headline1),
+                style: Theme.of(context).textTheme.headline5),
           ),
         ),
       ),

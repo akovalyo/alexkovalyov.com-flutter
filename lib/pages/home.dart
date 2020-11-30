@@ -4,11 +4,13 @@ import 'package:mysite/layout/image_placeholder.dart';
 import 'package:mysite/view/posts_view.dart';
 import 'package:mysite/layout/adaptive.dart';
 import 'package:mysite/theme/consts.dart';
+import 'package:mysite/widgets/main_inherited.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var _screenSize = MediaQuery.of(context).size;
+    List posts = MainInheritedWidget.of(context).posts;
 
     return Container(
       child: SingleChildScrollView(
@@ -36,7 +38,16 @@ class HomePage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(
                     horizontal:
                         isSmallScreen(context) ? paddingSmall : paddingLarge),
-                child: PostsGetter(),
+                child: Center(
+                  child: FlatButton(
+                    child: Text('Press'),
+                    onPressed: () {
+                      print(posts);
+                    },
+                  ),
+                ),
+
+                //Text('Hello') //PostsGetter(),
               ),
             ],
           ),

@@ -2,6 +2,7 @@ import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mysite/pages/template.dart';
 
 // class PostModel {
 //   final String title;
@@ -18,32 +19,34 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class PostsGetter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final Query postsRef = FirebaseFirestore.instance.collection('posts');
+    // final Query postsRef = FirebaseFirestore.instance.collection('posts');
 
-    return FutureBuilder<QuerySnapshot>(
-      future: postsRef.get(),
-      builder: (BuildContext context, snapshot) {
-        if (snapshot.hasError) {
-          return Center(child: Text("Something went wrong"));
-        }
-        if (snapshot.connectionState == ConnectionState.done) {
-          // _posts = snapshot.data.docs.toList();
-          // print(snapshot.data.docs[0].data());
+    // return FutureBuilder<QuerySnapshot>(
+    //   future: postsRef.get(),
+    //   builder: (BuildContext context, snapshot) {
+    //     if (snapshot.hasError) {
+    //       return Center(child: Text("Something went wrong"));
+    //     }
+    //     if (snapshot.connectionState == ConnectionState.done) {
+    //       // _posts = snapshot.data.docs.toList();
+    //       // print(snapshot.data.docs[0].data());
 
-          snapshot.data.docs.forEach((pst) {
-            print(pst.data());
-          });
-          return PostsView();
-        }
-        return Center(
-          child: CircularProgressIndicator(),
-        );
-      },
-    );
+    //       snapshot.data.docs.forEach((pst) {
+    //         print(pst.data());
+    //       });
+    //       return PostsView();
+    //     }
+    //     return Center(
+    //       child: CircularProgressIndicator(),
+    //     );
+    //   },
+    // );
   }
 }
 
 class PostsView extends StatelessWidget {
+  // List posts =
+
   @override
   Widget build(BuildContext context) {
     return Wrap(

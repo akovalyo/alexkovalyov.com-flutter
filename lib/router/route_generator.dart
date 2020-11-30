@@ -7,7 +7,10 @@ import 'package:mysite/router/routes.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   if (routes[settings.name] == null) return _getPageRoute(Page404(), settings);
-  return _getPageRoute(routes[settings.name], settings);
+  return _getPageRoute(
+    routes[settings.name],
+    settings,
+  );
   // switch (settings.name) {
   //   case routeHome:
   //     return _getPageRoute(HomePage(), settings);
