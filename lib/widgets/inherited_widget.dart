@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mysite/models/posts_model.dart';
 
 class MainInheritedWidget extends InheritedWidget {
-  final List posts;
+  final PostsModel posts;
   final Widget ch;
   MainInheritedWidget(this.posts, this.ch, Widget child) : super(child: child);
 

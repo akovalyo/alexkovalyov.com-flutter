@@ -4,7 +4,7 @@ import 'package:mysite/widgets/ak_app_bar.dart';
 import 'package:mysite/widgets/drawer.dart';
 import 'package:mysite/layout/screen_size.dart';
 import 'package:mysite/theme/consts.dart';
-import 'package:mysite/widgets/main_inherited.dart';
+import 'package:mysite/widgets/inherited_widget.dart';
 
 class LayoutTemplate extends StatefulWidget {
   //final Widget child;
@@ -31,7 +31,6 @@ class _LayoutTemplateState extends State<LayoutTemplate> {
   @override
   Widget build(BuildContext context) {
     final myInheritedWidget = MainInheritedWidget.of(context);
-
     var _screenSize = screenSize(context);
     opacity = _scrollPos > _screenSize.height * 0.5
         ? 1

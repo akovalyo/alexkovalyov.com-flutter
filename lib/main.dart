@@ -9,7 +9,8 @@ import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mysite/pages/something_wrong.dart';
 import 'package:mysite/pages/waiting_screen.dart';
-import 'package:mysite/widgets/main_inherited.dart';
+import 'package:mysite/widgets/inherited_widget.dart';
+import 'package:mysite/models/posts_model.dart';
 
 void main() {
   runApp(MyApp());
@@ -28,7 +29,6 @@ class MyApp extends StatelessWidget {
         }
         if (snapshot.connectionState == ConnectionState.done) {
           final Query postsRef = FirebaseFirestore.instance.collection('posts');
-          List posts = [];
 
           return FutureBuilder<QuerySnapshot>(
             future: postsRef.get(),
@@ -37,9 +37,12 @@ class MyApp extends StatelessWidget {
                 return SomethingWentWrong();
               }
               if (snapshot.connectionState == ConnectionState.done) {
+                List<Map> queryList = [];
                 snapshot.data.docs.forEach((pst) {
-                  posts.add(pst.data());
+                  queryList.add(pst.data());
                 });
+                PostsModel posts = PostsModel(queryList);
+
                 return DynamicTheme(
                   defaultBrightness: Brightness.light,
                   data: (brightness) => akTheme(brightness),
