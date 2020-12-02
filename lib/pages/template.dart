@@ -5,6 +5,7 @@ import 'package:mysite/widgets/drawer.dart';
 import 'package:mysite/layout/screen_size.dart';
 import 'package:mysite/theme/consts.dart';
 import 'package:mysite/widgets/inherited_widget.dart';
+import 'package:mysite/router/routes.dart';
 
 class LayoutTemplate extends StatefulWidget {
   //final Widget child;
@@ -35,26 +36,28 @@ class _LayoutTemplateState extends State<LayoutTemplate> {
     opacity = _scrollPos > _screenSize.height * 0.5
         ? 1
         : _scrollPos / (_screenSize.height * 0.5);
-    return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
-      extendBodyBehindAppBar: true,
-      appBar: PreferredSize(
-        preferredSize: Size(_screenSize.width, appBarHeight),
-        child: AkAppBar(opacity),
-      ),
-      drawer: AkDrawer(),
-      body: Scrollbar(
-        radius: Radius.circular(20),
-        child: NotificationListener<ScrollNotification>(
-          onNotification: (scrollNotification) {
-            _updateScroll(scrollNotification.metrics);
-            return false;
-          },
-          child: Stack(
-            alignment: Alignment.center,
-            children: <Widget>[
-              myInheritedWidget.ch,
-            ],
+    return LayoutBuilder(
+      builder: (context, constraints) => Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
+        extendBodyBehindAppBar: true,
+        appBar: PreferredSize(
+          preferredSize: Size(_screenSize.width, appBarHeight),
+          child: AkAppBar(opacity),
+        ),
+        drawer: AkDrawer(),
+        body: Scrollbar(
+          radius: Radius.circular(20),
+          child: NotificationListener<ScrollNotification>(
+            onNotification: (scrollNotification) {
+              _updateScroll(scrollNotification.metrics);
+              return false;
+            },
+            child: Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                myInheritedWidget.ch,
+              ],
+            ),
           ),
         ),
       ),

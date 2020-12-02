@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:hovering/hovering.dart';
 import 'package:mysite/theme/consts.dart';
 import 'package:mysite/layout/adaptive.dart';
@@ -28,10 +29,16 @@ class PostsModel {
             hoverHeight:
                 _isSmallScr ? gridPostsHeightS + 10 : gridPostsHeightL + 10,
             color: Colors.black,
-            child: Image(
-              fit: BoxFit.fill,
-              image: NetworkImage(elem['image']),
+            child: GestureDetector(
+              onTap: () {
+                print("ok");
+              },
+              child: Image(
+                fit: BoxFit.fill,
+                image: NetworkImage(elem['image']),
+              ),
             ),
+            cursor: SystemMouseCursors.click,
           ),
           Container(
             padding: EdgeInsets.all(10),

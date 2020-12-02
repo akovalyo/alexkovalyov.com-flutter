@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:mysite/layout/image_placeholder.dart';
-import 'package:mysite/view/posts_view.dart';
 import 'package:mysite/layout/adaptive.dart';
 import 'package:mysite/theme/consts.dart';
 import 'package:mysite/widgets/inherited_widget.dart';
 import 'package:mysite/models/posts_model.dart';
-import 'package:hovering/hovering.dart';
 
 class HomePage extends StatelessWidget {
+  bool barOpacity() => false;
+
   @override
   Widget build(BuildContext context) {
     var _screenSize = MediaQuery.of(context).size;
@@ -16,6 +16,7 @@ class HomePage extends StatelessWidget {
 
     return Container(
       child: SingleChildScrollView(
+        physics: ClampingScrollPhysics(),
         child: Center(
           child: Column(
             children: [
@@ -40,15 +41,11 @@ class HomePage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(
                     horizontal:
                         isSmallScreen(context) ? paddingSmall : paddingLarge),
-                child: Center(
-                  child: Wrap(
-                    spacing: 40,
-                    runSpacing: 40,
-                    children: postsModel.postCards(context),
-                  ),
+                child: Wrap(
+                  spacing: 40,
+                  runSpacing: 40,
+                  children: postsModel.postCards(context),
                 ),
-
-                //Text('Hello') //PostsGetter(),
               ),
             ],
           ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:mysite/widgets/menu.dart';
+import 'package:mysite/models/menu.dart';
 import 'package:mysite/layout/screen_size.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:mysite/widgets/choice_chip.dart';

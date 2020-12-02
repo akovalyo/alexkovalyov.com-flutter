@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:mysite/layout/adaptive.dart';
 import 'package:mysite/layout/image_placeholder.dart';
-import 'package:mysite/widgets/menu.dart';
+import 'package:mysite/models/menu.dart';
 import 'package:mysite/router/routes.dart';
 import 'package:mysite/theme/consts.dart';
 import 'package:mysite/widgets/overlay_menu.dart';

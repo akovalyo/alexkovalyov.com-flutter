@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:mysite/layout/image_placeholder.dart';
-
 class HomePage2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var _screenSize = MediaQuery.of(context).size;
-
     return SingleChildScrollView(
       child: Center(
         child: Column(

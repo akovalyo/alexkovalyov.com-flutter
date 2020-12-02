@@ -11,7 +11,7 @@ class AkMenu {
   List<Widget> _getMenu(bool col) {
     return [
       MenuItem(
-        title: 'Home',
+        title: 'Posts',
         path: routeHome,
         fontSize: fontSize,
         column: col,

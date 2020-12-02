@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
           final Query postsRef = FirebaseFirestore.instance.collection('posts');
 
           return FutureBuilder<QuerySnapshot>(
-            future: postsRef.get(),
+            future: postsRef.orderBy('date', descending: true).get(),
             builder: (BuildContext context, snapshot) {
               if (snapshot.hasError) {
                 return SomethingWentWrong();
