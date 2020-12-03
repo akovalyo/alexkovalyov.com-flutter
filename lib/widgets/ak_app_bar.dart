@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:mysite/layout/adaptive.dart';
 import 'package:mysite/layout/image_placeholder.dart';
-import 'package:mysite/models/menu.dart';
 import 'package:mysite/router/routes.dart';
 import 'package:mysite/theme/consts.dart';
 import 'package:mysite/widgets/overlay_menu.dart';
 import 'package:mysite/theme/change_theme.dart';
+import 'package:mysite/models/menu_model.dart';
 
 class AkAppBar extends StatelessWidget {
   final double opacity;
@@ -15,7 +16,8 @@ class AkAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Widget _mainIcon = Container(
+    final menu = Provider.of<AkMenu>(context, listen: false);
+    final _mainIcon = Container(
       alignment: Alignment.center,
       child: FlatButton(
         splashColor: Color(0x00000000),
@@ -82,7 +84,10 @@ class AkAppBar extends StatelessWidget {
                     child: _mainIcon,
                   ),
                   Expanded(
-                    child: AkMenu(18).row(),
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: menu.getMenuList(18.0, false),
+                    ),
                   ),
                   Container(
                     width: 40,

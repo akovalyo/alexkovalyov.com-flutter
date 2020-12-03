@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import 'package:flutter/rendering.dart';
 import 'package:hovering/hovering.dart';
@@ -10,12 +9,11 @@ class Posts with ChangeNotifier {
   List<Map> postsList;
 
   Posts(this.postsList);
-  //PostsModel(this.posts);
 
-  List getPosts(BuildContext context) {
+  List<Widget> getPosts(BuildContext context) {
     print("postCards");
     final bool _isSmallScr = isSmallScreen(context);
-    List<Widget> cards = postsList.map((elem) {
+    final cards = postsList.map((elem) {
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

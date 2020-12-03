@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:mysite/layout/image_placeholder.dart';
 import 'package:mysite/layout/adaptive.dart';
 import 'package:mysite/theme/consts.dart';
-import 'package:mysite/providers/posts_provider.dart';
+import 'package:mysite/models/posts_model.dart';
 
 class HomePage extends StatelessWidget {
   @override

@@ -10,7 +10,8 @@ import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mysite/pages/something_wrong.dart';
 import 'package:mysite/pages/waiting_screen.dart';
-import 'package:mysite/providers/posts_provider.dart';
+import 'package:mysite/models/posts_model.dart';
+import 'package:mysite/models/menu_model.dart';
 
 void main() {
   runApp(MyApp());
@@ -43,8 +44,15 @@ class MyApp extends StatelessWidget {
                 });
                 //final postsModel = PostsModel(queryList);
 
-                return ChangeNotifierProvider(
-                  create: (_) => Posts(queryList),
+                return MultiProvider(
+                  providers: [
+                    ChangeNotifierProvider(
+                      create: (_) => Posts(queryList),
+                    ),
+                    ChangeNotifierProvider(
+                      create: (_) => AkMenu(),
+                    ),
+                  ],
                   child: DynamicTheme(
                     defaultBrightness: Brightness.light,
                     data: (brightness) => akTheme(brightness),
