@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:flutter/rendering.dart';
 import 'package:hovering/hovering.dart';
 import 'package:mysite/theme/consts.dart';
 import 'package:mysite/layout/adaptive.dart';
 
-class PostItem {}
+class Posts with ChangeNotifier {
+  List<Map> postsList;
 
-class PostsModel {
-  final List posts;
+  Posts(this.postsList);
+  //PostsModel(this.posts);
 
-  PostsModel(this.posts);
-
-  List get postsList {
-    return posts;
-  }
-
-  List postCards(BuildContext context) {
+  List getPosts(BuildContext context) {
+    print("postCards");
     final bool _isSmallScr = isSmallScreen(context);
-    List<Widget> cards = posts.map((elem) {
+    List<Widget> cards = postsList.map((elem) {
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

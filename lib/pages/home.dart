@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:mysite/layout/image_placeholder.dart';
 import 'package:mysite/layout/adaptive.dart';
 import 'package:mysite/theme/consts.dart';
-import 'package:mysite/widgets/inherited_widget.dart';
-import 'package:mysite/models/posts_model.dart';
+import 'package:mysite/providers/posts_provider.dart';
 
 class HomePage extends StatelessWidget {
-  bool barOpacity() => false;
-
   @override
   Widget build(BuildContext context) {
-    var _screenSize = MediaQuery.of(context).size;
-    PostsModel postsModel = MainInheritedWidget.of(context).posts;
+    final postsData = Provider.of<Posts>(context, listen: false);
+    final posts = postsData.getPosts(context);
+    final _screenSize = MediaQuery.of(context).size;
 
     return Container(
       child: SingleChildScrollView(
@@ -44,7 +43,7 @@ class HomePage extends StatelessWidget {
                 child: Wrap(
                   spacing: 40,
                   runSpacing: 40,
-                  children: postsModel.postCards(context),
+                  children: posts,
                 ),
               ),
             ],
