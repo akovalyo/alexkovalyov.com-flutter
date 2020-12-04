@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:mysite/pages/home.dart';
 import 'package:mysite/pages/home2.dart';
-import 'package:mysite/pages/scroll.dart';
+import 'package:mysite/pages/example.dart';
 
 const String routeHome = '/';
 const String routeScroll = '/scroll';

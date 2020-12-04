@@ -15,7 +15,7 @@ class AkMenu with ChangeNotifier {
     },
     {
       'title': 'Home2',
-      'path': routeHome,
+      'path': routeHome2,
     },
   ];
 

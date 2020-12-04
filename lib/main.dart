@@ -12,6 +12,7 @@ import 'package:mysite/pages/something_wrong.dart';
 import 'package:mysite/pages/waiting_screen.dart';
 import 'package:mysite/models/posts_model.dart';
 import 'package:mysite/models/menu_model.dart';
+import 'package:mysite/models/scroll.dart';
 
 void main() {
   runApp(MyApp());
@@ -51,6 +52,9 @@ class MyApp extends StatelessWidget {
                     ),
                     ChangeNotifierProvider(
                       create: (_) => AkMenu(),
+                    ),
+                    ChangeNotifierProvider(
+                      create: (_) => Scroll(),
                     ),
                   ],
                   child: DynamicTheme(

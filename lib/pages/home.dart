@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:mysite/layout/image_placeholder.dart';
-import 'package:mysite/layout/adaptive.dart';
+import 'package:mysite/layout/screen_size.dart';
 import 'package:mysite/theme/consts.dart';
 import 'package:mysite/models/posts_model.dart';
 
@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
     final postsData = Provider.of<Posts>(context, listen: false);
     final posts = postsData.getPosts(context);
     final _screenSize = MediaQuery.of(context).size;
-
+    print("Home");
     return Container(
       child: SingleChildScrollView(
         physics: ClampingScrollPhysics(),
@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
               Container(

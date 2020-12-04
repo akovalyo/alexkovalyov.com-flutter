@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:mysite/layout/adaptive.dart';
+import 'package:mysite/layout/screen_size.dart';
 import 'package:mysite/layout/image_placeholder.dart';
 import 'package:mysite/router/routes.dart';
 import 'package:mysite/theme/consts.dart';
 import 'package:mysite/widgets/overlay_menu.dart';
 import 'package:mysite/theme/change_theme.dart';
 import 'package:mysite/models/menu_model.dart';
+import 'package:mysite/models/scroll.dart';
 
 class AkAppBar extends StatelessWidget {
-  final double opacity;
-
-  AkAppBar(this.opacity);
-
   @override
   Widget build(BuildContext context) {
     final menu = Provider.of<AkMenu>(context, listen: false);
+    final opacity = Provider.of<Scroll>(context).opacity;
     final _mainIcon = Container(
       alignment: Alignment.center,
       child: FlatButton(
@@ -34,7 +32,7 @@ class AkAppBar extends StatelessWidget {
         ),
       ),
     );
-
+    print("opacity: $opacity");
     return isSmallScreen(context)
         ? Container(
             color: Theme.of(context).primaryColor.withOpacity(opacity),

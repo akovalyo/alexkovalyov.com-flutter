@@ -28,8 +28,8 @@ class FadeInImageAny extends StatelessWidget {
       width: width,
       height: height,
       fit: fit,
-      frameBuilder: (context, child, frame, wasSynchronousluLoaded) {
-        if (wasSynchronousluLoaded || !kIsWeb) {
+      frameBuilder: (context, child, frame, wasSyncLoaded) {
+        if (wasSyncLoaded || !kIsWeb) {
           return this.child ?? child;
         } else {
           return AnimatedSwitcher(
