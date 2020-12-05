@@ -3,36 +3,49 @@ import 'package:flutter/rendering.dart';
 
 import 'package:mysite/theme/consts.dart';
 import 'package:mysite/widgets/hover_image.dart';
+import 'package:mysite/layout/screen_size.dart';
+import 'package:mysite/router/routes.dart';
 
-class Posts with ChangeNotifier {
-  List<Map> postsList;
+class PostsModel with ChangeNotifier {
+  Map<String, Map> postsMap;
+  PostsModel(this.postsMap);
 
-  Posts(this.postsList);
+  bool postExist(String path) {
+    return postsMap.containsKey(path);
+  }
 
   List<Widget> getPosts(BuildContext context) {
-    print("postCards");
-    final cards = postsList.map((elem) {
-      return Column(
+    final _isSmall = isSmallScreen(context);
+    final _cardSize = _isSmall
+        ? Size(postCardSWidth, postCardSHeight)
+        : Size(postCardLWidth, postCardLHeight);
+    final _cardHoverSize = _isSmall
+        ? Size(postCardSHoverWidth, postCardSHoverHeight)
+        : Size(postCardLHoverWidth, postCardLHoverHeight);
+    List<Widget> _cards = [];
+
+    postsMap.forEach((key, value) {
+      _cards.add(Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           GestureDetector(
             onTap: () {
-              print("ok");
+              navKey.currentState.pushNamed(value['path']);
             },
             child: HoverAnimatedImage(
-              width: 380,
-              hoverWidth: 395,
-              height: 160,
-              hoverHeight: 175,
-              image: elem['image'],
+              width: _cardSize.width,
+              hoverWidth: _cardHoverSize.width,
+              height: _cardSize.height,
+              hoverHeight: _cardHoverSize.height,
+              image: value['image'],
               borderRadius: 10,
             ),
           ),
           Container(
             padding: EdgeInsets.all(10),
-            width: gridPostsWidthL,
+            width: _cardSize.width,
             child: Text(
-              elem['title'],
+              value['title'],
               style: TextStyle(
                 color: Theme.of(context).primaryColor,
               ),
@@ -40,61 +53,13 @@ class Posts with ChangeNotifier {
           ),
           Container(
             padding: EdgeInsets.all(10),
-            width: gridPostsWidthL + 10,
-            child: Text(elem['description']),
+            width: _cardSize.width,
+            child: Text(value['description']),
           ),
         ],
-      );
-    }).toList();
+      ));
+    });
 
-    return cards;
+    return _cards;
   }
-
-  // List<Widget> getPosts(BuildContext context) {
-  //   print("postCards");
-  //   final cards = postsList.map((elem) {
-  //     return Column(
-  //       mainAxisAlignment: MainAxisAlignment.center,
-  //       children: [
-  //         HoverAnimatedContainer(
-  //           width: gridPostsWidthL,
-  //           hoverWidth: gridPostsWidthL + 10,
-  //           height: gridPostsHeightL,
-  //           hoverHeight: gridPostsHeightL + 10,
-  //           color: Colors.black,
-  //           child: GestureDetector(
-  //             onTap: () {
-  //               print("ok");
-  //             },
-  //             child: Image(
-  //               fit: BoxFit.fill,
-  //               image: NetworkImage(elem['image']),
-  //             ),
-  //           ),
-  //           cursor: SystemMouseCursors.click,
-  //         ),
-  //         Container(
-  //           padding: EdgeInsets.all(10),
-  //           width: gridPostsWidthL + 10,
-  //           child: Text(
-  //             elem['title'],
-  //             style: TextStyle(
-  //               color: Theme.of(context).primaryColor,
-  //             ),
-  //           ),
-  //         ),
-  //         Container(
-  //           padding: EdgeInsets.all(10),
-  //           width: gridPostsWidthL + 10,
-  //           child: Text(elem['description']),
-  //         ),
-  //         SizedBox(
-  //           height: 40,
-  //         ),
-  //       ],
-  //     );
-  //   }).toList();
-
-  //   return cards;
-  // }
 }

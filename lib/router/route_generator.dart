@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:mysite/pages/page404.dart';
 import 'package:mysite/router/routes.dart';
+import 'package:mysite/pages/post.dart';
+import 'package:mysite/models/posts_model.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
-  if (routes[settings.name] == null) return _getPageRoute(Page404(), settings);
+  final _postsModel =
+      Provider.of<PostsModel>(navKey.currentState.context, listen: false);
+  if (_postsModel.postExist(settings.name)) {
+    return _getPageRoute(
+      PostBuilder(settings.name),
+      settings,
+    );
+  }
+  if (routes[settings.name] == null) {
+    return _getPageRoute(Page404(), settings);
+  }
   return _getPageRoute(
     routes[settings.name],
     settings,
   );
-  // switch (settings.name) {
-  //   case routeHome:
-  //     return _getPageRoute(HomePage(), settings);
-  //   case routeScroll:
-  //     return _getPageRoute(Example(), settings);
-  //   case routeHome2:
-  //     return _getPageRoute(HomePage2(), settings);
-  // }
 }
 
 PageRoute _getPageRoute(Widget child, RouteSettings settings) {

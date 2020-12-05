@@ -39,16 +39,21 @@ class MyApp extends StatelessWidget {
                 return SomethingWentWrong();
               }
               if (snapshot.connectionState == ConnectionState.done) {
-                List<Map> queryList = [];
+                Map<String, Map> dbPosts = {};
                 snapshot.data.docs.forEach((pst) {
-                  queryList.add(pst.data());
+                  dbPosts[pst.data()['path']] = pst.data();
                 });
+                // print(dbPosts);
+                // List<Map> queryList = [];
+                // snapshot.data.docs.forEach((pst) {
+                //   queryList.add(pst.data());
+                // });
                 //final postsModel = PostsModel(queryList);
 
                 return MultiProvider(
                   providers: [
                     ChangeNotifierProvider(
-                      create: (_) => Posts(queryList),
+                      create: (_) => PostsModel(dbPosts),
                     ),
                     ChangeNotifierProvider(
                       create: (_) => AkMenu(),

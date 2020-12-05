@@ -9,8 +9,8 @@ import 'package:mysite/models/posts_model.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final postsData = Provider.of<Posts>(context, listen: false);
-    final posts = postsData.getPosts(context);
+    final _postsData = Provider.of<PostsModel>(context, listen: false);
+    final _posts = _postsData.getPosts(context);
     final _screenSize = MediaQuery.of(context).size;
     print("Home");
     return Container(
@@ -43,7 +43,7 @@ class HomePage extends StatelessWidget {
                 child: Wrap(
                   spacing: 40,
                   runSpacing: 40,
-                  children: posts,
+                  children: _posts,
                 ),
               ),
             ],

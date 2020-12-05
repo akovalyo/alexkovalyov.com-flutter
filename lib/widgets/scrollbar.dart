@@ -36,7 +36,7 @@ class _AkScrollbarState extends State<AkScrollbar> {
   ScrollController scrollController;
   double _scrollPos = 0;
   bool _isUpdating;
-  Timer timer;
+  Timer _timer;
 
   _scrollListener() {
     setState(() {
@@ -70,12 +70,12 @@ class _AkScrollbarState extends State<AkScrollbar> {
       onNotification: (notification) {
         if (notification.depth == 0) {
           if (notification is ScrollUpdateNotification) {
-            timer.cancel();
+            _timer.cancel();
             setState(() {
               _isUpdating = true;
             });
           } else {
-            timer = Timer(Duration(seconds: widget.scrollFadeTimer), () {
+            _timer = Timer(Duration(seconds: widget.scrollFadeTimer), () {
               setState(() {
                 _isUpdating = false;
               });
@@ -128,14 +128,14 @@ class _AkScrollbarState extends State<AkScrollbar> {
                       ),
                     ),
                     onTapCancel: () {
-                      timer = Timer(Duration(seconds: 5), () {
+                      _timer = Timer(Duration(seconds: 5), () {
                         setState(() {
                           _isUpdating = false;
                         });
                       });
                     },
                     onTapDown: (details) {
-                      timer.cancel();
+                      _timer.cancel();
                       setState(() {
                         _isUpdating = true;
                       });

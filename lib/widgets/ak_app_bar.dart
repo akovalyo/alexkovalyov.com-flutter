@@ -13,8 +13,8 @@ import 'package:mysite/models/scroll.dart';
 class AkAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final menu = Provider.of<AkMenu>(context, listen: false);
-    final opacity = Provider.of<Scroll>(context).opacity;
+    final _menu = Provider.of<AkMenu>(context, listen: false);
+    final _opacity = Provider.of<Scroll>(context).opacity;
     final _mainIcon = Container(
       alignment: Alignment.center,
       child: FlatButton(
@@ -32,10 +32,9 @@ class AkAppBar extends StatelessWidget {
         ),
       ),
     );
-    print("opacity: $opacity");
     return isSmallScreen(context)
         ? Container(
-            color: Theme.of(context).primaryColor.withOpacity(opacity),
+            color: Theme.of(context).primaryColor.withOpacity(_opacity),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: appBarPadding),
               child: Row(
@@ -68,7 +67,7 @@ class AkAppBar extends StatelessWidget {
             ),
           )
         : Container(
-            color: Theme.of(context).primaryColor.withOpacity(opacity),
+            color: Theme.of(context).primaryColor.withOpacity(_opacity),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: appBarPadding),
               child: Row(
@@ -84,7 +83,7 @@ class AkAppBar extends StatelessWidget {
                   Expanded(
                     child: ListView(
                       scrollDirection: Axis.horizontal,
-                      children: menu.getMenuList(18.0, false),
+                      children: _menu.getMenuList(18.0, false),
                     ),
                   ),
                   Container(

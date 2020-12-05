@@ -43,9 +43,9 @@ class OverlayMenu extends StatefulWidget {
 class _OverlayMenuState extends State<OverlayMenu>
     with SingleTickerProviderStateMixin {
   GlobalKey _key;
-  bool isMenuOpen = false;
-  Offset buttonPosition;
-  Size buttonSize;
+  bool _isMenuOpen = false;
+  Offset _buttonPosition;
+  Size _buttonSize;
   OverlayEntry _overlayEntry;
   BorderRadius _borderRadius;
   AnimationController _animationController;
@@ -69,14 +69,14 @@ class _OverlayMenuState extends State<OverlayMenu>
 
   findButton() {
     RenderBox renderBox = _key.currentContext.findRenderObject();
-    buttonSize = renderBox.size;
-    buttonPosition = renderBox.localToGlobal(Offset.zero);
+    _buttonSize = renderBox.size;
+    _buttonPosition = renderBox.localToGlobal(Offset.zero);
   }
 
   void closeMenu() {
     _overlayEntry.remove();
     _animationController.reverse();
-    isMenuOpen = !isMenuOpen;
+    _isMenuOpen = !_isMenuOpen;
   }
 
   void openMenu() {
@@ -84,7 +84,7 @@ class _OverlayMenuState extends State<OverlayMenu>
     _animationController.forward();
     _overlayEntry = _overlayEntryBuilder();
     navKey.currentState.overlay.insert(_overlayEntry);
-    isMenuOpen = !isMenuOpen;
+    _isMenuOpen = !_isMenuOpen;
   }
 
   @override
@@ -102,7 +102,7 @@ class _OverlayMenuState extends State<OverlayMenu>
         ),
         color: Colors.white,
         onPressed: () {
-          if (isMenuOpen) {
+          if (_isMenuOpen) {
             closeMenu();
           } else {
             openMenu();
@@ -116,9 +116,9 @@ class _OverlayMenuState extends State<OverlayMenu>
     return OverlayEntry(
       builder: (context) {
         return Positioned(
-          top: buttonPosition.dy + buttonSize.height,
-          left: buttonPosition.dx,
-          width: buttonSize.width,
+          top: _buttonPosition.dy + _buttonSize.height,
+          left: _buttonPosition.dx,
+          width: _buttonSize.width,
           child: Material(
             color: Colors.transparent,
             child: Stack(
@@ -137,7 +137,7 @@ class _OverlayMenuState extends State<OverlayMenu>
                 Padding(
                   padding: const EdgeInsets.only(top: 15.0),
                   child: Container(
-                    height: widget.icons.length * buttonSize.height,
+                    height: widget.icons.length * _buttonSize.height,
                     decoration: BoxDecoration(
                       color: widget.backgroundColor,
                       borderRadius: _borderRadius,
@@ -157,8 +157,8 @@ class _OverlayMenuState extends State<OverlayMenu>
                               closeMenu();
                             },
                             child: Container(
-                              width: buttonSize.width,
-                              height: buttonSize.height,
+                              width: _buttonSize.width,
+                              height: _buttonSize.height,
                               child: widget.icons[index],
                             ),
                           );

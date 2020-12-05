@@ -57,7 +57,6 @@ class _HoverAnimatedImageState extends State<HoverAnimatedImage> {
 
   @override
   Widget build(BuildContext context) {
-    print("$_width, $_height");
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       onEnter: _increase,

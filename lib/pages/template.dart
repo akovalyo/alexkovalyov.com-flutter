@@ -5,7 +5,6 @@ import 'package:mysite/widgets/ak_app_bar.dart';
 import 'package:mysite/widgets/drawer.dart';
 import 'package:mysite/layout/screen_size.dart';
 import 'package:mysite/theme/consts.dart';
-import 'package:mysite/widgets/scrollbar.dart';
 import 'package:mysite/models/scroll.dart';
 
 class LayoutTemplate extends StatelessWidget {
@@ -19,7 +18,7 @@ class LayoutTemplate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var _screenSize = screenSize(context);
-    var scrollData = Provider.of<Scroll>(context, listen: false);
+    var _scrollData = Provider.of<Scroll>(context, listen: false);
     print("template");
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
@@ -34,7 +33,7 @@ class LayoutTemplate extends StatelessWidget {
         child: NotificationListener<ScrollNotification>(
           onNotification: (scrollNotification) {
             WidgetsBinding.instance.addPostFrameCallback((_) =>
-                scrollData.updateScroll(
+                _scrollData.updateScroll(
                     scrollNotification.metrics, MediaQuery.of(context).size));
 
             return false;

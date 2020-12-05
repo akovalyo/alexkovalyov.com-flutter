@@ -11,7 +11,7 @@ import 'package:mysite/models/menu_model.dart';
 class AkDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final menu = Provider.of<AkMenu>(context, listen: false);
+    final _menu = Provider.of<AkMenu>(context, listen: false);
     var _screenHeight = screenSize(context).height;
 
     return Drawer(
@@ -71,7 +71,7 @@ class AkDrawer extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(25),
                 child: Column(
-                  children: menu.getMenuList(18.0, true),
+                  children: _menu.getMenuList(18.0, true),
                 ),
               ),
             ),
