@@ -19,7 +19,7 @@ ThemeData akTheme(Brightness brightness) {
           backgroundColor: Colors.white,
           errorColor: akAlertL,
           accentColor: akAccent,
-          textTheme: _akTextTheme(ThemeData.light().textTheme, Colors.white),
+          textTheme: _akTextTheme(ThemeData.light().textTheme, Colors.black),
           canvasColor: akBlackL,
           iconTheme: _akIconTheme(ThemeData.light().iconTheme, Colors.white),
           buttonTheme: const ButtonThemeData(
@@ -32,7 +32,7 @@ ThemeData akTheme(Brightness brightness) {
           primaryColorDark: akBlackDAcc,
           errorColor: akAlertD,
           accentColor: akAccent,
-          textTheme: _akTextTheme(ThemeData.dark().textTheme, Colors.black),
+          textTheme: _akTextTheme(ThemeData.dark().textTheme, Colors.white),
           canvasColor: akBlackL,
           iconTheme: _akIconTheme(ThemeData.dark().iconTheme, Colors.white),
           buttonTheme: const ButtonThemeData(
@@ -48,7 +48,14 @@ ThemeData akTheme(Brightness brightness) {
 TextTheme _akTextTheme(TextTheme base, Color color) {
   return GoogleFonts.davidLibreTextTheme(
     base.copyWith(
-      headline1: base.headline1.copyWith(fontSize: 64),
+      bodyText2: base.bodyText2.copyWith(
+        fontSize: 20,
+        height: 1.5,
+      ),
+      headline1: base.headline1.copyWith(
+        fontSize: 34,
+        color: color,
+      ),
       button: base.button.copyWith(color: Colors.white),
     ),
   );

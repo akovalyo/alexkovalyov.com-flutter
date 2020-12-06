@@ -1,0 +1,49 @@
+{
+  "body": [
+    {
+      "text": "Home assignment 1 for the course 'Deep Learning with PyTorch: Zero to GANs'"
+    },
+    {
+      "headline1": "Introduction"
+    },
+    {
+      "markdown": "**Pytorch** is Torch based machine learning Python library. It is similar to NumPy but uses the advantages of CUDA-capable Nvidia GPUs.\n\n**Tensor** in PyTorch is a multidimensional array containing elements of a single data type.\n* A *0-dimensional* (0D) tensor is a scalar - a single value.\n* A *1D* tensor is a vector - an array of values.\n* A *2D* tensor is a matrix. A matrix is arranged as a grid of values. In practice using matrix we can store samples and its features\n* A *3D* tensor is a vector of matrices of values. 3D tensors are typically used when storing time-series data or when sequence order is important.\n* A *4D* tensor is a vector of 3D tensors and is typically used to store image data."
+    },
+    {
+      "headline1": "Comparison operators"
+    },
+    {
+      "markdown": "Pytorch has lots of different functions. Among them are functions that implement logical comparison operators. In general, these functions take as input a tensor and another tensor or a number. And return a tensor in which each element is True or False.\n\n**torch.lt(a, b)** - implements **<** operator comparing each element in a with b (if b is a number) or each element in a with corresponding element in b.\n\n**torch.le(a, b)** - **<=** operator\n\n**torch.gt(a, b)** - **>** operator\n\n**torch.ge(a, b)** - **>=** operator\n\n**torch.eq(a, b)** - **==** operator\n\n**torch.ne(a, b)** - **!=** operator\n\nTensors must be of the same size or one of them of size 0\n"
+    },
+    {
+      "headline2": "Examples:"
+    },
+    {
+      "code": "#Comparing matrix with a number\n\na = torch.tensor([[1., 2, 3], [4, 5, 6], [7, 8 ,9]])\nb = 5\ntorch.lt(a,c)\n\nResult:\ntensor([[ True,  True,  True],\n\t\t[ True, False, False],\n\t\t[False, False, False]])\n\n#Comparing two matrices if the value in a is greater or equal the corresponding element in c\n\na = torch.tensor([[1., 2, 3], [4, 5, 6], [7, 8 ,9]])\nb = torch.tensor([[9., 8, 7], [4, 5, 6], [1, 2 ,3]])\ntorch.ge(a, b)"
+    },
+    {
+      "headline1": "Comparison of two tensors"
+    },
+    {
+      "markdown": "**torch.equal(a, b)** - compares if two tensors have the same size and elements. Returns True or False"
+    },
+    {
+      "headline2": "Examples:"
+    },
+    {
+      "code": "a = torch.tensor([[9., 8, 7], [4, 5, 6]])\nb = torch.tensor([[9., 8, 7], [4, 5, 6], [1, 2 ,3]])\ntorch.equal(a,b)\n\na:  tensor([[9., 8., 7.],\n\t\t[4., 5., 6.]])\n\nb:  tensor([[9., 8., 7.],\n\t\t[4., 5., 6.],\n[1., 2., 3.]])\n\nFalse\n\n#Same size and values\na = torch.tensor([[9., 8, 7], [4, 5, 6]])\nb = torch.tensor([[9., 8, 7], [4, 5, 6]])\ntorch.equal(a,b)\n\na:  tensor([[9., 8., 7.],\n\t\t[4., 5., 6.]])\n\nb:  tensor([[9., 8., 7.],\n\t\t[4., 5., 6.]])\n\nTrue"
+    },
+    {
+      "headline1": "Logical operators"
+    },
+    {
+      "markdown": "Logical operators were introduced in PyTorch 1.5.0\n\n**AND**\n\n**torch.logical_and(a, b)** - implements the element-wise logical AND of the given input tensors. Inputs are bool-type, if not, zeros are treated as False and non-zeros as True"
+    },
+    {
+      "code": "# Bool-type tensors\n\na = torch.tensor([True, True, False])\nb = torch.tensor([True, False, False])\ntorch.logical_and(a, b)\n\ntensor([ True, False, False])\n\n# Numbers\n\na = torch.tensor([0., 1, 1, 9, 4])\nb = torch.tensor([0., 0, 1, 0, 6])\ntorch.logical_and(a, b)\n\ntensor([False, False, True, False, True])"
+    },
+    {
+      "markdown": "**OR**\n\n**torch.logical_or(a, b)** - implements the element-wise logical OR of the given input tensors.\n\n**NOT**\n\n**torch.logical_not(a, b)**- implements the element-wise logical NOT of the given input tensors.\n\n**XOR**\n\n**torch.logical_xor(a, b)** - implements the element-wise logical XOR of the given input tensors.\n\nInputs for these functions must be two tensors of the same size or of size 0\n\n___\n\nIn this assignment explained functions that implement logical and comparison operators in pytorch"
+    }
+  ]
+}
