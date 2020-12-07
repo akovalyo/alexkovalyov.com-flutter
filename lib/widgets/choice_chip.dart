@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
+
+import 'package:mysite/theme/colors.dart';
+import 'package:mysite/theme/theme.dart';
 
 class ThemeChoiceChip extends StatefulWidget {
   final ValueChanged<Brightness> onSelectedTheme;
@@ -13,6 +17,7 @@ class _ThemeChoiceChipState extends State<ThemeChoiceChip> {
   @override
   Widget build(BuildContext context) {
     int _theme = Theme.of(context).brightness == Brightness.light ? 0 : 1;
+    _theme = Theme.of(context).backgroundColor == cp2077 ? 2 : _theme;
     return Column(
       children: <Widget>[
         ChoiceChip(
@@ -44,6 +49,26 @@ class _ThemeChoiceChipState extends State<ThemeChoiceChip> {
             widget.onSelectedTheme(Brightness.dark);
             setState(() {
               _theme = 1;
+            });
+          },
+        ),
+        Divider(),
+        ChoiceChip(
+          avatar: CircleAvatar(
+            child: Image(image: AssetImage('assets/images/cyberpunk.png')),
+          ),
+          label: Text(
+            '2077',
+          ),
+          labelStyle: TextStyle(color: Theme.of(context).buttonColor),
+          backgroundColor: Color(0x00000000),
+          selectedColor: cp2077,
+          selected: _theme == 2,
+          onSelected: (_) {
+            DynamicTheme.of(context)
+                .setThemeData(akTheme(Brightness.dark, '2077'));
+            setState(() {
+              _theme = 2;
             });
           },
         ),

@@ -5,23 +5,6 @@ class HomePage2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // SizedBox(
-        //   width: _screenSize.width,
-        //   height: _screenSize.height * 0.4,
-        //   child: FadeInImageAny(
-        //     image: AssetImage('assets/images/site/main.jpg'),
-        //     placeholder: SizedBox(
-        //       width: _screenSize.width,
-        //       height: _screenSize.height * 0.4,
-        //     ),
-        //     width: _screenSize.width,
-        //     height: _screenSize.height * 0.4,
-        //     fit: BoxFit.cover,
-        //   ),
-        // ),
-        SizedBox(
-          height: 70,
-        ),
         SizedBox(
           height: 300,
           child: PopupMenuButton(

@@ -1,3 +1,7 @@
+assets/images/*
+!assets/images/main
+!assets/images/cyberpunk.png
+
 # Miscellaneous
 *.class
 *.log

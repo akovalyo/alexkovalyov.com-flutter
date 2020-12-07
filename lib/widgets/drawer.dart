@@ -82,7 +82,7 @@ class AkDrawer extends StatelessWidget {
               padding: EdgeInsets.only(bottom: 10),
               child: Text(
                 'Select Theme',
-                style: TextStyle(color: Colors.white, fontSize: 24),
+                style: Theme.of(context).textTheme.headline2,
               ),
             ),
             Container(

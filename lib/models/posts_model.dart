@@ -7,7 +7,7 @@ import 'package:mysite/layout/screen_size.dart';
 import 'package:mysite/router/routes.dart';
 
 class PostsModel with ChangeNotifier {
-  Map<String, Map> postsMap;
+  final Map<String, Map> postsMap;
   PostsModel(this.postsMap);
 
   bool postExist(String path) {
@@ -37,7 +37,7 @@ class PostsModel with ChangeNotifier {
               hoverWidth: _cardHoverSize.width,
               height: _cardSize.height,
               hoverHeight: _cardHoverSize.height,
-              image: value['image'],
+              image: AssetImage(value['image']),
               borderRadius: 10,
             ),
           ),
@@ -46,9 +46,7 @@ class PostsModel with ChangeNotifier {
             width: _cardSize.width,
             child: Text(
               value['title'],
-              style: TextStyle(
-                color: Theme.of(context).primaryColor,
-              ),
+              style: Theme.of(context).textTheme.headline1,
             ),
           ),
           Container(

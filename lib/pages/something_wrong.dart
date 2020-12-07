@@ -8,7 +8,7 @@ class SomethingWentWrong extends StatelessWidget {
     return MaterialApp(
       title: 'Alex Kovalyov',
       debugShowCheckedModeBanner: false,
-      theme: akTheme(Brightness.light),
+      theme: akTheme(Brightness.light, null),
       home: Scaffold(
         body: Center(
           child: Container(

@@ -5,7 +5,7 @@ class Footer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 100,
-      color: Colors.grey,
+      color: Theme.of(context).primaryColor,
     );
   }
 }

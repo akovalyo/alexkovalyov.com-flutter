@@ -12,4 +12,4 @@ const postCardSHoverWidth = 415.0;
 const postCardSHeight = 180.0;
 const postCardSHoverHeight = 195.0;
 
-const mainImage = 'assets/images/site/akM.png';
+const mainImage = 'assets/images/main/akM.png';

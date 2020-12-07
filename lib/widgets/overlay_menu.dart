@@ -69,6 +69,7 @@ class _OverlayMenuState extends State<OverlayMenu>
 
   findButton() {
     RenderBox renderBox = _key.currentContext.findRenderObject();
+    print(_buttonSize);
     _buttonSize = renderBox.size;
     _buttonPosition = renderBox.localToGlobal(Offset.zero);
   }

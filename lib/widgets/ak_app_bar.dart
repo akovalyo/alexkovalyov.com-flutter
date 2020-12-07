@@ -93,6 +93,7 @@ class AkAppBar extends StatelessWidget {
                     child: OverlayMenu(
                       icons: [
                         Icon(Icons.brightness_6_outlined),
+                        Icon(Icons.brightness_2)
                       ],
                       backgroundColor: Theme.of(context).primaryColor,
                       iconColor: Theme.of(context).iconTheme.color,

@@ -19,7 +19,7 @@
       "headline2": "Examples:"
     },
     {
-      "code": "#Comparing matrix with a number\n\na = torch.tensor([[1., 2, 3], [4, 5, 6], [7, 8 ,9]])\nb = 5\ntorch.lt(a,c)\n\nResult:\ntensor([[ True,  True,  True],\n\t\t[ True, False, False],\n\t\t[False, False, False]])\n\n#Comparing two matrices if the value in a is greater or equal the corresponding element in c\n\na = torch.tensor([[1., 2, 3], [4, 5, 6], [7, 8 ,9]])\nb = torch.tensor([[9., 8, 7], [4, 5, 6], [1, 2 ,3]])\ntorch.ge(a, b)"
+      "code": "#Comparing matrix with a number\n\na = torch.tensor([[1., 2, 3], [4, 5, 6], [7, 8 ,9]])\nb = 5\ntorch.lt(a,c)\n\nResult:\ntensor([[ True,  True,  True],\n\t\t[True, False, False],\n\t\t[False, False, False]])\n\n#Comparing two matrices if the value in a is greater or equal the corresponding element in c\n\na = torch.tensor([[1., 2, 3], [4, 5, 6], [7, 8 ,9]])\nb = torch.tensor([[9., 8, 7], [4, 5, 6], [1, 2 ,3]])\ntorch.ge(a, b)\n\na:  tensor([[1., 2., 3.],\n\t\t\t[4., 5., 6.],\n\t\t\t[7., 8., 9.]])\n\nb:  tensor([[9., 8., 7.],\n\t\t\t[4., 5., 6.],\n\t\t\t[1., 2., 3.]])\n\nresult: tensor([[False, False, False],\n\t\t\t[True,  True,  True],\n\t\t\t[True,  True,  True]])\n"
     },
     {
       "headline1": "Comparison of two tensors"
@@ -31,7 +31,7 @@
       "headline2": "Examples:"
     },
     {
-      "code": "a = torch.tensor([[9., 8, 7], [4, 5, 6]])\nb = torch.tensor([[9., 8, 7], [4, 5, 6], [1, 2 ,3]])\ntorch.equal(a,b)\n\na:  tensor([[9., 8., 7.],\n\t\t[4., 5., 6.]])\n\nb:  tensor([[9., 8., 7.],\n\t\t[4., 5., 6.],\n[1., 2., 3.]])\n\nFalse\n\n#Same size and values\na = torch.tensor([[9., 8, 7], [4, 5, 6]])\nb = torch.tensor([[9., 8, 7], [4, 5, 6]])\ntorch.equal(a,b)\n\na:  tensor([[9., 8., 7.],\n\t\t[4., 5., 6.]])\n\nb:  tensor([[9., 8., 7.],\n\t\t[4., 5., 6.]])\n\nTrue"
+      "code": "a = torch.tensor([[9., 8, 7], [4, 5, 6]])\nb = torch.tensor([[9., 8, 7], [4, 5, 6], [1, 2 ,3]])\ntorch.equal(a,b)\n\na:  tensor([[9., 8., 7.],\n\t\t\t[4., 5., 6.]])\n\nb:  tensor([[9., 8., 7.],\n\t\t\t[4., 5., 6.],\n\t\t\t[1., 2., 3.]])\n\nFalse\n\n#Same size and values\na = torch.tensor([[9., 8, 7], [4, 5, 6]])\nb = torch.tensor([[9., 8, 7], [4, 5, 6]])\ntorch.equal(a,b)\n\na:  tensor([[9., 8., 7.],\n\t\t\t[4., 5., 6.]])\n\nb:  tensor([[9., 8., 7.],\n\t\t\t[4., 5., 6.]])\n\nTrue"
     },
     {
       "headline1": "Logical operators"

@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
                   ],
                   child: DynamicTheme(
                     defaultBrightness: Brightness.light,
-                    data: (brightness) => akTheme(brightness),
+                    data: (brightness) => akTheme(brightness, null),
                     themedWidgetBuilder: (context, theme) => MaterialApp(
                       title: 'Alex Kovalyov',
                       debugShowCheckedModeBanner: false,

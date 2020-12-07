@@ -21,6 +21,7 @@ class MenuItem extends StatelessWidget {
     return Container(
       padding: column ? EdgeInsets.only(bottom: 10, top: 10) : null,
       child: HoverButton(
+        padding: EdgeInsets.all(1),
         child: Text(title,
             style: TextStyle(
               fontSize: fontSize,

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 class HoverAnimatedImage extends StatefulWidget {
-  final String image;
+  final ImageProvider image;
+  // final String image;
   final double width;
   final double height;
 
@@ -64,7 +65,7 @@ class _HoverAnimatedImageState extends State<HoverAnimatedImage> {
       child: AnimatedContainer(
         child: Image(
           fit: BoxFit.fitWidth,
-          image: NetworkImage(widget.image),
+          image: widget.image,
         ),
         width: _width,
         height: _height,

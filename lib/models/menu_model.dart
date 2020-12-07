@@ -28,6 +28,7 @@ class AkMenu with ChangeNotifier {
         column: isColumn,
       );
     }).toList();
+
     return items;
   }
 }

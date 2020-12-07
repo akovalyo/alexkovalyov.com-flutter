@@ -47,17 +47,19 @@ class PostBuilder extends StatelessWidget {
 
   PostBuilder(this.path);
 
-  List<Widget> decodeBody(String body) {
+  List<Widget> decodeBody(String body, BuildContext ctx) {
     final List decodedData = json.decode(body)["body"];
     //print(decodedData[0]['text']);
 
     final List<Widget> _listWidget = decodedData.map((m) {
       final key = m.keys.toString().replaceAll(RegExp('[()]'), '');
-      final ctx = navKey.currentState.context;
+      // final ctx = navKey.currentState.context;
       switch (key) {
         case 'text':
           return PostElementContainer(
-            child: Text(m[key]),
+            child: Text(
+              m[key],
+            ),
             vertPadding: 10,
           );
         case 'codeS':
@@ -73,11 +75,13 @@ class PostBuilder extends StatelessWidget {
           return PostElementContainer(
             child: Text(
               m[key],
+              style: TextStyle(fontSize: 16, letterSpacing: 1),
             ),
             vertPadding: 10,
             horPadding: 20,
             background: Theme.of(ctx).primaryColor.withAlpha(30),
           );
+
         case 'headline1':
           return PostElementContainer(
             vertPadding: 20,
@@ -144,7 +148,7 @@ class PostBuilder extends StatelessWidget {
                   horizontal:
                       isSmallScreen(context) ? paddingSmall : paddingLarge),
               child: Column(
-                children: decodeBody(_postData['body']),
+                children: decodeBody(_postData['body'], context),
               ),
             ),
             Container(

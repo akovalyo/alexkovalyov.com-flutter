@@ -13,7 +13,6 @@ class HomePage extends StatelessWidget {
     final _postsData = Provider.of<PostsModel>(context, listen: false);
     final _posts = _postsData.getPosts(context);
     final _screenSize = MediaQuery.of(context).size;
-    print("Home");
     return SingleChildScrollView(
       physics: ClampingScrollPhysics(),
       child: Center(
@@ -23,7 +22,7 @@ class HomePage extends StatelessWidget {
               width: _screenSize.width,
               height: _screenSize.height * 0.4,
               child: FadeInImageAny(
-                image: AssetImage('assets/images/site/main.jpg'),
+                image: AssetImage('assets/images/main/main.jpg'),
                 placeholder: SizedBox(
                   width: _screenSize.width,
                   height: _screenSize.height * 0.4,
