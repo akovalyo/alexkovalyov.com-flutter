@@ -1,17 +1,13 @@
-import 'dart:convert';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:refined_markdown/refined_markdown.dart';
+
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:mysite/models/posts_model.dart';
 import 'package:provider/provider.dart';
-
 import 'package:mysite/theme/consts.dart';
 import 'package:mysite/layout/screen_size.dart';
 import 'package:mysite/widgets/footer.dart';
 import 'package:mysite/layout/image_placeholder.dart';
-import 'package:mysite/router/routes.dart';
+import 'package:mysite/widgets/animated_image.dart';
 
 class PostElementContainer extends StatelessWidget {
   final Widget child;
@@ -47,14 +43,23 @@ class PostBuilder extends StatelessWidget {
 
   PostBuilder(this.path);
 
-  List<Widget> decodeBody(String body, BuildContext ctx) {
-    final List decodedData = json.decode(body)["body"];
-    //print(decodedData[0]['text']);
+  List<Map> extractBody(String body) {
+    List<Map> list = [];
+    Iterable<RegExpMatch> parsedBody =
+        RegExp(r'<([a-zA-Z]*)>([ -;=?-~\n]*)<\/[a-z]*>').allMatches(body);
+    parsedBody.forEach((element) {
+      list.add({element.group(1): element.group(2)});
+    });
+    return list;
+  }
 
-    final List<Widget> _listWidget = decodedData.map((m) {
+  List<Widget> decodeBody(List<Map> extractedBody, BuildContext ctx) {
+    final List<Widget> _listWidget = extractedBody.map((m) {
       final key = m.keys.toString().replaceAll(RegExp('[()]'), '');
-      // final ctx = navKey.currentState.context;
+      final _screenSize = MediaQuery.of(ctx).size;
       switch (key) {
+        case 'p':
+          return Divider();
         case 'text':
           return PostElementContainer(
             child: Text(
@@ -101,9 +106,33 @@ class PostBuilder extends StatelessWidget {
               data: m[key],
               selectable: false,
               styleSheet: MarkdownStyleSheet(
+                em: Theme.of(ctx).textTheme.bodyText2,
+                a: Theme.of(ctx).textTheme.bodyText2,
+                del: Theme.of(ctx).textTheme.bodyText2,
                 blockSpacing: 10,
               ),
             ),
+          );
+        case 'image':
+          print(m[key]);
+          String path = m[key];
+          final match = RegExp(r'(\[[a-z]+\])([\w\W]+)').firstMatch(path);
+          var alignment = Alignment.center;
+          String atribute;
+
+          if (match != null) {
+            atribute = match.group(1);
+            path = match.group(2);
+          }
+          if (atribute == '[left]') {
+            alignment = Alignment.centerLeft;
+          } else if (atribute == '[right]') {
+            alignment = Alignment.centerRight;
+          }
+          return Container(
+            alignment: alignment,
+            width: _screenSize.width * 0.6,
+            child: AnimatedImage(path),
           );
 
         default:
@@ -111,8 +140,6 @@ class PostBuilder extends StatelessWidget {
       }
     }).toList();
 
-    //_listWidget.add(Footer());
-    print(_listWidget);
     return _listWidget;
   }
 
@@ -120,6 +147,7 @@ class PostBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     final _postData = Provider.of<PostsModel>(context).postsMap[path];
     final _screenSize = MediaQuery.of(context).size;
+    final _extracted = extractBody(_postData['body']);
     //print(_postBody);
     return SingleChildScrollView(
       physics: ClampingScrollPhysics(),
@@ -148,7 +176,7 @@ class PostBuilder extends StatelessWidget {
                   horizontal:
                       isSmallScreen(context) ? paddingSmall : paddingLarge),
               child: Column(
-                children: decodeBody(_postData['body'], context),
+                children: decodeBody(_extracted, context),
               ),
             ),
             Container(

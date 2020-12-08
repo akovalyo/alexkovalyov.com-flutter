@@ -43,13 +43,6 @@ class MyApp extends StatelessWidget {
                 snapshot.data.docs.forEach((pst) {
                   dbPosts[pst.data()['path']] = pst.data();
                 });
-                // print(dbPosts);
-                // List<Map> queryList = [];
-                // snapshot.data.docs.forEach((pst) {
-                //   queryList.add(pst.data());
-                // });
-                //final postsModel = PostsModel(queryList);
-
                 return MultiProvider(
                   providers: [
                     ChangeNotifierProvider(

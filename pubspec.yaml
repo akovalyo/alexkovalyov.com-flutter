@@ -68,6 +68,8 @@ flutter:
     - assets/images/jupyter/j_01.png
     - assets/images/jupyter/j_02.png
     - assets/images/jupyter/j_03.png
+    #/assets/posts
+    - assets/posts/2020-05-31-jupyter.ak
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

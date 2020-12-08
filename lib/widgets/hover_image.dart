@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 class HoverAnimatedImage extends StatefulWidget {
-  final ImageProvider image;
-  // final String image;
+  final String image;
   final double width;
   final double height;
 
@@ -31,10 +30,16 @@ class _HoverAnimatedImageState extends State<HoverAnimatedImage> {
   double _width;
   BorderRadiusGeometry _borderRadius;
   Duration _duration;
+  ImageProvider _imageProvider;
 
   @override
   void initState() {
     super.initState();
+    if (widget.image.startsWith(RegExp(r'[http|https]'))) {
+      _imageProvider = NetworkImage(widget.image);
+    } else {
+      _imageProvider = AssetImage(widget.image);
+    }
 
     _width = widget.width;
     _height = widget.height;
@@ -65,7 +70,7 @@ class _HoverAnimatedImageState extends State<HoverAnimatedImage> {
       child: AnimatedContainer(
         child: Image(
           fit: BoxFit.fitWidth,
-          image: widget.image,
+          image: _imageProvider,
         ),
         width: _width,
         height: _height,

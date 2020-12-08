@@ -37,7 +37,7 @@ class PostsModel with ChangeNotifier {
               hoverWidth: _cardHoverSize.width,
               height: _cardSize.height,
               hoverHeight: _cardHoverSize.height,
-              image: AssetImage(value['image']),
+              image: value['image'],
               borderRadius: 10,
             ),
           ),
