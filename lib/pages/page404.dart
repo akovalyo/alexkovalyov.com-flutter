@@ -13,7 +13,7 @@ class Page404 extends StatelessWidget {
         ),
         Expanded(
           child: Center(
-              child: Text('404', style: Theme.of(context).textTheme.headline1)),
+              child: Text('404', style: Theme.of(context).textTheme.headline4)),
         ),
       ],
     );

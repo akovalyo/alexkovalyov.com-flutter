@@ -20,3 +20,4 @@ const akHeadlineL = Color(0xFF2E2E2E);
 const akHeadlineD = Color(0xFFBDB3B3);
 
 const cp2077 = Color(0xFFf3e500);
+const cpBlue = Color(0xFF70C4F4);

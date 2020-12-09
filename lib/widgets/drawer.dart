@@ -54,7 +54,7 @@ class AkDrawer extends StatelessWidget {
                   ),
                   Center(
                     child: FadeInImageAny(
-                      image: AssetImage(mainImage),
+                      imagePath: mainImage,
                       placeholder: SizedBox(
                         width: 80,
                         height: 80,
@@ -80,10 +80,11 @@ class AkDrawer extends StatelessWidget {
             Container(
               alignment: Alignment.center,
               padding: EdgeInsets.only(bottom: 10),
-              child: Text(
-                'Select Theme',
-                style: Theme.of(context).textTheme.headline2,
-              ),
+              child: Text('Select Theme',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline5
+                      .copyWith(color: Theme.of(context).secondaryHeaderColor)),
             ),
             Container(
               alignment: Alignment.center,

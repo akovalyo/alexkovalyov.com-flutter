@@ -46,7 +46,7 @@ class PostBuilder extends StatelessWidget {
   List<Map> extractBody(String body) {
     List<Map> list = [];
     Iterable<RegExpMatch> parsedBody =
-        RegExp(r'<([a-zA-Z]*)>([ -;=?-~\n]*)<\/[a-z]*>').allMatches(body);
+        RegExp(r'{([a-zA-Z1-9]*)}([ -z|~\n]*){\/}').allMatches(body);
     parsedBody.forEach((element) {
       list.add({element.group(1): element.group(2)});
     });
@@ -55,22 +55,25 @@ class PostBuilder extends StatelessWidget {
 
   List<Widget> decodeBody(List<Map> extractedBody, BuildContext ctx) {
     final List<Widget> _listWidget = extractedBody.map((m) {
-      final key = m.keys.toString().replaceAll(RegExp('[()]'), '');
+      final _key = m.keys.toString().replaceAll(RegExp('[()]'), '');
       final _screenSize = MediaQuery.of(ctx).size;
-      switch (key) {
+      String _value = m[_key].replaceAll("\\n", "\n");
+      _value = _value.replaceAll("\\t", "\t");
+
+      switch (_key) {
         case 'p':
           return Divider();
         case 'text':
           return PostElementContainer(
             child: Text(
-              m[key],
+              _value,
             ),
             vertPadding: 10,
           );
         case 'codeS':
           return PostElementContainer(
             child: SelectableText(
-              m[key],
+              _value,
             ),
             vertPadding: 10,
             horPadding: 20,
@@ -79,7 +82,7 @@ class PostBuilder extends StatelessWidget {
         case 'code':
           return PostElementContainer(
             child: Text(
-              m[key],
+              _value,
               style: TextStyle(fontSize: 16, letterSpacing: 1),
             ),
             vertPadding: 10,
@@ -87,23 +90,38 @@ class PostBuilder extends StatelessWidget {
             background: Theme.of(ctx).primaryColor.withAlpha(30),
           );
 
-        case 'headline1':
+        case 'headline4':
           return PostElementContainer(
             vertPadding: 20,
             alignment: Alignment.center,
             child: Text(
-              m[key],
-              style: Theme.of(ctx).textTheme.headline1,
+              _value,
+              style: Theme.of(ctx).textTheme.headline4,
             ),
           );
-        case 'headline2':
-          return Text(m[key]);
+        case 'headline5':
+          return PostElementContainer(
+            vertPadding: 20,
+            alignment: Alignment.center,
+            child: Text(
+              _value,
+              style: Theme.of(ctx).textTheme.headline5,
+            ),
+          );
+        case 'headline6':
+          return PostElementContainer(
+            vertPadding: 20,
+            alignment: Alignment.center,
+            child: Text(
+              _value,
+              style: Theme.of(ctx).textTheme.headline6,
+            ),
+          );
         case 'markdown':
-          // return Text(m[key]);
           return PostElementContainer(
             vertPadding: 10,
             child: MarkdownBody(
-              data: m[key],
+              data: _value,
               selectable: false,
               styleSheet: MarkdownStyleSheet(
                 em: Theme.of(ctx).textTheme.bodyText2,
@@ -114,8 +132,7 @@ class PostBuilder extends StatelessWidget {
             ),
           );
         case 'image':
-          print(m[key]);
-          String path = m[key];
+          String path = _value;
           final match = RegExp(r'(\[[a-z]+\])([\w\W]+)').firstMatch(path);
           var alignment = Alignment.center;
           String atribute;
@@ -148,7 +165,8 @@ class PostBuilder extends StatelessWidget {
     final _postData = Provider.of<PostsModel>(context).postsMap[path];
     final _screenSize = MediaQuery.of(context).size;
     final _extracted = extractBody(_postData['body']);
-    //print(_postBody);
+    final _decoded = decodeBody(_extracted, context);
+
     return SingleChildScrollView(
       physics: ClampingScrollPhysics(),
       child: Center(
@@ -158,7 +176,7 @@ class PostBuilder extends StatelessWidget {
               width: _screenSize.width,
               height: _screenSize.height * 0.4,
               child: FadeInImageAny(
-                image: NetworkImage(_postData['image']),
+                imagePath: _postData['image'],
                 placeholder: SizedBox(
                   width: _screenSize.width,
                   height: _screenSize.height * 0.4,
@@ -172,11 +190,27 @@ class PostBuilder extends StatelessWidget {
               height: 40,
             ),
             Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.only(
+                  top: 20,
+                  bottom: 10,
+                ),
+                child: Text(
+                  _postData['title'],
+                  style: Theme.of(context).textTheme.headline4,
+                )),
+            Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.only(bottom: 20),
+                child: Text(
+                  _postData['date'],
+                )),
+            Container(
               padding: EdgeInsets.symmetric(
                   horizontal:
                       isSmallScreen(context) ? paddingSmall : paddingLarge),
               child: Column(
-                children: decodeBody(_extracted, context),
+                children: _decoded,
               ),
             ),
             Container(

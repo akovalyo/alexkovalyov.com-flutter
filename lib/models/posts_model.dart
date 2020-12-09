@@ -46,7 +46,7 @@ class PostsModel with ChangeNotifier {
             width: _cardSize.width,
             child: Text(
               value['title'],
-              style: Theme.of(context).textTheme.headline1,
+              style: Theme.of(context).textTheme.headline4,
             ),
           ),
           Container(

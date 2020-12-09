@@ -29,21 +29,21 @@ class HomePage2 extends StatelessWidget {
           height: 300,
           child: Text(
             'Hello3',
-            style: Theme.of(context).textTheme.headline1,
+            style: Theme.of(context).textTheme.headline4,
           ),
         ),
         SizedBox(
           height: 300,
           child: Text(
             'Hello',
-            style: Theme.of(context).textTheme.headline1,
+            style: Theme.of(context).textTheme.headline4,
           ),
         ),
         SizedBox(
           height: 300,
           child: Text(
             'Hello',
-            style: Theme.of(context).textTheme.headline1,
+            style: Theme.of(context).textTheme.headline4,
           ),
         ),
       ],

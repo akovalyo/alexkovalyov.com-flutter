@@ -19,7 +19,6 @@ class LayoutTemplate extends StatelessWidget {
   Widget build(BuildContext context) {
     var _screenSize = screenSize(context);
     var _scrollData = Provider.of<Scroll>(context, listen: false);
-    print("template");
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       extendBodyBehindAppBar: true,

@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
               width: _screenSize.width,
               height: _screenSize.height * 0.4,
               child: FadeInImageAny(
-                image: AssetImage('assets/images/main/main.jpg'),
+                imagePath: 'assets/images/main/main.jpg',
                 placeholder: SizedBox(
                   width: _screenSize.width,
                   height: _screenSize.height * 0.4,

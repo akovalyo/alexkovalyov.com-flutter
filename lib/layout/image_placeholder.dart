@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
 class FadeInImageAny extends StatelessWidget {
-  final ImageProvider image;
+  final String imagePath;
   final Widget placeholder;
   final Widget child;
   final Duration duration;
@@ -11,20 +11,26 @@ class FadeInImageAny extends StatelessWidget {
   final BoxFit fit;
 
   const FadeInImageAny({
-    @required this.image,
+    @required this.imagePath,
     @required this.placeholder,
     this.child,
     this.duration = const Duration(milliseconds: 500),
     this.width,
     this.height,
     this.fit,
-  })  : assert(image != null),
+  })  : assert(imagePath != null),
         assert(placeholder != null);
 
   @override
   Widget build(BuildContext context) {
+    ImageProvider _image;
+    if (imagePath.startsWith(RegExp(r'[http|https]'))) {
+      _image = NetworkImage(imagePath);
+    } else {
+      _image = AssetImage(imagePath);
+    }
     return Image(
-      image: image,
+      image: _image,
       width: width,
       height: height,
       fit: fit,

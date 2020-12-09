@@ -22,7 +22,7 @@ class AkAppBar extends StatelessWidget {
         hoverColor: Color(0x00000000),
         onPressed: () => navKey.currentState.pushNamed(routeHome),
         child: FadeInImageAny(
-          image: AssetImage(mainImage),
+          imagePath: mainImage,
           placeholder: SizedBox(
             width: 40,
             height: 60,
