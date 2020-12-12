@@ -1,3 +1,5 @@
+import 'dart:js' as js;
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -8,6 +10,7 @@ import 'package:mysite/layout/screen_size.dart';
 import 'package:mysite/widgets/footer.dart';
 import 'package:mysite/layout/image_placeholder.dart';
 import 'package:mysite/widgets/animated_image.dart';
+import 'package:mysite/consts/unicode_characters.dart';
 
 class PostElementContainer extends StatelessWidget {
   final Widget child;
@@ -46,20 +49,34 @@ class PostBuilder extends StatelessWidget {
   List<Map> extractBody(String body) {
     List<Map> list = [];
     Iterable<RegExpMatch> parsedBody =
-        RegExp(r'{([a-zA-Z1-9]*)}([ -z|~\n]*){\/}').allMatches(body);
+        RegExp(r'{([a-zA-Z1-9]*)}([^\{\}]*){\/}').allMatches(body);
     parsedBody.forEach((element) {
       list.add({element.group(1): element.group(2)});
     });
     return list;
   }
 
+  String replaceChar(String str) {
+    str = str.replaceAll("\\n", "\n");
+    str = str.replaceAll("\\t", "\t");
+    Iterable<RegExpMatch> match = RegExp(r'\\u([\w]*)').allMatches(str);
+    if (match == null) return str;
+    Map toReplace = {};
+    match.forEach((e) {
+      if (unicodeMap.containsKey(e.group(0)))
+        toReplace[e.group(0)] = unicodeMap[e.group(0)];
+    });
+    toReplace.forEach((key, value) {
+      str = str.replaceFirst(key, value);
+    });
+    return str;
+  }
+
   List<Widget> decodeBody(List<Map> extractedBody, BuildContext ctx) {
     final List<Widget> _listWidget = extractedBody.map((m) {
       final _key = m.keys.toString().replaceAll(RegExp('[()]'), '');
       final _screenSize = MediaQuery.of(ctx).size;
-      String _value = m[_key].replaceAll("\\n", "\n");
-      _value = _value.replaceAll("\\t", "\t");
-
+      String _value = replaceChar(m[_key]);
       switch (_key) {
         case 'p':
           return Divider();
@@ -67,6 +84,18 @@ class PostBuilder extends StatelessWidget {
           return PostElementContainer(
             child: Text(
               _value,
+            ),
+            vertPadding: 10,
+          );
+        case 'quote':
+          return PostElementContainer(
+            alignment: Alignment.center,
+            child: Text(
+              _value,
+              style: TextStyle(
+                fontSize: 24,
+                fontStyle: FontStyle.italic,
+              ),
             ),
             vertPadding: 10,
           );
@@ -118,38 +147,108 @@ class PostBuilder extends StatelessWidget {
             ),
           );
         case 'markdown':
-          return PostElementContainer(
-            vertPadding: 10,
-            child: MarkdownBody(
-              data: _value,
-              selectable: false,
-              styleSheet: MarkdownStyleSheet(
-                em: Theme.of(ctx).textTheme.bodyText2,
-                a: Theme.of(ctx).textTheme.bodyText2,
-                del: Theme.of(ctx).textTheme.bodyText2,
-                blockSpacing: 10,
-              ),
-            ),
-          );
-        case 'image':
-          String path = _value;
-          final match = RegExp(r'(\[[a-z]+\])([\w\W]+)').firstMatch(path);
-          var alignment = Alignment.center;
-          String atribute;
+          String _str = _value;
+          final match = RegExp(r'(\[\[[a-z]+\]\])([\w\W]+)').firstMatch(_str);
+          var _alignment = Alignment.centerLeft;
+          String _atribute;
 
           if (match != null) {
-            atribute = match.group(1);
-            path = match.group(2);
+            _atribute = match.group(1);
+            _str = match.group(2);
           }
-          if (atribute == '[left]') {
-            alignment = Alignment.centerLeft;
-          } else if (atribute == '[right]') {
-            alignment = Alignment.centerRight;
+          if (_atribute == '[[center]]') {
+            _alignment = Alignment.center;
+          }
+          return PostElementContainer(
+            alignment: _alignment,
+            vertPadding: 10,
+            child: MarkdownBody(
+              data: _str,
+              selectable: false,
+              styleSheet: MarkdownStyleSheet(
+                em: TextStyle(fontWeight: FontWeight.bold, height: 1.5),
+                a: Theme.of(ctx).textTheme.bodyText2,
+                blockSpacing: 10,
+              ),
+              onTapLink: (a, b, c) {
+                print("a: $a\n b: $b\n C: $c\n");
+                js.context.callMethod('open', ['https://google.com']);
+              },
+            ),
+          );
+        // case 'markdownCenter':
+        //   return PostElementContainer(
+        //     alignment: Alignment.center,
+        //     vertPadding: 10,
+        //     child: MarkdownBody(
+        //       data: _value,
+        //       selectable: false,
+        //       styleSheet: MarkdownStyleSheet(
+        //         em: Theme.of(ctx).textTheme.bodyText2,
+        //         a: Theme.of(ctx).textTheme.bodyText2,
+        //         del: Theme.of(ctx).textTheme.bodyText2,
+        //         blockSpacing: 10,
+        //       ),
+        //     ),
+        //   );
+        case 'image':
+          String _path = _value;
+          final _match = RegExp(r'(\[[a-z]+\])([\w\W]+)').firstMatch(_path);
+          var _alignment = Alignment.center;
+          String _atribute;
+
+          if (_match != null) {
+            _atribute = _match.group(1);
+            _path = _match.group(2);
+          }
+          if (_atribute == '[left]') {
+            _alignment = Alignment.centerLeft;
+          } else if (_atribute == '[right]') {
+            _alignment = Alignment.centerRight;
           }
           return Container(
-            alignment: alignment,
+            alignment: _alignment,
             width: _screenSize.width * 0.6,
-            child: AnimatedImage(path),
+            child: AnimatedImage(_path),
+          );
+        case 'table':
+          var numRow = 0;
+          List _rows = _value.split('|');
+          List _tableRows = _rows.map((row) {
+            List _cells = row.split('\t');
+            List _tableCells = _cells.map((cell) {
+              if (numRow == 0) {
+                return TableCell(
+                  child: Text(
+                    cell,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                );
+              }
+              return TableCell(
+                child: Text(
+                  cell,
+                  textAlign: TextAlign.center,
+                ),
+              );
+            }).toList();
+            numRow++;
+            return TableRow(
+              children: _tableCells,
+            );
+          }).toList();
+
+          return Container(
+            alignment: Alignment.center,
+            width: _screenSize.width * 0.4,
+            child: Table(
+              border: TableBorder.all(
+                width: 1.0,
+                color: Colors.grey,
+              ),
+              children: _tableRows,
+            ),
           );
 
         default:

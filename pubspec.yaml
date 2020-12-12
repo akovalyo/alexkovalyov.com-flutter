@@ -67,8 +67,20 @@ flutter:
     - assets/images/jupyter/j_01.png
     - assets/images/jupyter/j_02.png
     - assets/images/jupyter/j_03.png
+    - assets/images/blood/blood.png
+    - assets/images/blood/bl_1.png
+    - assets/images/blood/bl_2.png
+    - assets/images/blood/bl_3.png
+    - assets/images/blood/bl_4.png
+    - assets/images/blood/bl_5.png
+    - assets/images/blood/bl_6.png
+    - assets/images/blood/bl_7.png
+    - assets/images/blood/bl_8.png
+    - assets/images/blood/bl_9.png
+    - assets/images/blood/bl_10.png
+    - assets/images/blood/bl_11.png
     #/assets/posts
-    - assets/posts/2020-05-31-jupyter.ak
+    # - assets/posts/2020-05-31-jupyter.ak
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

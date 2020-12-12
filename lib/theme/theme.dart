@@ -65,6 +65,12 @@ ThemeData akTheme(Brightness brightness, String theme) {
           errorColor: akAlertL,
           accentColor: akAccentL,
           textTheme: ThemeData.light().textTheme.copyWith(
+                bodyText1: ThemeData.light().textTheme.bodyText1.copyWith(
+                      fontFamily: 'DavidLibre',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 20,
+                      height: 1.5,
+                    ),
                 bodyText2: ThemeData.light().textTheme.bodyText2.copyWith(
                       fontFamily: 'DavidLibre',
                       fontWeight: FontWeight.w100,
