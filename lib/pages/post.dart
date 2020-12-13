@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:mysite/models/posts_model.dart';
 import 'package:provider/provider.dart';
-import 'package:mysite/theme/consts.dart';
+import 'package:mysite/consts/consts.dart';
 import 'package:mysite/layout/screen_size.dart';
 import 'package:mysite/widgets/footer.dart';
 import 'package:mysite/layout/image_placeholder.dart';
@@ -167,30 +167,17 @@ class PostBuilder extends StatelessWidget {
               selectable: false,
               styleSheet: MarkdownStyleSheet(
                 em: TextStyle(fontWeight: FontWeight.bold, height: 1.5),
-                a: Theme.of(ctx).textTheme.bodyText2,
+                a: TextStyle(
+                    decoration: TextDecoration.underline,
+                    color: Theme.of(ctx)
+                        .accentColor), //Theme.of(ctx).textTheme.bodyText2,
                 blockSpacing: 10,
               ),
-              onTapLink: (a, b, c) {
-                print("a: $a\n b: $b\n C: $c\n");
-                js.context.callMethod('open', ['https://google.com']);
+              onTapLink: (text, link, title) {
+                js.context.callMethod('open', [link]);
               },
             ),
           );
-        // case 'markdownCenter':
-        //   return PostElementContainer(
-        //     alignment: Alignment.center,
-        //     vertPadding: 10,
-        //     child: MarkdownBody(
-        //       data: _value,
-        //       selectable: false,
-        //       styleSheet: MarkdownStyleSheet(
-        //         em: Theme.of(ctx).textTheme.bodyText2,
-        //         a: Theme.of(ctx).textTheme.bodyText2,
-        //         del: Theme.of(ctx).textTheme.bodyText2,
-        //         blockSpacing: 10,
-        //       ),
-        //     ),
-        //   );
         case 'image':
           String _path = _value;
           final _match = RegExp(r'(\[[a-z]+\])([\w\W]+)').firstMatch(_path);
@@ -293,6 +280,8 @@ class PostBuilder extends StatelessWidget {
                 padding: EdgeInsets.only(
                   top: 20,
                   bottom: 10,
+                  right: isSmallScreen(context) ? paddingSmall : paddingLarge,
+                  left: isSmallScreen(context) ? paddingSmall : paddingLarge,
                 ),
                 child: Text(
                   _postData['title'],
@@ -300,7 +289,11 @@ class PostBuilder extends StatelessWidget {
                 )),
             Container(
                 alignment: Alignment.center,
-                padding: EdgeInsets.only(bottom: 20),
+                padding: EdgeInsets.only(
+                  bottom: 20,
+                  left: isSmallScreen(context) ? paddingSmall : paddingLarge,
+                  right: isSmallScreen(context) ? paddingSmall : paddingLarge,
+                ),
                 child: Text(
                   _postData['date'],
                 )),

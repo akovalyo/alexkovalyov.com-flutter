@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import 'package:mysite/theme/consts.dart';
+import 'package:mysite/consts/consts.dart';
 import 'package:mysite/widgets/hover_image.dart';
 import 'package:mysite/layout/screen_size.dart';
 import 'package:mysite/router/routes.dart';

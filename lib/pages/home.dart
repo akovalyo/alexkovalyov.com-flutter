@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'package:mysite/layout/image_placeholder.dart';
 import 'package:mysite/layout/screen_size.dart';
-import 'package:mysite/theme/consts.dart';
+import 'package:mysite/consts/consts.dart';
 import 'package:mysite/models/posts_model.dart';
 import 'package:mysite/widgets/footer.dart';
 

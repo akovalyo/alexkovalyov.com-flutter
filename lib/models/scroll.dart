@@ -6,7 +6,7 @@ class Scroll with ChangeNotifier {
   ScrollMetrics scrollMetrics;
 
   void updateScroll(ScrollMetrics metrics, Size size) {
-    scrollPos = metrics.pixels;
+    scrollPos = metrics.pixels + size.height * 0.2;
     opacity =
         scrollPos > size.height * 0.5 ? 1 : scrollPos / (size.height * 0.5);
     notifyListeners();

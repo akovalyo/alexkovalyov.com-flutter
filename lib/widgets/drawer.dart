@@ -5,8 +5,10 @@ import 'package:mysite/layout/screen_size.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:mysite/widgets/choice_chip.dart';
 import 'package:mysite/layout/image_placeholder.dart';
-import 'package:mysite/theme/consts.dart';
+import 'package:mysite/consts/consts.dart';
 import 'package:mysite/models/menu_model.dart';
+import 'package:mysite/router/routes.dart';
+import 'package:mysite/widgets/main_icon.dart';
 
 class AkDrawer extends StatelessWidget {
   @override
@@ -20,25 +22,6 @@ class AkDrawer extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            // DrawerHeader(
-            //   decoration:
-            //       BoxDecoration(color: Theme.of(context).primaryColorDark),
-            //   child: Column(
-            //     children: [
-            //       Container(
-            //         alignment: Alignment.bottomRight,
-            //         child: IconButton(
-            //           icon: Icon(Icons.close_fullscreen_outlined),
-            //           onPressed: () => Scaffold.of(context).openEndDrawer(),
-            //         ),
-            //       ),
-            //       Center(
-            //         child: Text('Alex Kovalyov'),
-            //       ),
-            //     ],
-            //   ),
-            // ),
-
             Container(
               alignment: Alignment.center,
               height: _screenHeight * 0.25,
@@ -53,20 +36,24 @@ class AkDrawer extends StatelessWidget {
                     ),
                   ),
                   Center(
-                    child: FadeInImageAny(
-                      imagePath: mainImage,
-                      placeholder: SizedBox(
-                        width: 80,
-                        height: 80,
+                    child: Container(
+                      width: 100,
+                      height: 100,
+                      alignment: Alignment.center,
+                      child: FlatButton(
+                        splashColor: Color(0x00000000),
+                        hoverColor: Color(0x00000000),
+                        onPressed: () {
+                          Scaffold.of(context).openEndDrawer();
+                          navKey.currentState.pushNamed(routeHome);
+                        },
+                        child: MainIcon(),
                       ),
-                      width: 80,
-                      height: 80,
                     ),
                   ),
                 ],
               ),
             ),
-
             Container(
               child: Padding(
                 padding: const EdgeInsets.all(25),
@@ -76,7 +63,6 @@ class AkDrawer extends StatelessWidget {
               ),
             ),
             Divider(),
-
             Container(
               alignment: Alignment.center,
               padding: EdgeInsets.only(bottom: 10),

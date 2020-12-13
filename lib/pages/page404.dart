@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:mysite/theme/consts.dart';
+import 'package:mysite/consts/consts.dart';
 
 class Page404 extends StatelessWidget {
   @override
