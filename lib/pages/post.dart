@@ -1,6 +1,7 @@
 import 'dart:js' as js;
 
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:mysite/models/posts_model.dart';
@@ -11,6 +12,7 @@ import 'package:mysite/widgets/footer.dart';
 import 'package:mysite/layout/image_placeholder.dart';
 import 'package:mysite/widgets/animated_image.dart';
 import 'package:mysite/consts/unicode_characters.dart';
+import 'package:mysite/pages/something_wrong.dart';
 
 class PostElementContainer extends StatelessWidget {
   final Widget child;
@@ -67,7 +69,7 @@ class PostBuilder extends StatelessWidget {
         toReplace[e.group(0)] = unicodeMap[e.group(0)];
     });
     toReplace.forEach((key, value) {
-      str = str.replaceFirst(key, value);
+      str = str.replaceAll(key, value);
     });
     return str;
   }
@@ -250,67 +252,90 @@ class PostBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     final _postData = Provider.of<PostsModel>(context).postsMap[path];
     final _screenSize = MediaQuery.of(context).size;
-    final _extracted = extractBody(_postData['body']);
-    final _decoded = decodeBody(_extracted, context);
+    final CollectionReference _bodyRef =
+        FirebaseFirestore.instance.collection('posts/${_postData['id']}/body');
+    return FutureBuilder<DocumentSnapshot>(
+        future: _bodyRef.doc('0').get(),
+        builder: (BuildContext ctx, AsyncSnapshot<DocumentSnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return SomethingWentWrong();
+          } else if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (snapshot.data.data() == null) return SomethingWentWrong();
+          final _extracted = extractBody(snapshot.data.data()['body']);
+          final _decoded = decodeBody(_extracted, context);
 
-    return SingleChildScrollView(
-      physics: ClampingScrollPhysics(),
-      child: Center(
-        child: Column(
-          children: [
-            SizedBox(
-              width: _screenSize.width,
-              height: _screenSize.height * 0.4,
-              child: FadeInImageAny(
-                imagePath: _postData['image'],
-                placeholder: SizedBox(
-                  width: _screenSize.width,
-                  height: _screenSize.height * 0.4,
-                ),
-                width: _screenSize.width,
-                height: _screenSize.height * 0.4,
-                fit: BoxFit.cover,
-              ),
-            ),
-            const SizedBox(
-              height: 40,
-            ),
-            Container(
-                alignment: Alignment.center,
-                padding: EdgeInsets.only(
-                  top: 20,
-                  bottom: 10,
-                  right: isSmallScreen(context) ? paddingSmall : paddingLarge,
-                  left: isSmallScreen(context) ? paddingSmall : paddingLarge,
-                ),
-                child: Text(
-                  _postData['title'],
-                  style: Theme.of(context).textTheme.headline4,
-                )),
-            Container(
-                alignment: Alignment.center,
-                padding: EdgeInsets.only(
-                  bottom: 20,
-                  left: isSmallScreen(context) ? paddingSmall : paddingLarge,
-                  right: isSmallScreen(context) ? paddingSmall : paddingLarge,
-                ),
-                child: Text(
-                  _postData['date'],
-                )),
-            Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal:
-                      isSmallScreen(context) ? paddingSmall : paddingLarge),
+          return SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
+            child: Center(
               child: Column(
-                children: _decoded,
+                children: [
+                  SizedBox(
+                    width: _screenSize.width,
+                    height: _screenSize.height * 0.4,
+                    child: FadeInImageAny(
+                      imagePath: _postData['image'],
+                      placeholder: SizedBox(
+                        width: _screenSize.width,
+                        height: _screenSize.height * 0.4,
+                      ),
+                      width: _screenSize.width,
+                      height: _screenSize.height * 0.4,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.only(
+                        top: 20,
+                        bottom: 10,
+                        right: isSmallScreen(context)
+                            ? paddingSmall
+                            : paddingLarge,
+                        left: isSmallScreen(context)
+                            ? paddingSmall
+                            : paddingLarge,
+                      ),
+                      child: Text(
+                        _postData['title'],
+                        style: Theme.of(context).textTheme.headline4,
+                      )),
+                  Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.only(
+                        bottom: 20,
+                        left: isSmallScreen(context)
+                            ? paddingSmall
+                            : paddingLarge,
+                        right: isSmallScreen(context)
+                            ? paddingSmall
+                            : paddingLarge,
+                      ),
+                      child: Text(
+                        _postData['date'],
+                      )),
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: isSmallScreen(context)
+                            ? paddingSmall
+                            : paddingLarge),
+                    child: Column(
+                      children: _decoded,
+                    ),
+                  ),
+                  Container(
+                    child: Footer(),
+                  )
+                ],
               ),
             ),
-            Container(
-              child: Footer(),
-            )
-          ],
-        ),
-      ),
-    );
+          );
+        });
   }
 }
