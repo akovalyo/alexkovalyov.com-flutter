@@ -32,6 +32,7 @@ dependencies:
   cloud_firestore: ^0.14.3+1
   # firebase_storage: ^5.2.0
   provider: ^4.3.2+2
+  universal_html: ^1.2.3
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -79,6 +80,8 @@ flutter:
     - assets/images/blood/bl_9.png
     - assets/images/blood/bl_10.png
     - assets/images/blood/bl_11.png
+    - assets/images/bitlocker/bitl_1.png
+    - assets/images/bitlocker/bitlocker.jpg
     #/assets/posts
     # - assets/posts/2020-05-31-jupyter.ak
     

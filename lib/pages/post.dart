@@ -1,4 +1,4 @@
-import 'dart:js' as js;
+import 'package:universal_html/prefer_sdk/js.dart' as js;
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -45,8 +45,8 @@ class PostElementContainer extends StatelessWidget {
 
 class PostBuilder extends StatelessWidget {
   final String path;
-
   PostBuilder(this.path);
+  final _controller = ScrollController();
 
   List<Map> extractBody(String body) {
     List<Map> list = [];
@@ -73,6 +73,12 @@ class PostBuilder extends StatelessWidget {
     });
     return str;
   }
+
+  // void _animateToIndex() => _controller.animateTo(
+  //       400,
+  //       duration: Duration(seconds: 1),
+  //       curve: Curves.fastOutSlowIn,
+  //     );
 
   List<Widget> decodeBody(List<Map> extractedBody, BuildContext ctx) {
     final List<Widget> _listWidget = extractedBody.map((m) {
@@ -105,6 +111,7 @@ class PostBuilder extends StatelessWidget {
           return PostElementContainer(
             child: SelectableText(
               _value,
+              style: TextStyle(fontSize: 16, letterSpacing: 1),
             ),
             vertPadding: 10,
             horPadding: 20,
@@ -177,6 +184,7 @@ class PostBuilder extends StatelessWidget {
               ),
               onTapLink: (text, link, title) {
                 js.context.callMethod('open', [link]);
+                // _animateToIndex();
               },
             ),
           );
@@ -269,6 +277,7 @@ class PostBuilder extends StatelessWidget {
           final _decoded = decodeBody(_extracted, context);
 
           return SingleChildScrollView(
+            controller: _controller,
             physics: ClampingScrollPhysics(),
             child: Center(
               child: Column(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class AnimatedImage extends StatelessWidget {
   final String path;
@@ -15,18 +16,21 @@ class AnimatedImage extends StatelessWidget {
       _image = AssetImage(path);
     }
 
-    return GestureDetector(
-      child: Hero(
-        tag: id,
-        child: Image(
-          image: _image,
+    return MouseRegion(
+      cursor: SystemMouseCursors.zoomIn,
+      child: GestureDetector(
+        child: Hero(
+          tag: id,
+          child: Image(
+            image: _image,
+          ),
         ),
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (_) {
+            return AnimatedImageEnlarged(_image, id);
+          }));
+        },
       ),
-      onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (_) {
-          return AnimatedImageEnlarged(_image, id);
-        }));
-      },
     );
   }
 }
