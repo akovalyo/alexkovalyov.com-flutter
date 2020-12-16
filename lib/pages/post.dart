@@ -1,11 +1,11 @@
 import 'package:universal_html/prefer_sdk/js.dart' as js;
-
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:mysite/models/posts_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:provider/provider.dart';
+
+import 'package:mysite/models/posts_model.dart';
 import 'package:mysite/consts/consts.dart';
 import 'package:mysite/layout/screen_size.dart';
 import 'package:mysite/widgets/footer.dart';
@@ -43,10 +43,26 @@ class PostElementContainer extends StatelessWidget {
   }
 }
 
-class PostBuilder extends StatelessWidget {
+class PostBuilder extends StatefulWidget {
   final String path;
   PostBuilder(this.path);
-  final _controller = ScrollController();
+
+  @override
+  _PostBuilderState createState() => _PostBuilderState();
+}
+
+class _PostBuilderState extends State<PostBuilder> {
+  AutoScrollController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AutoScrollController(
+        viewportBoundaryGetter: () =>
+            Rect.fromLTRB(0, 0, 0, MediaQuery.of(context).padding.bottom),
+        axis: Axis.vertical);
+    print('hello');
+  }
 
   List<Map> extractBody(String body) {
     List<Map> list = [];
@@ -74,87 +90,106 @@ class PostBuilder extends StatelessWidget {
     return str;
   }
 
-  // void _animateToIndex() => _controller.animateTo(
-  //       400,
-  //       duration: Duration(seconds: 1),
-  //       curve: Curves.fastOutSlowIn,
-  //     );
+  Widget _wrapScrollTag(int index, Widget child) => AutoScrollTag(
+        key: ValueKey(index),
+        controller: _controller,
+        index: index,
+        child: child,
+        highlightColor: Colors.black.withOpacity(0.1),
+      );
 
   List<Widget> decodeBody(List<Map> extractedBody, BuildContext ctx) {
+    print("body");
+    var ind = 0;
     final List<Widget> _listWidget = extractedBody.map((m) {
+      ind += 1;
       final _key = m.keys.toString().replaceAll(RegExp('[()]'), '');
       final _screenSize = MediaQuery.of(ctx).size;
       String _value = replaceChar(m[_key]);
       switch (_key) {
         case 'p':
-          return Divider();
+          return _wrapScrollTag(ind, Divider());
         case 'text':
-          return PostElementContainer(
-            child: Text(
-              _value,
-            ),
-            vertPadding: 10,
-          );
+          return _wrapScrollTag(
+              ind,
+              PostElementContainer(
+                child: Text(
+                  _value,
+                ),
+                vertPadding: 10,
+              ));
         case 'quote':
-          return PostElementContainer(
-            alignment: Alignment.center,
-            child: Text(
-              _value,
-              style: TextStyle(
-                fontSize: 24,
-                fontStyle: FontStyle.italic,
-              ),
-            ),
-            vertPadding: 10,
-          );
+          return _wrapScrollTag(
+              ind,
+              PostElementContainer(
+                alignment: Alignment.center,
+                child: Text(
+                  _value,
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+                vertPadding: 10,
+              ));
         case 'codeS':
-          return PostElementContainer(
-            child: SelectableText(
-              _value,
-              style: TextStyle(fontSize: 16, letterSpacing: 1),
-            ),
-            vertPadding: 10,
-            horPadding: 20,
-            background: Theme.of(ctx).primaryColor.withAlpha(30),
-          );
+          return _wrapScrollTag(
+              ind,
+              PostElementContainer(
+                child: SelectableText(
+                  _value,
+                  style: TextStyle(fontSize: 16, letterSpacing: 1),
+                ),
+                vertPadding: 10,
+                horPadding: 20,
+                background: Theme.of(ctx).primaryColor.withAlpha(30),
+              ));
         case 'code':
-          return PostElementContainer(
-            child: Text(
-              _value,
-              style: TextStyle(fontSize: 16, letterSpacing: 1),
-            ),
-            vertPadding: 10,
-            horPadding: 20,
-            background: Theme.of(ctx).primaryColor.withAlpha(30),
-          );
+          return _wrapScrollTag(
+              ind,
+              PostElementContainer(
+                child: Text(
+                  _value,
+                  style: TextStyle(fontSize: 16, letterSpacing: 1),
+                ),
+                vertPadding: 10,
+                horPadding: 20,
+                background: Theme.of(ctx).primaryColor.withAlpha(30),
+              ));
 
         case 'headline4':
-          return PostElementContainer(
-            vertPadding: 20,
-            alignment: Alignment.center,
-            child: Text(
-              _value,
-              style: Theme.of(ctx).textTheme.headline4,
-            ),
-          );
+          return _wrapScrollTag(
+              ind,
+              PostElementContainer(
+                vertPadding: 20,
+                alignment: Alignment.center,
+                child: Text(
+                  _value,
+                  style: Theme.of(ctx).textTheme.headline4,
+                ),
+              ));
         case 'headline5':
-          return PostElementContainer(
-            vertPadding: 20,
-            alignment: Alignment.center,
-            child: Text(
-              _value,
-              style: Theme.of(ctx).textTheme.headline5,
-            ),
-          );
+          return _wrapScrollTag(
+              ind,
+              PostElementContainer(
+                vertPadding: 20,
+                alignment: Alignment.center,
+                child: Text(
+                  _value,
+                  style: Theme.of(ctx).textTheme.headline5,
+                ),
+              ));
         case 'headline6':
-          return PostElementContainer(
-            vertPadding: 20,
-            alignment: Alignment.center,
-            child: Text(
-              _value,
-              style: Theme.of(ctx).textTheme.headline6,
-            ),
-          );
+          return _wrapScrollTag(
+              ind,
+              PostElementContainer(
+                vertPadding: 20,
+                alignment: Alignment.center,
+                child: Text(
+                  _value,
+                  style: Theme.of(ctx).textTheme.headline6,
+                ),
+              ));
         case 'markdown':
           String _str = _value;
           final match = RegExp(r'(\[\[[a-z]+\]\])([\w\W]+)').firstMatch(_str);
@@ -168,26 +203,30 @@ class PostBuilder extends StatelessWidget {
           if (_atribute == '[[center]]') {
             _alignment = Alignment.center;
           }
-          return PostElementContainer(
-            alignment: _alignment,
-            vertPadding: 10,
-            child: MarkdownBody(
-              data: _str,
-              selectable: false,
-              styleSheet: MarkdownStyleSheet(
-                em: TextStyle(fontWeight: FontWeight.bold, height: 1.5),
-                a: TextStyle(
-                    decoration: TextDecoration.underline,
-                    color: Theme.of(ctx)
-                        .accentColor), //Theme.of(ctx).textTheme.bodyText2,
-                blockSpacing: 10,
-              ),
-              onTapLink: (text, link, title) {
-                js.context.callMethod('open', [link]);
-                // _animateToIndex();
-              },
-            ),
-          );
+          return _wrapScrollTag(
+              ind,
+              PostElementContainer(
+                alignment: _alignment,
+                vertPadding: 10,
+                child: MarkdownBody(
+                  data: _str,
+                  selectable: false,
+                  styleSheet: MarkdownStyleSheet(
+                    em: TextStyle(fontWeight: FontWeight.bold, height: 1.5),
+                    a: TextStyle(
+                        decoration: TextDecoration.underline,
+                        color: Theme.of(ctx)
+                            .accentColor), //Theme.of(ctx).textTheme.bodyText2,
+                    blockSpacing: 10,
+                  ),
+                  onTapLink: (text, link, title) {
+                    // js.context.callMethod('open', [link]);
+                    // _animateToIndex();
+                    _controller.scrollToIndex(1000,
+                        preferPosition: AutoScrollPosition.begin);
+                  },
+                ),
+              ));
         case 'image':
           String _path = _value;
           final _match = RegExp(r'(\[[a-z]+\])([\w\W]+)').firstMatch(_path);
@@ -203,11 +242,13 @@ class PostBuilder extends StatelessWidget {
           } else if (_atribute == '[right]') {
             _alignment = Alignment.centerRight;
           }
-          return Container(
-            alignment: _alignment,
-            width: _screenSize.width * 0.6,
-            child: AnimatedImage(_path),
-          );
+          return _wrapScrollTag(
+              ind,
+              Container(
+                alignment: _alignment,
+                width: _screenSize.width * 0.6,
+                child: AnimatedImage(_path),
+              ));
         case 'table':
           var numRow = 0;
           List _rows = _value.split('|');
@@ -236,20 +277,22 @@ class PostBuilder extends StatelessWidget {
             );
           }).toList();
 
-          return Container(
-            alignment: Alignment.center,
-            width: _screenSize.width * 0.4,
-            child: Table(
-              border: TableBorder.all(
-                width: 1.0,
-                color: Colors.grey,
-              ),
-              children: _tableRows,
-            ),
-          );
+          return _wrapScrollTag(
+              ind,
+              Container(
+                alignment: Alignment.center,
+                width: _screenSize.width * 0.4,
+                child: Table(
+                  border: TableBorder.all(
+                    width: 1.0,
+                    color: Colors.grey,
+                  ),
+                  children: _tableRows,
+                ),
+              ));
 
         default:
-          return Container();
+          return _wrapScrollTag(ind, Container());
       }
     }).toList();
 
@@ -258,7 +301,7 @@ class PostBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _postData = Provider.of<PostsModel>(context).postsMap[path];
+    final _postData = Provider.of<PostsModel>(context).postsMap[widget.path];
     final _screenSize = MediaQuery.of(context).size;
     final CollectionReference _bodyRef =
         FirebaseFirestore.instance.collection('posts/${_postData['id']}/body');
@@ -338,6 +381,26 @@ class PostBuilder extends StatelessWidget {
                       children: _decoded,
                     ),
                   ),
+                  Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: isSmallScreen(context)
+                              ? paddingSmall
+                              : paddingLarge),
+                      alignment: Alignment.bottomRight,
+                      child: IconButton(
+                        iconSize: 34,
+                        color: Theme.of(context).primaryColor,
+                        onPressed: () {
+                          _controller.animateTo(
+                            0,
+                            duration: Duration(seconds: 1),
+                            curve: Curves.fastOutSlowIn,
+                          );
+                          // scrollToIndex(0,
+                          // preferPosition: AutoScrollPosition.begin);
+                        },
+                        icon: Icon(Icons.arrow_upward),
+                      )),
                   Container(
                     child: Footer(),
                   )
