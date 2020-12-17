@@ -10,7 +10,7 @@ class AnimatedImage extends StatelessWidget {
   Widget build(BuildContext context) {
     final id = DateTime.now().toString();
     ImageProvider _image;
-    if (path.startsWith(RegExp(r'[http|https]'))) {
+    if (path.startsWith('http')) {
       _image = NetworkImage(path);
     } else {
       _image = AssetImage(path);

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'package:mysite/pages/page404.dart';
 import 'package:mysite/router/routes.dart';
-import 'package:mysite/pages/post.dart';
+import 'package:mysite/pages/post_page.dart';
 import 'package:mysite/models/posts_model.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -11,7 +11,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       Provider.of<PostsModel>(navKey.currentState.context, listen: false);
   if (_postsModel.postExist(settings.name)) {
     return _getPageRoute(
-      PostBuilder(settings.name),
+      PostPage(settings.name),
       settings,
     );
   }
