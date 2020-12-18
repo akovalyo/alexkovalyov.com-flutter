@@ -3,6 +3,8 @@ import 'package:hovering/hovering.dart';
 import 'package:flutter/rendering.dart';
 
 class MenuIcon extends StatelessWidget {
+  const MenuIcon();
+
   @override
   Widget build(BuildContext context) {
     return HoverCrossFadeWidget(

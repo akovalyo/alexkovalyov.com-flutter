@@ -19,9 +19,10 @@ class MenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: column ? EdgeInsets.only(bottom: 10, top: 10) : null,
+      padding: column ? const EdgeInsets.only(bottom: 10, top: 10) : null,
       child: HoverButton(
-        padding: EdgeInsets.all(1),
+        height: 1,
+        padding: const EdgeInsets.all(1),
         child: Text(title,
             style: TextStyle(
               fontSize: fontSize,
@@ -32,8 +33,6 @@ class MenuItem extends StatelessWidget {
         focusElevation: 0,
         hoverColor: Color(0x00000000),
         highlightColor: Color(0x00000000),
-        disabledColor: Color(0x00000000),
-        focusColor: Color(0x00000000),
         splashColor: Color(0x00000000),
         onpressed: () {
           navKey.currentState.pushNamed(path);

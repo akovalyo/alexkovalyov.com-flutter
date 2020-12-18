@@ -6,7 +6,7 @@ import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:mysite/widgets/choice_chip.dart';
 import 'package:mysite/models/menu_model.dart';
 import 'package:mysite/router/routes.dart';
-import 'package:mysite/widgets/main_icon.dart';
+import 'package:mysite/widgets/hover_icon_button.dart';
 
 class AkDrawer extends StatelessWidget {
   @override
@@ -38,14 +38,13 @@ class AkDrawer extends StatelessWidget {
                       width: 100,
                       height: 100,
                       alignment: Alignment.center,
-                      child: FlatButton(
-                        splashColor: Color(0x00000000),
-                        hoverColor: Color(0x00000000),
+                      child: HoverIconButton(
                         onPressed: () {
                           Scaffold.of(context).openEndDrawer();
                           navKey.currentState.pushNamed(routeHome);
                         },
-                        child: MainIcon(),
+                        imageProvider: AssetImage('assets/images/main/akM.png'),
+                        secondColor: Theme.of(context).accentColor,
                       ),
                     ),
                   ),
@@ -56,6 +55,7 @@ class AkDrawer extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(25),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: _menu.getMenuList(18.0, true),
                 ),
               ),
@@ -63,7 +63,7 @@ class AkDrawer extends StatelessWidget {
             Divider(),
             Container(
               alignment: Alignment.center,
-              padding: EdgeInsets.only(bottom: 10),
+              padding: const EdgeInsets.only(bottom: 10),
               child: Text('Select Theme',
                   style: Theme.of(context)
                       .textTheme

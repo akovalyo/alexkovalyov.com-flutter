@@ -40,7 +40,7 @@ class _ExampleState extends State<Example> {
         controller: controller,
         children: randomList.map<Widget>((data) {
           return Padding(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             child: _getRow(data[0], math.max(data[1].toDouble(), 50.0)),
           );
         }).toList(),
@@ -70,7 +70,7 @@ class _ExampleState extends State<Example> {
     return _wrapScrollTag(
         index: index,
         child: Container(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           alignment: Alignment.topCenter,
           height: height,
           decoration: BoxDecoration(

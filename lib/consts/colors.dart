@@ -9,7 +9,7 @@ const akBlackDAcc = Color(0xFF2B2B2B);
 const akBackD = Color(0xFF747474);
 
 const akAccentL = Color(0xFFA43C28);
-const akAccentD = Color(0xFFAF402A);
+const akAccentD = Color(0xFFCE7260);
 
 const akGrey = Color(0xFF707070);
 

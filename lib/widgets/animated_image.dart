@@ -3,18 +3,14 @@ import 'package:flutter/rendering.dart';
 
 class AnimatedImage extends StatelessWidget {
   final String path;
-  // final ImageProvider image;
+
   AnimatedImage(this.path);
 
   @override
   Widget build(BuildContext context) {
     final id = DateTime.now().toString();
-    ImageProvider _image;
-    if (path.startsWith('http')) {
-      _image = NetworkImage(path);
-    } else {
-      _image = AssetImage(path);
-    }
+    final ImageProvider _image =
+        path.startsWith('http') ? NetworkImage(path) : AssetImage(path);
 
     return MouseRegion(
       cursor: SystemMouseCursors.zoomIn,
@@ -38,6 +34,7 @@ class AnimatedImage extends StatelessWidget {
 class AnimatedImageEnlarged extends StatelessWidget {
   final ImageProvider image;
   final String id;
+
   AnimatedImageEnlarged(this.image, this.id);
   @override
   Widget build(BuildContext context) {

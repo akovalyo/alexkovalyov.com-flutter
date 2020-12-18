@@ -10,17 +10,13 @@ class AkMenu with ChangeNotifier {
       'path': routeHome,
     },
     {
-      'title': 'Scroll',
+      'title': 'Projects',
       'path': routeScroll,
-    },
-    {
-      'title': 'Home2',
-      'path': routeHome2,
     },
   ];
 
   List<Widget> getMenuList(double fontSize, bool isColumn) {
-    final items = _menuItems.map((elem) {
+    final _items = _menuItems.map((elem) {
       return MenuItem(
         title: elem['title'],
         path: elem['path'],
@@ -29,6 +25,6 @@ class AkMenu with ChangeNotifier {
       );
     }).toList();
 
-    return items;
+    return _items;
   }
 }

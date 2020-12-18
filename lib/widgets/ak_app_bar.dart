@@ -7,7 +7,7 @@ import 'package:mysite/router/routes.dart';
 import 'package:mysite/consts/consts.dart';
 import 'package:mysite/models/menu_model.dart';
 import 'package:mysite/models/scroll.dart';
-import 'package:mysite/widgets/main_icon.dart';
+import 'package:mysite/widgets/hover_icon_button.dart';
 import 'package:mysite/widgets/menu_icon.dart';
 
 class AkAppBar extends StatelessWidget {
@@ -27,11 +27,11 @@ class AkAppBar extends StatelessWidget {
       width: 40,
       height: 40,
       alignment: Alignment.center,
-      child: FlatButton(
-        splashColor: Color(0x00000000),
-        hoverColor: Color(0x00000000),
+      child: HoverIconButton(
         onPressed: () => navKey.currentState.pushNamed(routeHome),
-        child: MainIcon(),
+        imageProvider: AssetImage('assets/images/main/akM.png'),
+        secondColor: Theme.of(context).accentColor,
+        // ),
       ),
     );
     return isSmallScreen(context)

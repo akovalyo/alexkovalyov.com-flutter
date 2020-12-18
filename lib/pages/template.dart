@@ -9,11 +9,8 @@ import 'package:mysite/models/scroll.dart';
 
 class LayoutTemplate extends StatelessWidget {
   final Widget child;
-  // final List posts;
 
   LayoutTemplate({Key key, @required this.child});
-  //    : super(key: key);
-  // LayoutTemplate({@required this.child}) : assert(child != null);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +31,6 @@ class LayoutTemplate extends StatelessWidget {
             WidgetsBinding.instance.addPostFrameCallback((_) =>
                 _scrollData.updateScroll(
                     scrollNotification.metrics, MediaQuery.of(context).size));
-
             return false;
           },
           child: Stack(
