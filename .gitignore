@@ -2,8 +2,8 @@ assets/images/*
 !assets/images/main
 !assets/images/cyberpunk.png
 assets/posts/*
-ios/
-android/
+**/ios/
+**/android/
 
 # Miscellaneous
 *.class

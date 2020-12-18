@@ -13,6 +13,7 @@ import 'package:mysite/layout/image_placeholder.dart';
 import 'package:mysite/widgets/animated_image.dart';
 import 'package:mysite/consts/unicode_characters.dart';
 import 'package:mysite/pages/something_wrong.dart';
+import 'package:mysite/widgets/wrap_scroll_tag.dart';
 
 class PostElementContainer extends StatelessWidget {
   final Widget child;
@@ -139,26 +140,19 @@ class PostBuilder extends StatelessWidget {
     return str;
   }
 
-  Widget _wrapScrollTag(int index, Widget child) => AutoScrollTag(
-        key: ValueKey(index),
-        controller: controller,
-        index: index,
-        child: child,
-        highlightColor: Colors.black.withOpacity(0.1),
-      );
-
   List<Widget> decodeBody(List<Map> extractedBody, BuildContext ctx) {
     final List<Widget> _listWidget = extractedBody.map((m) {
       final _key = m.keys.toString().replaceAll(RegExp('[()]'), '');
       final _screenSize = MediaQuery.of(ctx).size;
-      String _value = replaceChar(m[_key][1]);
-      int _widgetIdx = m[_key][0].isEmpty ? 0 : int.parse(m[_key][0]);
+      final String _value = replaceChar(m[_key][1]);
+      final int _widgetIdx = m[_key][0].isEmpty ? 0 : int.parse(m[_key][0]);
 
       switch (_key) {
         case 'p':
           var _child = Divider();
           if (_widgetIdx == 0) return _child;
-          return _wrapScrollTag(_widgetIdx, _child);
+          return WrapScrollTag(
+              child: _child, controller: controller, index: _widgetIdx);
 
         case 'text':
           var _child = PostElementContainer(
@@ -168,7 +162,8 @@ class PostBuilder extends StatelessWidget {
             vertPadding: 10,
           );
           if (_widgetIdx == 0) return _child;
-          return _wrapScrollTag(_widgetIdx, _child);
+          return WrapScrollTag(
+              child: _child, controller: controller, index: _widgetIdx);
 
         case 'quote':
           var _child = PostElementContainer(
@@ -183,7 +178,8 @@ class PostBuilder extends StatelessWidget {
             vertPadding: 10,
           );
           if (_widgetIdx == 0) return _child;
-          return _wrapScrollTag(_widgetIdx, _child);
+          return WrapScrollTag(
+              child: _child, controller: controller, index: _widgetIdx);
 
         case 'code':
           var _child = PostElementContainer(
@@ -196,7 +192,8 @@ class PostBuilder extends StatelessWidget {
             background: Theme.of(ctx).primaryColor.withAlpha(30),
           );
           if (_widgetIdx == 0) return _child;
-          return _wrapScrollTag(_widgetIdx, _child);
+          return WrapScrollTag(
+              child: _child, controller: controller, index: _widgetIdx);
 
         case 'headline4':
           var _child = PostElementContainer(
@@ -208,7 +205,8 @@ class PostBuilder extends StatelessWidget {
             ),
           );
           if (_widgetIdx == 0) return _child;
-          return _wrapScrollTag(_widgetIdx, _child);
+          return WrapScrollTag(
+              child: _child, controller: controller, index: _widgetIdx);
 
         case 'headline5':
           var _child = PostElementContainer(
@@ -220,7 +218,8 @@ class PostBuilder extends StatelessWidget {
             ),
           );
           if (_widgetIdx == 0) return _child;
-          return _wrapScrollTag(_widgetIdx, _child);
+          return WrapScrollTag(
+              child: _child, controller: controller, index: _widgetIdx);
 
         case 'headline6':
           var _child = PostElementContainer(
@@ -232,7 +231,8 @@ class PostBuilder extends StatelessWidget {
             ),
           );
           if (_widgetIdx == 0) return _child;
-          return _wrapScrollTag(_widgetIdx, _child);
+          return WrapScrollTag(
+              child: _child, controller: controller, index: _widgetIdx);
 
         case 'markdown':
           String _str = _value;
@@ -257,8 +257,7 @@ class PostBuilder extends StatelessWidget {
                 em: TextStyle(fontWeight: FontWeight.bold, height: 1.5),
                 a: TextStyle(
                     decoration: TextDecoration.underline,
-                    color: Theme.of(ctx)
-                        .accentColor), //Theme.of(ctx).textTheme.bodyText2,
+                    color: Theme.of(ctx).accentColor),
                 blockSpacing: 10,
               ),
               onTapLink: (text, link, title) {
@@ -275,7 +274,8 @@ class PostBuilder extends StatelessWidget {
             ),
           );
           if (_widgetIdx == 0) return _child;
-          return _wrapScrollTag(_widgetIdx, _child);
+          return WrapScrollTag(
+              child: _child, controller: controller, index: _widgetIdx);
 
         case 'image':
           String _path = _value;
@@ -297,7 +297,8 @@ class PostBuilder extends StatelessWidget {
             child: AnimatedImage(_path),
           );
           if (_widgetIdx == 0) return _child;
-          return _wrapScrollTag(_widgetIdx, _child);
+          return WrapScrollTag(
+              child: _child, controller: controller, index: _widgetIdx);
 
         case 'table':
           var numRow = 0;
@@ -339,7 +340,8 @@ class PostBuilder extends StatelessWidget {
             ),
           );
           if (_widgetIdx == 0) return _child;
-          return _wrapScrollTag(_widgetIdx, _child);
+          return WrapScrollTag(
+              child: _child, controller: controller, index: _widgetIdx);
 
         default:
           return Container();
@@ -423,8 +425,6 @@ class PostBuilder extends StatelessWidget {
                       duration: Duration(seconds: 1),
                       curve: Curves.fastOutSlowIn,
                     );
-                    // scrollToIndex(0,
-                    // preferPosition: AutoScrollPosition.begin);
                   },
                   icon: Icon(Icons.arrow_upward),
                 )),

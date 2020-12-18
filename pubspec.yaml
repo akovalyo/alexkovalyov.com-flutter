@@ -23,17 +23,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_markdown: ^0.5.0
+  flutter_markdown: ^0.5.1
   # google_fonts: ^1.1.1
   scroll_to_index: ^1.0.6
   dynamic_theme: ^1.0.1
   hovering: ^1.0.2
   firebase_core: ^0.5.3
-  cloud_firestore: ^0.14.3+1
+  cloud_firestore: ^0.14.4
   # firebase_storage: ^5.2.0
-  provider: ^4.3.2+2
+  provider: ^4.3.2+3
   universal_html: ^1.2.3
-  scroll_to_id: ^1.1.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -83,6 +82,7 @@ flutter:
     - assets/images/blood/bl_11.png
     - assets/images/bitlocker/bitl_1.png
     - assets/images/bitlocker/bitlocker.jpg
+    - assets/images/git.jpg
     #/assets/posts
     # - assets/posts/2020-05-31-jupyter.ak
     

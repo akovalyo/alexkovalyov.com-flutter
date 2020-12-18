@@ -4,8 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:mysite/layout/screen_size.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:mysite/widgets/choice_chip.dart';
-import 'package:mysite/layout/image_placeholder.dart';
-import 'package:mysite/consts/consts.dart';
 import 'package:mysite/models/menu_model.dart';
 import 'package:mysite/router/routes.dart';
 import 'package:mysite/widgets/main_icon.dart';

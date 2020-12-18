@@ -6,4 +6,5 @@ const unicodeMap = {
   r'\u207F': '\u207F', // Superscript n
   r'\u007B': '\u007B', // Left Curly Bracket
   r'\u007D': '\u007D', // Right Curly Bracket
+  r'\u2217': '\u2217', // Asterisk
 };
