@@ -1,90 +1,137 @@
 import 'dart:math' as math;
-
+import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
-import 'package:scroll_to_index/scroll_to_index.dart';
+import 'dart:html' as html;
+import 'dart:js' as js;
+import 'dart:ui' as ui;
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 class Example extends StatefulWidget {
   static const routeName = '/scroll';
-
-  Example({Key key}) : super(key: key);
 
   @override
   _ExampleState createState() => _ExampleState();
 }
 
 class _ExampleState extends State<Example> {
-  static const maxCount = 100;
-  final random = math.Random();
-  final scrollDirection = Axis.vertical;
+  String createdViewId = 'map_element';
+//  void forWeb() {
 
-  AutoScrollController controller;
-  List<List<int>> randomList;
+//       // ignore: undefined_prefixed_name
+//       ui.platformViewRegistry.registerViewFactory(
+//           'hello-world-html',
+//               (int viewId) => html.IFrameElement()
+//             ..width = '640'
+//             ..height = '360'
+//             ..src = 'https://www.youtube.com/embed/IyFZznAk69U'
+//             ..style.border = 'none');
+
+//       Directionality(
+//         textDirection: TextDirection.ltr,
+//         child: Center(
+//           child: SizedBox(
+//             width: 200,
+//             height: 200,
+//             child: HtmlElementView(viewType: 'hello-world-html'),
+//           ),
+//         ),
+//       );
+
+//   }
+
+  void initState() {
+    // ignore: undefined_prefixed_name
+    ui.platformViewRegistry.registerViewFactory(
+        createdViewId,
+        (int viewId) => html.IFrameElement()
+          ..width = MediaQuery.of(context).size.width.toString() //'800'
+          ..height = MediaQuery.of(context).size.height.toString() //'400'
+          ..src = 'https://repl.it/@akovalyo/42svminishell-1?lite=false'
+          ..style.border = 'none');
+
+    super.initState();
+  }
 
   @override
-  void initState() {
-    super.initState();
-    controller = AutoScrollController(
-        viewportBoundaryGetter: () =>
-            Rect.fromLTRB(0, 0, 0, MediaQuery.of(context).padding.bottom),
-        axis: scrollDirection);
-    randomList = List.generate(maxCount,
-        (index) => <int>[index, (1000 * random.nextDouble()).toInt()]);
+  void dispose() {
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: null,
-      body: ListView(
-        scrollDirection: scrollDirection,
-        controller: controller,
-        children: randomList.map<Widget>((data) {
-          return Padding(
-            padding: const EdgeInsets.all(8),
-            child: _getRow(data[0], math.max(data[1].toDouble(), 50.0)),
-          );
-        }).toList(),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _scrollToIndex,
-        tooltip: 'Increment',
-        child: Text(counter.toString()),
+      body: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 70),
+        // decoration: BoxDecoration(
+        // color: Colors.white,
+        // border: Border.all(color: Colors.grey[300], width: 1),
+        // borderRadius: BorderRadius.all(Radius.circular(5))),
+        width: 500,
+        height: 800,
+        child: HtmlWidget(
+          // the first parameter (`html`) is required
+          '''
+  <h1>Heading</h1>
+  <h2>Heading</h2>
+  <h3>Heading</h3>
+  <h4>Heading</h4>
+  <h5>Heading</h5>
+  <h6>Heading</h6>
+  <p>
+    A paragraph with <strong>strong</strong>, <em>emphasized</em>
+    and <span style="color: red">colored</span> text.
+  </p>
+  <details>
+	<summary>Title</summary>
+ 
+     TextTextTextTextTextText
+     TextTextTextTextText
+     TextTextTextText
+     TextTextText
+     TextText
+     Text
+ 
+ </details>
+  ''',
+
+          // all other parameters are optional, a few notable params:
+
+          // specify custom styling for an element
+          // see supported inline styling below
+          customStylesBuilder: (element) {
+            if (element.classes.contains('foo')) {
+              return {'color': 'red'};
+            }
+
+            return null;
+          },
+
+          // render a custom widget
+          // customWidgetBuilder: (element) {
+          //   if (element.attributes['foo'] == 'bar') {
+          //     return FooBarWidget();
+          //   }
+
+          //   return null;
+          // },
+
+          // set the default styling for text
+          textStyle: TextStyle(fontSize: 14),
+
+          // By default, `webView` is turned off because additional config
+          // must be done for `PlatformView` to work on iOS.
+          // https://pub.dev/packages/webview_flutter#ios
+          // Make sure you have it configured before using.
+          webView: true,
+        ),
+        //  Directionality(
+        //   textDirection: TextDirection.ltr,
+        //   child: HtmlElementView(
+        //     viewType: createdViewId,
+        //   ),
+        // ),
       ),
     );
   }
-
-  int counter = -1;
-  Future _scrollToIndex() async {
-    setState(() {
-      counter++;
-
-      if (counter >= maxCount) counter = 0;
-    });
-
-    await controller.scrollToIndex(counter,
-        preferPosition: AutoScrollPosition.begin);
-    controller.highlight(counter);
-  }
-
-  Widget _getRow(int index, double height) {
-    return _wrapScrollTag(
-        index: index,
-        child: Container(
-          padding: const EdgeInsets.all(8),
-          alignment: Alignment.topCenter,
-          height: height,
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.lightBlue, width: 4),
-              borderRadius: BorderRadius.circular(12)),
-          child: Text('index: $index, height: $height'),
-        ));
-  }
-
-  Widget _wrapScrollTag({int index, Widget child}) => AutoScrollTag(
-        key: ValueKey(index),
-        controller: controller,
-        index: index,
-        child: child,
-        highlightColor: Colors.black.withOpacity(0.1),
-      );
 }

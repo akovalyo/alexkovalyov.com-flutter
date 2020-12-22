@@ -12,7 +12,7 @@ import 'package:mysite/widgets/animated_image.dart';
 import 'package:mysite/consts/unicode_characters.dart';
 import 'package:mysite/pages/something_wrong.dart';
 import 'package:mysite/widgets/wrap_scroll_tag.dart';
-import 'package:mysite/pages/post_page.dart';
+import 'package:mysite/pages/posts_page.dart';
 
 class PostBuilder extends StatelessWidget {
   final AutoScrollController controller;
@@ -189,6 +189,12 @@ class PostBuilder extends StatelessWidget {
           if (_widgetIdx == 0) return _child;
           return WrapScrollTag(
               child: _child, controller: controller, index: _widgetIdx);
+        // case 'webview':
+        //   return Container(
+        //       child: WebView(
+        //     initialUrl: 'https://flutter.dev',
+        //     javascriptMode: JavascriptMode.unrestricted,
+        //   ));
 
         case 'image':
           String _path = _value;
