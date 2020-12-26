@@ -25,8 +25,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 }
 
 PageRoute _getPageRoute(Widget child, RouteSettings settings) {
+  // print(settings.arguments);
   return PageRouteBuilder(
-    settings: RouteSettings(name: settings.name),
+    settings: RouteSettings(name: settings.name, arguments: settings.arguments),
     pageBuilder: (context, animation, secondaryAnimation) => child,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       var curvedAnimation = CurvedAnimation(

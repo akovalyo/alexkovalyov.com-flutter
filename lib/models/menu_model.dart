@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 
 import 'package:mysite/widgets/menu_item.dart';
 import 'package:mysite/router/routes.dart';
+import 'package:mysite/consts/home_widgets.dart';
 
 class AkMenu with ChangeNotifier {
   static const _menuItems = [
     {
-      'title': 'Posts',
+      'title': projects,
       'path': routeHome,
     },
     {
-      'title': 'Projects',
-      'path': routeScroll,
+      'title': blog,
+      'path': routeHome,
     },
   ];
 

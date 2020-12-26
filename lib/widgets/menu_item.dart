@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:mysite/router/routes.dart';
 import 'package:hovering/hovering.dart';
+import 'package:mysite/consts/home_widgets.dart';
 
 class MenuItem extends StatelessWidget {
   final String title;
@@ -35,7 +36,19 @@ class MenuItem extends StatelessWidget {
         highlightColor: Color(0x00000000),
         splashColor: Color(0x00000000),
         onpressed: () {
-          navKey.currentState.pushNamed(path);
+          final newRouteName = '/';
+          bool isSameRoute = false;
+          navKey.currentState.popUntil((route) {
+            if (route.settings.name == newRouteName) {
+              isSameRoute = true;
+            }
+            return true;
+          });
+
+          if (isSameRoute) {
+            navKey.currentState.pushReplacementNamed(path, arguments: title);
+          } else
+            navKey.currentState.pushNamed(path, arguments: title);
           if (column) {
             Scaffold.of(context).openEndDrawer();
           }

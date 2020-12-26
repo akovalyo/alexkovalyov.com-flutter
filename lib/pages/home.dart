@@ -10,11 +10,7 @@ import 'package:mysite/models/scroll.dart';
 import 'package:mysite/widgets/social_tab.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:mysite/widgets/wrap_scroll_tag.dart';
-
-enum homeWidgets {
-  projects,
-  blog,
-}
+import 'package:mysite/consts/home_widgets.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -43,7 +39,21 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final args = ModalRoute.of(context).settings.arguments;
+    print(args);
+    if (args != null) {
+      setState(() {
+        _scrollController.scrollToIndex(homeWidgets[args]);
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    // final args = ModalRoute.of(context).settings.arguments;
+    // print(args);
     //var _screenSize = MediaQuery.of(context).size;
     final List<Widget> wList = [
       Header(_scrollController),
@@ -53,22 +63,23 @@ class _HomePageState extends State<HomePage> {
       ),
       WrapScrollTag(
         controller: _scrollController,
-        index: homeWidgets.blog.index,
+        index: homeWidgets[blog],
         child: Posts(),
       ),
       // Posts(),
       WrapScrollTag(
         controller: _scrollController,
-        index: 2,
-        child: Container(height: 600, child: Text('Hello2')),
+        index: homeWidgets[projects],
+        child: Container(height: 600, child: Text('Projects')),
       ),
       WrapScrollTag(
         controller: _scrollController,
-        index: 3,
-        child: Container(height: 600, child: Text('Hello3')),
+        index: 2,
+        child: Container(height: 600, child: Text('Hello2')),
       ),
       const Footer(),
     ];
+
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: Column(children: wList),
@@ -150,7 +161,7 @@ class Header extends StatelessWidget {
               FlatButton(
                 onPressed: () {
                   controller.scrollToIndex(
-                    2,
+                    homeWidgets[projects],
                     preferPosition: AutoScrollPosition.begin,
                     duration: Duration(milliseconds: 1000),
                   );
@@ -160,7 +171,7 @@ class Header extends StatelessWidget {
               FlatButton(
                 onPressed: () {
                   controller.scrollToIndex(
-                    homeWidgets.blog.index,
+                    homeWidgets[blog],
                     preferPosition: AutoScrollPosition.begin,
                     duration: Duration(milliseconds: 1000),
                   );
@@ -170,7 +181,7 @@ class Header extends StatelessWidget {
               FlatButton(
                 onPressed: () {
                   controller.scrollToIndex(
-                    3,
+                    2,
                     preferPosition: AutoScrollPosition.begin,
                     duration: Duration(milliseconds: 1000),
                   );
