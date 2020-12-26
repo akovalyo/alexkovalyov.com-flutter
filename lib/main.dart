@@ -51,9 +51,9 @@ class MyApp extends StatelessWidget {
                     ChangeNotifierProvider(
                       create: (_) => AkMenu(),
                     ),
-                    ChangeNotifierProvider(
-                      create: (_) => Scroll(),
-                    ),
+                    // ChangeNotifierProvider(
+                    //   create: (_) => Scroll(),
+                    // ),
                   ],
                   child: DynamicTheme(
                     defaultBrightness: Brightness.light,

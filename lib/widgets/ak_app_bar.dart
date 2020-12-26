@@ -14,7 +14,7 @@ class AkAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _menu = Provider.of<AkMenu>(context, listen: false);
-    final _opacity = Provider.of<Scroll>(context).opacity;
+    //final _opacity = Provider.of<Scroll>(context).opacity;
     final _drawerIcon = Container(
       alignment: Alignment.centerLeft,
       child: Builder(
@@ -36,7 +36,7 @@ class AkAppBar extends StatelessWidget {
     );
     return isSmallScreen(context)
         ? Container(
-            color: Theme.of(context).primaryColor.withOpacity(_opacity),
+            color: Theme.of(context).primaryColor,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: appBarPadding),
               child: Row(
@@ -57,7 +57,7 @@ class AkAppBar extends StatelessWidget {
             ),
           )
         : Container(
-            color: Theme.of(context).primaryColor.withOpacity(_opacity),
+            color: Theme.of(context).primaryColor,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: appBarPadding),
               child: Row(

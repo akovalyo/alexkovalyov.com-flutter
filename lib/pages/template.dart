@@ -15,32 +15,34 @@ class LayoutTemplate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var _screenSize = screenSize(context);
-    var _scrollData = Provider.of<Scroll>(context, listen: false);
+    //var _scrollData = Provider.of<Scroll>(context, listen: false);
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      extendBodyBehindAppBar: true,
+      //extendBodyBehindAppBar: true,
       appBar: PreferredSize(
         preferredSize: Size(_screenSize.width, appBarHeight),
         child: AkAppBar(),
       ),
       drawer: AkDrawer(),
-      body: Scrollbar(
-        radius: Radius.circular(20),
-        child: NotificationListener<ScrollNotification>(
-          onNotification: (scrollNotification) {
-            WidgetsBinding.instance.addPostFrameCallback((_) =>
-                _scrollData.updateScroll(
-                    scrollNotification.metrics, MediaQuery.of(context).size));
-            return false;
-          },
-          child: Stack(
-            alignment: Alignment.center,
-            children: <Widget>[
-              child,
-            ],
-          ),
-        ),
-      ),
+      body: child,
+
+      // Scrollbar(
+      //   radius: Radius.circular(20),
+      //   child: NotificationListener<ScrollNotification>(
+      //     onNotification: (scrollNotification) {
+      //       WidgetsBinding.instance.addPostFrameCallback((_) =>
+      //           _scrollData.updateScroll(
+      //               scrollNotification.metrics, MediaQuery.of(context).size));
+      //       return false;
+      //     },
+      //     child: Stack(
+      //       alignment: Alignment.center,
+      //       children: <Widget>[
+      //         child,
+      //       ],
+      //     ),
+      //   ),
+      // ),
 
       // AkScrollbar(
       //   width: 10,
