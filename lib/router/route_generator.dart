@@ -25,19 +25,29 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 }
 
 PageRoute _getPageRoute(Widget child, RouteSettings settings) {
-  // print(settings.arguments);
+  print(settings.arguments);
   return PageRouteBuilder(
     settings: RouteSettings(name: settings.name, arguments: settings.arguments),
     pageBuilder: (context, animation, secondaryAnimation) => child,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      var curvedAnimation = CurvedAnimation(
-        parent: animation,
-        curve: Curves.linear,
-      );
-      return FadeTransition(
-        opacity: curvedAnimation,
+      // var curvedAnimation = CurvedAnimation(
+      //   parent: animation,
+      //   curve: Curves.linear,
+      // );
+      return SlideTransition(
+        position: Tween<Offset>(
+          begin: const Offset(0, -1),
+          end: Offset.zero,
+        ).animate(
+          animation,
+        ),
         child: child,
       );
+
+      // FadeTransition(
+      //   opacity: curvedAnimation,
+      //   child: child,
+      // );
     },
   );
 }

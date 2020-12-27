@@ -1,20 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:mysite/widgets/overlay_menu.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/rendering.dart';
+import 'package:hovering/hovering.dart';
 
 import 'package:mysite/layout/screen_size.dart';
 import 'package:mysite/router/routes.dart';
 import 'package:mysite/consts/consts.dart';
-import 'package:mysite/models/menu_model.dart';
+import 'package:mysite/widgets/menu.dart';
 import 'package:mysite/models/scroll.dart';
 import 'package:mysite/widgets/hover_icon_button.dart';
 import 'package:mysite/widgets/menu_icon.dart';
+import 'package:mysite/consts/menu_items_list.dart';
+import 'package:mysite/widgets/menu_item.dart';
 
 class AkAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final _menu = Provider.of<AkMenu>(context, listen: false);
-    //final _opacity = Provider.of<Scroll>(context).opacity;
+    final _items = menuItems.map((elem) {
+      return MenuItem(
+        title: elem['title'],
+        path: elem['path'],
+        fontSize: 12,
+        column: false,
+        overlayMenu: true,
+      );
+    }).toList();
+
     final _drawerIcon = Container(
       alignment: Alignment.centerLeft,
       child: Builder(
@@ -50,7 +62,32 @@ class AkAppBar extends StatelessWidget {
                     child: _mainIcon,
                   ),
                   Expanded(
-                    child: Container(),
+                    child: Container(
+                      alignment: Alignment.centerRight,
+                      child: OverlayMenu(
+                        backgroundColor: Theme.of(context).primaryColor,
+                        icons: _items,
+                        onChange: (index) {
+                          final newRouteName = '/';
+                          bool isSameRoute = false;
+                          navKey.currentState.popUntil((route) {
+                            if (route.settings.name == newRouteName) {
+                              isSameRoute = true;
+                            }
+                            return true;
+                          });
+
+                          if (isSameRoute) {
+                            navKey.currentState.pushReplacementNamed(
+                                menuItems[index]['path'],
+                                arguments: menuItems[index]['title']);
+                          } else
+                            navKey.currentState.pushNamed(
+                                menuItems[index]['path'],
+                                arguments: menuItems[index]['title']);
+                        },
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -73,10 +110,7 @@ class AkAppBar extends StatelessWidget {
                     child: _mainIcon,
                   ),
                   Expanded(
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: _menu.getMenuList(18.0, false),
-                    ),
+                    child: AkMenu(fontSize: 18.0, isColumn: false),
                   ),
                 ],
               ),

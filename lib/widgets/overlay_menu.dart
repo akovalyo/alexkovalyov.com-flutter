@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:mysite/router/routes.dart';
+import 'package:mysite/consts/consts.dart';
 
 class ArrowClipper extends CustomClipper<Path> {
   @override
@@ -19,7 +20,7 @@ class ArrowClipper extends CustomClipper<Path> {
 }
 
 class OverlayMenu extends StatefulWidget {
-  final List<Icon> icons;
+  final List icons;
   final BorderRadius borderRadius;
   final Color backgroundColor;
   final Color iconColor;
@@ -69,8 +70,8 @@ class _OverlayMenuState extends State<OverlayMenu>
 
   findButton() {
     RenderBox renderBox = _key.currentContext.findRenderObject();
-    _buttonSize = renderBox.size;
-    _buttonPosition = renderBox.localToGlobal(Offset.zero);
+    _buttonSize = Size(60, 40);
+    _buttonPosition = renderBox.localToGlobal(Offset(-10, -appBarHeight + 10));
   }
 
   void closeMenu() {
@@ -142,31 +143,32 @@ class _OverlayMenuState extends State<OverlayMenu>
                       color: widget.backgroundColor,
                       borderRadius: _borderRadius,
                     ),
-                    child: Theme(
-                      data: ThemeData(
-                        iconTheme: IconThemeData(
-                          color: widget.iconColor,
-                        ),
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: List.generate(widget.icons.length, (index) {
-                          return GestureDetector(
-                            onTap: () {
-                              widget.onChange(index);
-                              closeMenu();
-                            },
-                            child: Container(
-                              width: _buttonSize.width,
-                              height: _buttonSize.height,
-                              child: widget.icons[index],
-                            ),
-                          );
-                        }),
-                      ),
+                    // child: Theme(
+                    //   data: ThemeData(
+                    //     iconTheme: IconThemeData(
+                    //       color: widget.iconColor,
+                    //     ),
+                    //   ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: List.generate(widget.icons.length, (index) {
+                        return GestureDetector(
+                          onTap: () {
+                            print('Hello');
+                            widget.onChange(index);
+                            closeMenu();
+                          },
+                          child: Container(
+                            width: _buttonSize.width,
+                            height: _buttonSize.height,
+                            child: widget.icons[index],
+                          ),
+                        );
+                      }),
                     ),
                   ),
                 ),
+                // ),
               ],
             ),
           ),

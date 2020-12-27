@@ -7,10 +7,11 @@ import 'package:mysite/consts/consts.dart';
 import 'package:mysite/models/posts_model.dart';
 import 'package:mysite/widgets/footer.dart';
 import 'package:mysite/models/scroll.dart';
-import 'package:mysite/widgets/social_tab.dart';
+
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:mysite/widgets/wrap_scroll_tag.dart';
-import 'package:mysite/consts/home_widgets.dart';
+import 'package:mysite/consts/home_widgets_map.dart';
+import 'package:mysite/widgets/scroll_upward.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -31,6 +32,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    //var _scrollData = Provider.of<Scroll>(context, listen: false);
     _scrollController = AutoScrollController(
         viewportBoundaryGetter: () =>
             Rect.fromLTRB(0, 0, 0, MediaQuery.of(context).padding.bottom),
@@ -42,22 +44,28 @@ class _HomePageState extends State<HomePage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final args = ModalRoute.of(context).settings.arguments;
-    print(args);
     if (args != null) {
       setState(() {
-        _scrollController.scrollToIndex(homeWidgets[args]);
+        _scrollController.scrollToIndex(homeWidgets[args],
+            duration: Duration(milliseconds: 1));
       });
     }
   }
 
+  void scrollToIndex(ind) {
+    setState(() {
+      _scrollController.scrollToIndex(ind);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    // final args = ModalRoute.of(context).settings.arguments;
-    // print(args);
-    //var _screenSize = MediaQuery.of(context).size;
     final List<Widget> wList = [
-      Header(_scrollController),
-
+      WrapScrollTag(
+        controller: _scrollController,
+        index: homeWidgets[home],
+        child: Header(_scrollController),
+      ),
       const SizedBox(
         height: 40,
       ),
@@ -66,7 +74,6 @@ class _HomePageState extends State<HomePage> {
         index: homeWidgets[blog],
         child: Posts(),
       ),
-      // Posts(),
       WrapScrollTag(
         controller: _scrollController,
         index: homeWidgets[projects],
@@ -74,20 +81,32 @@ class _HomePageState extends State<HomePage> {
       ),
       WrapScrollTag(
         controller: _scrollController,
-        index: 2,
+        index: 3,
         child: Container(height: 600, child: Text('Hello2')),
       ),
       const Footer(),
     ];
 
-    return SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: Column(children: wList),
-      // itemCount: wList.length,
-      // itemBuilder: (BuildContext context, int index) {
-      //   return wList[index];
-      // },
-      controller: _scrollController,
+    return Stack(
+      children: <Widget>[
+        SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(children: wList),
+          // itemCount: wList.length,
+          // itemBuilder: (BuildContext context, int index) {
+          //   return wList[index];
+          // },
+          controller: _scrollController,
+        ),
+        Container(
+          child: ScrollUpward(
+            _scrollController,
+            alwaysShow: false,
+          ),
+          padding: EdgeInsets.only(bottom: 120),
+          alignment: Alignment.bottomRight,
+        ),
+      ],
     );
   }
 }
@@ -170,6 +189,7 @@ class Header extends StatelessWidget {
               ),
               FlatButton(
                 onPressed: () {
+                  print(homeWidgets[blog]);
                   controller.scrollToIndex(
                     homeWidgets[blog],
                     preferPosition: AutoScrollPosition.begin,

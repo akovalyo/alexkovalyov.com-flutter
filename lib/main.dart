@@ -11,7 +11,7 @@ import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:mysite/pages/something_wrong.dart';
 import 'package:mysite/pages/waiting_screen.dart';
 import 'package:mysite/models/posts_model.dart';
-import 'package:mysite/models/menu_model.dart';
+import 'package:mysite/widgets/menu.dart';
 import 'package:mysite/models/scroll.dart';
 
 void main() {
@@ -48,9 +48,9 @@ class MyApp extends StatelessWidget {
                     ChangeNotifierProvider(
                       create: (_) => PostsModel(dbPosts),
                     ),
-                    ChangeNotifierProvider(
-                      create: (_) => AkMenu(),
-                    ),
+                    // ChangeNotifierProvider(
+                    //   create: (_) => AkMenu(),
+                    // ),
                     // ChangeNotifierProvider(
                     //   create: (_) => Scroll(),
                     // ),

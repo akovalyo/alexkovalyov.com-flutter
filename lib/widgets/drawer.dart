@@ -4,14 +4,13 @@ import 'package:provider/provider.dart';
 import 'package:mysite/layout/screen_size.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:mysite/widgets/choice_chip.dart';
-import 'package:mysite/models/menu_model.dart';
+import 'package:mysite/widgets/menu.dart';
 import 'package:mysite/router/routes.dart';
 import 'package:mysite/widgets/hover_icon_button.dart';
 
 class AkDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final _menu = Provider.of<AkMenu>(context, listen: false);
     var _screenHeight = screenSize(context).height;
 
     return Drawer(
@@ -53,12 +52,8 @@ class AkDrawer extends StatelessWidget {
             ),
             Container(
               child: Padding(
-                padding: const EdgeInsets.all(25),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: _menu.getMenuList(18.0, true),
-                ),
-              ),
+                  padding: const EdgeInsets.all(25),
+                  child: AkMenu(fontSize: 18.0, isColumn: true)),
             ),
             Divider(),
             Container(

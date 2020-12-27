@@ -13,6 +13,7 @@ import 'package:mysite/consts/unicode_characters.dart';
 import 'package:mysite/pages/something_wrong.dart';
 import 'package:mysite/widgets/wrap_scroll_tag.dart';
 import 'package:mysite/pages/posts_page.dart';
+import 'package:mysite/widgets/scroll_upward.dart';
 
 class PostBuilder extends StatelessWidget {
   final AutoScrollController controller;
@@ -330,27 +331,10 @@ class PostBuilder extends StatelessWidget {
                 children: _decoded,
               ),
             ),
-            Container(
-                padding: EdgeInsets.symmetric(
-                    horizontal:
-                        isSmallScreen(context) ? paddingSmall : paddingLarge),
-                alignment: Alignment.bottomRight,
-                child: IconButton(
-                  hoverColor: Color(0x000000),
-                  iconSize: 34,
-                  color: Theme.of(context).primaryColor,
-                  onPressed: () {
-                    controller.animateTo(
-                      0,
-                      duration: Duration(seconds: 1),
-                      curve: Curves.fastOutSlowIn,
-                    );
-                  },
-                  icon: Icon(Icons.arrow_upward),
-                )),
+            ScrollUpward(controller),
             Container(
               child: const Footer(),
-            )
+            ),
           ],
         ),
       ),
