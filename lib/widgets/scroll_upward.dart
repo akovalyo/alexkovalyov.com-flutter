@@ -10,12 +10,9 @@ class ScrollUpward extends StatelessWidget {
   ScrollUpward(this.controller, {this.alwaysShow = true});
   @override
   Widget build(BuildContext context) {
-    return (controller.position.pixels < 50 && alwaysShow == false)
+    return (controller.position.pixels < 100 && alwaysShow == false)
         ? Container()
         : Container(
-            padding: EdgeInsets.symmetric(
-                horizontal:
-                    isSmallScreen(context) ? paddingSmall : paddingLarge),
             alignment: Alignment.bottomRight,
             child: IconButton(
               hoverColor: Color(0x000000),

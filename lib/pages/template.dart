@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:mysite/widgets/ak_app_bar.dart';
-import 'package:mysite/widgets/drawer.dart';
+import 'package:mysite/page_elements/ak_app_bar.dart';
+import 'package:mysite/page_elements/drawer.dart';
 import 'package:mysite/layout/screen_size.dart';
 import 'package:mysite/consts/consts.dart';
 import 'package:mysite/models/scroll.dart';

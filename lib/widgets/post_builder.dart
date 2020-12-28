@@ -6,7 +6,7 @@ import 'package:scroll_to_index/scroll_to_index.dart';
 
 import 'package:mysite/consts/consts.dart';
 import 'package:mysite/layout/screen_size.dart';
-import 'package:mysite/widgets/footer.dart';
+import 'package:mysite/page_elements/footer.dart';
 import 'package:mysite/layout/image_placeholder.dart';
 import 'package:mysite/widgets/animated_image.dart';
 import 'package:mysite/consts/unicode_characters.dart';

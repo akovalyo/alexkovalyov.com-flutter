@@ -54,7 +54,7 @@
 
 //   @override
 //   Widget build(BuildContext context) {
-//     var scrollData = Provider.of<Scroll>(context, listen: false);
+//     // var scrollData = Provider.of<Scroll>(context, listen: false);
 //     var _screenSize = MediaQuery.of(context).size;
 //     double _scrollHeight = _screenSize.height * widget.scrollSizeRatio;
 //     double _topMargin = scrollController.hasClients

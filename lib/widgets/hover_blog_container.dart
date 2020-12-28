@@ -1,31 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-class HoverAnimatedImage extends StatefulWidget {
+class HoverBlogContainer extends StatefulWidget {
   final String image;
   final double width;
   final double height;
-
   final double hoverHeight;
   final double hoverWidth;
+  final String title;
+  final String description;
   final double borderRadius;
   final int animationDuration;
 
-  HoverAnimatedImage({
+  HoverBlogContainer({
     @required this.image,
     @required this.width,
     @required this.height,
     @required this.hoverHeight,
     @required this.hoverWidth,
+    this.title = '',
+    this.description = '',
     this.borderRadius = 0.0,
     this.animationDuration = 500,
   });
 
   @override
-  _HoverAnimatedImageState createState() => _HoverAnimatedImageState();
+  _HoverBlogContainerState createState() => _HoverBlogContainerState();
 }
 
-class _HoverAnimatedImageState extends State<HoverAnimatedImage> {
+class _HoverBlogContainerState extends State<HoverBlogContainer> {
   double _height;
   double _width;
   BorderRadiusGeometry _borderRadius;
@@ -67,16 +70,33 @@ class _HoverAnimatedImageState extends State<HoverAnimatedImage> {
       cursor: SystemMouseCursors.click,
       onEnter: _increase,
       onExit: _decrease,
-      child: AnimatedContainer(
-        child: Image(
-          fit: BoxFit.fitWidth,
-          image: _imageProvider,
-        ),
-        width: _width,
-        height: _height,
-        decoration: BoxDecoration(borderRadius: _borderRadius),
-        duration: _duration,
-        curve: Curves.fastOutSlowIn,
+      child: Column(
+        children: [
+          AnimatedContainer(
+            child: Image(
+              fit: BoxFit.fitWidth,
+              image: _imageProvider,
+            ),
+            width: _width,
+            height: _height,
+            decoration: BoxDecoration(borderRadius: _borderRadius),
+            duration: _duration,
+            curve: Curves.fastOutSlowIn,
+          ),
+          Container(
+            padding: const EdgeInsets.all(10),
+            width: widget.width,
+            child: Text(
+              widget.title,
+              style: Theme.of(context).textTheme.headline4,
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(10),
+            width: widget.width,
+            child: Text(widget.description),
+          ),
+        ],
       ),
     );
   }
