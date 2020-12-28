@@ -3,8 +3,8 @@ import 'package:scroll_to_index/scroll_to_index.dart';
 
 import 'package:mysite/consts/consts.dart';
 import 'package:mysite/consts/home_widgets_map.dart';
-import 'package:mysite/layout/image_placeholder.dart';
-import 'package:mysite/layout/screen_size.dart';
+import 'package:mysite/helper/screen_size.dart';
+import 'package:mysite/widgets/image_placeholder.dart';
 
 class Header extends StatelessWidget {
   final AutoScrollController controller;

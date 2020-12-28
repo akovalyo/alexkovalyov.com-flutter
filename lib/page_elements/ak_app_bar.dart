@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:mysite/widgets/overlay_menu.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter/rendering.dart';
-import 'package:hovering/hovering.dart';
 
-import 'package:mysite/layout/screen_size.dart';
+import 'package:flutter/rendering.dart';
+
+import 'package:mysite/helper/screen_size.dart';
 import 'package:mysite/router/routes.dart';
 import 'package:mysite/consts/consts.dart';
+import 'package:mysite/consts/menu_items_list.dart';
 import 'package:mysite/widgets/menu.dart';
-import 'package:mysite/models/scroll.dart';
 import 'package:mysite/widgets/hover_icon_button.dart';
 import 'package:mysite/widgets/menu_icon.dart';
-import 'package:mysite/consts/menu_items_list.dart';
 import 'package:mysite/widgets/menu_item.dart';
+import 'package:mysite/widgets/overlay_menu.dart';
 
 class AkAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final _items = menuItems.map((elem) {
+    final _menuItems = menuItems.map((elem) {
       return MenuItem(
         title: elem['title'],
         path: elem['path'],
@@ -66,7 +64,7 @@ class AkAppBar extends StatelessWidget {
                       alignment: Alignment.centerRight,
                       child: OverlayMenu(
                         backgroundColor: Theme.of(context).primaryColor,
-                        icons: _items,
+                        links: _menuItems,
                         onChange: (index) {
                           final newRouteName = '/';
                           bool isSameRoute = false;

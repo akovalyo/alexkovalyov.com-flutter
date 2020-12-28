@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:mysite/widgets/menu_item.dart';
 import 'package:mysite/consts/menu_items_list.dart';
+import 'package:mysite/widgets/menu_item.dart';
 
 class AkMenu extends StatelessWidget {
   final double fontSize;

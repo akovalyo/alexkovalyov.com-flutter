@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
-
-import 'package:mysite/router/route_generator.dart';
-import 'package:mysite/theme/theme.dart';
-import 'package:mysite/pages/template.dart';
-import 'package:mysite/router/routes.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'package:mysite/theme/theme.dart';
+import 'package:mysite/models/posts_model.dart';
+import 'package:mysite/router/routes.dart';
+import 'package:mysite/router/route_generator.dart';
 import 'package:mysite/pages/something_wrong.dart';
 import 'package:mysite/pages/waiting_screen.dart';
-import 'package:mysite/models/posts_model.dart';
-import 'package:mysite/widgets/menu.dart';
-import 'package:mysite/models/scroll.dart';
+import 'package:mysite/pages/layout.dart';
 
 void main() {
   runApp(MyApp());
@@ -62,7 +60,7 @@ class MyApp extends StatelessWidget {
                       title: 'Alex Kovalyov',
                       debugShowCheckedModeBanner: false,
                       theme: theme,
-                      builder: (context, child) => LayoutTemplate(child: child),
+                      builder: (context, child) => Layout(child: child),
                       initialRoute: routeHome,
                       navigatorKey: navKey,
                       onGenerateRoute: generateRoute,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:universal_html/prefer_sdk/js.dart' as js;
 
-import 'package:mysite/widgets/hover_icon_button.dart';
 import 'package:mysite/consts/social.dart';
+import 'package:mysite/widgets/hover_icon_button.dart';
 
 class SocialTab extends StatelessWidget {
   const SocialTab();

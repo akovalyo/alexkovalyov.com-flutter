@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
-// import 'package:google_fonts/google_fonts.dart';
 
 import 'package:mysite/consts/colors.dart';
 
-//
-
-// final ThemeData lightTheme = _akLightTheme();
-// final ThemeData darkTheme = _akDarkTheme();
-
 ThemeData akTheme(Brightness brightness, String theme) {
-  // final base = ThemeData.light();
   if (theme == '2077') {
     return ThemeData.light().copyWith(
       buttonColor: Colors.black,

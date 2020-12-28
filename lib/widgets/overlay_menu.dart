@@ -20,7 +20,7 @@ class ArrowClipper extends CustomClipper<Path> {
 }
 
 class OverlayMenu extends StatefulWidget {
-  final List icons;
+  final List links;
   final BorderRadius borderRadius;
   final Color backgroundColor;
   final Color iconColor;
@@ -28,15 +28,13 @@ class OverlayMenu extends StatefulWidget {
   final ValueChanged<int> onChange;
 
   const OverlayMenu({
-    Key key,
-    this.icons,
+    @required this.links,
     this.borderRadius,
     this.backgroundColor,
     this.iconColor,
     this.buttonColor,
     this.onChange,
-  })  : assert(icons != null),
-        super(key: key);
+  });
   @override
   _OverlayMenuState createState() => _OverlayMenuState();
 }
@@ -138,37 +136,29 @@ class _OverlayMenuState extends State<OverlayMenu>
                 Padding(
                   padding: const EdgeInsets.only(top: 15.0),
                   child: Container(
-                    height: widget.icons.length * _buttonSize.height,
+                    height: widget.links.length * _buttonSize.height,
                     decoration: BoxDecoration(
                       color: widget.backgroundColor,
                       borderRadius: _borderRadius,
                     ),
-                    // child: Theme(
-                    //   data: ThemeData(
-                    //     iconTheme: IconThemeData(
-                    //       color: widget.iconColor,
-                    //     ),
-                    //   ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
-                      children: List.generate(widget.icons.length, (index) {
+                      children: List.generate(widget.links.length, (index) {
                         return GestureDetector(
                           onTap: () {
-                            print('Hello');
                             widget.onChange(index);
                             closeMenu();
                           },
                           child: Container(
                             width: _buttonSize.width,
                             height: _buttonSize.height,
-                            child: widget.icons[index],
+                            child: widget.links[index],
                           ),
                         );
                       }),
                     ),
                   ),
                 ),
-                // ),
               ],
             ),
           ),

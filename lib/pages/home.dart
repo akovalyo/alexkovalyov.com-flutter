@@ -3,11 +3,11 @@ import 'package:scroll_to_index/scroll_to_index.dart';
 
 import 'package:mysite/consts/consts.dart';
 import 'package:mysite/consts/home_widgets_map.dart';
-import 'package:mysite/widgets/wrap_scroll_tag.dart';
-import 'package:mysite/widgets/scroll_upward.dart';
 import 'package:mysite/page_elements/blog_items.dart';
 import 'package:mysite/page_elements/header.dart';
 import 'package:mysite/page_elements/footer.dart';
+import 'package:mysite/widgets/wrap_scroll_tag.dart';
+import 'package:mysite/widgets/scroll_upward.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -16,29 +16,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   AutoScrollController _scrollController;
-  double _scrollPos = 0;
-  double _upwardArrowPadding = 0;
-  // double _opacity = 0;
-
-  _scrollListener() {
-    setState(() {
-      var _low = _scrollController.position.maxScrollExtent;
-      _scrollPos = _scrollController.position.pixels;
-      if (_scrollPos > (_low * 0.9)) {
-        _upwardArrowPadding = 120 * (1 - ((_low - _scrollPos) / (_low * 0.1)));
-      }
-    });
-  }
 
   @override
   void initState() {
     super.initState();
-    //var _scrollData = Provider.of<Scroll>(context, listen: false);
     _scrollController = AutoScrollController(
         viewportBoundaryGetter: () =>
             Rect.fromLTRB(0, 0, 0, MediaQuery.of(context).padding.bottom),
         axis: Axis.vertical);
-    _scrollController.addListener(_scrollListener);
   }
 
   @override
@@ -91,18 +76,15 @@ class _HomePageState extends State<HomePage> {
     return Stack(
       children: <Widget>[
         SingleChildScrollView(
+          physics: ClampingScrollPhysics(),
           scrollDirection: Axis.vertical,
           child: Column(children: wList),
           controller: _scrollController,
         ),
-        Container(
-          child: ScrollUpward(
-            _scrollController,
-            alwaysShow: false,
-          ),
-          padding:
-              EdgeInsets.only(bottom: _upwardArrowPadding, right: paddingSmall),
-          alignment: Alignment.bottomRight,
+        ScrollUpward(
+          _scrollController,
+          visiblePosition: 100,
+          paddingRight: paddingSmall,
         ),
       ],
     );

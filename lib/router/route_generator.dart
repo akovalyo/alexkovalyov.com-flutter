@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:mysite/pages/page404.dart';
 import 'package:mysite/router/routes.dart';
-import 'package:mysite/pages/posts_page.dart';
 import 'package:mysite/models/posts_model.dart';
+import 'package:mysite/pages/posts_page.dart';
+import 'package:mysite/pages/page404.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   final _postsModel =

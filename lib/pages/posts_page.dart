@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
-import 'package:provider/provider.dart';
+
 import 'package:mysite/models/posts_model.dart';
 import 'package:mysite/widgets/post_builder.dart';
 
