@@ -30,7 +30,7 @@ class MenuItem extends StatelessWidget {
                 title,
                 style: TextStyle(
                   fontSize: fontSize,
-                  color: Theme.of(context).textTheme.button.color,
+                  color: Theme.of(context).secondaryHeaderColor,
                 ),
               ),
               secondChild: Text(
@@ -52,7 +52,7 @@ class MenuItem extends StatelessWidget {
                   style: TextStyle(
                     fontSize: fontSize,
                   )),
-              textColor: Theme.of(context).textTheme.button.color,
+              textColor: Theme.of(context).secondaryHeaderColor,
               hoverTextColor: Theme.of(context).accentColor,
               hoverElevation: 0,
               focusElevation: 0,
@@ -71,9 +71,9 @@ class MenuItem extends StatelessWidget {
 
                 if (isSameRoute) {
                   navKey.currentState
-                      .pushReplacementNamed(path, arguments: title);
+                      .pushReplacementNamed(path); //, arguments: title);
                 } else
-                  navKey.currentState.pushNamed(path, arguments: title);
+                  navKey.currentState.pushNamed(path); //, arguments: title);
                 if (column) {
                   Scaffold.of(context).openEndDrawer();
                 }

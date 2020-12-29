@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mysite/router/routes.dart';
 
 Size screenSize(BuildContext context) {
   return MediaQuery.of(context).size;
@@ -31,4 +32,15 @@ bool isLargeScreen(BuildContext context) {
 bool isMediumScreen(BuildContext context) {
   return MediaQuery.of(context).size.width >= 800 &&
       MediaQuery.of(context).size.width <= 1200;
+}
+
+bool isSameRoot(String newRouteName) {
+  bool isSameRoute = false;
+  navKey.currentState.popUntil((route) {
+    if (route.settings.name == newRouteName) {
+      isSameRoute = true;
+    }
+    return true;
+  });
+  return isSameRoute;
 }

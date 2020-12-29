@@ -3,7 +3,7 @@ import 'package:scroll_to_index/scroll_to_index.dart';
 
 import 'package:mysite/consts/consts.dart';
 import 'package:mysite/consts/home_widgets_map.dart';
-import 'package:mysite/helper/screen_size.dart';
+import 'package:mysite/helpers.dart';
 import 'package:mysite/widgets/image_placeholder.dart';
 
 class Header extends StatelessWidget {
@@ -39,7 +39,7 @@ class Header extends StatelessWidget {
           // ),
           width: _screenSize.width,
           height: _screenSize.height * 0.6 - appBarHeight,
-          color: Theme.of(context).backgroundColor,
+          color: Theme.of(context).primaryColor,
           padding: EdgeInsets.symmetric(
             vertical: 20,
           ),
@@ -50,8 +50,8 @@ class Header extends StatelessWidget {
                 "Hello, I'm  Alex Kovalyov.\nI'm a software developer.",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 28,
-                ),
+                    fontSize: 28,
+                    color: Theme.of(context).secondaryHeaderColor),
               ),
               FlatButton(
                 onPressed: () {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 
-import 'package:mysite/helper/screen_size.dart';
+import 'package:mysite/helpers.dart';
 import 'package:mysite/router/routes.dart';
 import 'package:mysite/widgets/choice_chip.dart';
 import 'package:mysite/widgets/menu.dart';
@@ -27,6 +27,7 @@ class AkDrawer extends StatelessWidget {
                     color: Color(0xFF202020),
                     alignment: Alignment.topRight,
                     child: IconButton(
+                      color: Theme.of(context).secondaryHeaderColor,
                       icon: Icon(Icons.close_sharp),
                       onPressed: () => Scaffold.of(context).openEndDrawer(),
                     ),
@@ -42,6 +43,7 @@ class AkDrawer extends StatelessWidget {
                           navKey.currentState.pushNamed(routeHome);
                         },
                         imageProvider: AssetImage('assets/images/main/akM.png'),
+                        firstColor: Theme.of(context).secondaryHeaderColor,
                         secondColor: Theme.of(context).accentColor,
                       ),
                     ),

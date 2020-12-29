@@ -6,10 +6,12 @@ import 'package:scroll_to_index/scroll_to_index.dart';
 
 import 'package:mysite/consts/consts.dart';
 import 'package:mysite/consts/unicode_characters.dart';
-import 'package:mysite/helper/screen_size.dart';
+import 'package:mysite/helpers.dart';
 import 'package:mysite/pages/something_wrong.dart';
-import 'package:mysite/pages/posts_page.dart';
+import 'package:mysite/pages/post_page.dart';
 import 'package:mysite/page_elements/footer.dart';
+import 'package:mysite/page_elements/drawer.dart';
+import 'package:mysite/page_elements/ak_app_bar.dart';
 import 'package:mysite/widgets/scroll_upward.dart';
 import 'package:mysite/widgets/image_placeholder.dart';
 import 'package:mysite/widgets/animated_image.dart';
@@ -278,78 +280,91 @@ class PostBuilder extends StatelessWidget {
     final _extracted = extractBody(snapshot.data()['body']);
     final _decoded = decodeBody(_extracted, context);
 
-    return Stack(
-      children: <Widget>[
-        SingleChildScrollView(
-          controller: controller,
-          physics: ClampingScrollPhysics(),
-          child: Center(
-            child: Column(
-              children: [
-                SizedBox(
-                  width: _screenSize.width,
-                  height: _screenSize.height * 0.4,
-                  child: FadeInImageAny(
-                    imagePath: postData['image'],
-                    placeholder: SizedBox(
-                      width: _screenSize.width,
-                      height: _screenSize.height * 0.4,
-                    ),
+    return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
+      appBar: PreferredSize(
+        preferredSize: Size(_screenSize.width, appBarHeight),
+        child: AkAppBar(controller),
+      ),
+      drawer: AkDrawer(),
+      body: Stack(
+        children: <Widget>[
+          SingleChildScrollView(
+            controller: controller,
+            physics: ClampingScrollPhysics(),
+            child: Center(
+              child: Column(
+                children: [
+                  SizedBox(
                     width: _screenSize.width,
                     height: _screenSize.height * 0.4,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-                Container(
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.only(
-                      top: 20,
-                      bottom: 10,
-                      right:
-                          isSmallScreen(context) ? paddingSmall : paddingLarge,
-                      left:
-                          isSmallScreen(context) ? paddingSmall : paddingLarge,
+                    child: FadeInImageAny(
+                      imagePath: postData['image'],
+                      placeholder: SizedBox(
+                        width: _screenSize.width,
+                        height: _screenSize.height * 0.4,
+                      ),
+                      width: _screenSize.width,
+                      height: _screenSize.height * 0.4,
+                      fit: BoxFit.cover,
                     ),
-                    child: Text(
-                      postData['title'],
-                      style: Theme.of(context).textTheme.headline4,
-                    )),
-                Container(
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.only(
-                      bottom: 20,
-                      left:
-                          isSmallScreen(context) ? paddingSmall : paddingLarge,
-                      right:
-                          isSmallScreen(context) ? paddingSmall : paddingLarge,
-                    ),
-                    child: Text(
-                      postData['date'],
-                    )),
-                Container(
-                  padding: EdgeInsets.symmetric(
-                      horizontal:
-                          isSmallScreen(context) ? paddingSmall : paddingLarge),
-                  child: Column(
-                    children: _decoded,
                   ),
-                ),
-                Container(
-                  child: const Footer(),
-                ),
-              ],
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.only(
+                        top: 20,
+                        bottom: 10,
+                        right: isSmallScreen(context)
+                            ? paddingSmall
+                            : paddingLarge,
+                        left: isSmallScreen(context)
+                            ? paddingSmall
+                            : paddingLarge,
+                      ),
+                      child: Text(
+                        postData['title'],
+                        style: Theme.of(context).textTheme.headline4,
+                      )),
+                  Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.only(
+                        bottom: 20,
+                        left: isSmallScreen(context)
+                            ? paddingSmall
+                            : paddingLarge,
+                        right: isSmallScreen(context)
+                            ? paddingSmall
+                            : paddingLarge,
+                      ),
+                      child: Text(
+                        postData['date'],
+                      )),
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: isSmallScreen(context)
+                            ? paddingSmall
+                            : paddingLarge),
+                    child: Column(
+                      children: _decoded,
+                    ),
+                  ),
+                  Container(
+                    child: const Footer(),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-        ScrollUpward(
-          controller,
-          visiblePosition: 100,
-          paddingRight: paddingSmall,
-        ),
-      ],
+          ScrollUpward(
+            controller,
+            visiblePosition: 100,
+            paddingRight: paddingSmall,
+          ),
+        ],
+      ),
     );
   }
 }

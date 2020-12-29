@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'package:mysite/consts/consts.dart';
 import 'package:mysite/models/posts_model.dart';
-import 'package:mysite/helper/screen_size.dart';
+import 'package:mysite/helpers.dart';
 
 class BlogItems extends StatelessWidget {
   @override

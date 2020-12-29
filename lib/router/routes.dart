@@ -5,11 +5,13 @@ import 'package:mysite/pages/example.dart';
 
 const String routeHome = '/';
 const String routeScroll = '/scroll';
-const String routePosts = '/posts';
+const String routeBlog = '/blog';
+const String routeProjects = '/projects';
 
 var routes = {
-  routeHome: HomePage(),
+  routeHome: HomePage(null),
   routeScroll: Example(),
+  routeBlog: HomePage('Blog')
 };
 
 final navKey = new GlobalKey<NavigatorState>();

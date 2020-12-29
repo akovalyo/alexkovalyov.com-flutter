@@ -10,7 +10,7 @@ import 'package:mysite/router/routes.dart';
 import 'package:mysite/router/route_generator.dart';
 import 'package:mysite/pages/something_wrong.dart';
 import 'package:mysite/pages/waiting_screen.dart';
-import 'package:mysite/pages/layout.dart';
+import 'package:mysite/pages/home.dart';
 
 void main() {
   runApp(MyApp());
@@ -60,7 +60,8 @@ class MyApp extends StatelessWidget {
                       title: 'Alex Kovalyov',
                       debugShowCheckedModeBanner: false,
                       theme: theme,
-                      builder: (context, child) => Layout(child: child),
+
+                      //builder: (context, child) => HomePage(routeHome),
                       initialRoute: routeHome,
                       navigatorKey: navKey,
                       onGenerateRoute: generateRoute,

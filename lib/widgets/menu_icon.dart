@@ -7,24 +7,29 @@ class MenuIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return HoverCrossFadeWidget(
-      cursor: SystemMouseCursors.click,
-      firstChild: IconButton(
-        color: Colors.white,
-        icon: const Icon(Icons.menu),
-        onPressed: () {
-          Scaffold.of(context).openDrawer();
-        },
+    return Container(
+      height: 40,
+      width: 40,
+      alignment: Alignment.center,
+      child: HoverCrossFadeWidget(
+        cursor: SystemMouseCursors.click,
+        firstChild: IconButton(
+          color: Theme.of(context).secondaryHeaderColor,
+          icon: const Icon(Icons.menu),
+          onPressed: () {
+            Scaffold.of(context).openDrawer();
+          },
+        ),
+        secondChild: IconButton(
+          color: Theme.of(context).accentColor,
+          icon: const Icon(Icons.menu),
+          onPressed: () {
+            Scaffold.of(context).openDrawer();
+          },
+        ),
+        duration: Duration(milliseconds: 500),
+        firstCurve: Curves.easeInCirc,
       ),
-      secondChild: IconButton(
-        color: Theme.of(context).accentColor,
-        icon: const Icon(Icons.menu),
-        onPressed: () {
-          Scaffold.of(context).openDrawer();
-        },
-      ),
-      duration: Duration(milliseconds: 500),
-      firstCurve: Curves.easeInCirc,
     );
   }
 }

@@ -8,10 +8,10 @@ const menuItems = [
   },
   {
     'title': projects,
-    'path': routeHome,
+    'path': routeProjects,
   },
   {
     'title': blog,
-    'path': routeHome,
+    'path': routeBlog,
   },
 ];

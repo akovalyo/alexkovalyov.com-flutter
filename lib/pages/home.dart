@@ -3,13 +3,22 @@ import 'package:scroll_to_index/scroll_to_index.dart';
 
 import 'package:mysite/consts/consts.dart';
 import 'package:mysite/consts/home_widgets_map.dart';
+import 'package:mysite/helpers.dart';
+import 'package:mysite/router/routes.dart';
 import 'package:mysite/page_elements/blog_items.dart';
 import 'package:mysite/page_elements/header.dart';
 import 'package:mysite/page_elements/footer.dart';
+import 'package:mysite/page_elements/ak_app_bar.dart';
+import 'package:mysite/page_elements/drawer.dart';
 import 'package:mysite/widgets/wrap_scroll_tag.dart';
 import 'package:mysite/widgets/scroll_upward.dart';
+import 'package:mysite/widgets/menu_icon.dart';
+import 'package:mysite/widgets/hover_icon_button.dart';
 
 class HomePage extends StatefulWidget {
+  final String path;
+  HomePage(this.path);
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -29,11 +38,11 @@ class _HomePageState extends State<HomePage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final args = ModalRoute.of(context).settings.arguments;
-    if (args != null) {
+    //final args = ModalRoute.of(context).settings.arguments;
+    if (widget.path != null) {
       setState(() {
-        _scrollController.scrollToIndex(homeWidgets[args],
-            duration: Duration(milliseconds: 1));
+        _scrollController.scrollToIndex(homeWidgets[widget.path],
+            duration: Duration(milliseconds: 500));
       });
     }
   }
@@ -46,6 +55,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var _screenSize = screenSize(context);
+
     final List<Widget> wList = [
       WrapScrollTag(
         controller: _scrollController,
@@ -73,20 +84,28 @@ class _HomePageState extends State<HomePage> {
       const Footer(),
     ];
 
-    return Stack(
-      children: <Widget>[
-        SingleChildScrollView(
-          physics: ClampingScrollPhysics(),
-          scrollDirection: Axis.vertical,
-          child: Column(children: wList),
-          controller: _scrollController,
-        ),
-        ScrollUpward(
-          _scrollController,
-          visiblePosition: 100,
-          paddingRight: paddingSmall,
-        ),
-      ],
+    return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
+      appBar: PreferredSize(
+        preferredSize: Size(_screenSize.width, appBarHeight),
+        child: AkAppBar(_scrollController),
+      ),
+      drawer: AkDrawer(),
+      body: Stack(
+        children: <Widget>[
+          SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            child: Column(children: wList),
+            controller: _scrollController,
+          ),
+          ScrollUpward(
+            _scrollController,
+            visiblePosition: 100,
+            paddingRight: paddingSmall,
+          ),
+        ],
+      ),
     );
   }
 }

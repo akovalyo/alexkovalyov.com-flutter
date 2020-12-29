@@ -8,7 +8,7 @@ ThemeData akTheme(Brightness brightness, String theme) {
       buttonColor: Colors.black,
       brightness: brightness,
       primaryColor: akBlackL,
-      secondaryHeaderColor: cpBlue,
+      secondaryHeaderColor: cp2077,
       primaryColorDark: akBlackLAcc,
       backgroundColor: cp2077,
       errorColor: akAlertL,
@@ -51,7 +51,7 @@ ThemeData akTheme(Brightness brightness, String theme) {
       ? ThemeData.light().copyWith(
           brightness: brightness,
           buttonColor: Colors.white,
-          primaryColor: akBlackD,
+          primaryColor: akBlackL,
           primaryColorDark: akBlackLAcc,
           secondaryHeaderColor: Colors.white,
           backgroundColor: Colors.white,
@@ -102,6 +102,7 @@ ThemeData akTheme(Brightness brightness, String theme) {
           primaryColor: akBlackD,
           primaryColorDark: akBlackDAcc,
           backgroundColor: akBackD,
+          secondaryHeaderColor: Colors.white,
           errorColor: akAlertD,
           accentColor: akAccentD,
           textTheme: ThemeData.dark().textTheme.copyWith(

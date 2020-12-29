@@ -21,11 +21,14 @@ class _ThemeChoiceChipState extends State<ThemeChoiceChip> {
     return Column(
       children: <Widget>[
         ChoiceChip(
-          avatar: Icon(Icons.brightness_5),
+          avatar: Icon(
+            Icons.brightness_5,
+            color: Theme.of(context).secondaryHeaderColor,
+          ),
           label: Text(
             'Light',
           ),
-          labelStyle: TextStyle(color: Colors.white),
+          labelStyle: TextStyle(color: Theme.of(context).secondaryHeaderColor),
           backgroundColor: Color(0x00000000),
           selectedColor: Colors.red,
           selected: _theme == 0,
@@ -37,11 +40,14 @@ class _ThemeChoiceChipState extends State<ThemeChoiceChip> {
           },
         ),
         ChoiceChip(
-          avatar: Icon(Icons.brightness_2),
+          avatar: Icon(
+            Icons.brightness_2,
+            color: Theme.of(context).secondaryHeaderColor,
+          ),
           label: Text(
             'Dark',
           ),
-          labelStyle: TextStyle(color: Colors.white),
+          labelStyle: TextStyle(color: Theme.of(context).secondaryHeaderColor),
           backgroundColor: Color(0x00000000),
           selectedColor: Theme.of(context).accentColor,
           selected: _theme == 1,
