@@ -13,81 +13,83 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var _screenSize = screenSize(context);
-    return Column(
-      children: [
-        Container(
-          margin: EdgeInsets.all(0),
-          padding: EdgeInsets.all(0),
-          //color: Colors.black,
-          width: _screenSize.width,
-          height: _screenSize.height * 0.4,
-          child: FadeInImageAny(
-            imagePath: 'assets/images/main/main.jpg',
-            placeholder: Container(
-              color: Colors.black,
-              width: _screenSize.width,
-              height: _screenSize.height * 0.4,
-            ),
+    return Container(
+      color: Colors.black,
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.all(0),
+            padding: EdgeInsets.all(0),
+            //color: Colors.black,
             width: _screenSize.width,
             height: _screenSize.height * 0.4,
-            fit: BoxFit.cover,
+            child: FadeInImageAny(
+              imagePath: 'assets/images/main/main.jpg',
+              placeholder: Container(
+                color: Colors.black,
+                width: _screenSize.width,
+                height: _screenSize.height * 0.4,
+              ),
+              width: _screenSize.width,
+              height: _screenSize.height * 0.4,
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-        Container(
-          // foregroundDecoration: BoxDecoration(
-          //   color: Theme.of(context).primaryColor,
-          // ),
-          width: _screenSize.width,
-          height: _screenSize.height * 0.6 - appBarHeight,
-          color: Theme.of(context).primaryColor,
-          padding: EdgeInsets.symmetric(
-            vertical: 20,
+          Container(
+            // foregroundDecoration: BoxDecoration(
+            //   color: Theme.of(context).primaryColor,
+            // ),
+            width: _screenSize.width,
+            height: _screenSize.height * 0.6 - appBarHeight,
+            color: Theme.of(context).primaryColor,
+            padding: EdgeInsets.symmetric(
+              vertical: 20,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  "Hello, I'm  Alex Kovalyov.\nI'm a software developer.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 28,
+                      color: Theme.of(context).secondaryHeaderColor),
+                ),
+                FlatButton(
+                  onPressed: () {
+                    controller.scrollToIndex(
+                      homeWidgets[projects],
+                      preferPosition: AutoScrollPosition.begin,
+                      duration: Duration(milliseconds: 1000),
+                    );
+                  },
+                  child: Text('Projects'),
+                ),
+                FlatButton(
+                  onPressed: () {
+                    controller.scrollToIndex(
+                      homeWidgets[blog],
+                      preferPosition: AutoScrollPosition.begin,
+                      duration: Duration(milliseconds: 1000),
+                    );
+                  },
+                  child: Text('Blog'),
+                ),
+                FlatButton(
+                  onPressed: () {
+                    controller.scrollToIndex(
+                      2,
+                      preferPosition: AutoScrollPosition.begin,
+                      duration: Duration(milliseconds: 1000),
+                    );
+                  },
+                  child: Text('4'),
+                ),
+              ],
+            ),
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                "Hello, I'm  Alex Kovalyov.\nI'm a software developer.",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 28,
-                    color: Theme.of(context).secondaryHeaderColor),
-              ),
-              FlatButton(
-                onPressed: () {
-                  controller.scrollToIndex(
-                    homeWidgets[projects],
-                    preferPosition: AutoScrollPosition.begin,
-                    duration: Duration(milliseconds: 1000),
-                  );
-                },
-                child: Text('Projects'),
-              ),
-              FlatButton(
-                onPressed: () {
-                  print(homeWidgets[blog]);
-                  controller.scrollToIndex(
-                    homeWidgets[blog],
-                    preferPosition: AutoScrollPosition.begin,
-                    duration: Duration(milliseconds: 1000),
-                  );
-                },
-                child: Text('Blog'),
-              ),
-              FlatButton(
-                onPressed: () {
-                  controller.scrollToIndex(
-                    2,
-                    preferPosition: AutoScrollPosition.begin,
-                    duration: Duration(milliseconds: 1000),
-                  );
-                },
-                child: Text('4'),
-              ),
-            ],
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

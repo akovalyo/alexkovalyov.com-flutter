@@ -12,8 +12,6 @@ import 'package:mysite/page_elements/ak_app_bar.dart';
 import 'package:mysite/page_elements/drawer.dart';
 import 'package:mysite/widgets/wrap_scroll_tag.dart';
 import 'package:mysite/widgets/scroll_upward.dart';
-import 'package:mysite/widgets/menu_icon.dart';
-import 'package:mysite/widgets/hover_icon_button.dart';
 
 class HomePage extends StatefulWidget {
   final String path;
@@ -38,7 +36,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    //final args = ModalRoute.of(context).settings.arguments;
     if (widget.path != null) {
       setState(() {
         _scrollController.scrollToIndex(homeWidgets[widget.path],
@@ -55,6 +52,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    print('Home');
     var _screenSize = screenSize(context);
 
     final List<Widget> wList = [
@@ -88,9 +86,12 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: PreferredSize(
         preferredSize: Size(_screenSize.width, appBarHeight),
-        child: AkAppBar(_scrollController),
+        child: AkAppBar(
+          _scrollController,
+          changeColor: true,
+        ),
       ),
-      drawer: AkDrawer(),
+      drawer: AkDrawer(_scrollController),
       body: Stack(
         children: <Widget>[
           SingleChildScrollView(

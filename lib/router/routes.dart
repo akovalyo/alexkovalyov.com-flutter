@@ -7,6 +7,7 @@ const String routeHome = '/';
 const String routeScroll = '/scroll';
 const String routeBlog = '/blog';
 const String routeProjects = '/projects';
+const List homePage = [routeHome, routeBlog, routeProjects];
 
 var routes = {
   routeHome: HomePage(null),

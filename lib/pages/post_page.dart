@@ -68,7 +68,6 @@ class _PostPageState extends State<PostPage> {
 
   @override
   void initState() {
-    print('posts');
     super.initState();
     _controller = AutoScrollController(
         viewportBoundaryGetter: () =>

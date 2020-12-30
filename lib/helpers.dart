@@ -34,13 +34,24 @@ bool isMediumScreen(BuildContext context) {
       MediaQuery.of(context).size.width <= 1200;
 }
 
-bool isSameRoot(String newRouteName) {
-  bool isSameRoute = false;
+// bool isSameRoot(String newRouteName) {
+//   bool isSameRoute = false;
+//   navKey.currentState.popUntil((route) {
+//     print(route.settings.name);
+//     if (route.settings.name == newRouteName) {
+//       isSameRoute = true;
+//     }
+//     return true;
+//   });
+//   return isSameRoute;
+// }
+
+String currentRoot() {
+  String curr;
+
   navKey.currentState.popUntil((route) {
-    if (route.settings.name == newRouteName) {
-      isSameRoute = true;
-    }
+    curr = route.settings.name;
     return true;
   });
-  return isSameRoute;
+  return curr;
 }

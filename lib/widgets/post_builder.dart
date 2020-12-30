@@ -68,7 +68,10 @@ class PostBuilder extends StatelessWidget {
           final _child = Divider();
           if (_widgetIdx == 0) return _child;
           return WrapScrollTag(
-              child: _child, controller: controller, index: _widgetIdx);
+            child: _child,
+            controller: controller,
+            index: _widgetIdx,
+          );
 
         case 'text':
           final _child = PostElementContainer(
@@ -79,7 +82,10 @@ class PostBuilder extends StatelessWidget {
           );
           if (_widgetIdx == 0) return _child;
           return WrapScrollTag(
-              child: _child, controller: controller, index: _widgetIdx);
+            child: _child,
+            controller: controller,
+            index: _widgetIdx,
+          );
 
         case 'quote':
           final _child = PostElementContainer(
@@ -95,7 +101,10 @@ class PostBuilder extends StatelessWidget {
           );
           if (_widgetIdx == 0) return _child;
           return WrapScrollTag(
-              child: _child, controller: controller, index: _widgetIdx);
+            child: _child,
+            controller: controller,
+            index: _widgetIdx,
+          );
 
         case 'code':
           final _child = PostElementContainer(
@@ -109,7 +118,10 @@ class PostBuilder extends StatelessWidget {
           );
           if (_widgetIdx == 0) return _child;
           return WrapScrollTag(
-              child: _child, controller: controller, index: _widgetIdx);
+            child: _child,
+            controller: controller,
+            index: _widgetIdx,
+          );
 
         case 'headline4':
           final _child = PostElementContainer(
@@ -122,7 +134,10 @@ class PostBuilder extends StatelessWidget {
           );
           if (_widgetIdx == 0) return _child;
           return WrapScrollTag(
-              child: _child, controller: controller, index: _widgetIdx);
+            child: _child,
+            controller: controller,
+            index: _widgetIdx,
+          );
 
         case 'headline5':
           final _child = PostElementContainer(
@@ -135,7 +150,10 @@ class PostBuilder extends StatelessWidget {
           );
           if (_widgetIdx == 0) return _child;
           return WrapScrollTag(
-              child: _child, controller: controller, index: _widgetIdx);
+            child: _child,
+            controller: controller,
+            index: _widgetIdx,
+          );
 
         case 'headline6':
           final _child = PostElementContainer(
@@ -148,7 +166,10 @@ class PostBuilder extends StatelessWidget {
           );
           if (_widgetIdx == 0) return _child;
           return WrapScrollTag(
-              child: _child, controller: controller, index: _widgetIdx);
+            child: _child,
+            controller: controller,
+            index: _widgetIdx,
+          );
 
         case 'markdown':
           String _str = _value;
@@ -286,7 +307,7 @@ class PostBuilder extends StatelessWidget {
         preferredSize: Size(_screenSize.width, appBarHeight),
         child: AkAppBar(controller),
       ),
-      drawer: AkDrawer(),
+      drawer: AkDrawer(controller),
       body: Stack(
         children: <Widget>[
           SingleChildScrollView(

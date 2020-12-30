@@ -1,199 +1,160 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter/rendering.dart';
+import 'package:hovering/hovering.dart';
 
 import 'package:mysite/helpers.dart';
 import 'package:mysite/router/routes.dart';
 import 'package:mysite/consts/consts.dart';
 import 'package:mysite/consts/menu_items_list.dart';
-import 'package:mysite/widgets/menu.dart';
+
 import 'package:mysite/widgets/hover_icon_button.dart';
-import 'package:mysite/widgets/menu_icon.dart';
 import 'package:mysite/widgets/menu_item.dart';
 import 'package:mysite/widgets/overlay_menu.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
-class AkAppBar extends StatelessWidget {
-  final AutoScrollController scrollController;
+class AkAppBar extends StatefulWidget {
+  final AutoScrollController controller;
+  final bool changeColor;
 
-  AkAppBar(this.scrollController);
+  AkAppBar(this.controller, {this.changeColor = false});
+
+  @override
+  _AkAppBarState createState() => _AkAppBarState();
+}
+
+class _AkAppBarState extends State<AkAppBar> {
+  double _scrollPos = 0;
+  bool _colorBlack = false;
+
+  _scrollListener() {
+    _scrollPos = widget.controller.position.pixels;
+    if (_scrollPos > 100 && widget.changeColor && _colorBlack) {
+      setState(() {
+        _colorBlack = false;
+      });
+    } else if (_scrollPos < 100 && widget.changeColor && !_colorBlack) {
+      setState(() {
+        _colorBlack = true;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.changeColor) {
+      _colorBlack = true;
+    }
+    widget.controller.addListener(_scrollListener);
+  }
+
   @override
   Widget build(BuildContext context) {
-    final _menuItems = menuItems.map((elem) {
+    print('AppBar');
+    final _leadingMenuButton = IconButton(
+      icon: const Icon(Icons.menu),
+      onPressed: () {
+        Scaffold.of(context).openDrawer();
+      },
+    );
+
+    final List<Widget> _menuItems = menuItems.map((elem) {
       return MenuItem(
+        controller: widget.controller,
         title: elem['title'],
         path: elem['path'],
-        fontSize: 12,
+        fontSize: 16,
         column: false,
-        overlayMenu: true,
       );
     }).toList();
 
-    final _drawerIcon = Container(
-      alignment: Alignment.centerLeft,
-      child: Builder(
-        builder: (BuildContext context) {
-          return MenuIcon();
-        },
-      ),
-    );
     final _mainIcon = Container(
       width: 40,
       height: 40,
       alignment: Alignment.center,
       child: HoverIconButton(
         onPressed: () {
-          final newRouteName = routeHome;
-          bool isSameRoute = false;
-          navKey.currentState.popUntil((route) {
-            if (route.settings.name == newRouteName) {
-              isSameRoute = true;
-            }
-            return true;
-          });
-
-          if (!isSameRoute) {
+          final _currRoot = currentRoot();
+          if (homePage.contains(_currRoot)) {
+            widget.controller.animateTo(
+              0,
+              duration: Duration(seconds: 1),
+              curve: Curves.fastOutSlowIn,
+            );
+          } else {
             navKey.currentState.pushNamed(routeHome);
           }
-        }, //, arguments: title);
-
+        },
         imageProvider: AssetImage('assets/images/main/akM.png'),
         firstColor: Theme.of(context).secondaryHeaderColor,
         secondColor: Theme.of(context).accentColor,
-        // ),
       ),
     );
+
     return isSmallScreen(context)
         ? AppBar(
+            backgroundColor:
+                _colorBlack ? Colors.black : Theme.of(context).primaryColor,
             centerTitle: true,
+            elevation: 0,
             toolbarHeight: appBarHeight,
-            leading: MenuIcon(),
-            title: Container(
-              width: 40,
-              height: 40,
-              alignment: Alignment.center,
-              child: HoverIconButton(
-                onPressed: () {
-                  final _isSameRoute = isSameRoot(routeHome);
-
-                  if (_isSameRoute) {
-                    scrollController.animateTo(
-                      0,
-                      duration: Duration(seconds: 1),
-                      curve: Curves.fastOutSlowIn,
+            leading: _leadingMenuButton,
+            title: _mainIcon,
+            actions: <Widget>[
+              Container(
+                alignment: Alignment.centerRight,
+                child: OverlayMenu(
+                  borderRadius: BorderRadius.circular(0),
+                  backgroundColor: _colorBlack
+                      ? Color(0x00000000)
+                      : Theme.of(context).primaryColor,
+                  links: menuItems.map((elem) {
+                    return Center(
+                      child: HoverCrossFadeWidget(
+                        cursor: SystemMouseCursors.click,
+                        firstChild: Text(
+                          elem['title'],
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Theme.of(context).secondaryHeaderColor,
+                          ),
+                        ),
+                        secondChild: Text(
+                          elem['title'],
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Theme.of(context).accentColor,
+                          ),
+                        ),
+                        duration: Duration(milliseconds: 200),
+                      ),
                     );
-                  } else {
-                    navKey.currentState.pushNamed(routeHome);
-                  }
-                },
-
-                imageProvider: AssetImage('assets/images/main/akM.png'),
-                firstColor: Theme.of(context).secondaryHeaderColor,
-                secondColor: Theme.of(context).accentColor,
-                // ),
+                  }).toList(),
+                  onChange: (index) {
+                    final _currRoot = currentRoot();
+                    if (homePage.contains(_currRoot)) {
+                      widget.controller.scrollToIndex(
+                        index,
+                        duration: Duration(milliseconds: 1000),
+                        preferPosition: AutoScrollPosition.begin,
+                      );
+                    } else {
+                      navKey.currentState.pushNamed(menuItems[index]['path']);
+                    }
+                  },
+                ),
               ),
-            ),
+            ],
           )
-        // Container(
-        //     color: Theme.of(context).primaryColor,
-        //     child: Padding(
-        //       padding: const EdgeInsets.symmetric(horizontal: appBarPadding),
-        //       child: Row(
-        //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //         crossAxisAlignment: CrossAxisAlignment.center,
-        //         children: <Widget>[
-        //           Expanded(
-        //             child: _drawerIcon,
-        //           ),
-        //           Expanded(
-        //             child: _mainIcon,
-        //           ),
-        //           Expanded(
-        //             child: Container(
-        //               alignment: Alignment.centerRight,
-        //               child: Container(),
-        //               // OverlayMenu(
-        //               //   backgroundColor: Theme.of(context).primaryColor,
-        //               //   links: _menuItems,
-        //               //   onChange: (index) {
-        //               //     // final newRouteName = '/';
-        //               //     // bool isSameRoute = false;
-        //               //     // navKey.currentState.popUntil((route) {
-        //               //     //   if (route.settings.name == newRouteName) {
-        //               //     //     isSameRoute = true;
-        //               //     //   }
-        //               //     //   return true;
-        //               //     // });
-
-        //               //     // if (isSameRoute) {
-        //               //     //   navKey.currentState.pushReplacementNamed(
-        //               //     //       menuItems[index]['path'],
-        //               //     //       arguments: menuItems[index]['title']);
-        //               //     // } else
-        //               //     //   navKey.currentState.pushNamed(
-        //               //     //       menuItems[index]['path'],
-        //               //     //       arguments: menuItems[index]['title']);
-        //               //   },
-        //               // ),
-        //             ),
-        //           ),
-        //         ],
-        //       ),
-        //     ),
-        //   )
         : AppBar(
+            backgroundColor:
+                _colorBlack ? Colors.black : Theme.of(context).primaryColor,
             centerTitle: true,
+            elevation: 0,
             toolbarHeight: appBarHeight,
-            leading: MenuIcon(),
-            title: Container(
-              width: 40,
-              height: 40,
-              alignment: Alignment.center,
-              child: HoverIconButton(
-                onPressed: () {
-                  final _isSameRoute = isSameRoot(routeHome);
-
-                  if (_isSameRoute) {
-                    scrollController.animateTo(
-                      0,
-                      duration: Duration(seconds: 1),
-                      curve: Curves.fastOutSlowIn,
-                    );
-                  } else {
-                    navKey.currentState.pushNamed(routeHome);
-                  }
-                },
-
-                imageProvider: AssetImage('assets/images/main/akM.png'),
-                firstColor: Theme.of(context).secondaryHeaderColor,
-                secondColor: Theme.of(context).accentColor,
-                // ),
-              ),
-            ),
+            leading: _leadingMenuButton,
+            title: _mainIcon,
+            actions: _menuItems,
           );
-
-    // Container(
-    //     color: Theme.of(context).primaryColor,
-    //     child: Padding(
-    //       padding: const EdgeInsets.symmetric(horizontal: appBarPadding),
-    //       child: Row(
-    //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //         crossAxisAlignment: CrossAxisAlignment.center,
-    //         children: <Widget>[
-    //           Expanded(
-    //             child: Container(
-    //               child: _drawerIcon,
-    //             ),
-    //           ),
-    //           Expanded(
-    //             child: _mainIcon,
-    //           ),
-    //           Expanded(
-    //             child: AkMenu(fontSize: 18.0, isColumn: false),
-    //           ),
-    //         ],
-    //       ),
-    //     ),
-    //   );
   }
 }

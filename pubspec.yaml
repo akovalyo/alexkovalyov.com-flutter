@@ -34,6 +34,7 @@ dependencies:
   provider: ^4.3.2+3
   universal_html: ^1.2.3
   flutter_widget_from_html: ^0.5.1+5
+  animated_icon_button: ^0.3.0
 
 
 

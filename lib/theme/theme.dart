@@ -13,6 +13,9 @@ ThemeData akTheme(Brightness brightness, String theme) {
       backgroundColor: cp2077,
       errorColor: akAlertL,
       accentColor: cpBlue,
+      splashColor: Color(0x00000000),
+      highlightColor: Color(0x00000000),
+      hoverColor: Color(0x00000000),
       textTheme: ThemeData.light().textTheme.copyWith(
             bodyText2: ThemeData.light().textTheme.bodyText2.copyWith(
                   fontFamily: 'DavidLibre',
@@ -57,6 +60,9 @@ ThemeData akTheme(Brightness brightness, String theme) {
           backgroundColor: Colors.white,
           errorColor: akAlertL,
           accentColor: akAccentL,
+          splashColor: Color(0x00000000),
+          highlightColor: Color(0x00000000),
+          hoverColor: Color(0x00000000),
           textTheme: ThemeData.light().textTheme.copyWith(
                 bodyText1: ThemeData.light().textTheme.bodyText1.copyWith(
                       fontFamily: 'DavidLibre',
@@ -105,6 +111,9 @@ ThemeData akTheme(Brightness brightness, String theme) {
           secondaryHeaderColor: Colors.white,
           errorColor: akAlertD,
           accentColor: akAccentD,
+          splashColor: Color(0x00000000),
+          highlightColor: Color(0x00000000),
+          hoverColor: Color(0x00000000),
           textTheme: ThemeData.dark().textTheme.copyWith(
                 bodyText2: ThemeData.dark().textTheme.bodyText2.copyWith(
                       fontFamily: 'DavidLibre',
@@ -135,6 +144,11 @@ ThemeData akTheme(Brightness brightness, String theme) {
           canvasColor: akBlackL,
           iconTheme: _akIconTheme(ThemeData.dark().iconTheme, Colors.white),
           buttonTheme: const ButtonThemeData(
+            highlightColor: Color(0x00000000),
+            splashColor: Color(0x00000000),
+            hoverColor: Color(0x00000000),
+            buttonColor: Color(0x00000000),
+            focusColor: Color(0x00000000),
             textTheme: ButtonTextTheme.primary,
           ),
         );
