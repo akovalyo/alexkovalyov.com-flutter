@@ -23,6 +23,11 @@ ThemeData akTheme(Brightness brightness, String theme) {
                   fontSize: 20,
                   height: 1.5,
                 ),
+            headline3: ThemeData.light().textTheme.headline3.copyWith(
+                  fontFamily: 'Cyberpunk',
+                  color: Colors.black,
+                  fontSize: 40,
+                ),
             headline4: ThemeData.light().textTheme.headline4.copyWith(
                   fontFamily: 'Cyberpunk',
                   color: cpBlue,
@@ -76,6 +81,12 @@ ThemeData akTheme(Brightness brightness, String theme) {
                       fontSize: 20,
                       height: 1.5,
                     ),
+                headline3: ThemeData.light().textTheme.headline3.copyWith(
+                      fontFamily: 'DavidLibre',
+                      color: akHeadlineL,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 40,
+                    ),
                 headline4: ThemeData.light().textTheme.headline4.copyWith(
                       fontFamily: 'DavidLibre',
                       color: akHeadlineL,
@@ -120,6 +131,12 @@ ThemeData akTheme(Brightness brightness, String theme) {
                       fontWeight: FontWeight.w100,
                       fontSize: 20,
                       height: 1.5,
+                    ),
+                headline3: ThemeData.dark().textTheme.headline3.copyWith(
+                      fontFamily: 'DavidLibre',
+                      color: akHeadlineL,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 40,
                     ),
                 headline4: ThemeData.dark().textTheme.headline4.copyWith(
                       fontFamily: 'DavidLibre',

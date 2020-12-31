@@ -87,6 +87,7 @@ flutter:
     - assets/images/bitlocker/bitlocker.jpg
     - assets/images/git.jpg
     - assets/images/gm.jpg
+    - assets/images/projects/project_1.png
     #/assets/posts
     # - assets/posts/2020-05-31-jupyter.ak
     

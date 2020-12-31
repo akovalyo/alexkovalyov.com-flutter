@@ -46,7 +46,7 @@ class _ExampleState extends State<Example> {
         (int viewId) => html.IFrameElement()
           ..width = MediaQuery.of(context).size.width.toString() //'800'
           ..height = MediaQuery.of(context).size.height.toString() //'400'
-          ..src = 'https://repl.it/@akovalyo/42svminishell-1?lite=false'
+          ..src = 'https://repl.it/@akovalyo/42svminishell?lite=false'
           ..style.border = 'none');
 
     super.initState();

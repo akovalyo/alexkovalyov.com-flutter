@@ -10,6 +10,7 @@ import 'package:mysite/page_elements/header.dart';
 import 'package:mysite/page_elements/footer.dart';
 import 'package:mysite/page_elements/ak_app_bar.dart';
 import 'package:mysite/page_elements/drawer.dart';
+import 'package:mysite/page_elements/projects.dart';
 import 'package:mysite/widgets/wrap_scroll_tag.dart';
 import 'package:mysite/widgets/scroll_upward.dart';
 
@@ -66,13 +67,13 @@ class _HomePageState extends State<HomePage> {
       ),
       WrapScrollTag(
         controller: _scrollController,
-        index: homeWidgets[blog],
-        child: BlogItems(),
+        index: homeWidgets[projects],
+        child: Projects(),
       ),
       WrapScrollTag(
         controller: _scrollController,
-        index: homeWidgets[projects],
-        child: Container(height: 600, child: Text('Projects')),
+        index: homeWidgets[blog],
+        child: BlogItems(),
       ),
       WrapScrollTag(
         controller: _scrollController,
