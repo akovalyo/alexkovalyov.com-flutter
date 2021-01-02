@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:universal_io/io.dart';
 import 'package:mysite/consts/routes.dart';
 
 Size screenSize(BuildContext context) {
@@ -54,4 +55,11 @@ String currentRoot() {
     return true;
   });
   return curr;
+}
+
+bool isDesktop() {
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    return true;
+  }
+  return false;
 }

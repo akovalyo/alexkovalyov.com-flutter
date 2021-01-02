@@ -52,7 +52,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    print('Build Home');
     var _screenSize = screenSize(context);
 
     final List<Widget> wList = [
@@ -103,7 +102,7 @@ class _HomePageState extends State<HomePage> {
           ScrollUpward(
             _scrollController,
             visiblePosition: 100,
-            paddingRight: paddingSmall,
+            //paddingRight: paddingSmall,
           ),
         ],
       ),
