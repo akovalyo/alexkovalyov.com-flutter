@@ -5,6 +5,7 @@ import 'package:universal_html/prefer_sdk/js.dart' as js;
 
 import 'package:mysite/helpers.dart';
 import 'package:mysite/consts/consts.dart';
+import 'package:mysite/consts/routes.dart';
 
 class Projects extends StatelessWidget {
   @override
@@ -32,7 +33,7 @@ class Projects extends StatelessWidget {
           ),
           child: Wrap(
             spacing: 40,
-            runSpacing: 40,
+            //runSpacing: 1,
             children: [
               ProjectCard(
                 imageProvider:
@@ -45,23 +46,33 @@ class Projects extends StatelessWidget {
                 ),
               ),
               ProjectCard(
+                imageProvider:
+                    AssetImage('assets/images/projects/project_minishell.png'),
+                title: 'Minimalistic shell',
+                description: 'Recreating a real shell in C',
+                firstButton: ProjectFlatButton(
+                  link: routeProjectMinishell,
+                  title: 'Demo',
+                ),
+                secondButton: ProjectFlatButton(
+                  link: 'https://github.com/akovalyo/42sv_minishell',
+                  title: 'Code',
+                ),
+              ),
+              ProjectCard(
                 imageProvider: AssetImage('assets/images/blood/blood.png'),
                 title: 'AI Project',
                 description:
                     'Identifying white blood cells using CNN with Pytorch',
-                firstButton: FlatButton(
-                  child: Text('Code', style: TextStyle(color: Colors.white)),
-                  onPressed: () {
-                    js.context.callMethod('open', [
-                      'https://github.com/akovalyo/alexkovalyov.com-flutter'
-                    ]);
-                  },
-                  mouseCursor: SystemMouseCursors.click,
-                  color: Theme.of(context).primaryColor,
+                firstButton: ProjectFlatButton(
+                  link: 'https://github.com/akovalyo/wbc_classification',
+                  title: 'Code',
+                ),
+                secondButton: ProjectFlatButton(
+                  link: '/2020-06-29-blood_cells',
+                  title: 'Description',
                 ),
               ),
-              // ProjectCard(),
-              // ProjectCard()
             ],
           ),
         ),
@@ -98,9 +109,9 @@ class _ProjectCardState extends State<ProjectCard> {
   @override
   void initState() {
     super.initState();
-    _image = Image(fit: BoxFit.fitWidth, image: widget.imageProvider);
+    _image = Image(fit: BoxFit.fitHeight, image: widget.imageProvider);
     _hoverImage = Opacity(
-      opacity: 0.5,
+      opacity: 0.35,
       child: _image,
     );
 
@@ -212,7 +223,9 @@ class ProjectFlatButton extends StatelessWidget {
       onPressed: () {
         if (link.startsWith('http')) {
           js.context.callMethod('open', [link]);
-        } else {}
+        } else {
+          navKey.currentState.pushNamed(link, arguments: true);
+        }
       },
       mouseCursor: SystemMouseCursors.click,
       color: Theme.of(context).primaryColor,

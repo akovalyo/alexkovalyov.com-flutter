@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 import 'package:mysite/consts/consts.dart';
-import 'package:mysite/consts/home_widgets_map.dart';
+import 'package:mysite/consts/routes.dart';
 import 'package:mysite/helpers.dart';
-import 'package:mysite/router/routes.dart';
 import 'package:mysite/page_elements/blog_items.dart';
 import 'package:mysite/page_elements/header.dart';
 import 'package:mysite/page_elements/footer.dart';
@@ -53,7 +52,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    print('Home');
+    //print('Home');
     var _screenSize = screenSize(context);
 
     final List<Widget> wList = [

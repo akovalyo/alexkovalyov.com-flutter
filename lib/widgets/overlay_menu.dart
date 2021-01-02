@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:animated_icon_button/animated_icon_button.dart';
 
-import 'package:mysite/router/routes.dart';
+import 'package:mysite/consts/routes.dart';
 
 class OverlayMenu extends StatefulWidget {
   final List links;

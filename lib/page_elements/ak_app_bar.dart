@@ -3,9 +3,8 @@ import 'package:flutter/rendering.dart';
 import 'package:hovering/hovering.dart';
 
 import 'package:mysite/helpers.dart';
-import 'package:mysite/router/routes.dart';
+import 'package:mysite/consts/routes.dart';
 import 'package:mysite/consts/consts.dart';
-import 'package:mysite/consts/menu_items_list.dart';
 
 import 'package:mysite/widgets/hover_icon_button.dart';
 import 'package:mysite/widgets/menu_item.dart';
@@ -50,7 +49,7 @@ class _AkAppBarState extends State<AkAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    print('AppBar');
+    //print('AppBar');
     final _leadingMenuButton = IconButton(
       icon: const Icon(Icons.menu),
       onPressed: () {

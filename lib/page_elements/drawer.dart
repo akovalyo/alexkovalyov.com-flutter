@@ -3,7 +3,7 @@ import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 import 'package:mysite/helpers.dart';
-import 'package:mysite/router/routes.dart';
+import 'package:mysite/consts/routes.dart';
 import 'package:mysite/widgets/choice_chip.dart';
 import 'package:mysite/widgets/menu.dart';
 import 'package:mysite/widgets/hover_icon_button.dart';

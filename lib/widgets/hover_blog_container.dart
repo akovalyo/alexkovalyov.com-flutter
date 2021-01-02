@@ -38,7 +38,7 @@ class _HoverBlogContainerState extends State<HoverBlogContainer> {
   @override
   void initState() {
     super.initState();
-    if (widget.image.startsWith(RegExp(r'[http|https]'))) {
+    if (widget.image.startsWith('http')) {
       _imageProvider = NetworkImage(widget.image);
     } else {
       _imageProvider = AssetImage(widget.image);

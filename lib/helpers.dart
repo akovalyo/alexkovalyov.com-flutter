@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mysite/router/routes.dart';
+import 'package:mysite/consts/routes.dart';
 
 Size screenSize(BuildContext context) {
   return MediaQuery.of(context).size;

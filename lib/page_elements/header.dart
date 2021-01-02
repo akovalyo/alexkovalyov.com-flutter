@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 import 'package:mysite/consts/consts.dart';
-import 'package:mysite/consts/home_widgets_map.dart';
+import 'package:mysite/consts/routes.dart';
 import 'package:mysite/helpers.dart';
 import 'package:mysite/widgets/image_placeholder.dart';
 import 'package:mysite/widgets/header_button.dart';

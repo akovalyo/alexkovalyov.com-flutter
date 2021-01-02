@@ -81,6 +81,12 @@ class _PostPageState extends State<PostPage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return _isLoading
         ? Center(child: CircularProgressIndicator())

@@ -6,11 +6,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:mysite/theme/theme.dart';
 import 'package:mysite/models/posts_model.dart';
-import 'package:mysite/router/routes.dart';
-import 'package:mysite/router/route_generator.dart';
+import 'package:mysite/consts/routes.dart';
+import 'package:mysite/route_generator.dart';
 import 'package:mysite/pages/something_wrong.dart';
 import 'package:mysite/pages/waiting_screen.dart';
-import 'package:mysite/pages/home.dart';
+import 'package:mysite/pages/post_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -63,6 +63,7 @@ class MyApp extends StatelessWidget {
 
                       //builder: (context, child) => HomePage(routeHome),
                       initialRoute: routeHome,
+
                       navigatorKey: navKey,
                       onGenerateRoute: generateRoute,
                     ),

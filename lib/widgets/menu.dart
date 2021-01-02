@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:mysite/consts/menu_items_list.dart';
+import 'package:mysite/consts/routes.dart';
 import 'package:mysite/widgets/menu_item.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
