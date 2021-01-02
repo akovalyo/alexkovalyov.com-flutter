@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    //print('Home');
+    print('Build Home');
     var _screenSize = screenSize(context);
 
     final List<Widget> wList = [

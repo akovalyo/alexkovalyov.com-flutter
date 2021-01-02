@@ -9,7 +9,7 @@ import 'package:mysite/pages/home.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   print(settings.name);
-  // final name = settings.name;
+  final name = settings.name;
 
   final _postsModel =
       Provider.of<PostsModel>(navKey.currentState.context, listen: false);

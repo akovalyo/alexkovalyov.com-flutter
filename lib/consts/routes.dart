@@ -5,10 +5,10 @@ import 'package:mysite/pages/example.dart';
 import 'package:mysite/pages/project_minishell.dart';
 
 const routeHome = '/';
-//const routeScroll = '/scroll';
-const routeBlog = '/blog';
-const routeProjects = '/projects';
-const routeProjectMinishell = '/projects_minishell';
+const routeScroll = '/scroll';
+const routeBlog = 'blog';
+const routeProjects = 'projects';
+const routeProjectMinishell = 'projects_minishell';
 
 const homePage = [routeHome, routeBlog, routeProjects];
 
@@ -39,7 +39,7 @@ const menuItems = [
 
 var routes = {
   routeHome: HomePage(null),
-  //routeScroll: Example(),
+  routeScroll: Example(),
   routeBlog: HomePage('Blog'),
   routeProjects: HomePage('Projects'),
   //routeProjectMinishell: PageBuilder(),
