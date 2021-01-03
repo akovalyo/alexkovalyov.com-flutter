@@ -89,6 +89,7 @@ flutter:
     - assets/images/gm.jpg
     - assets/images/projects/project_1.png
     - assets/images/projects/project_minishell.png
+    - assets/images/marvin.png
     #/assets/posts
     # - assets/posts/2020-05-31-jupyter.ak
     

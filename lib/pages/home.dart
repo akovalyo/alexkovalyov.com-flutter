@@ -86,11 +86,11 @@ class _HomePageState extends State<HomePage> {
       appBar: PreferredSize(
         preferredSize: Size(_screenSize.width, appBarHeight),
         child: AkAppBar(
-          _scrollController,
+          controller: _scrollController,
           changeColor: true,
         ),
       ),
-      drawer: AkDrawer(_scrollController),
+      drawer: AkDrawer(controller: _scrollController),
       body: Stack(
         children: <Widget>[
           SingleChildScrollView(

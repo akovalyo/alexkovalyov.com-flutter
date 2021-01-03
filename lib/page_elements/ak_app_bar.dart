@@ -15,7 +15,7 @@ class AkAppBar extends StatefulWidget {
   final AutoScrollController controller;
   final bool changeColor;
 
-  AkAppBar(this.controller, {this.changeColor = false});
+  AkAppBar({this.controller, this.changeColor = false});
 
   @override
   _AkAppBarState createState() => _AkAppBarState();
@@ -44,7 +44,9 @@ class _AkAppBarState extends State<AkAppBar> {
     if (widget.changeColor) {
       _colorBlack = true;
     }
-    widget.controller.addListener(_scrollListener);
+    if (widget.controller != null) {
+      widget.controller.addListener(_scrollListener);
+    }
   }
 
   @override

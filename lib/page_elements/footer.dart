@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:mysite/widgets/social_tab.dart';
+import 'package:mysite/consts/consts.dart';
 
 class Footer extends StatelessWidget {
   const Footer();
@@ -9,7 +10,7 @@ class Footer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      height: 120,
+      height: footerHeight,
       color: Theme.of(context).primaryColor,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,

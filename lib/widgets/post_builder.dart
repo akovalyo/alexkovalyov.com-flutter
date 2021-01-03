@@ -305,9 +305,9 @@ class PostBuilder extends StatelessWidget {
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: PreferredSize(
         preferredSize: Size(_screenSize.width, appBarHeight),
-        child: AkAppBar(controller),
+        child: AkAppBar(controller: controller),
       ),
-      drawer: AkDrawer(controller),
+      drawer: AkDrawer(controller: controller),
       body: Stack(
         children: <Widget>[
           SingleChildScrollView(

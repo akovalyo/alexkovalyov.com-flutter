@@ -11,7 +11,7 @@ import 'package:mysite/widgets/hover_icon_button.dart';
 class AkDrawer extends StatelessWidget {
   final AutoScrollController controller;
 
-  AkDrawer(this.controller);
+  AkDrawer({this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,8 @@ class AkDrawer extends StatelessWidget {
                       child: HoverIconButton(
                         onPressed: () {
                           final _currRoot = currentRoot();
-                          if (homePage.contains(_currRoot)) {
+                          if (homePage.contains(_currRoot) &&
+                              controller != null) {
                             controller.animateTo(
                               0,
                               duration: Duration(seconds: 1),

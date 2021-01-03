@@ -109,8 +109,9 @@ ThemeData akTheme(Brightness brightness, String theme) {
               ),
           canvasColor: akBlackL,
           iconTheme: _akIconTheme(ThemeData.light().iconTheme, Colors.white),
-          buttonTheme: const ButtonThemeData(
+          buttonTheme: ButtonThemeData(
             textTheme: ButtonTextTheme.primary,
+            buttonColor: akBlackL,
           ),
         )
       : ThemeData.dark().copyWith(
