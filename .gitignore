@@ -49,3 +49,5 @@ app.*.map.json
 .firebase/hosting.YnVpbGQvd2Vi.cache
 .firebaserc
 firebase.json
+
+index.html
