@@ -5,12 +5,8 @@ import 'package:mysite/consts/routes.dart';
 import 'package:mysite/models/posts_model.dart';
 import 'package:mysite/pages/post_page.dart';
 import 'package:mysite/pages/page404.dart';
-import 'package:mysite/pages/home.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
-  print(settings.name);
-  final name = settings.name;
-
   final _postsModel =
       Provider.of<PostsModel>(navKey.currentState.context, listen: false);
   if (_postsModel.postExist(settings.name)) {
@@ -23,7 +19,6 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   if (routes[settings.name] == null) {
     return _getPageRoute(Page404(), settings);
   }
-  //print('test');
   return _getPageRoute(
     routes[settings.name],
     settings,
@@ -39,19 +34,7 @@ PageRoute _getPageRoute(Widget child, RouteSettings settings) {
         parent: animation,
         curve: Curves.linear,
       );
-      return
-
-          // SlideTransition(
-          //   position: Tween<Offset>(
-          //     begin: const Offset(0, -1),
-          //     end: Offset.zero,
-          //   ).animate(
-          //     animation,
-          //   ),
-          //   child: child,
-          // );
-
-          FadeTransition(
+      return FadeTransition(
         opacity: curvedAnimation,
         child: child,
       );

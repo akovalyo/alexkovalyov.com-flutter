@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+import 'package:mysite/helpers.dart';
+
 class ProjectCard extends StatefulWidget {
   final ImageProvider imageProvider;
   final String title;
@@ -84,10 +86,46 @@ class _ProjectCardState extends State<ProjectCard> {
     });
   }
 
+  void _onTap() {
+    if (_secondAnimatedWidget == null) {
+      setState(() {
+        _firstAnimatedWidget = _hoverImage;
+        _secondAnimatedWidget = _secondWidget;
+      });
+    } else {
+      setState(() {
+        _firstAnimatedWidget = _image;
+        _secondAnimatedWidget = null;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size.height * 0.6;
     final _width = _size > 300 ? _size : 300;
+    final _child = Stack(
+      fit: StackFit.expand,
+      children: [
+        AnimatedSwitcher(
+          duration: Duration(milliseconds: 300),
+          child: _firstAnimatedWidget,
+        ),
+        AnimatedSwitcher(
+          duration: Duration(milliseconds: 800),
+          child: _secondAnimatedWidget,
+          switchInCurve: Curves.easeInOutBack,
+          switchOutCurve: Curves.decelerate,
+          transitionBuilder: (Widget child, Animation<double> animation) {
+            return ScaleTransition(
+              scale: animation,
+              child: child,
+            );
+          },
+        ),
+      ],
+    );
+
     return Column(
       children: [
         FittedBox(
@@ -100,32 +138,16 @@ class _ProjectCardState extends State<ProjectCard> {
         SizedBox(
           width: _width,
           height: _width * 0.6,
-          child: MouseRegion(
-            onEnter: _onEnter,
-            onExit: _onExit,
-            child: Stack(
-              fit: StackFit.expand,
-              children: [
-                AnimatedSwitcher(
-                  duration: Duration(milliseconds: 300),
-                  child: _firstAnimatedWidget,
+          child: isDesktop() == null
+              ? MouseRegion(
+                  onEnter: _onEnter,
+                  onExit: _onExit,
+                  child: _child,
+                )
+              : GestureDetector(
+                  onTap: _onTap,
+                  child: _child,
                 ),
-                AnimatedSwitcher(
-                  duration: Duration(milliseconds: 800),
-                  child: _secondAnimatedWidget,
-                  switchInCurve: Curves.easeInOutBack,
-                  switchOutCurve: Curves.decelerate,
-                  transitionBuilder:
-                      (Widget child, Animation<double> animation) {
-                    return ScaleTransition(
-                      scale: animation,
-                      child: child,
-                    );
-                  },
-                ),
-              ],
-            ),
-          ),
         ),
       ],
     );

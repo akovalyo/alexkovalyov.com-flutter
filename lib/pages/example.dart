@@ -47,6 +47,7 @@ class _ExampleState extends State<Example> {
           ..width = MediaQuery.of(context).size.width.toString() //'800'
           ..height = MediaQuery.of(context).size.height.toString() //'400'
           ..src = 'https://repl.it/@akovalyo/42svminishell?lite=false'
+          //..src = 'https://formcarry.com/s/R81_ByjDvOmL'
           ..style.border = 'none');
 
     super.initState();
@@ -69,68 +70,12 @@ class _ExampleState extends State<Example> {
         // borderRadius: BorderRadius.all(Radius.circular(5))),
         width: 500,
         height: 800,
-        child: HtmlWidget(
-          // the first parameter (`html`) is required
-          '''
-  <h1>Heading</h1>
-  <h2>Heading</h2>
-  <h3>Heading</h3>
-  <h4>Heading</h4>
-  <h5>Heading</h5>
-  <h6>Heading</h6>
-  <p>
-    A paragraph with <strong>strong</strong>, <em>emphasized</em>
-    and <span style="color: red">colored</span> text.
-  </p>
-  <details>
-	<summary>Title</summary>
- 
-     TextTextTextTextTextText
-     TextTextTextTextText
-     TextTextTextText
-     TextTextText
-     TextText
-     Text
- 
- </details>
-  ''',
-
-          // all other parameters are optional, a few notable params:
-
-          // specify custom styling for an element
-          // see supported inline styling below
-          customStylesBuilder: (element) {
-            if (element.classes.contains('foo')) {
-              return {'color': 'red'};
-            }
-
-            return null;
-          },
-
-          // render a custom widget
-          // customWidgetBuilder: (element) {
-          //   if (element.attributes['foo'] == 'bar') {
-          //     return FooBarWidget();
-          //   }
-
-          //   return null;
-          // },
-
-          // set the default styling for text
-          textStyle: TextStyle(fontSize: 14),
-
-          // By default, `webView` is turned off because additional config
-          // must be done for `PlatformView` to work on iOS.
-          // https://pub.dev/packages/webview_flutter#ios
-          // Make sure you have it configured before using.
-          webView: true,
+        child: Directionality(
+          textDirection: TextDirection.ltr,
+          child: HtmlElementView(
+            viewType: createdViewId,
+          ),
         ),
-        //  Directionality(
-        //   textDirection: TextDirection.ltr,
-        //   child: HtmlElementView(
-        //     viewType: createdViewId,
-        //   ),
-        // ),
       ),
     );
   }

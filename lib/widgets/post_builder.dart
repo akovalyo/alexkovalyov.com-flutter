@@ -382,7 +382,6 @@ class PostBuilder extends StatelessWidget {
           ScrollUpward(
             controller,
             visiblePosition: 100,
-            paddingRight: paddingSmall,
           ),
         ],
       ),
