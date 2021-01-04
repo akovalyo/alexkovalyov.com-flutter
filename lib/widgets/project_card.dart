@@ -138,7 +138,7 @@ class _ProjectCardState extends State<ProjectCard> {
         SizedBox(
           width: _width,
           height: _width * 0.6,
-          child: isDesktop() == null
+          child: isDesktop()
               ? MouseRegion(
                   onEnter: _onEnter,
                   onExit: _onExit,

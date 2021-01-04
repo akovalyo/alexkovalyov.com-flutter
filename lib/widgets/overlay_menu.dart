@@ -35,19 +35,19 @@ class _OverlayMenuState extends State<OverlayMenu>
 
   @override
   void initState() {
+    super.initState();
     _animationController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 250),
     );
     _borderRadius = widget.borderRadius ?? BorderRadius.circular(4);
     _key = LabeledGlobalKey("button_icon");
-    super.initState();
   }
 
   @override
   void dispose() {
-    _animationController.dispose();
     super.dispose();
+    _animationController.dispose();
   }
 
   findButton() {
@@ -80,6 +80,7 @@ class _OverlayMenuState extends State<OverlayMenu>
       ),
       child: AnimatedIconButton(
         onPressed: () {
+          print(_isMenuOpen);
           if (_isMenuOpen) {
             closeMenu();
           } else {

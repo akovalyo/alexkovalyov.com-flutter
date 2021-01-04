@@ -191,7 +191,7 @@ class PostBuilder extends StatelessWidget {
               data: _str,
               selectable: false,
               styleSheet: MarkdownStyleSheet(
-                em: TextStyle(fontWeight: FontWeight.bold, height: 1.5),
+                em: TextStyle(height: 1.5, fontSize: 18),
                 a: TextStyle(
                     decoration: TextDecoration.underline,
                     color: Theme.of(ctx).accentColor),
