@@ -44,9 +44,10 @@ class MenuItem extends StatelessWidget {
         onpressed: () {
           final _currRoot = currentRoot();
           if (homePage.contains(_currRoot)) {
+            // changeTitle(title);
             controller.scrollToIndex(
               homeWidgets[title],
-              duration: Duration(milliseconds: 500),
+              duration: Duration(milliseconds: 1000),
               preferPosition: AutoScrollPosition.begin,
             );
           } else {

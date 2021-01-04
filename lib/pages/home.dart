@@ -12,6 +12,7 @@ import 'package:mysite/page_elements/drawer.dart';
 import 'package:mysite/page_elements/projects.dart';
 import 'package:mysite/widgets/wrap_scroll_tag.dart';
 import 'package:mysite/widgets/scroll_upward.dart';
+import 'package:mysite/page_elements/contact.dart';
 
 class HomePage extends StatefulWidget {
   final String path;
@@ -39,19 +40,15 @@ class _HomePageState extends State<HomePage> {
     if (widget.path != null) {
       setState(() {
         _scrollController.scrollToIndex(homeWidgets[widget.path],
-            duration: Duration(milliseconds: 500));
+            duration: Duration(milliseconds: 1000),
+            preferPosition: AutoScrollPosition.begin);
       });
     }
   }
 
-  void scrollToIndex(ind) {
-    setState(() {
-      _scrollController.scrollToIndex(ind);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    // changeTitle('${widget.path}');
     var _screenSize = screenSize(context);
 
     final List<Widget> wList = [
@@ -75,8 +72,8 @@ class _HomePageState extends State<HomePage> {
       ),
       WrapScrollTag(
         controller: _scrollController,
-        index: 3,
-        child: Container(height: 600, child: Text('Hello2')),
+        index: homeWidgets[contact],
+        child: Contact(),
       ),
       const Footer(),
     ];

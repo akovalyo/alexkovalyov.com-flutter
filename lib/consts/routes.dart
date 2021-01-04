@@ -2,24 +2,31 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:mysite/pages/home.dart';
 import 'package:mysite/pages/example.dart';
-import 'package:mysite/pages/project_minishell.dart';
 
 const routeHome = '/';
 const routeScroll = '/scroll';
 const routeBlog = 'blog';
 const routeProjects = 'projects';
+const routeContact = 'contact';
 const routeProjectMinishell = 'projects_minishell';
 
-const homePage = [routeHome, routeBlog, routeProjects];
+const homePage = [
+  routeHome,
+  routeBlog,
+  routeProjects,
+  routeContact,
+];
 
 const home = 'Home';
 const projects = 'Projects';
 const blog = 'Blog';
+const contact = 'Contact';
 
 const Map homeWidgets = {
   home: 0,
   projects: 1,
   blog: 2,
+  contact: 3,
 };
 
 const menuItems = [
@@ -35,13 +42,24 @@ const menuItems = [
     'title': blog,
     'path': routeBlog,
   },
+  {
+    'title': contact,
+    'path': routeContact,
+  },
 ];
+
+// const titles = {
+//   routeProjects: projects,
+//   routeBlog: blog,
+//   routeProjectMinishell: 'Project Minishell',
+// };
 
 var routes = {
   routeHome: HomePage(null),
   routeScroll: Example(),
-  routeBlog: HomePage('Blog'),
-  routeProjects: HomePage('Projects'),
+  routeBlog: HomePage(blog),
+  routeProjects: HomePage(projects),
+  routeContact: HomePage(contact),
   //routeProjectMinishell: PageBuilder(),
 };
 

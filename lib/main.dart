@@ -7,7 +7,6 @@ import 'package:mysite/theme/theme.dart';
 import 'package:mysite/models/posts_model.dart';
 import 'package:mysite/consts/routes.dart';
 import 'package:mysite/route_generator.dart';
-import 'package:mysite/pages/page404.dart';
 
 void main() async {
   final Auth _auth = Auth();

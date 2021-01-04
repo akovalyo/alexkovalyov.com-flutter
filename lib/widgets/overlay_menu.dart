@@ -82,7 +82,6 @@ class _OverlayMenuState extends State<OverlayMenu>
       child: AnimatedIconButton(
         animationController: _animationController,
         onPressed: () {
-          print(_isMenuOpen);
           if (_isMenuOpen) {
             closeMenu();
           } else {

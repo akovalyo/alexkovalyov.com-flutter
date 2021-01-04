@@ -59,6 +59,7 @@ class _Page404State extends State<Page404> {
 
   @override
   Widget build(BuildContext context) {
+    //changeTitle('404');
     final _screenSize = screenSize(context);
     final _height = _screenSize.height - appBarHeight - footerHeight;
 

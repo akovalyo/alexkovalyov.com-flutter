@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 
 import 'package:mysite/consts/routes.dart';
+import 'package:mysite/helpers.dart';
 import 'package:mysite/models/posts_model.dart';
 import 'package:mysite/pages/post_page.dart';
 import 'package:mysite/pages/page404.dart';
@@ -10,15 +12,17 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   final _postsModel =
       Provider.of<PostsModel>(navKey.currentState.context, listen: false);
   if (_postsModel.postExist(settings.name)) {
-    print('blog');
+    // changeTitle(_postsModel.postsMap[settings.name]['title']);
     return _getPageRoute(
       PostPage(settings.name),
       settings,
     );
   }
   if (routes[settings.name] == null) {
+    // changeTitle('404 - Page not found');
     return _getPageRoute(Page404(), settings);
   }
+  // changeTitle(settings.name);
   return _getPageRoute(
     routes[settings.name],
     settings,

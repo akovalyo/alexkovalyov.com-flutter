@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:universal_io/io.dart';
+import 'package:flutter/services.dart';
 import 'package:mysite/consts/routes.dart';
 
 Size screenSize(BuildContext context) {
@@ -63,3 +64,20 @@ bool isDesktop() {
   }
   return false;
 }
+
+// void changeTitle(String str) {
+//   String title = '';
+//   if (str == '/' || str == 'Home') {
+//     title = 'Alex Kovalyov';
+//   } else if (titles.containsKey(str)) {
+//     title = 'Alex Kovalyov - ${titles[str]}';
+//   } else {
+//     print(str);
+//     title = str;
+//   }
+
+//   SystemChrome.setApplicationSwitcherDescription(ApplicationSwitcherDescription(
+//     label: title,
+//     primaryColor: 4282335039,
+//   ));
+// }

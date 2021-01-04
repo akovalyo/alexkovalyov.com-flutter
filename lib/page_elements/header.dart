@@ -13,14 +13,13 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _screenSize = screenSize(context);
+    final _screenSize = screenSize(context);
+    final _heightBottom = _screenSize.height * 0.6 - appBarHeight;
     return Container(
       color: Colors.black,
       child: Column(
         children: [
           Container(
-            margin: EdgeInsets.all(0),
-            padding: EdgeInsets.all(0),
             width: _screenSize.width,
             height: _screenSize.height * 0.4,
             child: FadeInImageAny(
@@ -38,7 +37,7 @@ class Header extends StatelessWidget {
           Container(
             alignment: Alignment.center,
             width: _screenSize.width,
-            height: _screenSize.height * 0.6 - appBarHeight,
+            height: _heightBottom < 100 ? 100 : _heightBottom,
             color: Theme.of(context).primaryColor,
             padding: EdgeInsets.symmetric(
               vertical: 20,
@@ -70,7 +69,7 @@ class Header extends StatelessWidget {
                   ),
                   HeaderButton(
                     controller: controller,
-                    scrollToIndex: 0,
+                    scrollToIndex: homeWidgets[contact],
                     title: 'Contact',
                   ),
                 ],

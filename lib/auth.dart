@@ -6,7 +6,7 @@ class Auth {
     try {
       await Firebase.initializeApp();
     } catch (error) {
-      print(error);
+      print('firebase init error: $error');
     }
   }
 

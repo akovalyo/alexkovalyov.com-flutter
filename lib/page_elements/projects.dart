@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:universal_html/prefer_sdk/js.dart' as js;
 
 import 'package:mysite/consts/consts.dart';
 import 'package:mysite/consts/routes.dart';
