@@ -38,7 +38,8 @@ class _OverlayMenuState extends State<OverlayMenu>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 250),
+      duration: Duration(milliseconds: 300),
+      reverseDuration: Duration(milliseconds: 300),
     );
     _borderRadius = widget.borderRadius ?? BorderRadius.circular(4);
     _key = LabeledGlobalKey("button_icon");
@@ -79,6 +80,7 @@ class _OverlayMenuState extends State<OverlayMenu>
         borderRadius: _borderRadius,
       ),
       child: AnimatedIconButton(
+        animationController: _animationController,
         onPressed: () {
           print(_isMenuOpen);
           if (_isMenuOpen) {
@@ -93,7 +95,6 @@ class _OverlayMenuState extends State<OverlayMenu>
         endIcon: Icon(
           Icons.close,
         ),
-        duration: Duration(milliseconds: 100),
       ),
     );
   }
