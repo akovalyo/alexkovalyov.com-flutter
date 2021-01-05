@@ -51,7 +51,6 @@ class _AkAppBarState extends State<AkAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    //print('AppBar');
     final _leadingMenuButton = IconButton(
       icon: const Icon(Icons.menu),
       onPressed: () {

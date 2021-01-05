@@ -26,10 +26,11 @@ class MenuItem extends StatelessWidget {
     return Container(
       padding: column
           ? const EdgeInsets.symmetric(vertical: 10)
-          : const EdgeInsets.symmetric(horizontal: 1),
+          : const EdgeInsets.only(right: 25),
       child: HoverButton(
         height: 1,
-        padding: const EdgeInsets.all(1),
+        minWidth: 0,
+        padding: const EdgeInsets.all(0),
         child: Text(title,
             style: TextStyle(
               fontSize: fontSize,
@@ -44,7 +45,6 @@ class MenuItem extends StatelessWidget {
         onpressed: () {
           final _currRoot = currentRoot();
           if (homePage.contains(_currRoot)) {
-            // changeTitle(title);
             controller.scrollToIndex(
               homeWidgets[title],
               duration: Duration(milliseconds: 1000),

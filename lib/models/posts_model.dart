@@ -11,7 +11,8 @@ class PostsModel with ChangeNotifier {
   PostsModel(this.postsMap);
 
   bool postExist(String path) {
-    return postsMap.containsKey(path);
+    if (postsMap != null) return postsMap.containsKey(path);
+    return false;
   }
 
   List<Widget> getPosts(BuildContext context) {
@@ -24,26 +25,27 @@ class PostsModel with ChangeNotifier {
         : Size(postCardLHoverWidth, postCardLHoverHeight);
     List<Widget> _cards = [];
 
-    postsMap.forEach((key, value) {
-      _cards.add(
-        GestureDetector(
-          onTap: () {
-            //Navigator.pushNamed(context, value['path']);
-            navKey.currentState.pushNamed(value['path']);
-          },
-          child: HoverBlogContainer(
-            width: _cardSize.width,
-            hoverWidth: _cardHoverSize.width,
-            height: _cardSize.height,
-            hoverHeight: _cardHoverSize.height,
-            image: value['image'],
-            title: value['title'],
-            description: value['description'],
-            borderRadius: 10,
+    if (postsMap != null)
+      postsMap.forEach((key, value) {
+        _cards.add(
+          GestureDetector(
+            onTap: () {
+              //Navigator.pushNamed(context, value['path']);
+              navKey.currentState.pushNamed(value['path']);
+            },
+            child: HoverBlogContainer(
+              width: _cardSize.width,
+              hoverWidth: _cardHoverSize.width,
+              height: _cardSize.height,
+              hoverHeight: _cardHoverSize.height,
+              image: value['image'],
+              title: value['title'],
+              description: value['description'],
+              borderRadius: 10,
+            ),
           ),
-        ),
-      );
-    });
+        );
+      });
 
     return _cards;
   }

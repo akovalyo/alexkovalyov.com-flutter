@@ -21,6 +21,7 @@ class Auth {
       });
       return dbPosts;
     } catch (error) {
+      print('error query posts: $error');
       return null;
     }
   }

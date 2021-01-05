@@ -47,6 +47,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     // changeTitle('${widget.path}');
     var _screenSize = screenSize(context);

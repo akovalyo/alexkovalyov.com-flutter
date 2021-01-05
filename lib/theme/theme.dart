@@ -17,6 +17,13 @@ ThemeData akTheme(Brightness brightness, String theme) {
       highlightColor: Color(0x00000000),
       hoverColor: Color(0x00000000),
       textTheme: ThemeData.light().textTheme.copyWith(
+            bodyText1: ThemeData.light().textTheme.bodyText2.copyWith(
+                  fontFamily: 'DavidLibre',
+                  fontWeight: FontWeight.w100,
+                  fontSize: 20,
+                  height: 1.5,
+                  color: cp2077,
+                ),
             bodyText2: ThemeData.light().textTheme.bodyText2.copyWith(
                   fontFamily: 'DavidLibre',
                   fontWeight: FontWeight.w100,
@@ -74,6 +81,7 @@ ThemeData akTheme(Brightness brightness, String theme) {
                       fontWeight: FontWeight.w100,
                       fontSize: 20,
                       height: 1.5,
+                      color: Colors.white,
                     ),
                 bodyText2: ThemeData.light().textTheme.bodyText2.copyWith(
                       fontFamily: 'DavidLibre',
@@ -127,11 +135,19 @@ ThemeData akTheme(Brightness brightness, String theme) {
           highlightColor: Color(0x00000000),
           hoverColor: Color(0x00000000),
           textTheme: ThemeData.dark().textTheme.copyWith(
+                bodyText1: ThemeData.light().textTheme.bodyText1.copyWith(
+                      fontFamily: 'DavidLibre',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 20,
+                      height: 1.5,
+                      color: Colors.white,
+                    ),
                 bodyText2: ThemeData.dark().textTheme.bodyText2.copyWith(
                       fontFamily: 'DavidLibre',
                       fontWeight: FontWeight.w100,
                       fontSize: 20,
                       height: 1.5,
+                      //color: Colors.white,
                     ),
                 headline3: ThemeData.dark().textTheme.headline3.copyWith(
                       fontFamily: 'DavidLibre',

@@ -3,19 +3,20 @@ import 'package:flutter/rendering.dart';
 import 'package:universal_html/prefer_sdk/js.dart' as js;
 
 import 'package:mysite/consts/routes.dart';
+import 'package:mysite/widgets/button.dart';
 
-class ProjectFlatButton extends StatelessWidget {
+class ProjectButton extends StatelessWidget {
   final String link;
   final String title;
 
-  ProjectFlatButton({
+  ProjectButton({
     this.link,
     this.title,
   });
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
-      child: Text(title, style: TextStyle(color: Colors.white, fontSize: 18)),
+    return AkButton(
+      child: Text(title, style: TextStyle(fontSize: 18)),
       onPressed: () {
         if (link.startsWith('http')) {
           js.context.callMethod('open', [link]);
@@ -23,8 +24,11 @@ class ProjectFlatButton extends StatelessWidget {
           navKey.currentState.pushNamed(link, arguments: true);
         }
       },
-      mouseCursor: SystemMouseCursors.click,
-      color: Theme.of(context).primaryColor,
+      borderWidth: 0,
+      backgroundColor: Theme.of(context).primaryColor,
+      color: Theme.of(context).secondaryHeaderColor,
+      hoverColor: Theme.of(context).accentColor,
+      padding: const EdgeInsets.symmetric(vertical: 20),
     );
   }
 }

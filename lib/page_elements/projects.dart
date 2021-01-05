@@ -4,7 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:mysite/consts/consts.dart';
 import 'package:mysite/consts/routes.dart';
 import 'package:mysite/widgets/project_card.dart';
-import 'package:mysite/widgets/project_flat_button.dart';
+import 'package:mysite/widgets/project_button.dart';
 
 class Projects extends StatelessWidget {
   @override
@@ -39,7 +39,7 @@ class Projects extends StatelessWidget {
                     AssetImage('assets/images/projects/project_1.png'),
                 title: 'Flutter Web',
                 description: 'This website is built in Flutter',
-                firstButton: ProjectFlatButton(
+                firstButton: ProjectButton(
                   link: 'https://github.com/akovalyo/alexkovalyov.com-flutter',
                   title: 'Code',
                 ),
@@ -49,11 +49,11 @@ class Projects extends StatelessWidget {
                     AssetImage('assets/images/projects/project_minishell.png'),
                 title: 'Minimalistic shell',
                 description: 'Recreating a real shell in C',
-                firstButton: ProjectFlatButton(
+                firstButton: ProjectButton(
                   link: routeProjectMinishell,
                   title: 'Demo',
                 ),
-                secondButton: ProjectFlatButton(
+                secondButton: ProjectButton(
                   link: 'https://github.com/akovalyo/42sv_minishell',
                   title: 'Code',
                 ),
@@ -63,11 +63,11 @@ class Projects extends StatelessWidget {
                 title: 'AI Project',
                 description:
                     'Identifying white blood cells using CNN with Pytorch',
-                firstButton: ProjectFlatButton(
+                firstButton: ProjectButton(
                   link: 'https://github.com/akovalyo/wbc_classification',
                   title: 'Code',
                 ),
-                secondButton: ProjectFlatButton(
+                secondButton: ProjectButton(
                   link: '/2020-06-29-blood_cells',
                   title: 'Description',
                 ),

@@ -5,7 +5,7 @@ import 'package:mysite/consts/consts.dart';
 import 'package:mysite/consts/routes.dart';
 import 'package:mysite/helpers.dart';
 import 'package:mysite/widgets/image_placeholder.dart';
-import 'package:mysite/widgets/header_button.dart';
+import 'package:mysite/widgets/button.dart';
 
 class Header extends StatelessWidget {
   final AutoScrollController controller;
@@ -57,20 +57,56 @@ class Header extends StatelessWidget {
                           color: Theme.of(context).secondaryHeaderColor),
                     ),
                   ),
-                  HeaderButton(
-                    controller: controller,
-                    scrollToIndex: homeWidgets[projects],
-                    title: 'Projects',
+                  AkButton(
+                    child: Text(
+                      'Projects',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    backgroundColor: Color(0x00000000),
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    color: Theme.of(context).secondaryHeaderColor,
+                    hoverColor: Theme.of(context).accentColor,
+                    onPressed: () {
+                      controller.scrollToIndex(
+                        homeWidgets[projects],
+                        preferPosition: AutoScrollPosition.begin,
+                        duration: Duration(milliseconds: 1000),
+                      );
+                    },
                   ),
-                  HeaderButton(
-                    controller: controller,
-                    scrollToIndex: homeWidgets[blog],
-                    title: 'Blog',
+                  AkButton(
+                    child: Text(
+                      'Blog',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    backgroundColor: Color(0x00000000),
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    color: Theme.of(context).secondaryHeaderColor,
+                    hoverColor: Theme.of(context).accentColor,
+                    onPressed: () {
+                      controller.scrollToIndex(
+                        homeWidgets[blog],
+                        preferPosition: AutoScrollPosition.begin,
+                        duration: Duration(milliseconds: 1000),
+                      );
+                    },
                   ),
-                  HeaderButton(
-                    controller: controller,
-                    scrollToIndex: homeWidgets[contact],
-                    title: 'Contact',
+                  AkButton(
+                    child: Text(
+                      'Contact',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    backgroundColor: Color(0x00000000),
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    color: Theme.of(context).secondaryHeaderColor,
+                    hoverColor: Theme.of(context).accentColor,
+                    onPressed: () {
+                      controller.scrollToIndex(
+                        homeWidgets[contact],
+                        preferPosition: AutoScrollPosition.begin,
+                        duration: Duration(milliseconds: 1000),
+                      );
+                    },
                   ),
                 ],
               ),

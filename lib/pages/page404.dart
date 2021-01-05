@@ -59,18 +59,10 @@ class _Page404State extends State<Page404> {
 
   @override
   Widget build(BuildContext context) {
-    //changeTitle('404');
     final _screenSize = screenSize(context);
     final _height = _screenSize.height - appBarHeight - footerHeight;
 
-    return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
-      appBar: PreferredSize(
-        preferredSize: Size(_screenSize.width, appBarHeight),
-        child: AkAppBar(),
-      ),
-      drawer: AkDrawer(),
-      body: Column(
+    return Column(
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20),
@@ -127,7 +119,7 @@ class _Page404State extends State<Page404> {
           ),
           _height < 0 ? Container() : Footer(),
         ],
-      ),
+      
     );
   }
 }

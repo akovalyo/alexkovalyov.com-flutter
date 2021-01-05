@@ -7,6 +7,7 @@ import 'package:mysite/helpers.dart';
 import 'package:mysite/models/posts_model.dart';
 import 'package:mysite/pages/post_page.dart';
 import 'package:mysite/pages/page404.dart';
+import 'package:mysite/pages/template_basic.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   final _postsModel =
@@ -20,7 +21,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   }
   if (routes[settings.name] == null) {
     // changeTitle('404 - Page not found');
-    return _getPageRoute(Page404(), settings);
+    return _getPageRoute(TemplateBasic(Page404()), settings);
   }
   // changeTitle(settings.name);
   return _getPageRoute(

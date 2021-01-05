@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+import 'package:hovering/hovering.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
 
 import 'package:mysite/helpers.dart';
 import 'package:mysite/consts/routes.dart';
-import 'package:mysite/widgets/choice_chip.dart';
 import 'package:mysite/widgets/menu.dart';
 import 'package:mysite/widgets/hover_icon_button.dart';
+import 'package:mysite/widgets/choice_chip.dart';
 
 class AkDrawer extends StatelessWidget {
   final AutoScrollController controller;
@@ -68,14 +69,39 @@ class AkDrawer extends StatelessWidget {
             ),
             Container(
               child: Padding(
-                  padding: const EdgeInsets.all(25),
+                  padding: const EdgeInsets.only(top: 25),
                   child: AkMenu(
                     controller: controller,
                     fontSize: 18.0,
                     isColumn: true,
                   )),
             ),
-            Divider(),
+            Container(
+              padding: const EdgeInsets.only(top: 7, bottom: 10),
+              child: HoverButton(
+                height: 1,
+                minWidth: 0,
+                padding: const EdgeInsets.all(0),
+                child: Text('Login',
+                    style: TextStyle(
+                      fontSize: 18,
+                    )),
+                textColor: Theme.of(context).secondaryHeaderColor,
+                hoverTextColor: Theme.of(context).accentColor,
+                hoverElevation: 0,
+                focusElevation: 0,
+                hoverColor: Color(0x00000000),
+                highlightColor: Color(0x00000000),
+                splashColor: Color(0x00000000),
+                onpressed: () {
+                  navKey.currentState.pushNamed('login');
+                  Scaffold.of(context).openEndDrawer();
+                },
+              ),
+            ),
+            SizedBox(
+              height: 40,
+            ),
             Container(
               alignment: Alignment.center,
               padding: const EdgeInsets.only(bottom: 10),
