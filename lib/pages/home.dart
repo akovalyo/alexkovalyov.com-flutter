@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:mysite/consts/consts.dart';
 import 'package:mysite/consts/routes.dart';

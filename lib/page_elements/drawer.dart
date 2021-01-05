@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:hovering/hovering.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:mysite/helpers.dart';
 import 'package:mysite/consts/routes.dart';
@@ -16,7 +17,8 @@ class AkDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _screenHeight = screenSize(context).height;
+    final _screenHeight = screenSize(context).height;
+    final _isLogged = FirebaseAuth.instance.currentUser != null;
 
     return Drawer(
       child: Container(
@@ -78,26 +80,54 @@ class AkDrawer extends StatelessWidget {
             ),
             Container(
               padding: const EdgeInsets.only(top: 7, bottom: 10),
-              child: HoverButton(
-                height: 1,
-                minWidth: 0,
-                padding: const EdgeInsets.all(0),
-                child: Text('Login',
-                    style: TextStyle(
-                      fontSize: 18,
-                    )),
-                textColor: Theme.of(context).secondaryHeaderColor,
-                hoverTextColor: Theme.of(context).accentColor,
-                hoverElevation: 0,
-                focusElevation: 0,
-                hoverColor: Color(0x00000000),
-                highlightColor: Color(0x00000000),
-                splashColor: Color(0x00000000),
-                onpressed: () {
-                  navKey.currentState.pushNamed('login');
-                  Scaffold.of(context).openEndDrawer();
-                },
-              ),
+              child: _isLogged
+                  ? HoverButton(
+                      height: 1,
+                      minWidth: 0,
+                      padding: const EdgeInsets.all(0),
+                      child: Text('Logout',
+                          style: TextStyle(
+                            fontSize: 18,
+                          )),
+                      textColor: Theme.of(context).secondaryHeaderColor,
+                      hoverTextColor: Theme.of(context).accentColor,
+                      hoverElevation: 0,
+                      focusElevation: 0,
+                      hoverColor: Color(0x00000000),
+                      highlightColor: Color(0x00000000),
+                      splashColor: Color(0x00000000),
+                      onpressed: () {
+                        FirebaseAuth.instance.signOut();
+                        Scaffold.of(context).openEndDrawer();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Signed out'),
+                            backgroundColor: Colors.green[600].withOpacity(0.7),
+                          ),
+                        );
+                      },
+                    )
+                  : HoverButton(
+                      height: 1,
+                      minWidth: 0,
+                      padding: const EdgeInsets.all(0),
+                      child: Text('Login',
+                          style: TextStyle(
+                            fontSize: 18,
+                          )),
+                      textColor: Theme.of(context).secondaryHeaderColor,
+                      hoverTextColor: Theme.of(context).accentColor,
+                      hoverElevation: 0,
+                      focusElevation: 0,
+                      hoverColor: Color(0x00000000),
+                      highlightColor: Color(0x00000000),
+                      splashColor: Color(0x00000000),
+                      onpressed: () {
+                        navKey.currentState.pushNamed('login');
+
+                        Scaffold.of(context).openEndDrawer();
+                      },
+                    ),
             ),
             SizedBox(
               height: 40,

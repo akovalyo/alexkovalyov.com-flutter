@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 
 import 'package:mysite/consts/consts.dart';
+import 'package:mysite/consts/routes.dart';
 import 'package:mysite/helpers.dart';
+import 'package:mysite/consts/routes.dart';
 import 'package:mysite/page_elements/footer.dart';
 import 'package:mysite/widgets/button.dart';
 
@@ -11,22 +15,70 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _auth = FirebaseAuth.instance;
   final _formKey = GlobalKey<FormState>();
-  var _userName = '';
+  var _userEmail = '';
   var _userPassword = '';
+  var _isLoading = false;
 
   void _trySubmit() {
-    final _isValid = _formKey.currentState.validate();
+    final isValid = _formKey.currentState.validate();
     FocusScope.of(context).unfocus();
 
-    if (_isValid) {
+    if (isValid) {
       _formKey.currentState.save();
 
-      _authenticate(_userName, _userPassword);
+      _authenticate(
+        _userEmail.trim(),
+        _userPassword.trim(),
+      );
     }
   }
 
-  void _authenticate(String username, String password) {}
+  void _authenticate(String username, String password) async {
+    UserCredential authResult;
+
+    try {
+      setState(() {
+        _isLoading = true;
+      });
+
+      authResult = await _auth.signInWithEmailAndPassword(
+          email: _userEmail, password: _userPassword);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Welcome!'),
+          backgroundColor: Colors.green[600].withOpacity(0.7),
+        ),
+      );
+      navKey.currentState.pushNamed(routeHome);
+      // } on PlatformException catch (error) {
+      //   var message = 'An error occured, please check your credentialas!';
+      //   if (error.message != null) {
+      //     message = error.message;
+      //   }
+
+      //   ScaffoldMessenger.of(context).showSnackBar(
+      //     SnackBar(
+      //       content: Text(message),
+      //       backgroundColor: Theme.of(context).errorColor,
+      //     ),
+      //   );
+    } catch (error) {
+      var message = 'An error occured, please check your credentialas!';
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(message),
+          backgroundColor: Theme.of(context).errorColor.withOpacity(0.7),
+        ),
+      );
+      print(error.message);
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,17 +122,17 @@ class _LoginPageState extends State<LoginPage> {
                             cursorColor: Theme.of(context).accentColor,
                             style: Theme.of(context).textTheme.bodyText1,
                             decoration: InputDecoration(
-                              labelText: 'Username',
+                              labelText: 'Email',
                               labelStyle: Theme.of(context).textTheme.bodyText1,
                             ),
                             validator: (value) {
                               if (value.isEmpty) {
-                                return 'Please enter username';
+                                return 'Please enter email';
                               }
                               return null;
                             },
                             onSaved: (value) {
-                              _userName = value;
+                              _userEmail = value;
                             },
                           ),
                           TextFormField(
@@ -102,16 +154,19 @@ class _LoginPageState extends State<LoginPage> {
                             },
                           ),
                           SizedBox(height: 20),
-                          AkButton(
-                            onPressed: _trySubmit,
-                            child: Text(
-                              'Login',
-                              style: TextStyle(
-                                fontSize: 20,
-                              ),
-                            ),
-                            backgroundColor: Theme.of(context).primaryColor,
-                          ),
+                          _isLoading
+                              ? CircularProgressIndicator()
+                              : AkButton(
+                                  onPressed: _trySubmit,
+                                  child: Text(
+                                    'Login',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  backgroundColor:
+                                      Theme.of(context).primaryColor,
+                                ),
                         ],
                       ),
                     ),
