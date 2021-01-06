@@ -17,7 +17,15 @@ ThemeData akTheme(Brightness brightness, String theme) {
       highlightColor: Color(0x00000000),
       hoverColor: Color(0x00000000),
       textTheme: ThemeData.light().textTheme.copyWith(
-            bodyText1: ThemeData.light().textTheme.bodyText2.copyWith(
+            caption: ThemeData.light().textTheme.caption.copyWith(
+                  fontFamily: 'DavidLibre',
+                  fontWeight: FontWeight.w100,
+                  fontSize: 20,
+                  height: 1.5,
+                  color: cpBlue,
+                  decoration: TextDecoration.underline,
+                ),
+            bodyText1: ThemeData.light().textTheme.bodyText1.copyWith(
                   fontFamily: 'DavidLibre',
                   fontWeight: FontWeight.w100,
                   fontSize: 20,
@@ -76,6 +84,14 @@ ThemeData akTheme(Brightness brightness, String theme) {
           highlightColor: Color(0x00000000),
           hoverColor: Color(0x00000000),
           textTheme: ThemeData.light().textTheme.copyWith(
+                caption: ThemeData.light().textTheme.caption.copyWith(
+                      fontFamily: 'DavidLibre',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 20,
+                      height: 1.5,
+                      color: akAccentL,
+                      decoration: TextDecoration.underline,
+                    ),
                 bodyText1: ThemeData.light().textTheme.bodyText1.copyWith(
                       fontFamily: 'DavidLibre',
                       fontWeight: FontWeight.w100,
@@ -128,26 +144,34 @@ ThemeData akTheme(Brightness brightness, String theme) {
           primaryColor: akBlackD,
           primaryColorDark: akBlackDAcc,
           backgroundColor: akBackD,
-          secondaryHeaderColor: Colors.white,
+          secondaryHeaderColor: akHeadlineD,
           errorColor: akAlertD,
           accentColor: akAccentD,
           splashColor: Color(0x00000000),
           highlightColor: Color(0x00000000),
           hoverColor: Color(0x00000000),
           textTheme: ThemeData.dark().textTheme.copyWith(
-                bodyText1: ThemeData.light().textTheme.bodyText1.copyWith(
+                caption: ThemeData.dark().textTheme.caption.copyWith(
                       fontFamily: 'DavidLibre',
                       fontWeight: FontWeight.w100,
                       fontSize: 20,
                       height: 1.5,
-                      color: Colors.white,
+                      color: akAccentD,
+                      decoration: TextDecoration.underline,
+                    ),
+                bodyText1: ThemeData.dark().textTheme.bodyText1.copyWith(
+                      fontFamily: 'DavidLibre',
+                      fontWeight: FontWeight.w100,
+                      fontSize: 20,
+                      height: 1.5,
+                      color: akHeadlineD,
                     ),
                 bodyText2: ThemeData.dark().textTheme.bodyText2.copyWith(
                       fontFamily: 'DavidLibre',
                       fontWeight: FontWeight.w100,
                       fontSize: 20,
                       height: 1.5,
-                      //color: Colors.white,
+                      color: akHeadlineD,
                     ),
                 headline3: ThemeData.dark().textTheme.headline3.copyWith(
                       fontFamily: 'DavidLibre',

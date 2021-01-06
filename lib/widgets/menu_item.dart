@@ -25,7 +25,9 @@ class MenuItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: column
-          ? const EdgeInsets.symmetric(vertical: 10)
+          ? isDesktop()
+              ? EdgeInsets.symmetric(vertical: 10)
+              : EdgeInsets.symmetric(vertical: 2)
           : const EdgeInsets.only(right: 25),
       child: HoverButton(
         height: 1,
@@ -45,6 +47,7 @@ class MenuItem extends StatelessWidget {
         onpressed: () {
           final _currRoot = currentRoot();
           if (homePage.contains(_currRoot)) {
+            FocusScope.of(context).unfocus();
             controller.scrollToIndex(
               homeWidgets[title],
               duration: Duration(milliseconds: 1000),

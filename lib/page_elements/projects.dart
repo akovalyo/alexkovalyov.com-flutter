@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 
 import 'package:mysite/consts/consts.dart';
 import 'package:mysite/consts/routes.dart';
+import 'package:mysite/helpers.dart';
 import 'package:mysite/widgets/project_card.dart';
 import 'package:mysite/widgets/project_button.dart';
 
@@ -26,10 +27,9 @@ class Projects extends StatelessWidget {
           ),
         ),
         Container(
-          padding: const EdgeInsets.symmetric(
-            vertical: 20,
-            horizontal: paddingSmall,
-          ),
+          padding: EdgeInsets.symmetric(
+              vertical: 20,
+              horizontal: isSmallScreen(context) ? paddingSmall : paddingLarge),
           child: Wrap(
             spacing: 40,
             runSpacing: 40,

@@ -59,67 +59,70 @@ class _Page404State extends State<Page404> {
 
   @override
   Widget build(BuildContext context) {
-    final _screenSize = screenSize(context);
+    final _screenSize = MediaQuery.of(context).size;
     final _height = _screenSize.height - appBarHeight - footerHeight;
 
     return Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
-            child: FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Text('Oops! Page not found',
-                  style: Theme.of(context).textTheme.headline4),
-            ),
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text('Oops! Page not found',
+                style: Theme.of(context).textTheme.headline4),
           ),
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: paddingSmall),
-              color: Theme.of(context).backgroundColor,
-              alignment: Alignment.center,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Flexible(
-                    fit: FlexFit.loose,
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 100),
-                      child: AnimatedCrossFade(
-                        crossFadeState: _first
-                            ? CrossFadeState.showFirst
-                            : CrossFadeState.showSecond,
-                        duration: Duration(milliseconds: 500),
-                        firstChild: Text(
-                          _firstQuote,
-                          style: TextStyle(
-                              fontSize: 28, color: Colors.black, height: 1),
-                        ),
-                        secondChild: Text(
-                          _secondQuote,
-                          style: TextStyle(
-                              fontSize: 28, color: Colors.black, height: 1),
-                        ),
-                      ),
+        ),
+        Expanded(
+          child: Container(
+            //padding: const EdgeInsets.symmetric(horizontal: paddingSmall),
+            color: Theme.of(context).backgroundColor,
+            alignment: Alignment.center,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: _screenSize.width * 0.45,
+                  ),
+                  child: AnimatedCrossFade(
+                    crossFadeState: _first
+                        ? CrossFadeState.showFirst
+                        : CrossFadeState.showSecond,
+                    duration: Duration(milliseconds: 500),
+                    firstChild: Text(
+                      _firstQuote,
+                      style: TextStyle(
+                          fontSize: 28, color: Colors.black, height: 1),
+                    ),
+                    secondChild: Text(
+                      _secondQuote,
+                      style: TextStyle(
+                          fontSize: 28, color: Colors.black, height: 1),
                     ),
                   ),
-                  MouseRegion(
+                ),
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: _screenSize.width * 0.45,
+                  ),
+                  child: MouseRegion(
                     cursor: SystemMouseCursors.click,
                     child: GestureDetector(
                       onTap: onTap,
                       child: Image(
-                        fit: BoxFit.fitHeight,
+                        fit: BoxFit.scaleDown,
                         image: AssetImage('assets/images/marvin.png'),
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-          _height < 0 ? Container() : Footer(),
-        ],
-      
+        ),
+        _height < 0 ? Container() : Footer(),
+      ],
     );
   }
 }

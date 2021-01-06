@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
-import 'package:hovering/hovering.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:mysite/helpers.dart';
 import 'package:mysite/consts/routes.dart';
 import 'package:mysite/widgets/menu.dart';
 import 'package:mysite/widgets/hover_icon_button.dart';
 import 'package:mysite/widgets/choice_chip.dart';
+import 'package:mysite/widgets/account_menu.dart';
 
 class AkDrawer extends StatelessWidget {
   final AutoScrollController controller;
@@ -17,9 +16,9 @@ class AkDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _screenHeight = screenSize(context).height;
-    final _isLogged = FirebaseAuth.instance.currentUser != null;
+    final _screenHeight = MediaQuery.of(context).size.height;
 
+    FocusScope.of(context).unfocus();
     return Drawer(
       child: Container(
         color: Theme.of(context).primaryColorDark,
@@ -50,6 +49,7 @@ class AkDrawer extends StatelessWidget {
                           final _currRoot = currentRoot();
                           if (homePage.contains(_currRoot) &&
                               controller != null) {
+                            FocusScope.of(context).unfocus();
                             controller.animateTo(
                               0,
                               duration: Duration(seconds: 1),
@@ -79,58 +79,11 @@ class AkDrawer extends StatelessWidget {
                   )),
             ),
             Container(
-              padding: const EdgeInsets.only(top: 7, bottom: 10),
-              child: _isLogged
-                  ? HoverButton(
-                      height: 1,
-                      minWidth: 0,
-                      padding: const EdgeInsets.all(0),
-                      child: Text('Logout',
-                          style: TextStyle(
-                            fontSize: 18,
-                          )),
-                      textColor: Theme.of(context).secondaryHeaderColor,
-                      hoverTextColor: Theme.of(context).accentColor,
-                      hoverElevation: 0,
-                      focusElevation: 0,
-                      hoverColor: Color(0x00000000),
-                      highlightColor: Color(0x00000000),
-                      splashColor: Color(0x00000000),
-                      onpressed: () {
-                        FirebaseAuth.instance.signOut();
-                        Scaffold.of(context).openEndDrawer();
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('Signed out'),
-                            backgroundColor: Colors.green[600].withOpacity(0.7),
-                          ),
-                        );
-                      },
-                    )
-                  : HoverButton(
-                      height: 1,
-                      minWidth: 0,
-                      padding: const EdgeInsets.all(0),
-                      child: Text('Login',
-                          style: TextStyle(
-                            fontSize: 18,
-                          )),
-                      textColor: Theme.of(context).secondaryHeaderColor,
-                      hoverTextColor: Theme.of(context).accentColor,
-                      hoverElevation: 0,
-                      focusElevation: 0,
-                      hoverColor: Color(0x00000000),
-                      highlightColor: Color(0x00000000),
-                      splashColor: Color(0x00000000),
-                      onpressed: () {
-                        navKey.currentState.pushNamed('login');
-
-                        Scaffold.of(context).openEndDrawer();
-                      },
-                    ),
+              padding: const EdgeInsets.only(top: 7),
+              child: AccountMenu(),
             ),
             SizedBox(
-              height: 40,
+              height: 30,
             ),
             Container(
               alignment: Alignment.center,

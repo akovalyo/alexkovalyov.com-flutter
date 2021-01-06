@@ -16,6 +16,7 @@ import 'package:mysite/widgets/scroll_upward.dart';
 import 'package:mysite/widgets/image_placeholder.dart';
 import 'package:mysite/widgets/animated_image.dart';
 import 'package:mysite/widgets/wrap_scroll_tag.dart';
+import 'package:mysite/pages/template_basic.dart';
 
 class PostBuilder extends StatelessWidget {
   final AutoScrollController controller;
@@ -296,7 +297,7 @@ class PostBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (snapshot.data() == null) return SomethingWentWrong();
+    if (snapshot.data() == null) return TemplateBasic(SomethingWentWrong());
     final _screenSize = MediaQuery.of(context).size;
     final _extracted = extractBody(snapshot.data()['body']);
     final _decoded = decodeBody(_extracted, context);

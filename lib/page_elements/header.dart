@@ -3,7 +3,6 @@ import 'package:scroll_to_index/scroll_to_index.dart';
 
 import 'package:mysite/consts/consts.dart';
 import 'package:mysite/consts/routes.dart';
-import 'package:mysite/helpers.dart';
 import 'package:mysite/widgets/image_placeholder.dart';
 import 'package:mysite/widgets/button.dart';
 
@@ -13,7 +12,8 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _screenSize = screenSize(context);
+    final _screenSize = MediaQuery.of(context).size;
+    ;
     final _heightBottom = _screenSize.height * 0.6 - appBarHeight;
     return Container(
       color: Colors.black,

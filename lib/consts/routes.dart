@@ -1,17 +1,18 @@
 import 'package:flutter/cupertino.dart';
 
 import 'package:mysite/pages/home.dart';
-import 'package:mysite/pages/example.dart';
 import 'package:mysite/pages/login_page.dart';
 import 'package:mysite/pages/template_basic.dart';
+import 'package:mysite/pages/messages_page.dart';
+import 'package:mysite/pages/project_minishell.dart';
 
 const routeHome = '/';
-const routeScroll = '/scroll';
 const routeBlog = 'blog';
 const routeProjects = 'projects';
 const routeContact = 'contact';
 const routeLogin = 'login';
-const routeProjectMinishell = 'projects_minishell';
+const routeMessages = 'messages';
+const routeProjectMinishell = 'minishell';
 
 const homePage = [
   routeHome,
@@ -59,12 +60,12 @@ const menuItems = [
 
 var routes = {
   routeHome: HomePage(null),
-  routeScroll: Example(),
   routeBlog: HomePage(blog),
   routeProjects: HomePage(projects),
   routeContact: HomePage(contact),
   routeLogin: TemplateBasic(LoginPage()),
-  //routeProjectMinishell: PageBuilder(),
+  routeMessages: TemplateBasic(MessagesPage()),
+  routeProjectMinishell: TemplateBasic(ProjectMinishell()),
 };
 
 final navKey = new GlobalKey<NavigatorState>();

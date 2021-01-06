@@ -76,6 +76,7 @@ class _AkAppBarState extends State<AkAppBar> {
         onPressed: () {
           final _currRoot = currentRoot();
           if (homePage.contains(_currRoot)) {
+            FocusScope.of(context).unfocus();
             widget.controller.animateTo(
               0,
               duration: Duration(seconds: 1),

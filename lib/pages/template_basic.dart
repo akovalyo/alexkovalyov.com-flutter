@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:mysite/consts/consts.dart';
-import 'package:mysite/helpers.dart';
 import 'package:mysite/page_elements/ak_app_bar.dart';
 import 'package:mysite/page_elements/drawer.dart';
 
@@ -11,7 +10,7 @@ class TemplateBasic extends StatelessWidget {
   TemplateBasic(this.child);
   @override
   Widget build(BuildContext context) {
-    final _screenSize = screenSize(context);
+    final _screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,

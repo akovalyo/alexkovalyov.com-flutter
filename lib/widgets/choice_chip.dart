@@ -20,45 +20,52 @@ class _ThemeChoiceChipState extends State<ThemeChoiceChip> {
     _theme = Theme.of(context).backgroundColor == cp2077 ? 2 : _theme;
     return Column(
       children: <Widget>[
-        ChoiceChip(
-          avatar: Icon(
-            Icons.brightness_5,
-            color: Theme.of(context).secondaryHeaderColor,
+        Padding(
+          padding: const EdgeInsets.only(bottom: 4),
+          child: ChoiceChip(
+            avatar: Icon(
+              Icons.brightness_5,
+              color: Theme.of(context).secondaryHeaderColor,
+            ),
+            label: Text(
+              'Light',
+            ),
+            labelStyle:
+                TextStyle(color: Theme.of(context).secondaryHeaderColor),
+            backgroundColor: Color(0x00000000),
+            selectedColor: Colors.red,
+            selected: _theme == 0,
+            onSelected: (_) {
+              widget.onSelectedTheme(Brightness.light);
+              setState(() {
+                _theme = 0;
+              });
+            },
           ),
-          label: Text(
-            'Light',
-          ),
-          labelStyle: TextStyle(color: Theme.of(context).secondaryHeaderColor),
-          backgroundColor: Color(0x00000000),
-          selectedColor: Colors.red,
-          selected: _theme == 0,
-          onSelected: (_) {
-            widget.onSelectedTheme(Brightness.light);
-            setState(() {
-              _theme = 0;
-            });
-          },
         ),
-        ChoiceChip(
-          avatar: Icon(
-            Icons.brightness_2,
-            color: Theme.of(context).secondaryHeaderColor,
+        Padding(
+          padding: const EdgeInsets.only(bottom: 4),
+          child: ChoiceChip(
+            avatar: Icon(
+              Icons.brightness_2,
+              color: Theme.of(context).secondaryHeaderColor,
+            ),
+            label: Text(
+              'Dark',
+            ),
+            labelStyle:
+                TextStyle(color: Theme.of(context).secondaryHeaderColor),
+            backgroundColor: Color(0x00000000),
+            selectedColor: Theme.of(context).accentColor,
+            selected: _theme == 1,
+            onSelected: (_) {
+              widget.onSelectedTheme(Brightness.dark);
+              setState(() {
+                _theme = 1;
+              });
+            },
           ),
-          label: Text(
-            'Dark',
-          ),
-          labelStyle: TextStyle(color: Theme.of(context).secondaryHeaderColor),
-          backgroundColor: Color(0x00000000),
-          selectedColor: Theme.of(context).accentColor,
-          selected: _theme == 1,
-          onSelected: (_) {
-            widget.onSelectedTheme(Brightness.dark);
-            setState(() {
-              _theme = 1;
-            });
-          },
         ),
-        Divider(),
         ChoiceChip(
           avatar: CircleAvatar(
             child: Image(image: AssetImage('assets/images/cyberpunk.png')),

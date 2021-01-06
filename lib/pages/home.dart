@@ -25,6 +25,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   AutoScrollController _scrollController;
+  //var _scrollPos = 0.0;
 
   @override
   void initState() {
@@ -56,7 +57,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     // changeTitle('${widget.path}');
-    var _screenSize = screenSize(context);
+    var _screenSize = MediaQuery.of(context).size;
 
     final List<Widget> wList = [
       WrapScrollTag(
@@ -95,20 +96,25 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       drawer: AkDrawer(controller: _scrollController),
-      body: Stack(
-        children: <Widget>[
-          SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
-            scrollDirection: Axis.vertical,
-            child: Column(children: wList),
-            controller: _scrollController,
-          ),
-          ScrollUpward(
-            _scrollController,
-            visiblePosition: 100,
-            //paddingRight: paddingSmall,
-          ),
-        ],
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: Stack(
+          children: <Widget>[
+            SingleChildScrollView(
+              physics: ClampingScrollPhysics(),
+              scrollDirection: Axis.vertical,
+              child: Column(children: wList),
+              controller: _scrollController,
+            ),
+            ScrollUpward(
+              _scrollController,
+              visiblePosition: 100,
+              //paddingRight: paddingSmall,
+            ),
+          ],
+        ),
       ),
     );
   }

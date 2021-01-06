@@ -1,34 +1,193 @@
+import 'dart:ui' as ui;
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:mysite/consts/consts.dart';
+import 'package:universal_html/prefer_sdk/html.dart' as html;
+import 'package:universal_html/prefer_sdk/js.dart' as js;
 
-import 'package:mysite/page_elements/ak_app_bar.dart';
+import 'package:mysite/helpers.dart';
+import 'package:mysite/page_elements/footer.dart';
 
-class PageBuilder extends StatelessWidget {
-  final Widget child;
+class ProjectMinishell extends StatefulWidget {
+  @override
+  _ProjectMinishellState createState() => _ProjectMinishellState();
+}
 
-  PageBuilder(this.child);
+class _ProjectMinishellState extends State<ProjectMinishell> {
+  String createdViewId = 'map_element';
+
+  void initState() {
+    // ignore: undefined_prefixed_name
+    ui.platformViewRegistry.registerViewFactory(
+        createdViewId,
+        (int viewId) => html.IFrameElement()
+          ..width = MediaQuery.of(context).size.width.toString()
+          ..height = MediaQuery.of(context).size.height.toString()
+          ..src = 'https://repl.it/@akovalyo/minishell?lite=false'
+          ..style.border = 'none');
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    final _screenSize = MediaQuery.of(context).size;
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(top: 40.0),
+            child: Text(
+              'MINISHELL',
+              style: Theme.of(context).textTheme.headline3,
+            ),
+          ),
+          Container(
+            width: 160,
+            child: Divider(
+              thickness: 5,
+              color: Theme.of(context).primaryColor,
+            ),
+          ),
+          TextBlock(),
+          Center(
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 20),
+              width: isSmallScreen(context)
+                  ? _screenSize.width * 0.95
+                  : _screenSize.width * 0.6,
+              height: 600,
+              child: Directionality(
+                textDirection: TextDirection.ltr,
+                child: HtmlElementView(
+                  viewType: createdViewId,
+                ),
+              ),
+            ),
+          ),
+          Footer()
+        ],
+      ),
+    );
   }
 }
 
-class ProjectMinishell extends StatelessWidget {
+class TextBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // final backSign = ModalRoute.of(context).settings.arguments;
-    // print(backSign);
-    return Container();
-
-    // Scaffold(
-    //   backgroundColor: Theme.of(context).backgroundColor,
-    //   appBar: PreferredSize(
-    //     preferredSize: Size(_screenSize.width, appBarHeight),
-    //     child: AkAppBar(controller),
-    //   ),
-    //   drawer: AkDrawer(controller),
-    //   body: Center(
-    //     child: Text('Hello'),
-    //   ),
-    // );
+    return Container(
+      padding: EdgeInsets.symmetric(
+        vertical: 10,
+        horizontal: isSmallScreen(context) ? paddingSmall : paddingLarge,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            'The objective of this project is to create a simple shell and learn about processes and file descriptors.',
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: Text(
+              'Common Instructions (mandatory part):',
+              style: Theme.of(context).textTheme.headline5,
+              textAlign: TextAlign.center,
+            ),
+          ),
+          RichText(
+            text: TextSpan(
+              children: [
+                TextSpan(
+                  text:
+                      '∘ The project must be written in C and in accordance with the school\'s ',
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+                TextSpan(
+                  text: 'Norm.',
+                  style: Theme.of(context).textTheme.caption,
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      js.context.callMethod(
+                        'open',
+                        [
+                          'https://github.com/akovalyo/akovalyo/blob/master/42_NORM.md'
+                        ],
+                      );
+                    },
+                ),
+              ],
+            ),
+          ),
+          Text(
+            '∘ Functions should not quite unexpectedly (segmentation fault, bus error, double free, etc).',
+            style: Theme.of(context).textTheme.bodyText2,
+          ),
+          Text(
+            '∘ No memory leaks',
+            style: Theme.of(context).textTheme.bodyText2,
+            textAlign: TextAlign.start,
+          ),
+          RichText(
+            text: TextSpan(
+              children: [
+                TextSpan(
+                  text: '∘ Allowed functions: ',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText2
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+                TextSpan(
+                  text:
+                      'malloc, free, write, open, read, close, fork, wait, wait3, wait4, signal, kill, exit, getcwd, chdir, stat, fstat, lstat, execve, dup, dup2, pipe, opendir, readdir, closedir, strerror, errno, and functions from ',
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+                TextSpan(
+                    text: 'libft.',
+                    style: Theme.of(context).textTheme.caption,
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        js.context.callMethod(
+                            'open', ['https://github.com/akovalyo/42sv_libft']);
+                      }),
+              ],
+            ),
+          ),
+          Text(
+            '∘ Implement the builtins like in bash:',
+            style: Theme.of(context).textTheme.bodyText2.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
+          Text('\t∘ echo with option \'-n\''),
+          Text('\t∘ cd with only a relative or absolute path'),
+          Text('\t∘ pwd without any options'),
+          Text('\t∘ export without any options'),
+          Text('\t∘ unset without any options'),
+          Text('\t∘ env without any options and any arguments'),
+          Text('\t∘ exit without any options'),
+          Text(
+              '∘ Search and launch the right executable (based on the PATH variable or by using relative or absolute path) like in bash'),
+          Text('∘ ; in the command should separate commands like in bash'),
+          Text(
+              '∘ ’ and " should work like in bash except for multiline commands'),
+          Text(
+              '∘ Redirections \'<\' \'>\' \'>>\' should work like in bash except for file descriptor aggregation'),
+          Text('∘ Pipes | should work like in bash'),
+          Text(
+              '∘ Environment variables (\$ followed by characters) should work like in bash'),
+          Text('∘ \$? should work like in bash'),
+          Text(
+              '∘ ctrl-C, ctrl-D and ctrl- should have the same result as in bash'),
+        ],
+      ),
+    );
   }
 }

@@ -63,6 +63,7 @@ class _ScrollUpwardState extends State<ScrollUpward> {
           iconSize: 34,
           color: Theme.of(context).primaryColor,
           onPressed: () {
+            FocusScope.of(context).unfocus();
             widget.controller.animateTo(
               0,
               duration: Duration(seconds: 1),
