@@ -12,3 +12,6 @@ const postCardSWidth = 400.0;
 const postCardSHoverWidth = 415.0;
 const postCardSHeight = 180.0;
 const postCardSHoverHeight = 195.0;
+
+const scrollBarThickness = 8.0;
+const scrollBarRadius = 50.0;

@@ -5,7 +5,6 @@ import 'package:hovering/hovering.dart';
 import 'package:mysite/helpers.dart';
 import 'package:mysite/consts/routes.dart';
 import 'package:mysite/consts/consts.dart';
-
 import 'package:mysite/widgets/hover_icon_button.dart';
 import 'package:mysite/widgets/menu_item.dart';
 import 'package:mysite/widgets/overlay_menu.dart';
@@ -47,6 +46,12 @@ class _AkAppBarState extends State<AkAppBar> {
     if (widget.controller != null) {
       widget.controller.addListener(_scrollListener);
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    widget.controller.dispose();
   }
 
   @override

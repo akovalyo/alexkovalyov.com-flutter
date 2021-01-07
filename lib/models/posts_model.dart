@@ -30,7 +30,6 @@ class PostsModel with ChangeNotifier {
         _cards.add(
           GestureDetector(
             onTap: () {
-              //Navigator.pushNamed(context, value['path']);
               navKey.currentState.pushNamed(value['path']);
             },
             child: HoverBlogContainer(
@@ -46,7 +45,6 @@ class PostsModel with ChangeNotifier {
           ),
         );
       });
-
     return _cards;
   }
 }

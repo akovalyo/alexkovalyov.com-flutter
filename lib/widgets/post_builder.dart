@@ -3,6 +3,7 @@ import 'package:universal_html/prefer_sdk/js.dart' as js;
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+import 'package:vs_scrollbar/vs_scrollbar.dart';
 
 import 'package:mysite/consts/consts.dart';
 import 'package:mysite/consts/unicode_characters.dart';
@@ -214,12 +215,6 @@ class PostBuilder extends StatelessWidget {
           if (_widgetIdx == 0) return _child;
           return WrapScrollTag(
               child: _child, controller: controller, index: _widgetIdx);
-        // case 'webview':
-        //   return Container(
-        //       child: WebView(
-        //     initialUrl: 'https://flutter.dev',
-        //     javascriptMode: JavascriptMode.unrestricted,
-        //   ));
 
         case 'image':
           String _path = _value;
@@ -311,72 +306,80 @@ class PostBuilder extends StatelessWidget {
       drawer: AkDrawer(controller: controller),
       body: Stack(
         children: <Widget>[
-          SingleChildScrollView(
+          VsScrollbar(
             controller: controller,
-            physics: ClampingScrollPhysics(),
-            child: Center(
-              child: Column(
-                children: [
-                  SizedBox(
-                    width: _screenSize.width,
-                    height: _screenSize.height * 0.4,
-                    child: FadeInImageAny(
-                      imagePath: postData['image'],
-                      placeholder: SizedBox(
-                        width: _screenSize.width,
-                        height: _screenSize.height * 0.4,
-                      ),
+            allowDrag: true,
+            color: Theme.of(context).accentColor.withOpacity(0.4),
+            radius: scrollBarRadius,
+            thickness: scrollBarThickness,
+            isAlwaysShown: false,
+            child: SingleChildScrollView(
+              controller: controller,
+              physics: ClampingScrollPhysics(),
+              child: Center(
+                child: Column(
+                  children: [
+                    SizedBox(
                       width: _screenSize.width,
                       height: _screenSize.height * 0.4,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  Container(
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.only(
-                        top: 20,
-                        bottom: 10,
-                        right: isSmallScreen(context)
-                            ? paddingSmall
-                            : paddingLarge,
-                        left: isSmallScreen(context)
-                            ? paddingSmall
-                            : paddingLarge,
+                      child: FadeInImageAny(
+                        imagePath: postData['image'],
+                        placeholder: SizedBox(
+                          width: _screenSize.width,
+                          height: _screenSize.height * 0.4,
+                        ),
+                        width: _screenSize.width,
+                        height: _screenSize.height * 0.4,
+                        fit: BoxFit.cover,
                       ),
-                      child: Text(
-                        postData['title'],
-                        style: Theme.of(context).textTheme.headline4,
-                      )),
-                  Container(
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.only(
-                        bottom: 20,
-                        left: isSmallScreen(context)
-                            ? paddingSmall
-                            : paddingLarge,
-                        right: isSmallScreen(context)
-                            ? paddingSmall
-                            : paddingLarge,
-                      ),
-                      child: Text(
-                        postData['date'],
-                      )),
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: isSmallScreen(context)
-                            ? paddingSmall
-                            : paddingLarge),
-                    child: Column(
-                      children: _decoded,
                     ),
-                  ),
-                  Container(
-                    child: const Footer(),
-                  ),
-                ],
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    Container(
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.only(
+                          top: 20,
+                          bottom: 10,
+                          right: isSmallScreen(context)
+                              ? paddingSmall
+                              : paddingLarge,
+                          left: isSmallScreen(context)
+                              ? paddingSmall
+                              : paddingLarge,
+                        ),
+                        child: Text(
+                          postData['title'],
+                          style: Theme.of(context).textTheme.headline4,
+                        )),
+                    Container(
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.only(
+                          bottom: 20,
+                          left: isSmallScreen(context)
+                              ? paddingSmall
+                              : paddingLarge,
+                          right: isSmallScreen(context)
+                              ? paddingSmall
+                              : paddingLarge,
+                        ),
+                        child: Text(
+                          postData['date'],
+                        )),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: isSmallScreen(context)
+                              ? paddingSmall
+                              : paddingLarge),
+                      child: Column(
+                        children: _decoded,
+                      ),
+                    ),
+                    Container(
+                      child: const Footer(),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

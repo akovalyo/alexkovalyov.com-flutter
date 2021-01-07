@@ -1,12 +1,13 @@
 import 'dart:ui' as ui;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:mysite/consts/consts.dart';
 import 'package:universal_html/prefer_sdk/html.dart' as html;
 import 'package:universal_html/prefer_sdk/js.dart' as js;
 
 import 'package:mysite/helpers.dart';
+import 'package:mysite/consts/consts.dart';
 import 'package:mysite/page_elements/footer.dart';
+import 'package:mysite/widgets/image_placeholder.dart';
 
 class ProjectMinishell extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class ProjectMinishell extends StatefulWidget {
 }
 
 class _ProjectMinishellState extends State<ProjectMinishell> {
-  String createdViewId = 'map_element';
+  String createdViewId = 'repl';
 
   void initState() {
     // ignore: undefined_prefixed_name
@@ -30,17 +31,26 @@ class _ProjectMinishellState extends State<ProjectMinishell> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final _screenSize = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
+          SizedBox(
+            width: _screenSize.width,
+            height: _screenSize.height * 0.4,
+            child: FadeInImageAny(
+              imagePath: 'assets/images/projects/project_minishell.png',
+              placeholder: SizedBox(
+                width: _screenSize.width,
+                height: _screenSize.height * 0.4,
+              ),
+              width: _screenSize.width,
+              height: _screenSize.height * 0.4,
+              fit: BoxFit.cover,
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.only(top: 40.0),
             child: Text(
@@ -63,10 +73,12 @@ class _ProjectMinishellState extends State<ProjectMinishell> {
                   ? _screenSize.width * 0.95
                   : _screenSize.width * 0.6,
               height: 600,
-              child: Directionality(
-                textDirection: TextDirection.ltr,
-                child: HtmlElementView(
-                  viewType: createdViewId,
+              child: MouseRegion(
+                child: Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: HtmlElementView(
+                    viewType: createdViewId,
+                  ),
                 ),
               ),
             ),

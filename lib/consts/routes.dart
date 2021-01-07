@@ -52,12 +52,6 @@ const menuItems = [
   },
 ];
 
-// const titles = {
-//   routeProjects: projects,
-//   routeBlog: blog,
-//   routeProjectMinishell: 'Project Minishell',
-// };
-
 var routes = {
   routeHome: HomePage(null),
   routeBlog: HomePage(blog),

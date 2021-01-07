@@ -45,8 +45,13 @@ class _ScrollUpwardState extends State<ScrollUpward> {
   @override
   void initState() {
     super.initState();
-
     widget.controller.addListener(_scrollListener);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    widget.controller.dispose();
   }
 
   @override

@@ -26,12 +26,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => PostsModel(dbPosts),
         ),
-        // ChangeNotifierProvider(
-        //   create: (_) => AkMenu(),
-        // ),
-        // ChangeNotifierProvider(
-        //   create: (_) => Scroll(),
-        // ),
       ],
       child: DynamicTheme(
         defaultBrightness: Brightness.light,

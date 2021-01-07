@@ -29,7 +29,7 @@ class Footer extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: Text(
-              'Copyright Alex Kovalyov © 2020',
+              'Copyright Alex Kovalyov © ${DateTime.now().year}',
               style: TextStyle(
                 color: Theme.of(context).secondaryHeaderColor,
                 fontSize: 12,

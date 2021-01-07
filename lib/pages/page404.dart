@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 import 'package:mysite/consts/consts.dart';
-import 'package:mysite/helpers.dart';
-import 'package:mysite/page_elements/drawer.dart';
 import 'package:mysite/page_elements/footer.dart';
-import 'package:mysite/page_elements/ak_app_bar.dart';
 
 const quotes = [
   '\"Don\'t panic.\"',
@@ -74,7 +71,6 @@ class _Page404State extends State<Page404> {
         ),
         Expanded(
           child: Container(
-            //padding: const EdgeInsets.symmetric(horizontal: paddingSmall),
             color: Theme.of(context).backgroundColor,
             alignment: Alignment.center,
             child: Row(
