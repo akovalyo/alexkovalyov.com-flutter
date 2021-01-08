@@ -1,6 +1,6 @@
 ![](https://raw.githubusercontent.com/akovalyo/alexkovalyov.com-flutter/main/assets/images/ak.png?token=AN5GVLN6UCGHJYB4FEMCOSK7765SI)
 
-# [alexkovalyov.com](alexkovalyov.com)
+# [alexkovalyov.com](https://alexkovalyov.com)
 
 ![](https://img.shields.io/badge/dynamic/yaml?url=https://raw.githubusercontent.com/akovalyo/alexkovalyov.com-flutter/main/pubspec.yaml?token=AN5GVLJI3B2QGZTBQQZHTHS777VGE&label=v&query=$.version&color=blue) ![GitHub](https://img.shields.io/github/license/akovalyo/alexkovalyov.com-flutter)
 
