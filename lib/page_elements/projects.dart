@@ -68,7 +68,7 @@ class Projects extends StatelessWidget {
                   title: 'Code',
                 ),
                 secondButton: ProjectButton(
-                  link: '/2020-06-29-blood_cells',
+                  link: '2020-06-29-blood_cells',
                   title: 'Description',
                 ),
               ),

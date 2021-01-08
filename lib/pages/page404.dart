@@ -22,6 +22,10 @@ const quotes = [
   '\"Do you want me to sit in a corner and rust, or just fall apart where I\'m standing?\"',
   '\"The best conversation I had was over forty million years ago…. And that was with a coffee machine.\"',
   '\"Sounds awful.\"',
+  '\"Funny, how just when you think life can\'t possibly get any worse it suddenly does.\"',
+  '\"Don\'t look at me, I\'m too depressed."',
+  '\"Oh god, I\'m so depressed.\"',
+  '\"I must warn you, I\'m feeling very depressed.\"',
 ];
 
 class Page404 extends StatefulWidget {
