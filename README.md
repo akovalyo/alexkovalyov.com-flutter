@@ -1,4 +1,4 @@
-![](https://raw.githubusercontent.com/akovalyo/alexkovalyov.com-flutter/main/assets/images/ak.png?token=AN5GVLN6UCGHJYB4FEMCOSK7765SI)
+![](https://alexkovalyov)
 
 # [alexkovalyov.com](alexkovalyov.com)
 
