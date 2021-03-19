@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -15,32 +15,30 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.4.4+11
+version: 2.0.0
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_markdown: ^0.5.1
-  scroll_to_index: ^1.0.6
-  dynamic_theme: ^1.0.1
-  hovering: ^1.0.2
-  firebase_core: ^0.5.3
-  cloud_firestore: ^0.14.4
-  firebase_auth: ^0.18.4+1
+  flutter_markdown: ^0.6.0
+  scroll_to_index: ^2.0.0
+  # dynamic_theme: ^1.0.1
+  hovering: ^1.0.3
+  firebase_core: ^1.0.1
+  cloud_firestore: ^1.0.1
+  firebase_auth: ^1.0.1
   # firebase_storage: ^5.2.0
-  provider: ^4.3.2+3
-  universal_html: ^1.2.3
-  animated_icon_button: ^0.3.0
-  vs_scrollbar: ^0.1.0
-
-
+  provider: ^5.0.0
+  universal_html: ^2.0.1
+  animated_icon_button: ^1.0.0
+  vs_scrollbar: ^0.2.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.0
+  cupertino_icons: ^1.0.2
 
 dev_dependencies:
   flutter_test:
@@ -51,7 +49,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -87,7 +84,7 @@ flutter:
     - assets/images/projects/project_1.png
     - assets/images/projects/project_minishell.png
     - assets/images/marvin.png
-    
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

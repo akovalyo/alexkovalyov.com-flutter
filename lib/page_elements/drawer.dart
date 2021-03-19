@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
-import 'package:dynamic_theme/dynamic_theme.dart';
+// import 'package:dynamic_theme/dynamic_theme.dart';
 
+import 'package:mysite/theme/dynamic_theme.dart';
 import 'package:mysite/helpers.dart';
 import 'package:mysite/consts/routes.dart';
 import 'package:mysite/widgets/menu.dart';

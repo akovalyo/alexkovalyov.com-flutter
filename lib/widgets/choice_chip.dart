@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:dynamic_theme/dynamic_theme.dart';
+// import 'package:dynamic_theme/dynamic_theme.dart';
 
+import 'package:mysite/theme/dynamic_theme.dart';
 import 'package:mysite/consts/colors.dart';
 import 'package:mysite/theme/theme.dart';
 
