@@ -13,7 +13,6 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _screenSize = MediaQuery.of(context).size;
-    ;
     final _heightBottom = _screenSize.height * 0.6 - appBarHeight;
     return Container(
       color: Colors.black,

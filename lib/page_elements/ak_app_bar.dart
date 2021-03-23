@@ -11,7 +11,7 @@ import 'package:mysite/widgets/overlay_menu.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 class AkAppBar extends StatefulWidget {
-  final AutoScrollController controller;
+  final AutoScrollController? controller;
   final bool changeColor;
 
   AkAppBar({this.controller, this.changeColor = false});
@@ -25,7 +25,7 @@ class _AkAppBarState extends State<AkAppBar> {
   bool _colorBlack = false;
 
   _scrollListener() {
-    _scrollPos = widget.controller.position.pixels;
+    _scrollPos = widget.controller!.position.pixels;
     if (_scrollPos > 100 && widget.changeColor && _colorBlack) {
       setState(() {
         _colorBlack = false;
@@ -44,14 +44,16 @@ class _AkAppBarState extends State<AkAppBar> {
       _colorBlack = true;
     }
     if (widget.controller != null) {
-      widget.controller.addListener(_scrollListener);
+      widget.controller?.addListener(_scrollListener);
     }
   }
 
   @override
   void dispose() {
     super.dispose();
-    widget.controller.dispose();
+    if (widget.controller != null) {
+      widget.controller?.dispose();
+    }
   }
 
   @override
@@ -65,9 +67,9 @@ class _AkAppBarState extends State<AkAppBar> {
 
     final List<Widget> _menuItems = menuItems.map((elem) {
       return MenuItem(
-        controller: widget.controller,
-        title: elem['title'],
-        path: elem['path'],
+        controller: widget.controller == null ? null : widget.controller,
+        title: elem['title'] as String,
+        path: elem['path'] as String,
         fontSize: 16,
         column: false,
       );
@@ -82,13 +84,13 @@ class _AkAppBarState extends State<AkAppBar> {
           final _currRoot = currentRoot();
           if (homePage.contains(_currRoot)) {
             FocusScope.of(context).unfocus();
-            widget.controller.animateTo(
+            widget.controller?.animateTo(
               0,
               duration: Duration(seconds: 1),
               curve: Curves.fastOutSlowIn,
             );
           } else {
-            navKey.currentState.pushNamed(routeHome);
+            navKey.currentState?.pushNamed(routeHome);
           }
         },
         imageProvider: AssetImage('assets/images/main/akM.png'),
@@ -119,14 +121,14 @@ class _AkAppBarState extends State<AkAppBar> {
                       child: HoverCrossFadeWidget(
                         cursor: SystemMouseCursors.click,
                         firstChild: Text(
-                          elem['title'],
+                          elem['title'] as String,
                           style: TextStyle(
                             fontSize: 16,
                             color: Theme.of(context).secondaryHeaderColor,
                           ),
                         ),
                         secondChild: Text(
-                          elem['title'],
+                          elem['title'] as String,
                           style: TextStyle(
                             fontSize: 16,
                             color: Theme.of(context).accentColor,
@@ -139,13 +141,13 @@ class _AkAppBarState extends State<AkAppBar> {
                   onChange: (index) {
                     final _currRoot = currentRoot();
                     if (homePage.contains(_currRoot)) {
-                      widget.controller.scrollToIndex(
+                      widget.controller?.scrollToIndex(
                         index,
                         duration: Duration(milliseconds: 1000),
                         preferPosition: AutoScrollPosition.begin,
                       );
                     } else {
-                      navKey.currentState.pushNamed(menuItems[index]['path']);
+                      navKey.currentState?.pushNamed(menuItems[index]['path']!);
                     }
                   },
                 ),

@@ -5,22 +5,22 @@ import 'package:mysite/widgets/menu_item.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 class AkMenu extends StatelessWidget {
-  final AutoScrollController controller;
+  final AutoScrollController? controller;
   final double fontSize;
   final bool isColumn;
 
   AkMenu({
-    @required this.controller,
-    this.fontSize,
-    this.isColumn,
+    this.controller,
+    required this.fontSize,
+    required this.isColumn,
   });
   @override
   Widget build(BuildContext context) {
     final _items = menuItems.map((elem) {
       return MenuItem(
-        controller: controller,
-        title: elem['title'],
-        path: elem['path'],
+        controller: controller == null ? null : controller,
+        title: elem['title'] as String,
+        path: elem['path'] as String,
         fontSize: fontSize,
         column: isColumn,
       );

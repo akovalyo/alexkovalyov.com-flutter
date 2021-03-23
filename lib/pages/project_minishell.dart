@@ -1,8 +1,8 @@
 import 'dart:ui' as ui;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:universal_html/prefer_sdk/html.dart' as html;
-import 'package:universal_html/prefer_sdk/js.dart' as js;
+import 'package:universal_html/html.dart' as html;
+import 'package:universal_html/js.dart' as js;
 
 import 'package:mysite/helpers.dart';
 import 'package:mysite/consts/consts.dart';
@@ -153,7 +153,7 @@ class TextBlock extends StatelessWidget {
                   text: '∘ Allowed functions: ',
                   style: Theme.of(context)
                       .textTheme
-                      .bodyText2
+                      .bodyText2!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
                 TextSpan(
@@ -174,7 +174,7 @@ class TextBlock extends StatelessWidget {
           ),
           Text(
             '∘ Implement the builtins like in bash:',
-            style: Theme.of(context).textTheme.bodyText2.copyWith(
+            style: Theme.of(context).textTheme.bodyText2!.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
           ),

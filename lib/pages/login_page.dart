@@ -21,11 +21,11 @@ class _LoginPageState extends State<LoginPage> {
   var _isLoading = false;
 
   void _trySubmit() {
-    final isValid = _formKey.currentState.validate();
+    final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
 
     if (isValid) {
-      _formKey.currentState.save();
+      _formKey.currentState!.save();
 
       _authenticate(
         _userEmail.trim(),
@@ -46,10 +46,10 @@ class _LoginPageState extends State<LoginPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Welcome!'),
-          backgroundColor: Colors.green[600].withOpacity(0.7),
+          backgroundColor: Colors.green[600]!.withOpacity(0.7),
         ),
       );
-      navKey.currentState.pushNamed(routeHome);
+      navKey.currentState!.pushNamed(routeHome);
     } catch (error) {
       var message = 'An error occured, please check your credentialas!';
       ScaffoldMessenger.of(context).showSnackBar(
@@ -58,7 +58,6 @@ class _LoginPageState extends State<LoginPage> {
           backgroundColor: Theme.of(context).errorColor.withOpacity(0.7),
         ),
       );
-      print(error.message);
       setState(() {
         _isLoading = false;
       });
@@ -121,13 +120,13 @@ class _LoginPageState extends State<LoginPage> {
                                         Theme.of(context).textTheme.bodyText1,
                                   ),
                                   validator: (value) {
-                                    if (value.isEmpty) {
+                                    if (value!.isEmpty) {
                                       return 'Please enter email';
                                     }
                                     return null;
                                   },
                                   onSaved: (value) {
-                                    _userEmail = value;
+                                    _userEmail = value!;
                                   },
                                 ),
                                 TextFormField(
@@ -139,14 +138,14 @@ class _LoginPageState extends State<LoginPage> {
                                         Theme.of(context).textTheme.bodyText1,
                                   ),
                                   validator: (value) {
-                                    if (value.isEmpty) {
+                                    if (value!.isEmpty) {
                                       return 'Please enter password';
                                     }
                                     return null;
                                   },
                                   obscureText: true,
                                   onSaved: (value) {
-                                    _userPassword = value;
+                                    _userPassword = value!;
                                   },
                                 ),
                                 SizedBox(height: 20),

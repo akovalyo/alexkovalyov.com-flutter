@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:mysite/helpers.dart';
-import 'package:mysite/consts/consts.dart';
 import 'package:mysite/widgets/button.dart';
 
 class Contact extends StatefulWidget {
@@ -17,11 +16,11 @@ class _ContactState extends State<Contact> {
   var _isLoading = false;
 
   void _trySubmit() {
-    final isValid = _formKey.currentState.validate();
+    final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
 
     if (isValid) {
-      _formKey.currentState.save();
+      _formKey.currentState!.save();
 
       _sendMessage(
         _email.trim(),
@@ -50,10 +49,10 @@ class _ContactState extends State<Contact> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Thank you! Message has been sent!'),
-          backgroundColor: Colors.green[600].withOpacity(0.7),
+          backgroundColor: Colors.green[600]!.withOpacity(0.7),
         ),
       );
-      _formKey.currentState.reset();
+      _formKey.currentState!.reset();
     } catch (error) {
       var message = 'Sorry! Something went wrong';
       ScaffoldMessenger.of(context).showSnackBar(
@@ -62,7 +61,6 @@ class _ContactState extends State<Contact> {
           backgroundColor: Theme.of(context).errorColor.withOpacity(0.7),
         ),
       );
-      print(error.message);
       setState(() {
         _isLoading = false;
       });
@@ -114,13 +112,13 @@ class _ContactState extends State<Contact> {
                           labelStyle: Theme.of(context).textTheme.bodyText1,
                         ),
                         validator: (value) {
-                          if (value.isEmpty || !value.contains('@')) {
+                          if (value!.isEmpty || !value.contains('@')) {
                             return 'Please enter a valid email address';
                           }
                           return null;
                         },
                         onSaved: (value) {
-                          _email = value;
+                          _email = value!;
                         },
                       ),
                       TextFormField(
@@ -134,7 +132,7 @@ class _ContactState extends State<Contact> {
                           labelStyle: Theme.of(context).textTheme.bodyText1,
                         ),
                         validator: (value) {
-                          if (value.isEmpty) {
+                          if (value!.isEmpty) {
                             return 'Please enter your message';
                           }
                           if (value.length < 10) {
@@ -143,7 +141,7 @@ class _ContactState extends State<Contact> {
                           return null;
                         },
                         onSaved: (value) {
-                          _message = value;
+                          _message = value!;
                         },
                       ),
                       Container(height: 20),

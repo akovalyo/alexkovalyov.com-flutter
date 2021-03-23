@@ -13,11 +13,11 @@ class HoverBlogContainer extends StatefulWidget {
   final int animationDuration;
 
   HoverBlogContainer({
-    @required this.image,
-    @required this.width,
-    @required this.height,
-    @required this.hoverHeight,
-    @required this.hoverWidth,
+    required this.image,
+    required this.width,
+    required this.height,
+    required this.hoverHeight,
+    required this.hoverWidth,
     this.title = '',
     this.description = '',
     this.borderRadius = 0.0,
@@ -29,11 +29,11 @@ class HoverBlogContainer extends StatefulWidget {
 }
 
 class _HoverBlogContainerState extends State<HoverBlogContainer> {
-  double _height;
-  double _width;
-  BorderRadiusGeometry _borderRadius;
-  Duration _duration;
-  ImageProvider _imageProvider;
+  late double _height;
+  late double _width;
+  late BorderRadiusGeometry _borderRadius;
+  late Duration _duration;
+  late ImageProvider _imageProvider;
 
   @override
   void initState() {

@@ -9,8 +9,9 @@ class AnimatedImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final id = DateTime.now().toString();
-    final ImageProvider _image =
-        path.startsWith('http') ? NetworkImage(path) : AssetImage(path);
+    final ImageProvider<Object> _image = path.startsWith('http')
+        ? NetworkImage(path)
+        : AssetImage(path) as ImageProvider<Object>;
 
     return MouseRegion(
       cursor: SystemMouseCursors.zoomIn,

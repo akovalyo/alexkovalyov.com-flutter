@@ -4,7 +4,7 @@ import 'package:hovering/hovering.dart';
 import 'package:mysite/helpers.dart';
 
 class AkButton extends StatelessWidget {
-  final Function onPressed;
+  final VoidCallback onPressed;
   final Widget child;
   final Color backgroundColor;
   final Color color;
@@ -15,8 +15,8 @@ class AkButton extends StatelessWidget {
   final EdgeInsets padding;
 
   AkButton({
-    @required this.onPressed,
-    @required this.child,
+    required this.onPressed,
+    required this.child,
     this.backgroundColor = const Color(0x00000000),
     this.color = Colors.white,
     this.hoverColor = Colors.red,

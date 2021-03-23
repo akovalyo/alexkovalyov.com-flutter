@@ -7,11 +7,11 @@ import 'package:mysite/consts/routes.dart';
 import 'package:mysite/widgets/hover_blog_container.dart';
 
 class PostsModel with ChangeNotifier {
-  final Map<String, Map> postsMap;
+  final Map<String, Map>? postsMap;
   PostsModel(this.postsMap);
 
   bool postExist(String path) {
-    if (postsMap != null) return postsMap.containsKey(path);
+    if (postsMap != null) return postsMap!.containsKey(path);
     return false;
   }
 
@@ -26,11 +26,11 @@ class PostsModel with ChangeNotifier {
     List<Widget> _cards = [];
 
     if (postsMap != null)
-      postsMap.forEach((key, value) {
+      postsMap!.forEach((key, value) {
         _cards.add(
           GestureDetector(
             onTap: () {
-              navKey.currentState.pushNamed(value['path']);
+              navKey.currentState!.pushNamed(value['path']);
             },
             child: HoverBlogContainer(
               width: _cardSize.width,

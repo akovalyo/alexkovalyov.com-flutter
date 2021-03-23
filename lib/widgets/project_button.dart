@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:universal_html/prefer_sdk/js.dart' as js;
+import 'package:universal_html/js.dart' as js;
 
 import 'package:mysite/consts/routes.dart';
 import 'package:mysite/widgets/button.dart';
 
 class ProjectButton extends StatelessWidget {
-  final String link;
-  final String title;
+  final String? link;
+  final String? title;
 
   ProjectButton({
     this.link,
@@ -16,12 +16,12 @@ class ProjectButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AkButton(
-      child: Text(title, style: TextStyle(fontSize: 18)),
+      child: Text(title!, style: TextStyle(fontSize: 18)),
       onPressed: () {
-        if (link.startsWith('http')) {
+        if (link!.startsWith('http')) {
           js.context.callMethod('open', [link]);
         } else {
-          navKey.currentState.pushNamed(link, arguments: true);
+          navKey.currentState?.pushNamed(link!, arguments: true);
         }
       },
       borderWidth: 0,

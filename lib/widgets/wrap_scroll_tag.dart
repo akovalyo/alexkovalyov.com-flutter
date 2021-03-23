@@ -7,9 +7,9 @@ class WrapScrollTag extends StatelessWidget {
   final Widget child;
 
   WrapScrollTag({
-    this.controller,
-    this.index,
-    this.child,
+    required this.controller,
+    required this.index,
+    required this.child,
   });
   @override
   Widget build(BuildContext context) {

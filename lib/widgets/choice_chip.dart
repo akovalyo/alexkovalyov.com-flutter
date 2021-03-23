@@ -8,7 +8,7 @@ import 'package:mysite/theme/theme.dart';
 class ThemeChoiceChip extends StatefulWidget {
   final ValueChanged<Brightness> onSelectedTheme;
 
-  ThemeChoiceChip({this.onSelectedTheme});
+  ThemeChoiceChip({required this.onSelectedTheme});
 
   @override
   _ThemeChoiceChipState createState() => _ThemeChoiceChipState();
@@ -79,7 +79,7 @@ class _ThemeChoiceChipState extends State<ThemeChoiceChip> {
           selectedColor: cp2077,
           selected: _theme == 2,
           onSelected: (_) {
-            DynamicTheme.of(context)
+            DynamicTheme.of(context)!
                 .setThemeData(akTheme(Brightness.dark, '2077'));
             setState(() {
               _theme = 2;

@@ -9,16 +9,16 @@ import 'package:scroll_to_index/scroll_to_index.dart';
 class MenuItem extends StatelessWidget {
   final String title;
   final String path;
-  final AutoScrollController controller;
+  final AutoScrollController? controller;
   final double fontSize;
   final bool column;
 
   const MenuItem({
-    @required this.title,
-    @required this.path,
-    @required this.controller,
-    this.fontSize,
-    this.column,
+    required this.title,
+    required this.path,
+    this.controller,
+    required this.fontSize,
+    required this.column,
   });
 
   @override
@@ -48,13 +48,13 @@ class MenuItem extends StatelessWidget {
           final _currRoot = currentRoot();
           if (homePage.contains(_currRoot)) {
             FocusScope.of(context).unfocus();
-            controller.scrollToIndex(
+            controller?.scrollToIndex(
               homeWidgets[title],
               duration: Duration(milliseconds: 1000),
               preferPosition: AutoScrollPosition.begin,
             );
           } else {
-            navKey.currentState.pushNamed(path);
+            navKey.currentState!.pushNamed(path);
           }
           if (column) {
             Scaffold.of(context).openEndDrawer();

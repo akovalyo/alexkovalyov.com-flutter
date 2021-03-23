@@ -6,7 +6,7 @@ class MessagesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _isLogged = FirebaseAuth.instance.currentUser != null;
-    CollectionReference messages;
+    late CollectionReference messages;
     if (_isLogged) {
       messages = FirebaseFirestore.instance.collection('messages');
     }
@@ -26,13 +26,13 @@ class MessagesPage extends StatelessWidget {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());
               }
-              List<Widget> lst = snapshot.data.docs.map((element) {
+              List<Widget> lst = snapshot.data!.docs.map((element) {
                 return Column(
                   children: <Widget>[
                     ListTile(
                       tileColor: Theme.of(context).primaryColor,
                       title: SelectableText(
-                        element.data()['mail'],
+                        element.data()!['mail'],
                         style: Theme.of(context).textTheme.bodyText1,
                       ),
                       trailing: IconButton(
@@ -48,13 +48,13 @@ class MessagesPage extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      child: Text(element.data()['date']),
+                      child: Text(element.data()!['date']),
                     ),
                     Container(
                       padding: const EdgeInsets.only(
                         bottom: 20,
                       ),
-                      child: SelectableText(element.data()['message']),
+                      child: SelectableText(element.data()!['message']),
                     ),
                   ],
                 );

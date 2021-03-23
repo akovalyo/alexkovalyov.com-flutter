@@ -6,11 +6,11 @@ bool isSmallScreen(BuildContext context) {
   return MediaQuery.of(context).size.width < 800;
 }
 
-String currentRoot() {
-  String curr;
+String? currentRoot() {
+  String? curr;
 
-  navKey.currentState.popUntil((route) {
-    curr = route.settings.name;
+  navKey.currentState!.popUntil((route) {
+    curr = route.settings.name!;
     return true;
   });
   return curr;

@@ -17,7 +17,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  final Map<String, Map> dbPosts;
+  final Map<String, Map>? dbPosts;
   MyApp(this.dbPosts);
 
   @override

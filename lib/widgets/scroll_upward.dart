@@ -21,7 +21,7 @@ class _ScrollUpwardState extends State<ScrollUpward> {
   bool _visible = false;
 
   _scrollListener() {
-    var _low = widget.controller.position.maxScrollExtent;
+    double _low = widget.controller.position.maxScrollExtent;
     _scrollPos = widget.controller.position.pixels;
 
     if (_scrollPos > widget.visiblePosition && _visible == false) {

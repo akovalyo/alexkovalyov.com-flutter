@@ -4,20 +4,20 @@ import 'package:flutter/foundation.dart';
 class FadeInImageAny extends StatelessWidget {
   final String imagePath;
   final Widget placeholder;
-  final Widget child;
+  final Widget? child;
   final Duration duration;
   final double width;
   final double height;
   final BoxFit fit;
 
   const FadeInImageAny({
-    @required this.imagePath,
-    @required this.placeholder,
+    required this.imagePath,
+    required this.placeholder,
     this.child,
     this.duration = const Duration(milliseconds: 500),
-    this.width,
-    this.height,
-    this.fit,
+    required this.width,
+    required this.height,
+    required this.fit,
   });
 
   @override

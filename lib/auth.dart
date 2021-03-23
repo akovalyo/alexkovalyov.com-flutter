@@ -17,7 +17,7 @@ class Auth {
           await postsRef.orderBy('date', descending: true).get();
       Map<String, Map> dbPosts = {};
       _snapshot.docs.forEach((pst) {
-        dbPosts[pst.data()['path']] = pst.data();
+        dbPosts[pst.data()!['path']] = pst.data()!;
       });
       return dbPosts;
     } catch (error) {

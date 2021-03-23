@@ -11,8 +11,8 @@ class HoverIconButton extends StatelessWidget {
   final Color secondColor;
 
   HoverIconButton({
-    @required this.imageProvider,
-    @required this.onPressed,
+    required this.imageProvider,
+    required this.onPressed,
     this.duration = const Duration(milliseconds: 500),
     this.curve = Curves.easeInCirc,
     this.firstColor = Colors.white,

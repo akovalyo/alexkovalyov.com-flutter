@@ -35,7 +35,7 @@ class Page404 extends StatefulWidget {
 
 class _Page404State extends State<Page404> {
   final random = Random();
-  String _firstQuote;
+  late String _firstQuote;
   String _secondQuote = '';
   bool _first = true;
 

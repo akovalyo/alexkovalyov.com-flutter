@@ -29,7 +29,7 @@ class AccountMenu extends StatelessWidget {
                   highlightColor: Color(0x00000000),
                   splashColor: Color(0x00000000),
                   onpressed: () {
-                    navKey.currentState.pushNamed(routeMessages);
+                    navKey.currentState!.pushNamed(routeMessages);
                     Scaffold.of(context).openEndDrawer();
                   },
                 ),
@@ -55,7 +55,7 @@ class AccountMenu extends StatelessWidget {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text('Signed out'),
-                      backgroundColor: Colors.green[600].withOpacity(0.7),
+                      backgroundColor: Colors.green[600]!.withOpacity(0.7),
                     ),
                   );
                 },
@@ -78,7 +78,7 @@ class AccountMenu extends StatelessWidget {
             highlightColor: Color(0x00000000),
             splashColor: Color(0x00000000),
             onpressed: () {
-              navKey.currentState.pushNamed('login');
+              navKey.currentState!.pushNamed('login');
 
               Scaffold.of(context).openEndDrawer();
             },

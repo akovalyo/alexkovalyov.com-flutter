@@ -9,10 +9,10 @@ import 'package:mysite/pages/template_basic.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   final _postsModel =
-      Provider.of<PostsModel>(navKey.currentState.context, listen: false);
-  if (_postsModel.postExist(settings.name)) {
+      Provider.of<PostsModel>(navKey.currentState!.context, listen: false);
+  if (_postsModel.postExist(settings.name!)) {
     return _getPageRoute(
-      PostPage(settings.name),
+      PostPage(settings.name!),
       settings,
     );
   }
@@ -20,7 +20,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     return _getPageRoute(TemplateBasic(Page404()), settings);
   }
   return _getPageRoute(
-    routes[settings.name],
+    routes[settings.name]!,
     settings,
   );
 }

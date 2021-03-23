@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:universal_html/prefer_sdk/js.dart' as js;
+import 'package:universal_html/js.dart' as js;
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
@@ -25,9 +25,9 @@ class PostBuilder extends StatelessWidget {
   final DocumentSnapshot snapshot;
 
   PostBuilder({
-    this.controller,
-    this.postData,
-    this.snapshot,
+    required this.controller,
+    required this.postData,
+    required this.snapshot,
   });
 
   List<Map> extractBody(String body) {
@@ -45,7 +45,8 @@ class PostBuilder extends StatelessWidget {
   String replaceChar(String str) {
     str = str.replaceAll("\\n", "\n");
     str = str.replaceAll("\\t", "\t");
-    Iterable<RegExpMatch> match = RegExp(r'\\u([\w]*)').allMatches(str);
+    Iterable<RegExpMatch>? match = RegExp(r'\\u([\w]*)').allMatches(str);
+    // ignore: unnecessary_null_comparison
     if (match == null) return str;
     Map toReplace = {};
     match.forEach((e) {
@@ -177,11 +178,11 @@ class PostBuilder extends StatelessWidget {
           String _str = _value;
           final match = RegExp(r'(\[\[[a-z]+\]\])([\w\W]+)').firstMatch(_str);
           var _alignment = Alignment.centerLeft;
-          String _atribute;
+          String _atribute = "";
 
           if (match != null) {
-            _atribute = match.group(1);
-            _str = match.group(2);
+            _atribute = match.group(1)!;
+            _str = match.group(2)!;
           }
           if (_atribute == '[[center]]') {
             _alignment = Alignment.center;
@@ -200,7 +201,7 @@ class PostBuilder extends StatelessWidget {
                 blockSpacing: 10,
               ),
               onTapLink: (text, link, title) {
-                if (link.startsWith('http')) {
+                if (link!.startsWith('http')) {
                   js.context.callMethod('open', [link]);
                 } else {
                   controller.scrollToIndex(
@@ -220,10 +221,10 @@ class PostBuilder extends StatelessWidget {
           String _path = _value;
           final _match = RegExp(r'(\[[a-z]+\])([\w\W]+)').firstMatch(_path);
           var _alignment = Alignment.center;
-          String _atribute;
+          String _atribute = "";
           if (_match != null) {
-            _atribute = _match.group(1);
-            _path = _match.group(2);
+            _atribute = _match.group(1)!;
+            _path = _match.group(2)!;
           }
           if (_atribute == '[left]') {
             _alignment = Alignment.centerLeft;
@@ -263,7 +264,7 @@ class PostBuilder extends StatelessWidget {
             }).toList();
             numRow++;
             return TableRow(
-              children: _tableCells,
+              children: _tableCells as List<Widget>,
             );
           }).toList();
 
@@ -275,7 +276,7 @@ class PostBuilder extends StatelessWidget {
                 width: 1.0,
                 color: Colors.grey,
               ),
-              children: _tableRows,
+              children: _tableRows as List<TableRow>,
             ),
           );
           if (_widgetIdx == 0) return _child;
@@ -294,7 +295,7 @@ class PostBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     if (snapshot.data() == null) return TemplateBasic(SomethingWentWrong());
     final _screenSize = MediaQuery.of(context).size;
-    final _extracted = extractBody(snapshot.data()['body']);
+    final _extracted = extractBody(snapshot.data()!['body']);
     final _decoded = decodeBody(_extracted, context);
 
     return Scaffold(
@@ -308,10 +309,11 @@ class PostBuilder extends StatelessWidget {
         children: <Widget>[
           VsScrollbar(
             controller: controller,
-            allowDrag: true,
-            color: Theme.of(context).accentColor.withOpacity(0.4),
-            radius: scrollBarRadius,
-            thickness: scrollBarThickness,
+            style: VsScrollbarStyle(
+              color: Theme.of(context).accentColor.withOpacity(0.4),
+              radius: Radius.circular(scrollBarRadius),
+              thickness: scrollBarThickness,
+            ),
             isAlwaysShown: false,
             child: SingleChildScrollView(
               controller: controller,

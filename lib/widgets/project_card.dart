@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -8,11 +7,11 @@ class ProjectCard extends StatefulWidget {
   final ImageProvider imageProvider;
   final String title;
   final String description;
-  final Widget firstButton;
-  final Widget secondButton;
+  final Widget? firstButton;
+  final Widget? secondButton;
 
   ProjectCard({
-    @required this.imageProvider,
+    required this.imageProvider,
     this.title = '',
     this.description = '',
     this.firstButton,
@@ -23,11 +22,11 @@ class ProjectCard extends StatefulWidget {
 }
 
 class _ProjectCardState extends State<ProjectCard> {
-  Widget _image;
-  Widget _hoverImage;
-  Widget _secondWidget;
-  Widget _firstAnimatedWidget;
-  Widget _secondAnimatedWidget;
+  late Widget _image;
+  late Widget _hoverImage;
+  late Widget _secondWidget;
+  Widget? _firstAnimatedWidget;
+  Widget? _secondAnimatedWidget;
 
   @override
   void initState() {
@@ -136,7 +135,7 @@ class _ProjectCardState extends State<ProjectCard> {
           ),
         ),
         SizedBox(
-          width: _width,
+          width: _width as double,
           height: _width * 0.6,
           child: isDesktop()
               ? MouseRegion(

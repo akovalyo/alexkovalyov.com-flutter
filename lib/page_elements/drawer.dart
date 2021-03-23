@@ -11,7 +11,7 @@ import 'package:mysite/widgets/choice_chip.dart';
 import 'package:mysite/widgets/account_menu.dart';
 
 class AkDrawer extends StatelessWidget {
-  final AutoScrollController controller;
+  final AutoScrollController? controller;
 
   AkDrawer({this.controller});
 
@@ -51,13 +51,13 @@ class AkDrawer extends StatelessWidget {
                           if (homePage.contains(_currRoot) &&
                               controller != null) {
                             FocusScope.of(context).unfocus();
-                            controller.animateTo(
+                            controller!.animateTo(
                               0,
                               duration: Duration(seconds: 1),
                               curve: Curves.fastOutSlowIn,
                             );
                           } else {
-                            navKey.currentState.pushNamed(routeHome);
+                            navKey.currentState!.pushNamed(routeHome);
                           }
                           Scaffold.of(context).openEndDrawer();
                         },
@@ -74,7 +74,7 @@ class AkDrawer extends StatelessWidget {
               child: Padding(
                   padding: const EdgeInsets.only(top: 25),
                   child: AkMenu(
-                    controller: controller,
+                    controller: controller == null ? null : controller,
                     fontSize: 18.0,
                     isColumn: true,
                   )),
@@ -92,13 +92,13 @@ class AkDrawer extends StatelessWidget {
               child: Text('Select Theme',
                   style: Theme.of(context)
                       .textTheme
-                      .headline5
+                      .headline5!
                       .copyWith(color: Theme.of(context).secondaryHeaderColor)),
             ),
             Container(
               alignment: Alignment.center,
               child: ThemeChoiceChip(onSelectedTheme: (brightness) {
-                DynamicTheme.of(context).setBrightness(brightness);
+                DynamicTheme.of(context)!.setBrightness(brightness);
               }),
             ),
           ],

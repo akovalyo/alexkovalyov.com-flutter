@@ -15,7 +15,7 @@ import 'package:mysite/widgets/scroll_upward.dart';
 import 'package:mysite/page_elements/contact.dart';
 
 class HomePage extends StatefulWidget {
-  final String path;
+  final String? path;
   HomePage(this.path);
 
   @override
@@ -23,7 +23,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  AutoScrollController _scrollController;
+  late AutoScrollController _scrollController;
 
   @override
   void initState() {
@@ -104,10 +104,11 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             VsScrollbar(
               controller: _scrollController,
-              allowDrag: true,
-              color: Theme.of(context).accentColor.withOpacity(0.4),
-              radius: scrollBarRadius,
-              thickness: scrollBarThickness,
+              style: VsScrollbarStyle(
+                color: Theme.of(context).accentColor.withOpacity(0.4),
+                thickness: scrollBarThickness,
+                radius: Radius.circular(scrollBarRadius),
+              ),
               isAlwaysShown: false,
               child: SingleChildScrollView(
                 physics: ClampingScrollPhysics(),

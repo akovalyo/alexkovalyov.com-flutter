@@ -14,10 +14,10 @@ class PostElementContainer extends StatelessWidget {
   final Alignment alignment;
 
   PostElementContainer({
-    this.child,
+    required this.child,
     this.vertPadding = 0,
     this.horPadding = 0,
-    this.background,
+    this.background = Colors.white,
     this.alignment = Alignment.centerLeft,
   });
 
@@ -44,11 +44,11 @@ class PostPage extends StatefulWidget {
 }
 
 class _PostPageState extends State<PostPage> {
-  AutoScrollController _controller;
+  late AutoScrollController _controller;
   var _isLoading = false;
-  Map<String, dynamic> _postData;
-  CollectionReference _bodyRef;
-  DocumentSnapshot _snapshot;
+  late Map<String, dynamic> _postData;
+  late CollectionReference _bodyRef;
+  late DocumentSnapshot _snapshot;
 
   void _loadPostBody() async {
     try {
@@ -73,8 +73,8 @@ class _PostPageState extends State<PostPage> {
         viewportBoundaryGetter: () =>
             Rect.fromLTRB(0, 0, 0, MediaQuery.of(context).padding.bottom),
         axis: Axis.vertical);
-    _postData =
-        Provider.of<PostsModel>(context, listen: false).postsMap[widget.path];
+    _postData = Provider.of<PostsModel>(context, listen: false)
+        .postsMap![widget.path] as Map<String, dynamic>;
     _bodyRef =
         FirebaseFirestore.instance.collection('posts/${_postData['id']}/body');
     _loadPostBody();

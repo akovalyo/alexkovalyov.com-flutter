@@ -7,17 +7,17 @@ class OverlayMenu extends StatefulWidget {
   final List links;
   final BorderRadius borderRadius;
   final Color backgroundColor;
-  final Color iconColor;
-  final Color buttonColor;
+  final Color? iconColor;
+  final Color? buttonColor;
   final ValueChanged<int> onChange;
 
   const OverlayMenu({
-    @required this.links,
-    this.borderRadius,
-    this.backgroundColor,
+    required this.links,
+    required this.borderRadius,
+    required this.backgroundColor,
     this.iconColor,
     this.buttonColor,
-    this.onChange,
+    required this.onChange,
   });
   @override
   _OverlayMenuState createState() => _OverlayMenuState();
@@ -25,13 +25,13 @@ class OverlayMenu extends StatefulWidget {
 
 class _OverlayMenuState extends State<OverlayMenu>
     with SingleTickerProviderStateMixin {
-  GlobalKey _key;
+  late GlobalKey _key;
   bool _isMenuOpen = false;
-  Offset _buttonPosition;
-  Size _buttonSize;
-  OverlayEntry _overlayEntry;
-  BorderRadius _borderRadius;
-  AnimationController _animationController;
+  late Offset _buttonPosition;
+  late Size _buttonSize;
+  late OverlayEntry _overlayEntry;
+  late BorderRadius _borderRadius;
+  late AnimationController _animationController;
 
   @override
   void initState() {
@@ -41,7 +41,7 @@ class _OverlayMenuState extends State<OverlayMenu>
       duration: Duration(milliseconds: 300),
       reverseDuration: Duration(milliseconds: 300),
     );
-    _borderRadius = widget.borderRadius ?? BorderRadius.circular(4);
+    _borderRadius = widget.borderRadius;
     _key = LabeledGlobalKey("button_icon");
   }
 
@@ -52,22 +52,20 @@ class _OverlayMenuState extends State<OverlayMenu>
   }
 
   findButton() {
-    RenderBox renderBox = _key.currentContext.findRenderObject();
+    RenderBox renderBox = _key.currentContext!.findRenderObject() as RenderBox;
     _buttonSize = Size(60, 40);
     _buttonPosition = renderBox.localToGlobal(Offset(-20, 0));
   }
 
   void closeMenu() {
     _overlayEntry.remove();
-    _animationController.reverse();
     _isMenuOpen = !_isMenuOpen;
   }
 
   void openMenu() {
     findButton();
-    _animationController.forward();
     _overlayEntry = _overlayEntryBuilder();
-    navKey.currentState.overlay.insert(_overlayEntry);
+    navKey.currentState!.overlay!.insert(_overlayEntry);
     _isMenuOpen = !_isMenuOpen;
   }
 
@@ -88,12 +86,18 @@ class _OverlayMenuState extends State<OverlayMenu>
             openMenu();
           }
         },
-        startIcon: Icon(
-          Icons.more_vert,
-        ),
-        endIcon: Icon(
-          Icons.close,
-        ),
+        icons: [
+          AnimatedIconItem(
+            icon: Icon(
+              Icons.more_vert,
+            ),
+          ),
+          AnimatedIconItem(
+            icon: Icon(
+              Icons.close,
+            ),
+          ),
+        ],
       ),
     );
   }
