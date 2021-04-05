@@ -29,13 +29,13 @@ class HoverIconButton extends StatelessWidget {
           child: Image(
             image: imageProvider,
           ),
-          colorFilter: ColorFilter.mode(firstColor, BlendMode.src),
+          colorFilter: ColorFilter.mode(firstColor, BlendMode.srcATop),
         ),
         secondChild: ColorFiltered(
           child: Image(
             image: imageProvider,
           ),
-          colorFilter: ColorFilter.mode(secondColor, BlendMode.src),
+          colorFilter: ColorFilter.mode(secondColor, BlendMode.srcATop),
         ),
         duration: duration,
         firstCurve: curve,
