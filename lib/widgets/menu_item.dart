@@ -25,9 +25,7 @@ class MenuItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: column
-          ? isDesktop()
-              ? EdgeInsets.symmetric(vertical: 10)
-              : EdgeInsets.symmetric(vertical: 2)
+          ? EdgeInsets.symmetric(vertical: 6)
           : const EdgeInsets.only(right: 25),
       child: HoverButton(
         height: 1,

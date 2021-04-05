@@ -28,50 +28,30 @@ class AkButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return isDesktop()
-        ? Padding(
-            padding: padding,
-            child: HoverButton(
-              color: backgroundColor,
-              height: height,
-              minWidth: minWidth,
-              child: child,
-              hoverColor: Color(0x00000000),
-              textColor: color,
-              hoverTextColor: hoverColor,
-              shape: RoundedRectangleBorder(
-                  side: BorderSide(
-                    width: borderWidth,
-                    color: color,
-                  ),
-                  borderRadius: BorderRadius.all(Radius.elliptical(15, 15))),
-              hoverShape: RoundedRectangleBorder(
-                  side: BorderSide(
-                    width: borderWidth,
-                    color: hoverColor,
-                  ),
-                  borderRadius: BorderRadius.all(Radius.elliptical(15, 15))),
-              onpressed: onPressed,
+    return Padding(
+      padding: padding,
+      child: HoverButton(
+        color: backgroundColor,
+        height: height,
+        minWidth: minWidth,
+        child: child,
+        hoverColor: Color(0x00000000),
+        textColor: color,
+        hoverTextColor: hoverColor,
+        shape: RoundedRectangleBorder(
+            side: BorderSide(
+              width: borderWidth,
+              color: color,
             ),
-          )
-        : Padding(
-            padding: padding,
-            child: FlatButton(
-              color: backgroundColor,
-              height: height,
-              minWidth: minWidth,
-              textColor: color,
-              onPressed: onPressed,
-              hoverColor: hoverColor.withOpacity(0.5),
-              splashColor: hoverColor,
-              child: child,
-              shape: RoundedRectangleBorder(
-                  side: BorderSide(
-                    width: borderWidth,
-                    color: color,
-                  ),
-                  borderRadius: BorderRadius.all(Radius.elliptical(15, 15))),
+            borderRadius: BorderRadius.all(Radius.elliptical(15, 15))),
+        hoverShape: RoundedRectangleBorder(
+            side: BorderSide(
+              width: borderWidth,
+              color: hoverColor,
             ),
-          );
+            borderRadius: BorderRadius.all(Radius.elliptical(15, 15))),
+        onpressed: onPressed,
+      ),
+    );
   }
 }

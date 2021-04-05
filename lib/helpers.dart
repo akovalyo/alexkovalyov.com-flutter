@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:universal_io/io.dart';
 import 'package:mysite/consts/routes.dart';
 
 bool isSmallScreen(BuildContext context) {
@@ -16,12 +15,12 @@ String? currentRoot() {
   return curr;
 }
 
-bool isDesktop() {
-  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-    return true;
-  }
-  return false;
-}
+// bool isDesktop() {
+//   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+//     return true;
+//   }
+//   return false;
+// }
 
 // Size screenSize(BuildContext context) {
 //   return MediaQuery.of(context).size;

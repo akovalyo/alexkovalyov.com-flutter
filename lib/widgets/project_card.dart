@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import 'package:mysite/helpers.dart';
-
 class ProjectCard extends StatefulWidget {
   final ImageProvider imageProvider;
   final String title;
@@ -137,16 +135,13 @@ class _ProjectCardState extends State<ProjectCard> {
         SizedBox(
           width: _width as double,
           height: _width * 0.6,
-          child: isDesktop()
-              ? MouseRegion(
-                  onEnter: _onEnter,
-                  onExit: _onExit,
-                  child: _child,
-                )
-              : GestureDetector(
-                  onTap: _onTap,
-                  child: _child,
-                ),
+          child: MouseRegion(
+              onEnter: _onEnter,
+              onExit: _onExit,
+              child: GestureDetector(
+                onTap: _onTap,
+                child: _child,
+              )),
         ),
       ],
     );
