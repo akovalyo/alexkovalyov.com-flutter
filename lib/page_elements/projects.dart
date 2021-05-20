@@ -38,6 +38,7 @@ class Projects extends StatelessWidget {
                 imageProvider:
                     AssetImage('assets/images/projects/project_1.png'),
                 title: 'Flutter Web',
+                label: 'web',
                 description: 'This website is built in Flutter',
                 firstButton: ProjectButton(
                   link: 'https://github.com/akovalyo/alexkovalyov.com-flutter',
@@ -48,6 +49,7 @@ class Projects extends StatelessWidget {
                 imageProvider:
                     AssetImage('assets/images/projects/project_minishell.png'),
                 title: 'Minimalistic shell',
+                label: 'C',
                 description: 'Recreating a real shell in C',
                 firstButton: ProjectButton(
                   link: routeProjectMinishell,
@@ -61,6 +63,7 @@ class Projects extends StatelessWidget {
               ProjectCard(
                 imageProvider: AssetImage('assets/images/blood/blood.png'),
                 title: 'AI Project',
+                label: 'ML',
                 description:
                     'Identifying white blood cells using CNN with Pytorch',
                 firstButton: ProjectButton(

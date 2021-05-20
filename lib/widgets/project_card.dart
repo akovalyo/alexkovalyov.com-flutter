@@ -1,10 +1,36 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+
+class TrapeziumPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    var paint = Paint();
+    paint.color = Colors.yellow;
+    paint.style = PaintingStyle.fill;
+
+    var path = Path();
+    path.moveTo(40, 0);
+    path.lineTo(80, 0);
+    path.lineTo(0, 80);
+    path.lineTo(0, 40);
+    path.lineTo(40, 0);
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return true;
+  }
+}
 
 class ProjectCard extends StatefulWidget {
   final ImageProvider imageProvider;
   final String title;
   final String description;
+  final String label;
   final Widget? firstButton;
   final Widget? secondButton;
 
@@ -12,6 +38,7 @@ class ProjectCard extends StatefulWidget {
     required this.imageProvider,
     this.title = '',
     this.description = '',
+    this.label = '',
     this.firstButton,
     this.secondButton,
   });
@@ -21,7 +48,8 @@ class ProjectCard extends StatefulWidget {
 
 class _ProjectCardState extends State<ProjectCard> {
   late Widget _image;
-  late Widget _hoverImage;
+  late Widget _hoverWidget;
+  late Widget _firstWidget;
   late Widget _secondWidget;
   Widget? _firstAnimatedWidget;
   Widget? _secondAnimatedWidget;
@@ -30,9 +58,30 @@ class _ProjectCardState extends State<ProjectCard> {
   void initState() {
     super.initState();
     _image = Image(fit: BoxFit.fitHeight, image: widget.imageProvider);
-    _hoverImage = Opacity(
+
+    _firstWidget = Stack(children: [
+      _image,
+      Container(
+        child: CustomPaint(
+          painter: TrapeziumPainter(),
+        ),
+      ),
+      Container(
+        transform: Matrix4.translationValues(-15.0, 50.0, 0)
+          ..rotateZ(-math.pi / 4),
+        width: 80,
+        height: 30,
+        child: Text(
+          widget.label,
+          textAlign: TextAlign.center,
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ),
+    ]);
+
+    _hoverWidget = Opacity(
       opacity: 0.35,
-      child: _image,
+      child: _firstWidget,
     );
 
     _secondWidget = Column(
@@ -66,19 +115,19 @@ class _ProjectCardState extends State<ProjectCard> {
       ],
     );
 
-    _firstAnimatedWidget = _image;
+    _firstAnimatedWidget = _firstWidget;
   }
 
   void _onEnter(PointerEvent details) {
     setState(() {
-      _firstAnimatedWidget = _hoverImage;
+      _firstAnimatedWidget = _hoverWidget;
       _secondAnimatedWidget = _secondWidget;
     });
   }
 
   void _onExit(PointerEvent details) {
     setState(() {
-      _firstAnimatedWidget = _image;
+      _firstAnimatedWidget = _firstWidget;
       _secondAnimatedWidget = null;
     });
   }
@@ -86,12 +135,12 @@ class _ProjectCardState extends State<ProjectCard> {
   void _onTap() {
     if (_secondAnimatedWidget == null) {
       setState(() {
-        _firstAnimatedWidget = _hoverImage;
+        _firstAnimatedWidget = _hoverWidget;
         _secondAnimatedWidget = _secondWidget;
       });
     } else {
       setState(() {
-        _firstAnimatedWidget = _image;
+        _firstAnimatedWidget = _firstWidget;
         _secondAnimatedWidget = null;
       });
     }
