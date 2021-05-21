@@ -94,7 +94,7 @@ class _ProjectCardState extends State<ProjectCard> {
                 const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
             child: Text(
               widget.description,
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               softWrap: true,
               overflow: TextOverflow.clip,
             ),

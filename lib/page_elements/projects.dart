@@ -36,6 +36,31 @@ class Projects extends StatelessWidget {
             children: [
               ProjectCard(
                 imageProvider:
+                    AssetImage('assets/images/projects/css_tree.png'),
+                label: 'css',
+                title: 'Css image',
+                description: 'Css image with animation',
+                firstButton: ProjectButton(
+                  title: 'Live',
+                  link: 'https://codepen.io/akovalyo/full/WNporeY',
+                ),
+              ),
+              ProjectCard(
+                imageProvider:
+                    AssetImage('assets/images/projects/instaharvest.png'),
+                title: 'InstaHarvest',
+                label: 'web',
+                description: 'Place to find local grown fruits and vegetables',
+                firstButton: ProjectButton(
+                  title: 'Site',
+                  link: 'https://instaharvest.net',
+                ),
+                secondButton: ProjectButton(
+                    title: 'Code',
+                    link: 'https://github.com/akovalyo/instaHarvest'),
+              ),
+              ProjectCard(
+                imageProvider:
                     AssetImage('assets/images/projects/project_1.png'),
                 title: 'Flutter Web',
                 label: 'web',
