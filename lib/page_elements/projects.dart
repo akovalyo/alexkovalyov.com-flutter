@@ -48,7 +48,7 @@ class Projects extends StatelessWidget {
               ProjectCard(
                 imageProvider:
                     AssetImage('assets/images/projects/instaharvest.png'),
-                title: 'InstaHarvest',
+                title: 'React + Flask website',
                 label: 'web',
                 description: 'Place to find local grown fruits and vegetables',
                 firstButton: ProjectButton(
