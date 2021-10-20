@@ -63,7 +63,7 @@ class AkDrawer extends StatelessWidget {
                         },
                         imageProvider: AssetImage('assets/images/main/akM.png'),
                         firstColor: Theme.of(context).secondaryHeaderColor,
-                        secondColor: Theme.of(context).accentColor,
+                        secondColor: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                   ),

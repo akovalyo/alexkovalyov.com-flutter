@@ -197,7 +197,7 @@ class PostBuilder extends StatelessWidget {
                 em: TextStyle(height: 1.5, fontSize: 18),
                 a: TextStyle(
                     decoration: TextDecoration.underline,
-                    color: Theme.of(ctx).accentColor),
+                    color: Theme.of(ctx).colorScheme.secondary),
                 blockSpacing: 10,
               ),
               onTapLink: (text, link, title) {
@@ -310,7 +310,7 @@ class PostBuilder extends StatelessWidget {
           VsScrollbar(
             controller: controller,
             style: VsScrollbarStyle(
-              color: Theme.of(context).accentColor.withOpacity(0.4),
+              color: Theme.of(context).colorScheme.secondary.withOpacity(0.4),
               radius: Radius.circular(scrollBarRadius),
               thickness: scrollBarThickness,
             ),

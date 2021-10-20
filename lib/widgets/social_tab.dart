@@ -21,7 +21,7 @@ class SocialTab extends StatelessWidget {
             imageProvider: NetworkImage(
                 'https://img.icons8.com/ios-filled/48/000000/github.png'),
             firstColor: Theme.of(context).secondaryHeaderColor,
-            secondColor: Theme.of(context).accentColor,
+            secondColor: Theme.of(context).colorScheme.secondary,
             duration: Duration(milliseconds: 200),
           ),
         ),
@@ -34,7 +34,7 @@ class SocialTab extends StatelessWidget {
             imageProvider: NetworkImage(
                 'https://img.icons8.com/ios-filled/48/000000/linkedin.png'),
             firstColor: Theme.of(context).secondaryHeaderColor,
-            secondColor: Theme.of(context).accentColor,
+            secondColor: Theme.of(context).colorScheme.secondary,
             duration: Duration(milliseconds: 200),
           ),
         ),
@@ -47,7 +47,7 @@ class SocialTab extends StatelessWidget {
             imageProvider: NetworkImage(
                 'https://img.icons8.com/ios-filled/48/000000/twitter.png'),
             firstColor: Theme.of(context).secondaryHeaderColor,
-            secondColor: Theme.of(context).accentColor,
+            secondColor: Theme.of(context).colorScheme.secondary,
             duration: Duration(milliseconds: 200),
           ),
         ),
@@ -60,7 +60,7 @@ class SocialTab extends StatelessWidget {
             imageProvider: NetworkImage(
                 'https://img.icons8.com/ios-filled/48/000000/instagram.png'),
             firstColor: Theme.of(context).secondaryHeaderColor,
-            secondColor: Theme.of(context).accentColor,
+            secondColor: Theme.of(context).colorScheme.secondary,
             duration: Duration(milliseconds: 200),
           ),
         ),

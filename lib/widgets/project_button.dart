@@ -27,7 +27,7 @@ class ProjectButton extends StatelessWidget {
       borderWidth: 0,
       backgroundColor: Theme.of(context).primaryColor,
       color: Theme.of(context).secondaryHeaderColor,
-      hoverColor: Theme.of(context).accentColor,
+      hoverColor: Theme.of(context).colorScheme.secondary,
       padding: const EdgeInsets.symmetric(vertical: 20),
     );
   }

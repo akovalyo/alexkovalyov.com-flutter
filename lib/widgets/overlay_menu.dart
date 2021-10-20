@@ -90,11 +90,13 @@ class _OverlayMenuState extends State<OverlayMenu>
           AnimatedIconItem(
             icon: Icon(
               Icons.more_vert,
+              color: Theme.of(context).secondaryHeaderColor,
             ),
           ),
           AnimatedIconItem(
             icon: Icon(
               Icons.close,
+              color: Theme.of(context).secondaryHeaderColor,
             ),
           ),
         ],

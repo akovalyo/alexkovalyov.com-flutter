@@ -5,14 +5,12 @@ import 'package:mysite/consts/colors.dart';
 ThemeData akTheme(Brightness brightness, String? theme) {
   if (theme == '2077') {
     return ThemeData.light().copyWith(
-      buttonColor: Colors.black,
       brightness: brightness,
       primaryColor: akBlackL,
       secondaryHeaderColor: cp2077,
       primaryColorDark: akBlackLAcc,
       backgroundColor: cp2077,
       errorColor: akAlertL,
-      accentColor: cpBlue,
       splashColor: Color(0x00000000),
       highlightColor: Color(0x00000000),
       hoverColor: Color(0x00000000),
@@ -66,20 +64,22 @@ ThemeData akTheme(Brightness brightness, String? theme) {
       iconTheme: _akIconTheme(ThemeData.light().iconTheme, cpBlue),
       buttonTheme: const ButtonThemeData(
         textTheme: ButtonTextTheme.primary,
+        buttonColor: Colors.black,
       ),
+      colorScheme: ThemeData.light().colorScheme.copyWith(
+            secondary: cpBlue,
+          ),
     );
   }
 
   return brightness == Brightness.light
       ? ThemeData.light().copyWith(
           brightness: brightness,
-          buttonColor: Colors.white,
           primaryColor: akBlackL,
           primaryColorDark: akBlackLAcc,
           secondaryHeaderColor: Colors.white,
           backgroundColor: Colors.white,
           errorColor: akAlertL,
-          accentColor: akAccentL,
           splashColor: Color(0x00000000),
           highlightColor: Color(0x00000000),
           hoverColor: Color(0x00000000),
@@ -137,16 +137,17 @@ ThemeData akTheme(Brightness brightness, String? theme) {
             textTheme: ButtonTextTheme.primary,
             buttonColor: akBlackL,
           ),
+          colorScheme: ThemeData.light().colorScheme.copyWith(
+                secondary: akAccentL,
+              ),
         )
       : ThemeData.dark().copyWith(
           brightness: brightness,
-          buttonColor: Colors.white,
           primaryColor: akBlackD,
           primaryColorDark: akBlackDAcc,
           backgroundColor: akBackD,
           secondaryHeaderColor: akHeadlineD,
           errorColor: akAlertD,
-          accentColor: akAccentD,
           splashColor: Color(0x00000000),
           highlightColor: Color(0x00000000),
           hoverColor: Color(0x00000000),
@@ -209,6 +210,9 @@ ThemeData akTheme(Brightness brightness, String? theme) {
             focusColor: Color(0x00000000),
             textTheme: ButtonTextTheme.primary,
           ),
+          colorScheme: ThemeData.light().colorScheme.copyWith(
+                secondary: akAccentD,
+              ),
         );
 }
 

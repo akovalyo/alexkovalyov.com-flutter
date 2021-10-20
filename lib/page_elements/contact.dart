@@ -105,7 +105,7 @@ class _ContactState extends State<Contact> {
                       TextFormField(
                         key: ValueKey('Email'),
                         keyboardType: TextInputType.emailAddress,
-                        cursorColor: Theme.of(context).accentColor,
+                        cursorColor: Theme.of(context).colorScheme.secondary,
                         style: Theme.of(context).textTheme.bodyText1,
                         decoration: InputDecoration(
                           labelText: 'Email',
@@ -123,7 +123,7 @@ class _ContactState extends State<Contact> {
                       ),
                       TextFormField(
                         key: ValueKey('Message'),
-                        cursorColor: Theme.of(context).accentColor,
+                        cursorColor: Theme.of(context).colorScheme.secondary,
                         style: Theme.of(context).textTheme.bodyText1,
                         minLines: 3,
                         maxLines: 3,

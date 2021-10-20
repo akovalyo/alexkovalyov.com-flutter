@@ -111,7 +111,8 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                 ),
                                 TextFormField(
-                                  cursorColor: Theme.of(context).accentColor,
+                                  cursorColor:
+                                      Theme.of(context).colorScheme.secondary,
                                   keyboardType: TextInputType.emailAddress,
                                   style: Theme.of(context).textTheme.bodyText1,
                                   decoration: InputDecoration(
@@ -130,7 +131,8 @@ class _LoginPageState extends State<LoginPage> {
                                   },
                                 ),
                                 TextFormField(
-                                  cursorColor: Theme.of(context).accentColor,
+                                  cursorColor:
+                                      Theme.of(context).colorScheme.secondary,
                                   style: Theme.of(context).textTheme.bodyText1,
                                   decoration: InputDecoration(
                                     labelText: 'Password',

@@ -64,7 +64,7 @@ class Header extends StatelessWidget {
                     backgroundColor: Color(0x00000000),
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     color: Theme.of(context).secondaryHeaderColor,
-                    hoverColor: Theme.of(context).accentColor,
+                    hoverColor: Theme.of(context).colorScheme.secondary,
                     onPressed: () {
                       controller.scrollToIndex(
                         homeWidgets[projects],
@@ -81,7 +81,7 @@ class Header extends StatelessWidget {
                     backgroundColor: Color(0x00000000),
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     color: Theme.of(context).secondaryHeaderColor,
-                    hoverColor: Theme.of(context).accentColor,
+                    hoverColor: Theme.of(context).colorScheme.secondary,
                     onPressed: () {
                       controller.scrollToIndex(
                         homeWidgets[blog],
@@ -98,7 +98,7 @@ class Header extends StatelessWidget {
                     backgroundColor: Color(0x00000000),
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     color: Theme.of(context).secondaryHeaderColor,
-                    hoverColor: Theme.of(context).accentColor,
+                    hoverColor: Theme.of(context).colorScheme.secondary,
                     onPressed: () {
                       controller.scrollToIndex(
                         homeWidgets[contact],

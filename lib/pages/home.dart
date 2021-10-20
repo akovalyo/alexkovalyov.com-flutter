@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage> {
             VsScrollbar(
               controller: _scrollController,
               style: VsScrollbarStyle(
-                color: Theme.of(context).accentColor.withOpacity(0.4),
+                color: Theme.of(context).colorScheme.secondary.withOpacity(0.4),
                 thickness: scrollBarThickness,
                 radius: Radius.circular(scrollBarRadius),
               ),

@@ -57,7 +57,7 @@ class _ThemeChoiceChipState extends State<ThemeChoiceChip> {
             labelStyle:
                 TextStyle(color: Theme.of(context).secondaryHeaderColor),
             backgroundColor: Color(0x00000000),
-            selectedColor: Theme.of(context).accentColor,
+            selectedColor: Theme.of(context).colorScheme.secondary,
             selected: _theme == 1,
             onSelected: (_) {
               widget.onSelectedTheme(Brightness.dark);
@@ -74,7 +74,8 @@ class _ThemeChoiceChipState extends State<ThemeChoiceChip> {
           label: Text(
             '2077',
           ),
-          labelStyle: TextStyle(color: Theme.of(context).buttonColor),
+          labelStyle:
+              TextStyle(color: _theme == 2 ? Colors.black : Colors.white),
           backgroundColor: Color(0x00000000),
           selectedColor: cp2077,
           selected: _theme == 2,

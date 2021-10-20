@@ -59,6 +59,7 @@ class _AkAppBarState extends State<AkAppBar> {
   @override
   Widget build(BuildContext context) {
     final _leadingMenuButton = IconButton(
+      color: Theme.of(context).secondaryHeaderColor,
       icon: const Icon(Icons.menu),
       onPressed: () {
         Scaffold.of(context).openDrawer();
@@ -95,7 +96,7 @@ class _AkAppBarState extends State<AkAppBar> {
         },
         imageProvider: AssetImage('assets/images/main/akM.png'),
         firstColor: Theme.of(context).secondaryHeaderColor,
-        secondColor: Theme.of(context).accentColor,
+        secondColor: Theme.of(context).colorScheme.secondary,
       ),
     );
 
@@ -131,7 +132,7 @@ class _AkAppBarState extends State<AkAppBar> {
                           elem['title'] as String,
                           style: TextStyle(
                             fontSize: 16,
-                            color: Theme.of(context).accentColor,
+                            color: Theme.of(context).colorScheme.secondary,
                           ),
                         ),
                         duration: Duration(milliseconds: 200),
