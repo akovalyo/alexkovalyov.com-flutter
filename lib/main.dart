@@ -22,12 +22,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     appState.firebaseInit();
-    appState.loadDb();
+    appState.loadPosts();
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => PostsModel(null), //TODO
-        ),
+        ChangeNotifierProvider.value(value: appState),
+        // ChangeNotifierProvider(
+        //   create: (_) => PostsModel(null), //TODO
+        // ),
       ],
       child: DynamicTheme(
         defaultBrightness: Brightness.light,
