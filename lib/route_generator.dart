@@ -2,17 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:mysite/consts/routes.dart';
-import 'package:mysite/models/posts_model.dart';
+import 'appState.dart';
 import 'package:mysite/pages/post_page.dart';
 import 'package:mysite/pages/page404.dart';
 import 'package:mysite/pages/template_basic.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
-  final _postsModel =
-      Provider.of<PostsModel>(navKey.currentState!.context, listen: false);
-  if (_postsModel.postExist(settings.name!)) {
+  final appState =
+      Provider.of<AppState>(navKey.currentState!.context, listen: false);
+
+  String path = settings.name ?? '';
+  if (appState.postExists(path)) {
+    print(settings.name);
     return _getPageRoute(
-      PostPage(settings.name!),
+      PostPage(appState.getPostByPath(path)),
       settings,
     );
   }

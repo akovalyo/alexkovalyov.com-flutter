@@ -39,9 +39,12 @@ class AppState with ChangeNotifier {
 
   bool postExists(String path) {
     try {
+      print(_posts.length);
       _posts.firstWhere((p) => p.path == path);
+      print('TRUE');
       return true;
     } catch (e) {
+      print('FALSE');
       return false;
     }
   }
