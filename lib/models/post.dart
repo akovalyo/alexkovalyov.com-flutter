@@ -69,12 +69,16 @@ class Post {
     return str;
   }
 
-  Future<List<Widget>> decodeBody(
-      BuildContext ctx, AutoScrollController controller) async {
-    final CollectionReference bodyRef =
-        FirebaseFirestore.instance.collection('posts/${this.postId}/body');
-    final DocumentSnapshot snapshot = await bodyRef.doc('0').get();
-    if (snapshot.data() == null) return Future.value(<Widget>[]);
+  // Future<DocumentSnapshot> loadBody() async {
+  //   final CollectionReference bodyRef =
+  //       FirebaseFirestore.instance.collection('posts/${this.postId}/body');
+  //   final DocumentSnapshot snapshot = await bodyRef.doc('0').get();
+  //   return snapshot;
+  // }
+
+  List<Widget> decodeBody(BuildContext ctx, AutoScrollController controller,
+      DocumentSnapshot snapshot) {
+    if (snapshot.data() == null) return <Widget>[];
     final List<Map> extractedBody = _extractBody(snapshot.data()?['body']);
 
     final List<Widget> listWidget = extractedBody.map((m) {
@@ -305,6 +309,6 @@ class Post {
       }
     }).toList();
 
-    return Future.value(listWidget);
+    return listWidget;
   }
 }

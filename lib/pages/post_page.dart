@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:vs_scrollbar/vs_scrollbar.dart';
@@ -20,14 +21,23 @@ class PostPage extends StatefulWidget {
 }
 
 class _PostPageState extends State<PostPage> {
-  late AutoScrollController controller;
+  late final AutoScrollController controller;
   bool isLoading = true;
   List<Widget> decodedBody = <Widget>[];
+  late DocumentSnapshot snapshot;
 
-  void decodePostBody(
-      BuildContext context, AutoScrollController controller) async {
+  void loadPostBody() async {
+    final CollectionReference bodyRef = FirebaseFirestore.instance
+        .collection('posts/${widget.post.postId}/body');
+    final DocumentSnapshot loadBody = await bodyRef.doc('0').get();
+    setState(() {
+      snapshot = loadBody;
+    });
+  }
+
+  void decodePostBody(BuildContext context, AutoScrollController controller) {
     try {
-      decodedBody = await widget.post.decodeBody(context, controller);
+      decodedBody = widget.post.decodeBody(context, controller, snapshot);
     } catch (err) {}
     setState(() {
       isLoading = false;
@@ -37,17 +47,21 @@ class _PostPageState extends State<PostPage> {
   @override
   void initState() {
     super.initState();
+
     controller = AutoScrollController(
+        debugLabel: 'PostPage Controller',
         viewportBoundaryGetter: () =>
             Rect.fromLTRB(0, 0, 0, MediaQuery.of(context).padding.bottom),
         axis: Axis.vertical);
+    loadPostBody();
   }
 
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  //   controller.dispose();
-  // }
+  @override
+  void dispose() {
+    super.dispose();
+    print('Dispose: ${controller.debugLabel}');
+    controller.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
