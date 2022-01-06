@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:url_strategy/url_strategy.dart';
 
-import 'package:mysite/appState.dart';
-import 'package:mysite/theme/theme.dart';
-import 'package:mysite/theme/dynamic_theme.dart';
-import 'package:mysite/consts/routes.dart';
-import 'package:mysite/route_generator.dart';
+import 'appState.dart';
+import 'theme/theme.dart';
+import 'theme/dynamic_theme.dart';
+import 'navigation/routes.dart';
+import 'navigation/route_generator.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  setPathUrlStrategy();
+  final AppState appState = AppState();
+  await appState.firebaseInit();
+  await appState.loadPosts();
+  runApp(MyApp(appState));
 }
 
 class MyApp extends StatelessWidget {
-  final AppState appState = AppState();
+  final AppState appState;
+  MyApp(this.appState);
 
   @override
   Widget build(BuildContext context) {
-    appState.firebaseInit();
-    appState.loadPosts();
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: appState),

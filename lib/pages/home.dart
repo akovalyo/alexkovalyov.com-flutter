@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:vs_scrollbar/vs_scrollbar.dart';
 
-import 'package:mysite/consts/consts.dart';
-import 'package:mysite/consts/routes.dart';
-import 'package:mysite/page_elements/blog_post_cards.dart';
-import 'package:mysite/page_elements/header.dart';
-import 'package:mysite/page_elements/footer.dart';
-import 'package:mysite/page_elements/ak_app_bar.dart';
-import 'package:mysite/page_elements/drawer.dart';
-import 'package:mysite/page_elements/projects.dart';
-import 'package:mysite/widgets/wrap_scroll_tag.dart';
-import 'package:mysite/widgets/scroll_upward.dart';
-import 'package:mysite/page_elements/contact.dart';
+import '../consts/consts.dart';
+import '../navigation/routes.dart';
+import '../page_elements/blog_post_cards.dart';
+import '../page_elements/header.dart';
+import '../page_elements/footer.dart';
+import '../page_elements/ak_app_bar.dart';
+import '../page_elements/drawer.dart';
+import '../page_elements/projects.dart';
+import '../widgets/wrap_scroll_tag.dart';
+import '../widgets/scroll_upward.dart';
+import '../page_elements/contact.dart';
 
 class HomePage extends StatefulWidget {
   final String? path;
@@ -39,7 +39,8 @@ class _HomePageState extends State<HomePage> {
     super.didChangeDependencies();
     if (widget.path != null) {
       setState(() {
-        _scrollController.scrollToIndex(homeWidgets[widget.path],
+        Rt? route = Routes.homePageContains(widget.path);
+        _scrollController.scrollToIndex(route?.homeWidgetNum as int,
             duration: Duration(milliseconds: 1000),
             preferPosition: AutoScrollPosition.begin);
       });
@@ -59,7 +60,7 @@ class _HomePageState extends State<HomePage> {
     final List<Widget> wList = [
       WrapScrollTag(
         controller: _scrollController,
-        index: homeWidgets[home],
+        index: Routes.home.homeWidgetNum as int,
         child: Header(_scrollController),
       ),
       const SizedBox(
@@ -67,12 +68,12 @@ class _HomePageState extends State<HomePage> {
       ),
       WrapScrollTag(
         controller: _scrollController,
-        index: homeWidgets[projects],
+        index: Routes.projects.homeWidgetNum as int,
         child: Projects(),
       ),
       WrapScrollTag(
         controller: _scrollController,
-        index: homeWidgets[blog],
+        index: Routes.blog.homeWidgetNum as int,
         child: BlogPostCards(),
       ),
       SizedBox(
@@ -80,7 +81,7 @@ class _HomePageState extends State<HomePage> {
       ),
       WrapScrollTag(
         controller: _scrollController,
-        index: homeWidgets[contact],
+        index: Routes.contact.homeWidgetNum as int,
         child: Contact(),
       ),
       const Footer(),

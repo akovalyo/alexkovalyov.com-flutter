@@ -5,11 +5,10 @@ import 'package:flutter/material.dart';
 import 'models/post.dart';
 import 'helpers.dart';
 import 'consts/consts.dart';
-import 'package:mysite/consts/routes.dart';
+import 'navigation/routes.dart';
 import 'widgets/hover_blog_container.dart';
 
 class AppState with ChangeNotifier {
-  bool isLoading = false;
   List<Post> _posts = <Post>[];
   List nfts = [];
 
@@ -38,15 +37,8 @@ class AppState with ChangeNotifier {
   }
 
   bool postExists(String path) {
-    try {
-      print(_posts.length);
-      _posts.firstWhere((p) => p.path == path);
-      print('TRUE');
-      return true;
-    } catch (e) {
-      print('FALSE');
-      return false;
-    }
+    var contain = _posts.where((e) => e.path == path);
+    return contain.isNotEmpty;
   }
 
   // Get existing post by path, confirm with postExists() before using

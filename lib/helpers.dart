@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mysite/consts/routes.dart';
+import 'navigation/routes.dart';
 
 bool isSmallScreen(BuildContext context) {
   return MediaQuery.of(context).size.width < 800;

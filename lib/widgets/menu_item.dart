@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:hovering/hovering.dart';
-
-import 'package:mysite/consts/routes.dart';
-import 'package:mysite/helpers.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+
+import '../navigation/routes.dart';
+import '../helpers.dart';
 
 class MenuItem extends StatelessWidget {
   final String title;
@@ -43,11 +43,13 @@ class MenuItem extends StatelessWidget {
         highlightColor: Color(0x00000000),
         splashColor: Color(0x00000000),
         onpressed: () {
-          final _currRoot = currentRoot();
-          if (homePage.contains(_currRoot)) {
+          final currRoot = currentRoot();
+
+          if (Routes.homePageContains(currRoot) != null) {
+            Rt? route = Routes.homePageContains(path);
             FocusScope.of(context).unfocus();
             controller?.scrollToIndex(
-              homeWidgets[title],
+              route!.homeWidgetNum as int,
               duration: Duration(milliseconds: 1000),
               preferPosition: AutoScrollPosition.begin,
             );

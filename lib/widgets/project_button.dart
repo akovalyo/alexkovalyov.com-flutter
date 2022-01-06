@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:universal_html/js.dart' as js;
 
-import 'package:mysite/consts/routes.dart';
-import 'package:mysite/widgets/button.dart';
+import '../navigation/routes.dart';
+import 'button.dart';
 
 class ProjectButton extends StatelessWidget {
   final String? link;

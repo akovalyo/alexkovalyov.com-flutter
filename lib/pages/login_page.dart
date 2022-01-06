@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 
-import 'package:mysite/consts/consts.dart';
-import 'package:mysite/consts/routes.dart';
-import 'package:mysite/helpers.dart';
-import 'package:mysite/page_elements/footer.dart';
-import 'package:mysite/widgets/button.dart';
+import '../consts/consts.dart';
+import '../navigation/routes.dart';
+import '../helpers.dart';
+import '../page_elements/footer.dart';
+import '../widgets/button.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -49,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
           backgroundColor: Colors.green[600]!.withOpacity(0.7),
         ),
       );
-      navKey.currentState!.pushNamed(routeHome);
+      navKey.currentState!.pushNamed(Routes.home.path);
     } catch (error) {
       var message = 'An error occured, please check your credentialas!';
       ScaffoldMessenger.of(context).showSnackBar(

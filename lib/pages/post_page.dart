@@ -43,11 +43,11 @@ class _PostPageState extends State<PostPage> {
         axis: Axis.vertical);
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    controller.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   controller.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {

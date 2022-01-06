@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:hovering/hovering.dart';
-
-import 'package:mysite/helpers.dart';
-import 'package:mysite/consts/routes.dart';
-import 'package:mysite/consts/consts.dart';
-import 'package:mysite/widgets/hover_icon_button.dart';
-import 'package:mysite/widgets/menu_item.dart';
-import 'package:mysite/widgets/overlay_menu.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+
+import '../helpers.dart';
+import '../navigation/routes.dart';
+import '../widgets/hover_icon_button.dart';
+import '../models/menu_items_list.dart';
+import '../widgets/menu_item.dart';
+import '../widgets/overlay_menu.dart';
+import '../consts/consts.dart';
 
 class AkAppBar extends StatefulWidget {
   final AutoScrollController? controller;
@@ -66,7 +67,7 @@ class _AkAppBarState extends State<AkAppBar> {
       },
     );
 
-    final List<Widget> _menuItems = menuItems.map((elem) {
+    final List<Widget> _menuItems = menuItemsList.map((elem) {
       return MenuItem(
         controller: widget.controller == null ? null : widget.controller,
         title: elem['title'] as String,
@@ -83,7 +84,8 @@ class _AkAppBarState extends State<AkAppBar> {
       child: HoverIconButton(
         onPressed: () {
           final _currRoot = currentRoot();
-          if (homePage.contains(_currRoot)) {
+          final route = Routes.homePageContains(_currRoot);
+          if (route != null) {
             FocusScope.of(context).unfocus();
             widget.controller?.animateTo(
               0,
@@ -91,7 +93,7 @@ class _AkAppBarState extends State<AkAppBar> {
               curve: Curves.fastOutSlowIn,
             );
           } else {
-            navKey.currentState?.pushNamed(routeHome);
+            navKey.currentState?.pushNamed(Routes.home.path);
           }
         },
         imageProvider: AssetImage('assets/images/main/akM.png'),
@@ -117,7 +119,7 @@ class _AkAppBarState extends State<AkAppBar> {
                   backgroundColor: _colorBlack
                       ? Color(0x00000000)
                       : Theme.of(context).primaryColor,
-                  links: menuItems.map((elem) {
+                  links: menuItemsList.map((elem) {
                     return Center(
                       child: HoverCrossFadeWidget(
                         cursor: SystemMouseCursors.click,
@@ -141,14 +143,16 @@ class _AkAppBarState extends State<AkAppBar> {
                   }).toList(),
                   onChange: (index) {
                     final _currRoot = currentRoot();
-                    if (homePage.contains(_currRoot)) {
+                    final route = Routes.homePageContains(_currRoot);
+                    if (route != null) {
                       widget.controller?.scrollToIndex(
                         index,
                         duration: Duration(milliseconds: 1000),
                         preferPosition: AutoScrollPosition.begin,
                       );
                     } else {
-                      navKey.currentState?.pushNamed(menuItems[index]['path']!);
+                      navKey.currentState
+                          ?.pushNamed(menuItemsList[index]['path']!);
                     }
                   },
                 ),

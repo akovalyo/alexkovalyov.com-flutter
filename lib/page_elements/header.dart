@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
-import 'package:mysite/consts/consts.dart';
-import 'package:mysite/consts/routes.dart';
-import 'package:mysite/widgets/image_placeholder.dart';
-import 'package:mysite/widgets/button.dart';
+import '../consts/consts.dart';
+import '../navigation/routes.dart';
+import '../widgets/image_placeholder.dart';
+import '../widgets/button.dart';
 
 class Header extends StatelessWidget {
   final AutoScrollController controller;
@@ -67,7 +67,7 @@ class Header extends StatelessWidget {
                     hoverColor: Theme.of(context).colorScheme.secondary,
                     onPressed: () {
                       controller.scrollToIndex(
-                        homeWidgets[projects],
+                        Routes.projects.homeWidgetNum as int,
                         preferPosition: AutoScrollPosition.begin,
                         duration: Duration(milliseconds: 1000),
                       );
@@ -84,7 +84,7 @@ class Header extends StatelessWidget {
                     hoverColor: Theme.of(context).colorScheme.secondary,
                     onPressed: () {
                       controller.scrollToIndex(
-                        homeWidgets[blog],
+                        Routes.blog.homeWidgetNum as int,
                         preferPosition: AutoScrollPosition.begin,
                         duration: Duration(milliseconds: 1000),
                       );
@@ -101,7 +101,7 @@ class Header extends StatelessWidget {
                     hoverColor: Theme.of(context).colorScheme.secondary,
                     onPressed: () {
                       controller.scrollToIndex(
-                        homeWidgets[contact],
+                        Routes.contact.homeWidgetNum as int,
                         preferPosition: AutoScrollPosition.begin,
                         duration: Duration(milliseconds: 1000),
                       );
