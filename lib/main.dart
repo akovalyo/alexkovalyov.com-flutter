@@ -5,14 +5,10 @@ import 'package:provider/provider.dart';
 import 'package:mysite/appState.dart';
 import 'package:mysite/theme/theme.dart';
 import 'package:mysite/theme/dynamic_theme.dart';
-import 'package:mysite/models/posts_model.dart';
 import 'package:mysite/consts/routes.dart';
 import 'package:mysite/route_generator.dart';
 
 void main() {
-  // final Auth _auth = Auth();
-  // await _auth.firebaseInit();
-  // Map<String, Map> _dbPosts = await _auth.loadDb();
   runApp(MyApp());
 }
 
@@ -26,9 +22,6 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: appState),
-        // ChangeNotifierProvider(
-        //   create: (_) => PostsModel(null), //TODO
-        // ),
       ],
       child: DynamicTheme(
         defaultBrightness: Brightness.light,

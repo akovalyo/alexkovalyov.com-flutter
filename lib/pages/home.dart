@@ -4,7 +4,7 @@ import 'package:vs_scrollbar/vs_scrollbar.dart';
 
 import 'package:mysite/consts/consts.dart';
 import 'package:mysite/consts/routes.dart';
-import 'package:mysite/page_elements/blog_items.dart';
+import 'package:mysite/page_elements/blog_post_cards.dart';
 import 'package:mysite/page_elements/header.dart';
 import 'package:mysite/page_elements/footer.dart';
 import 'package:mysite/page_elements/ak_app_bar.dart';
@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
       WrapScrollTag(
         controller: _scrollController,
         index: homeWidgets[blog],
-        child: BlogItems(),
+        child: BlogPostCards(),
       ),
       SizedBox(
         height: _screenSize.height * 0.2,
