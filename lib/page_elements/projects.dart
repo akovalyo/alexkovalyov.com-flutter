@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import 'package:mysite/consts/consts.dart';
-import 'package:mysite/consts/routes.dart';
-import 'package:mysite/helpers.dart';
-import 'package:mysite/widgets/project_card.dart';
-import 'package:mysite/widgets/project_button.dart';
+import '../consts/consts.dart';
+import '../navigation/routes.dart';
+import '../helpers.dart';
+import '../widgets/project_card.dart';
+import '../widgets/project_button.dart';
 
 class Projects extends StatelessWidget {
   @override
@@ -77,7 +77,7 @@ class Projects extends StatelessWidget {
                 label: 'C',
                 description: 'Recreating a real shell in C',
                 firstButton: ProjectButton(
-                  link: routeProjectMinishell,
+                  link: Routes.minishell.path,
                   title: 'Demo',
                 ),
                 secondButton: ProjectButton(

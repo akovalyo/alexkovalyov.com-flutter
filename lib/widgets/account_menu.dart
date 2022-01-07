@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hovering/hovering.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:mysite/consts/routes.dart';
+import '../navigation/routes.dart';
 
 class AccountMenu extends StatelessWidget {
   @override
@@ -29,7 +29,7 @@ class AccountMenu extends StatelessWidget {
                   highlightColor: Color(0x00000000),
                   splashColor: Color(0x00000000),
                   onpressed: () {
-                    navKey.currentState!.pushNamed(routeMessages);
+                    navKey.currentState!.pushNamed(Routes.messages.path);
                     Scaffold.of(context).openEndDrawer();
                   },
                 ),
@@ -78,7 +78,7 @@ class AccountMenu extends StatelessWidget {
             highlightColor: Color(0x00000000),
             splashColor: Color(0x00000000),
             onpressed: () {
-              navKey.currentState!.pushNamed('login');
+              navKey.currentState!.pushNamed(Routes.login.path);
 
               Scaffold.of(context).openEndDrawer();
             },

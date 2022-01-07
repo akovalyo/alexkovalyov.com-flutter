@@ -1,28 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:mysite/consts/routes.dart';
-import 'package:mysite/models/posts_model.dart';
-import 'package:mysite/pages/post_page.dart';
-import 'package:mysite/pages/page404.dart';
-import 'package:mysite/pages/template_basic.dart';
+import 'routes.dart';
+import '../appState.dart';
+import '../pages/post_page.dart';
+import '../pages/page404.dart';
+import '../pages/template_basic.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
-  final _postsModel =
-      Provider.of<PostsModel>(navKey.currentState!.context, listen: false);
-  if (_postsModel.postExist(settings.name!)) {
+  final appState =
+      Provider.of<AppState>(navKey.currentState!.context, listen: false);
+  String path = settings.name ?? '';
+  if (appState.postExists(path)) {
     return _getPageRoute(
-      PostPage(settings.name!),
+      PostPage(appState.getPostByPath(path)),
       settings,
     );
   }
-  if (routes[settings.name] == null) {
-    return _getPageRoute(TemplateBasic(Page404()), settings);
+
+  Rt? route = Routes.contains(settings.name);
+  if (route != null) {
+    return _getPageRoute(
+      route.widget(),
+      settings,
+    );
   }
-  return _getPageRoute(
-    routes[settings.name]!,
-    settings,
-  );
+  return _getPageRoute(TemplateBasic(Page404()), settings);
 }
 
 PageRoute _getPageRoute(Widget child, RouteSettings settings) {

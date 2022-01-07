@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 // import 'package:dynamic_theme/dynamic_theme.dart';
 
-import 'package:mysite/theme/dynamic_theme.dart';
-import 'package:mysite/helpers.dart';
-import 'package:mysite/consts/routes.dart';
-import 'package:mysite/widgets/menu.dart';
-import 'package:mysite/widgets/hover_icon_button.dart';
-import 'package:mysite/widgets/choice_chip.dart';
-import 'package:mysite/widgets/account_menu.dart';
+import '../theme/dynamic_theme.dart';
+import '../helpers.dart';
+import '../navigation/routes.dart';
+import '../widgets/menu.dart';
+import '../widgets/hover_icon_button.dart';
+import '../widgets/choice_chip.dart';
+import '../widgets/account_menu.dart';
 
 class AkDrawer extends StatelessWidget {
   final AutoScrollController? controller;
@@ -47,9 +47,9 @@ class AkDrawer extends StatelessWidget {
                       alignment: Alignment.center,
                       child: HoverIconButton(
                         onPressed: () {
-                          final _currRoot = currentRoot();
-                          if (homePage.contains(_currRoot) &&
-                              controller != null) {
+                          final currRoot = currentRoot();
+                          final route = Routes.homePageContains(currRoot);
+                          if (route != null && controller != null) {
                             FocusScope.of(context).unfocus();
                             controller!.animateTo(
                               0,
@@ -57,7 +57,7 @@ class AkDrawer extends StatelessWidget {
                               curve: Curves.fastOutSlowIn,
                             );
                           } else {
-                            navKey.currentState!.pushNamed(routeHome);
+                            navKey.currentState!.pushNamed(Routes.home.path);
                           }
                           Scaffold.of(context).openEndDrawer();
                         },

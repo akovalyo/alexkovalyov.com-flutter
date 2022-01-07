@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:vs_scrollbar/vs_scrollbar.dart';
 
-import 'package:mysite/consts/consts.dart';
-import 'package:mysite/consts/routes.dart';
-import 'package:mysite/page_elements/blog_items.dart';
-import 'package:mysite/page_elements/header.dart';
-import 'package:mysite/page_elements/footer.dart';
-import 'package:mysite/page_elements/ak_app_bar.dart';
-import 'package:mysite/page_elements/drawer.dart';
-import 'package:mysite/page_elements/projects.dart';
-import 'package:mysite/widgets/wrap_scroll_tag.dart';
-import 'package:mysite/widgets/scroll_upward.dart';
-import 'package:mysite/page_elements/contact.dart';
+import '../consts/consts.dart';
+import '../navigation/routes.dart';
+import '../page_elements/blog_post_cards.dart';
+import '../page_elements/header.dart';
+import '../page_elements/footer.dart';
+import '../page_elements/ak_app_bar.dart';
+import '../page_elements/drawer.dart';
+import '../page_elements/projects.dart';
+import '../widgets/wrap_scroll_tag.dart';
+import '../widgets/scroll_upward.dart';
+import '../page_elements/contact.dart';
 
 class HomePage extends StatefulWidget {
   final String? path;
@@ -23,15 +23,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late AutoScrollController _scrollController;
+  late AutoScrollController scrollController;
 
   @override
   void initState() {
     super.initState();
-    _scrollController = AutoScrollController(
+
+    scrollController = AutoScrollController(
+        debugLabel: 'HomePage Controller',
         viewportBoundaryGetter: () =>
             Rect.fromLTRB(0, 0, 0, MediaQuery.of(context).padding.bottom),
         axis: Axis.vertical);
+    print('Init: ${scrollController.debugLabel}');
   }
 
   @override
@@ -39,7 +42,8 @@ class _HomePageState extends State<HomePage> {
     super.didChangeDependencies();
     if (widget.path != null) {
       setState(() {
-        _scrollController.scrollToIndex(homeWidgets[widget.path],
+        Rt? route = Routes.homePageContains(widget.path);
+        scrollController.scrollToIndex(route?.homeWidgetNum as int,
             duration: Duration(milliseconds: 1000),
             preferPosition: AutoScrollPosition.begin);
       });
@@ -49,7 +53,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void dispose() {
     super.dispose();
-    _scrollController.dispose();
+    print('Dispose: ${scrollController.debugLabel}');
+    scrollController.dispose();
   }
 
   @override
@@ -58,29 +63,29 @@ class _HomePageState extends State<HomePage> {
 
     final List<Widget> wList = [
       WrapScrollTag(
-        controller: _scrollController,
-        index: homeWidgets[home],
-        child: Header(_scrollController),
+        controller: scrollController,
+        index: Routes.home.homeWidgetNum as int,
+        child: Header(scrollController),
       ),
       const SizedBox(
         height: 40,
       ),
       WrapScrollTag(
-        controller: _scrollController,
-        index: homeWidgets[projects],
+        controller: scrollController,
+        index: Routes.projects.homeWidgetNum as int,
         child: Projects(),
       ),
       WrapScrollTag(
-        controller: _scrollController,
-        index: homeWidgets[blog],
-        child: BlogItems(),
+        controller: scrollController,
+        index: Routes.blog.homeWidgetNum as int,
+        child: BlogPostCards(),
       ),
       SizedBox(
         height: _screenSize.height * 0.2,
       ),
       WrapScrollTag(
-        controller: _scrollController,
-        index: homeWidgets[contact],
+        controller: scrollController,
+        index: Routes.contact.homeWidgetNum as int,
         child: Contact(),
       ),
       const Footer(),
@@ -91,11 +96,11 @@ class _HomePageState extends State<HomePage> {
       appBar: PreferredSize(
         preferredSize: Size(_screenSize.width, appBarHeight),
         child: AkAppBar(
-          controller: _scrollController,
+          controller: scrollController,
           changeColor: true,
         ),
       ),
-      drawer: AkDrawer(controller: _scrollController),
+      drawer: AkDrawer(controller: scrollController),
       body: GestureDetector(
         onTap: () {
           FocusScope.of(context).unfocus();
@@ -103,7 +108,7 @@ class _HomePageState extends State<HomePage> {
         child: Stack(
           children: <Widget>[
             VsScrollbar(
-              controller: _scrollController,
+              controller: scrollController,
               style: VsScrollbarStyle(
                 color: Theme.of(context).colorScheme.secondary.withOpacity(0.4),
                 thickness: scrollBarThickness,
@@ -114,11 +119,11 @@ class _HomePageState extends State<HomePage> {
                 physics: ClampingScrollPhysics(),
                 scrollDirection: Axis.vertical,
                 child: Column(children: wList),
-                controller: _scrollController,
+                controller: scrollController,
               ),
             ),
             ScrollUpward(
-              _scrollController,
+              scrollController,
               visiblePosition: 100,
             ),
           ],

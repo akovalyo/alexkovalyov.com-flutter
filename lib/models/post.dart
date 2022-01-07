@@ -1,36 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:universal_html/js.dart' as js;
-import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
-import 'package:vs_scrollbar/vs_scrollbar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:universal_html/js.dart' as js;
+import '../consts/unicode_characters.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 
-import 'package:mysite/consts/consts.dart';
-import 'package:mysite/consts/unicode_characters.dart';
-import 'package:mysite/helpers.dart';
-import 'package:mysite/pages/something_wrong.dart';
-import 'package:mysite/pages/post_page.dart';
-import 'package:mysite/page_elements/footer.dart';
-import 'package:mysite/page_elements/drawer.dart';
-import 'package:mysite/page_elements/ak_app_bar.dart';
-import 'package:mysite/widgets/scroll_upward.dart';
-import 'package:mysite/widgets/image_placeholder.dart';
-import 'package:mysite/widgets/animated_image.dart';
-import 'package:mysite/widgets/wrap_scroll_tag.dart';
-import 'package:mysite/pages/template_basic.dart';
+import '../widgets/wrap_scroll_tag.dart';
+import '../widgets/post_element_container.dart';
+import '../widgets/animated_image.dart';
 
-class PostBuilder extends StatelessWidget {
-  final AutoScrollController controller;
-  final Map<String, dynamic> postData;
-  final DocumentSnapshot snapshot;
+class Post {
+  String postId;
+  final String date; //TODO: convert into DateTime
+  final String description;
+  final String imageUrl;
+  final String path;
+  final String title;
+  final List<String> tags;
 
-  PostBuilder({
-    required this.controller,
-    required this.postData,
-    required this.snapshot,
+  Post({
+    this.postId = '',
+    this.date = '',
+    this.description = '',
+    this.imageUrl = '',
+    this.path = '',
+    this.title = '',
+    this.tags = const [],
   });
 
-  List<Map> extractBody(String body) {
+  factory Post.fromData(Map<String, dynamic>? data) {
+    if (data == null) return Post();
+    return Post(
+      date: data['date'] as String,
+      description: data['description'] as String,
+      imageUrl: data['image'] as String,
+      path: data['path'] as String,
+      title: data['title'] as String,
+      tags: (data['tags'] as List<dynamic>).map((e) => e as String).toList(),
+    );
+  }
+
+  List<Map> _extractBody(String body) {
     List<Map> list = [];
     Iterable<RegExpMatch> parsedBody =
         RegExp(r'{([a-zA-Z1-9]*){([0-9]*)}}([^\{\}]*){\/}').allMatches(body);
@@ -42,7 +52,7 @@ class PostBuilder extends StatelessWidget {
     return list;
   }
 
-  String replaceChar(String str) {
+  String _replaceChar(String str) {
     str = str.replaceAll("\\n", "\n");
     str = str.replaceAll("\\t", "\t");
     Iterable<RegExpMatch>? match = RegExp(r'\\u([\w]*)').allMatches(str);
@@ -59,11 +69,22 @@ class PostBuilder extends StatelessWidget {
     return str;
   }
 
-  List<Widget> decodeBody(List<Map> extractedBody, BuildContext ctx) {
-    final List<Widget> _listWidget = extractedBody.map((m) {
+  // Future<DocumentSnapshot> loadBody() async {
+  //   final CollectionReference bodyRef =
+  //       FirebaseFirestore.instance.collection('posts/${this.postId}/body');
+  //   final DocumentSnapshot snapshot = await bodyRef.doc('0').get();
+  //   return snapshot;
+  // }
+
+  List<Widget> decodeBody(BuildContext ctx, AutoScrollController controller,
+      DocumentSnapshot snapshot) {
+    if (snapshot.data() == null) return <Widget>[];
+    final List<Map> extractedBody = _extractBody(snapshot.data()?['body']);
+
+    final List<Widget> listWidget = extractedBody.map((m) {
       final _key = m.keys.toString().replaceAll(RegExp('[()]'), '');
       final _screenSize = MediaQuery.of(ctx).size;
-      final String _value = replaceChar(m[_key][1]);
+      final String _value = _replaceChar(m[_key][1]);
       final int _widgetIdx = m[_key][0].isEmpty ? 0 : int.parse(m[_key][0]);
 
       switch (_key) {
@@ -288,109 +309,6 @@ class PostBuilder extends StatelessWidget {
       }
     }).toList();
 
-    return _listWidget;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (snapshot.data() == null) return TemplateBasic(SomethingWentWrong());
-    final _screenSize = MediaQuery.of(context).size;
-    final _extracted = extractBody(snapshot.data()!['body']);
-    final _decoded = decodeBody(_extracted, context);
-
-    return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
-      appBar: PreferredSize(
-        preferredSize: Size(_screenSize.width, appBarHeight),
-        child: AkAppBar(controller: controller),
-      ),
-      drawer: AkDrawer(controller: controller),
-      body: Stack(
-        children: <Widget>[
-          VsScrollbar(
-            controller: controller,
-            style: VsScrollbarStyle(
-              color: Theme.of(context).colorScheme.secondary.withOpacity(0.4),
-              radius: Radius.circular(scrollBarRadius),
-              thickness: scrollBarThickness,
-            ),
-            isAlwaysShown: false,
-            child: SingleChildScrollView(
-              controller: controller,
-              physics: ClampingScrollPhysics(),
-              child: Center(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      width: _screenSize.width,
-                      height: _screenSize.height * 0.4,
-                      child: FadeInImageAny(
-                        imagePath: postData['image'],
-                        placeholder: SizedBox(
-                          width: _screenSize.width,
-                          height: _screenSize.height * 0.4,
-                        ),
-                        width: _screenSize.width,
-                        height: _screenSize.height * 0.4,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    Container(
-                        alignment: Alignment.center,
-                        padding: EdgeInsets.only(
-                          top: 20,
-                          bottom: 10,
-                          right: isSmallScreen(context)
-                              ? paddingSmall
-                              : paddingLarge,
-                          left: isSmallScreen(context)
-                              ? paddingSmall
-                              : paddingLarge,
-                        ),
-                        child: Text(
-                          postData['title'],
-                          style: Theme.of(context).textTheme.headline4,
-                        )),
-                    Container(
-                        alignment: Alignment.center,
-                        padding: EdgeInsets.only(
-                          bottom: 20,
-                          left: isSmallScreen(context)
-                              ? paddingSmall
-                              : paddingLarge,
-                          right: isSmallScreen(context)
-                              ? paddingSmall
-                              : paddingLarge,
-                        ),
-                        child: Text(
-                          postData['date'],
-                        )),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: isSmallScreen(context)
-                              ? paddingSmall
-                              : paddingLarge),
-                      child: Column(
-                        children: _decoded,
-                      ),
-                    ),
-                    Container(
-                      child: const Footer(),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          ScrollUpward(
-            controller,
-            visiblePosition: 100,
-          ),
-        ],
-      ),
-    );
+    return listWidget;
   }
 }
