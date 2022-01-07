@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 import '../consts/consts.dart';
 import '../navigation/routes.dart';
 import '../helpers.dart';
 import '../page_elements/footer.dart';
 import '../widgets/button.dart';
+import '../appState.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -14,64 +16,61 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final _auth = FirebaseAuth.instance;
-  final _formKey = GlobalKey<FormState>();
-  var _userEmail = '';
-  var _userPassword = '';
-  var _isLoading = false;
+  // final _auth = FirebaseAuth.instance;
+  final formKey = GlobalKey<FormState>();
+  var userEmail = '';
+  var userPassword = '';
+  // var _isLoading = false;
 
-  void _trySubmit() {
-    final isValid = _formKey.currentState!.validate();
+  void trySubmit(AppState appState, BuildContext context) {
+    final isValid = formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
 
     if (isValid) {
-      _formKey.currentState!.save();
-
-      _authenticate(
-        _userEmail.trim(),
-        _userPassword.trim(),
-      );
+      formKey.currentState!.save();
+      appState.authenticate(userEmail.trim(), userPassword.trim(), context);
     }
   }
 
-  void _authenticate(String username, String password) async {
-    try {
-      setState(() {
-        _isLoading = true;
-      });
+  // void _authenticate(String username, String password) async {
+  //   try {
+  //     setState(() {
+  //       _isLoading = true;
+  //     });
 
-      await _auth.signInWithEmailAndPassword(
-          email: _userEmail, password: _userPassword);
+  //     await _auth.signInWithEmailAndPassword(
+  //         email: _userEmail, password: _userPassword);
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Welcome!'),
-          backgroundColor: Colors.green[600]!.withOpacity(0.7),
-        ),
-      );
-      navKey.currentState!.pushNamed(Routes.home.path);
-    } catch (error) {
-      var message = 'An error occured, please check your credentialas!';
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(message),
-          backgroundColor: Theme.of(context).errorColor.withOpacity(0.7),
-        ),
-      );
-      setState(() {
-        _isLoading = false;
-      });
-    }
-  }
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(
+  //         content: Text('Welcome!'),
+  //         backgroundColor: Colors.green[600]!.withOpacity(0.7),
+  //       ),
+  //     );
+  //     navKey.currentState!.pushNamed(Routes.home.path);
+  //   } catch (error) {
+  //     var message = 'An error occured, please check your credentialas!';
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(
+  //         content: Text(message),
+  //         backgroundColor: Theme.of(context).errorColor.withOpacity(0.7),
+  //       ),
+  //     );
+  //     setState(() {
+  //       _isLoading = false;
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
-    final _screenSize = MediaQuery.of(context).size;
-    final _height = _screenSize.height - appBarHeight - footerHeight;
+    final screenSize = MediaQuery.of(context).size;
+    final height = screenSize.height - appBarHeight - footerHeight;
+    AppState appState = Provider.of<AppState>(context);
 
     return ConstrainedBox(
       constraints: BoxConstraints(
-        minHeight: _screenSize.height,
+        minHeight: screenSize.height,
       ),
       child: IntrinsicHeight(
         child: GestureDetector(
@@ -85,15 +84,15 @@ class _LoginPageState extends State<LoginPage> {
                 child: Center(
                   child: SizedBox(
                     width: isSmallScreen(context)
-                        ? _screenSize.width * 0.7
-                        : _screenSize.width * 0.4,
+                        ? screenSize.width * 0.7
+                        : screenSize.width * 0.4,
                     child: Card(
                       color: Theme.of(context).primaryColor,
                       child: SingleChildScrollView(
                         child: Padding(
                           padding: const EdgeInsets.all(20),
                           child: Form(
-                            key: _formKey,
+                            key: formKey,
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
@@ -127,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                                     return null;
                                   },
                                   onSaved: (value) {
-                                    _userEmail = value!;
+                                    userEmail = value!;
                                   },
                                 ),
                                 TextFormField(
@@ -147,16 +146,17 @@ class _LoginPageState extends State<LoginPage> {
                                   },
                                   obscureText: true,
                                   onSaved: (value) {
-                                    _userPassword = value!;
+                                    userPassword = value!;
                                   },
                                 ),
                                 SizedBox(height: 20),
-                                _isLoading
+                                appState.isLoading
                                     ? Center(
                                         child: CircularProgressIndicator(),
                                       )
                                     : AkButton(
-                                        onPressed: _trySubmit,
+                                        onPressed: () =>
+                                            trySubmit(appState, context),
                                         child: Text(
                                           'Login',
                                           style: TextStyle(
@@ -175,7 +175,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              _height < 0 ? Container() : Footer(),
+              height < 0 ? Container() : Footer(),
             ],
           ),
         ),

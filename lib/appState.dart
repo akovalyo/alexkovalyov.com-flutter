@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'models/post.dart';
@@ -10,7 +11,11 @@ import 'widgets/hover_blog_container.dart';
 
 class AppState with ChangeNotifier {
   List<Post> _posts = <Post>[];
-  List nfts = [];
+  List _nfts = [];
+  bool _loggedIn = false;
+  bool isLoading = false;
+
+  bool get isLoggedIn => _loggedIn;
 
   List<Post> get posts => _posts;
 
@@ -20,7 +25,44 @@ class AppState with ChangeNotifier {
     } catch (error) {
       print('firebase init error: $error');
     }
+    _loggedIn = FirebaseAuth.instance.currentUser != null;
   }
+
+  void authenticate(String user, String password, BuildContext context) async {
+    final _auth = FirebaseAuth.instance;
+
+    try {
+      isLoading = true;
+      notifyListeners();
+
+      await _auth.signInWithEmailAndPassword(email: user, password: password);
+
+      isLoading = false;
+      notifyListeners();
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Welcome!'),
+          backgroundColor: Colors.green[600]!.withOpacity(0.7),
+        ),
+      );
+      navKey.currentState!.pushNamed(Routes.home.path);
+    } catch (e) {
+      var message = 'An error occured, please check your credentialas!';
+
+      isLoading = false;
+      notifyListeners();
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(message),
+          backgroundColor: Theme.of(context).errorColor.withOpacity(0.7),
+        ),
+      );
+    }
+  }
+
+  void logout() {}
 
   Future<void> loadPosts() async {
     final Query postsRef = FirebaseFirestore.instance.collection('posts');
