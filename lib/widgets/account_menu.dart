@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:hovering/hovering.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 
 import '../navigation/routes.dart';
+import '../appState.dart';
 
 class AccountMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final _isLogged = FirebaseAuth.instance.currentUser != null;
-    return _isLogged
+    final AppState appState = Provider.of<AppState>(context);
+
+    return appState.isLoggedIn
         ? Column(
             children: <Widget>[
               Padding(
@@ -50,7 +52,7 @@ class AccountMenu extends StatelessWidget {
                 highlightColor: Color(0x00000000),
                 splashColor: Color(0x00000000),
                 onpressed: () {
-                  FirebaseAuth.instance.signOut();
+                  appState.logout();
                   Scaffold.of(context).openEndDrawer();
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
@@ -58,6 +60,7 @@ class AccountMenu extends StatelessWidget {
                       backgroundColor: Colors.green[600]!.withOpacity(0.7),
                     ),
                   );
+                  navKey.currentState?.pushNamed(Routes.home.path);
                 },
               ),
             ],

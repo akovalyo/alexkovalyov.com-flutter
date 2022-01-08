@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../consts/consts.dart';
-import '../navigation/routes.dart';
 import '../helpers.dart';
 import '../page_elements/footer.dart';
 import '../widgets/button.dart';
@@ -16,11 +14,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // final _auth = FirebaseAuth.instance;
   final formKey = GlobalKey<FormState>();
   var userEmail = '';
   var userPassword = '';
-  // var _isLoading = false;
 
   void trySubmit(AppState appState, BuildContext context) {
     final isValid = formKey.currentState!.validate();
@@ -31,36 +27,6 @@ class _LoginPageState extends State<LoginPage> {
       appState.authenticate(userEmail.trim(), userPassword.trim(), context);
     }
   }
-
-  // void _authenticate(String username, String password) async {
-  //   try {
-  //     setState(() {
-  //       _isLoading = true;
-  //     });
-
-  //     await _auth.signInWithEmailAndPassword(
-  //         email: _userEmail, password: _userPassword);
-
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
-  //         content: Text('Welcome!'),
-  //         backgroundColor: Colors.green[600]!.withOpacity(0.7),
-  //       ),
-  //     );
-  //     navKey.currentState!.pushNamed(Routes.home.path);
-  //   } catch (error) {
-  //     var message = 'An error occured, please check your credentialas!';
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
-  //         content: Text(message),
-  //         backgroundColor: Theme.of(context).errorColor.withOpacity(0.7),
-  //       ),
-  //     );
-  //     setState(() {
-  //       _isLoading = false;
-  //     });
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {

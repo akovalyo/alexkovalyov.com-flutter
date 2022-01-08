@@ -29,13 +29,13 @@ class AppState with ChangeNotifier {
   }
 
   void authenticate(String user, String password, BuildContext context) async {
-    final _auth = FirebaseAuth.instance;
+    final auth = FirebaseAuth.instance;
 
     try {
       isLoading = true;
       notifyListeners();
 
-      await _auth.signInWithEmailAndPassword(email: user, password: password);
+      await auth.signInWithEmailAndPassword(email: user, password: password);
 
       isLoading = false;
       notifyListeners();
@@ -46,10 +46,10 @@ class AppState with ChangeNotifier {
           backgroundColor: Colors.green[600]!.withOpacity(0.7),
         ),
       );
-      navKey.currentState!.pushNamed(Routes.home.path);
+      _loggedIn = true;
+      navKey.currentState?.pushNamed(Routes.home.path);
     } catch (e) {
       var message = 'An error occured, please check your credentialas!';
-
       isLoading = false;
       notifyListeners();
 
@@ -62,7 +62,19 @@ class AppState with ChangeNotifier {
     }
   }
 
-  void logout() {}
+  void logout() async {
+    final auth = FirebaseAuth.instance;
+    isLoading = true;
+    notifyListeners();
+
+    await auth.signOut();
+
+    // TODO: Check for errors at signout
+
+    _loggedIn = false;
+    isLoading = true;
+    notifyListeners();
+  }
 
   Future<void> loadPosts() async {
     final Query postsRef = FirebaseFirestore.instance.collection('posts');
