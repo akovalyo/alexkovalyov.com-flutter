@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
+import '../appState.dart';
 
 class MessagesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final _isLogged = FirebaseAuth.instance.currentUser != null;
+    final AppState appState = Provider.of<AppState>(context);
     late CollectionReference messages;
-    if (_isLogged) {
+    if (appState.isLoggedIn) {
       messages = FirebaseFirestore.instance.collection('messages');
     }
-    return _isLogged
+    return appState.isLoggedIn
         ? StreamBuilder<QuerySnapshot>(
             stream: messages.snapshots(),
             builder:
