@@ -24,9 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider.value(value: appState),
-      ],
+      providers: [ChangeNotifierProvider(create: (_) => appState)],
       child: DynamicTheme(
         defaultBrightness: Brightness.light,
         data: (brightness) => akTheme(brightness, null),
