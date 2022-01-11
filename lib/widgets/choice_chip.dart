@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-// import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:dynamic_themes/dynamic_themes.dart';
 
-import 'package:mysite/theme/dynamic_theme.dart';
-import 'package:mysite/consts/colors.dart';
-import 'package:mysite/theme/theme.dart';
+import '../consts/colors.dart';
+import '../theme/theme.dart';
 
 class ThemeChoiceChip extends StatefulWidget {
-  final ValueChanged<Brightness> onSelectedTheme;
-
-  ThemeChoiceChip({required this.onSelectedTheme});
-
   @override
   _ThemeChoiceChipState createState() => _ThemeChoiceChipState();
 }
@@ -17,8 +12,8 @@ class ThemeChoiceChip extends StatefulWidget {
 class _ThemeChoiceChipState extends State<ThemeChoiceChip> {
   @override
   Widget build(BuildContext context) {
-    int _theme = Theme.of(context).brightness == Brightness.light ? 0 : 1;
-    _theme = Theme.of(context).backgroundColor == cp2077 ? 2 : _theme;
+    int _theme = DynamicTheme.of(context)!.themeId;
+    // _theme = Theme.of(context).backgroundColor == cp2077 ? 2 : _theme;
     return Column(
       children: <Widget>[
         Padding(
@@ -37,7 +32,7 @@ class _ThemeChoiceChipState extends State<ThemeChoiceChip> {
             selectedColor: Colors.red,
             selected: _theme == 0,
             onSelected: (_) {
-              widget.onSelectedTheme(Brightness.light);
+              DynamicTheme.of(context)?.setTheme(AppThemes.light);
               setState(() {
                 _theme = 0;
               });
@@ -60,7 +55,7 @@ class _ThemeChoiceChipState extends State<ThemeChoiceChip> {
             selectedColor: Theme.of(context).colorScheme.secondary,
             selected: _theme == 1,
             onSelected: (_) {
-              widget.onSelectedTheme(Brightness.dark);
+              DynamicTheme.of(context)?.setTheme(AppThemes.dark);
               setState(() {
                 _theme = 1;
               });
@@ -80,8 +75,7 @@ class _ThemeChoiceChipState extends State<ThemeChoiceChip> {
           selectedColor: cp2077,
           selected: _theme == 2,
           onSelected: (_) {
-            DynamicTheme.of(context)!
-                .setThemeData(akTheme(Brightness.dark, '2077'));
+            DynamicTheme.of(context)?.setTheme(AppThemes.theme2077);
             setState(() {
               _theme = 2;
             });

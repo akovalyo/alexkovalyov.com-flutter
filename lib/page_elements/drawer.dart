@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
-// import 'package:dynamic_theme/dynamic_theme.dart';
 
-import '../theme/dynamic_theme.dart';
 import '../helpers.dart';
 import '../navigation/routes.dart';
 import '../widgets/menu.dart';
@@ -97,9 +95,7 @@ class AkDrawer extends StatelessWidget {
             ),
             Container(
               alignment: Alignment.center,
-              child: ThemeChoiceChip(onSelectedTheme: (brightness) {
-                DynamicTheme.of(context)!.setBrightness(brightness);
-              }),
+              child: ThemeChoiceChip(),
             ),
           ],
         ),

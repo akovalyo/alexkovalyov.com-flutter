@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
+import 'package:dynamic_themes/dynamic_themes.dart';
 
 import 'appState.dart';
 import 'theme/theme.dart';
-import 'theme/dynamic_theme.dart';
 import 'navigation/routes.dart';
 import 'navigation/route_generator.dart';
 
@@ -23,12 +23,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeCollection = ThemeCollection(
+      themes: {
+        AppThemes.light: AppThemes.themeDataLight(),
+        AppThemes.dark: AppThemes.themeDataDark(),
+        AppThemes.theme2077: AppThemes.themeData2077(),
+      },
+    );
+
     return MultiProvider(
       providers: [ChangeNotifierProvider(create: (_) => appState)],
       child: DynamicTheme(
-        defaultBrightness: Brightness.light,
-        data: (brightness) => akTheme(brightness, null),
-        themedWidgetBuilder: (context, theme) => MaterialApp(
+        themeCollection: themeCollection,
+        defaultThemeId: AppThemes.light,
+        builder: (context, theme) => MaterialApp(
           title: 'Alex Kovalyov',
           debugShowCheckedModeBanner: false,
           theme: theme,
