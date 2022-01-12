@@ -10,15 +10,13 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:mysite/main.dart';
 import 'package:mysite/models/app_state.dart';
-import 'package:mysite/models/nft_manager.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
 
     final AppState appState = AppState();
-    final NftManager nftManager = NftManager();
-    await tester.pumpWidget(MyApp(appState, nftManager));
+    await tester.pumpWidget(MyApp(appState));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

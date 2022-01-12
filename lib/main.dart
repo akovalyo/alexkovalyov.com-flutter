@@ -7,23 +7,22 @@ import 'models/app_state.dart';
 import 'theme/theme.dart';
 import 'navigation/routes.dart';
 import 'navigation/route_generator.dart';
-import 'models/nft_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setPathUrlStrategy();
   final AppState appState = AppState();
-  final NftManager nftManager = NftManager();
+
   await appState.firebaseInit();
   await appState.loadPosts();
-  await nftManager.load();
-  runApp(MyApp(appState, nftManager));
+
+  runApp(MyApp(appState));
 }
 
 class MyApp extends StatelessWidget {
   final AppState appState;
-  final NftManager nftManager;
-  MyApp(this.appState, this.nftManager);
+
+  MyApp(this.appState);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +37,6 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => appState),
-        ChangeNotifierProvider(create: (_) => nftManager),
       ],
       child: DynamicTheme(
         themeCollection: themeCollection,
