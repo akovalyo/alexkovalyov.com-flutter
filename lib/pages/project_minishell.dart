@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:universal_html/html.dart' as html;
 import 'package:universal_html/js.dart' as js;
 
-import 'package:mysite/helpers.dart';
-import 'package:mysite/consts/consts.dart';
-import 'package:mysite/page_elements/footer.dart';
-import 'package:mysite/widgets/image_placeholder.dart';
+import '../helpers/screen_helper.dart';
+import '../consts/consts.dart';
+import '../page_elements/footer.dart';
+import '../widgets/image_placeholder.dart';
 
 class ProjectMinishell extends StatefulWidget {
   @override

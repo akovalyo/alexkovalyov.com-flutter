@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:mysite/helpers.dart';
-import 'package:mysite/widgets/button.dart';
+import '../helpers/screen_helper.dart';
+import '../widgets/button.dart';
 
 class Contact extends StatefulWidget {
   @override

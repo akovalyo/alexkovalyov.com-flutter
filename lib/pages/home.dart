@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
         viewportBoundaryGetter: () =>
             Rect.fromLTRB(0, 0, 0, MediaQuery.of(context).padding.bottom),
         axis: Axis.vertical);
-    print('Init: ${scrollController.debugLabel}');
+    // print('Init: ${scrollController.debugLabel}');
   }
 
   @override
@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void dispose() {
     super.dispose();
-    print('Dispose: ${scrollController.debugLabel}');
+    // print('Dispose: ${scrollController.debugLabel}');
     scrollController.dispose();
   }
 

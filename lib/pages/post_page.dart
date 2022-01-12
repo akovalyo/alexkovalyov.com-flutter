@@ -9,7 +9,7 @@ import '../page_elements/drawer.dart';
 import '../page_elements/footer.dart';
 import '../consts/consts.dart';
 import '../widgets/image_placeholder.dart';
-import '../helpers.dart';
+import '../helpers/screen_helper.dart';
 import '../widgets/scroll_upward.dart';
 
 class PostPage extends StatefulWidget {
@@ -59,7 +59,7 @@ class _PostPageState extends State<PostPage> {
   @override
   void dispose() {
     super.dispose();
-    print('Dispose: ${controller.debugLabel}');
+    // print('Dispose: ${controller.debugLabel}');
     controller.dispose();
   }
 

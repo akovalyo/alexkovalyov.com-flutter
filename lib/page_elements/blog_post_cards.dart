@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:mysite/consts/consts.dart';
-import 'package:mysite/helpers.dart';
+import '../consts/consts.dart';
+import '../helpers/screen_helper.dart';
 import '../appState.dart';
 
 class BlogPostCards extends StatelessWidget {

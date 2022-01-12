@@ -1,19 +1,10 @@
 import 'package:flutter/material.dart';
-import 'navigation/routes.dart';
 
 bool isSmallScreen(BuildContext context) {
   return MediaQuery.of(context).size.width < 800;
 }
 
-String? currentRoot() {
-  String? curr;
 
-  navKey.currentState!.popUntil((route) {
-    curr = route.settings.name!;
-    return true;
-  });
-  return curr;
-}
 
 // bool isDesktop() {
 //   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {

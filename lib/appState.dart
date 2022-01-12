@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'models/post.dart';
-import 'helpers.dart';
+import 'helpers/screen_helper.dart';
 import 'consts/consts.dart';
 import 'navigation/routes.dart';
 import 'widgets/hover_blog_container.dart';

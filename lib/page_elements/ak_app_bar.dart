@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:provider/provider.dart';
 
 import '../appState.dart';
-import '../helpers.dart';
+import '../navigation/navigation_helper.dart';
 import '../navigation/routes.dart';
 import '../widgets/hover_icon_button.dart';
 import '../widgets/circle_image.dart';

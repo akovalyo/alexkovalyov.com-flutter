@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 import '../consts/consts.dart';
 import '../navigation/routes.dart';
-import '../helpers.dart';
+import '../helpers/screen_helper.dart';
 import '../widgets/project_card.dart';
 import '../widgets/project_button.dart';
 

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../consts/consts.dart';
-import '../helpers.dart';
+import '../helpers/screen_helper.dart';
 import '../page_elements/footer.dart';
 import '../widgets/button.dart';
 import '../appState.dart';

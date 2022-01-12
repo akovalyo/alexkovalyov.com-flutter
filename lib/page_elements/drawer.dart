@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
-import '../helpers.dart';
+import '../navigation/navigation_helper.dart';
 import '../navigation/routes.dart';
 import '../widgets/menu.dart';
 import '../widgets/hover_icon_button.dart';
