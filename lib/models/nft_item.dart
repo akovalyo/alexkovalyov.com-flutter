@@ -1,5 +1,5 @@
 class NftItem {
-  final String id;
+  final String? id;
   final String title;
   final String imageUrl;
   final int tokenId;
@@ -14,7 +14,7 @@ class NftItem {
   final int rarityRank;
 
   NftItem({
-    required this.id,
+    this.id,
     required this.title,
     required this.imageUrl,
     required this.tokenId,

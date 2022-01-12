@@ -79,7 +79,7 @@ class Routes {
     homePage: false,
     homeWidgetNum: null,
     title: 'Nft Gallery',
-    widget: () => BasicPageTemplate(NftGalleryPage()),
+    widget: () => NftGalleryPage(),
   );
 
   static final List<Rt> all = [
