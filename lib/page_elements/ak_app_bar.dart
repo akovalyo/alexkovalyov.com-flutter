@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:provider/provider.dart';
 
-import '../appState.dart';
+import '../models/app_state.dart';
 import '../navigation/navigation_helper.dart';
 import '../navigation/routes.dart';
 import '../widgets/hover_icon_button.dart';

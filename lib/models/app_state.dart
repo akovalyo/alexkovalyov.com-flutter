@@ -3,15 +3,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'models/post.dart';
-import 'helpers/screen_helper.dart';
-import 'consts/consts.dart';
-import 'navigation/routes.dart';
-import 'widgets/hover_blog_container.dart';
+import 'post.dart';
+import '../helpers/screen_helper.dart';
+import '../consts/consts.dart';
+import '../navigation/routes.dart';
+import '../widgets/hover_blog_container.dart';
 
 class AppState with ChangeNotifier {
   List<Post> _posts = <Post>[];
-  List _nfts = [];
   bool _loggedIn = false;
   bool isLoading = false;
   bool isRightMenuOpen = false;
@@ -134,11 +133,5 @@ class AppState with ChangeNotifier {
         );
       });
     return cards;
-  }
-
-  Future loadNftCollection() async {
-    final Query postsRef = FirebaseFirestore.instance.collection('posts');
-// TODO
-    notifyListeners();
   }
 }

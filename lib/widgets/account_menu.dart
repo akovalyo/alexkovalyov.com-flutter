@@ -3,7 +3,7 @@ import 'package:hovering/hovering.dart';
 import 'package:provider/provider.dart';
 
 import '../navigation/routes.dart';
-import '../appState.dart';
+import '../models/app_state.dart';
 
 class AccountMenu extends StatelessWidget {
   @override

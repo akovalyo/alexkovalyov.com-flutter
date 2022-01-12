@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'routes.dart';
-import '../appState.dart';
+import '../models/app_state.dart';
 import '../pages/post_page.dart';
 import '../pages/page404.dart';
 import '../pages/basic_page_template.dart';

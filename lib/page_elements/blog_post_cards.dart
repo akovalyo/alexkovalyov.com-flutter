@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../consts/consts.dart';
 import '../helpers/screen_helper.dart';
-import '../appState.dart';
+import '../models/app_state.dart';
 
 class BlogPostCards extends StatelessWidget {
   @override

@@ -5,7 +5,7 @@ import '../consts/consts.dart';
 import '../helpers/screen_helper.dart';
 import '../page_elements/footer.dart';
 import '../widgets/button.dart';
-import '../appState.dart';
+import '../models/app_state.dart';
 
 class LoginPage extends StatefulWidget {
   @override
