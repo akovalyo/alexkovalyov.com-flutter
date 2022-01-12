@@ -1,6 +1,7 @@
 assets/images/*
 !assets/images/main
 !assets/images/cyberpunk.png
+!assets/images/profile_image.png
 assets/posts/*
 **/ios/
 **/android/

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:hovering/hovering.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+import 'package:provider/provider.dart';
 
+import '../appState.dart';
 import '../helpers.dart';
 import '../navigation/routes.dart';
 import '../widgets/hover_icon_button.dart';
-import '../models/menu_items_list.dart';
-import '../widgets/menu_item.dart';
-import '../widgets/overlay_menu.dart';
+import '../widgets/circle_image.dart';
 import '../consts/consts.dart';
+
+import '../widgets/hover_link.dart';
 
 class AkAppBar extends StatefulWidget {
   final AutoScrollController? controller;
@@ -22,18 +23,18 @@ class AkAppBar extends StatefulWidget {
 }
 
 class _AkAppBarState extends State<AkAppBar> {
-  double _scrollPos = 0;
-  bool _colorBlack = false;
+  double scrollPos = 0;
+  bool colorBlack = false;
 
   _scrollListener() {
-    _scrollPos = widget.controller!.position.pixels;
-    if (_scrollPos > 100 && widget.changeColor && _colorBlack) {
+    scrollPos = widget.controller!.position.pixels;
+    if (scrollPos > 100 && widget.changeColor && colorBlack) {
       setState(() {
-        _colorBlack = false;
+        colorBlack = false;
       });
-    } else if (_scrollPos < 100 && widget.changeColor && !_colorBlack) {
+    } else if (scrollPos < 100 && widget.changeColor && !colorBlack) {
       setState(() {
-        _colorBlack = true;
+        colorBlack = true;
       });
     }
   }
@@ -42,7 +43,7 @@ class _AkAppBarState extends State<AkAppBar> {
   void initState() {
     super.initState();
     if (widget.changeColor) {
-      _colorBlack = true;
+      colorBlack = true;
     }
     if (widget.controller != null) {
       widget.controller?.addListener(_scrollListener);
@@ -59,7 +60,8 @@ class _AkAppBarState extends State<AkAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    final _leadingMenuButton = IconButton(
+    final appState = Provider.of<AppState>(context);
+    final leadingMenuButton = IconButton(
       color: Theme.of(context).secondaryHeaderColor,
       icon: const Icon(Icons.menu),
       onPressed: () {
@@ -67,17 +69,7 @@ class _AkAppBarState extends State<AkAppBar> {
       },
     );
 
-    final List<Widget> _menuItems = menuItemsList.map((elem) {
-      return MenuItem(
-        controller: widget.controller == null ? null : widget.controller,
-        title: elem['title'] as String,
-        path: elem['path'] as String,
-        fontSize: 16,
-        column: false,
-      );
-    }).toList();
-
-    final _mainIcon = Container(
+    final mainIcon = Container(
       width: 40,
       height: 40,
       alignment: Alignment.center,
@@ -102,72 +94,65 @@ class _AkAppBarState extends State<AkAppBar> {
       ),
     );
 
-    return isSmallScreen(context)
-        ? AppBar(
-            backgroundColor:
-                _colorBlack ? Colors.black : Theme.of(context).primaryColor,
-            centerTitle: true,
-            elevation: 0,
-            toolbarHeight: appBarHeight,
-            leading: _leadingMenuButton,
-            title: _mainIcon,
-            actions: <Widget>[
-              Container(
-                alignment: Alignment.centerRight,
-                child: OverlayMenu(
-                  borderRadius: BorderRadius.circular(0),
-                  backgroundColor: _colorBlack
-                      ? Color(0x00000000)
-                      : Theme.of(context).primaryColor,
-                  links: menuItemsList.map((elem) {
-                    return Center(
-                      child: HoverCrossFadeWidget(
-                        cursor: SystemMouseCursors.click,
-                        firstChild: Text(
-                          elem['title'] as String,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Theme.of(context).secondaryHeaderColor,
-                          ),
-                        ),
-                        secondChild: Text(
-                          elem['title'] as String,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Theme.of(context).colorScheme.secondary,
-                          ),
-                        ),
-                        duration: Duration(milliseconds: 200),
-                      ),
-                    );
-                  }).toList(),
-                  onChange: (index) {
-                    final _currRoot = currentRoot();
-                    final route = Routes.homePageContains(_currRoot);
-                    if (route != null) {
-                      widget.controller?.scrollToIndex(
-                        index,
-                        duration: Duration(milliseconds: 1000),
-                        preferPosition: AutoScrollPosition.begin,
-                      );
-                    } else {
-                      navKey.currentState
-                          ?.pushNamed(menuItemsList[index]['path']!);
-                    }
-                  },
-                ),
-              ),
-            ],
-          )
-        : AppBar(
-            backgroundColor:
-                _colorBlack ? Colors.black : Theme.of(context).primaryColor,
-            centerTitle: true,
-            elevation: 0,
-            toolbarHeight: appBarHeight,
-            leading: _leadingMenuButton,
-            title: _mainIcon,
-            actions: _menuItems,
-          );
+    List<HoverLink> menuLinks = [
+      HoverLink(
+        title: 'Messages',
+        onPressed: () {
+          navKey.currentState!.pushNamed(Routes.messages.path);
+        },
+      ),
+      HoverLink(
+        title: 'Logout',
+        onPressed: () {
+          appState.logout();
+        },
+      ),
+    ];
+
+    return AppBar(
+      backgroundColor:
+          colorBlack ? Colors.black : Theme.of(context).primaryColor,
+      centerTitle: true,
+      elevation: 0,
+      toolbarHeight: appBarHeight,
+      leading: leadingMenuButton,
+      title: mainIcon,
+      actions: <Widget>[
+        Container(
+          alignment: Alignment.centerRight,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 10,
+            ),
+            child: appState.isLoggedIn
+                ? PopupMenuButton(
+                    iconSize: 40,
+                    icon: CircleImage(
+                      // imageRadius: 40,
+                      imageProvider:
+                          AssetImage('assets/images/profile_image.png'),
+                    ),
+                    tooltip: '',
+                    elevation: 5,
+                    enableFeedback: false,
+                    color: colorBlack
+                        ? Colors.black
+                        : Theme.of(context).primaryColor,
+                    itemBuilder: (_) {
+                      return menuLinks.map((link) {
+                        return PopupMenuItem(child: link);
+                      }).toList();
+                    })
+                : HoverLink(
+                    title: 'Login',
+                    fontSize: 16.0,
+                    onPressed: () {
+                      navKey.currentState!.pushNamed(Routes.login.path);
+                    },
+                  ),
+          ),
+        ),
+      ],
+    );
   }
 }

@@ -14,6 +14,7 @@ class AppState with ChangeNotifier {
   List _nfts = [];
   bool _loggedIn = false;
   bool isLoading = false;
+  bool isRightMenuOpen = false;
 
   bool get isLoggedIn => _loggedIn;
 
@@ -72,7 +73,7 @@ class AppState with ChangeNotifier {
     // TODO: Check for errors at signout
 
     _loggedIn = false;
-    isLoading = true;
+    isLoading = false;
     notifyListeners();
   }
 

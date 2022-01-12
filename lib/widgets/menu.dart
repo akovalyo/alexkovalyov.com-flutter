@@ -22,18 +22,12 @@ class AkMenu extends StatelessWidget {
         title: elem['title'] as String,
         path: elem['path'] as String,
         fontSize: fontSize,
-        column: isColumn,
       );
     }).toList();
 
-    return isColumn
-        ? Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: _items,
-          )
-        : ListView(
-            scrollDirection: Axis.horizontal,
-            children: _items,
-          );
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: _items,
+    );
   }
 }

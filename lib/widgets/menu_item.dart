@@ -11,22 +11,18 @@ class MenuItem extends StatelessWidget {
   final String path;
   final AutoScrollController? controller;
   final double fontSize;
-  final bool column;
 
   const MenuItem({
     required this.title,
     required this.path,
     this.controller,
     required this.fontSize,
-    required this.column,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: column
-          ? EdgeInsets.symmetric(vertical: 6)
-          : const EdgeInsets.only(right: 25),
+      padding: EdgeInsets.symmetric(vertical: 6),
       child: HoverButton(
         height: 1,
         minWidth: 0,
@@ -56,9 +52,8 @@ class MenuItem extends StatelessWidget {
           } else {
             navKey.currentState!.pushNamed(path);
           }
-          if (column) {
-            Scaffold.of(context).openEndDrawer();
-          }
+
+          Scaffold.of(context).openEndDrawer();
         },
       ),
     );
