@@ -11,7 +11,8 @@ class NftItem {
   final DateTime dateAcquired;
   final String? tokenStandard;
   final String blockchain;
-  final int rarityRank;
+  final int? rarityRank;
+  final String? rarity;
 
   NftItem({
     this.id,
@@ -26,7 +27,8 @@ class NftItem {
     required this.dateAcquired,
     required this.tokenStandard,
     required this.blockchain,
-    required this.rarityRank,
+    this.rarityRank,
+    required this.rarity,
   });
 
   NftItem copyWith({
@@ -43,6 +45,7 @@ class NftItem {
     String? tokenStandard,
     String? blockchain,
     int? rarityRank,
+    String? rarity,
   }) {
     return NftItem(
       id: id ?? this.id,
@@ -58,6 +61,7 @@ class NftItem {
       tokenStandard: tokenStandard ?? this.tokenStandard,
       blockchain: blockchain ?? this.blockchain,
       rarityRank: rarityRank ?? this.rarityRank,
+      rarity: rarity ?? this.rarity,
     );
   }
 
@@ -77,6 +81,7 @@ class NftItem {
       tokenStandard: data['tokenStandard'],
       blockchain: data['blockchain'] as String,
       rarityRank: data['rarityRank'] as int,
+      rarity: data['rarity'] as String,
     );
   }
 
@@ -94,6 +99,7 @@ class NftItem {
       'tokenStandard': tokenStandard,
       'blockchain': blockchain,
       'rarityRank': rarityRank,
+      'rarity': rarity,
     };
   }
 }
