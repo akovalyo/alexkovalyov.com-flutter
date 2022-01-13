@@ -117,7 +117,7 @@ class AppState with ChangeNotifier {
         cards.add(
           GestureDetector(
             onTap: () {
-              navKey.currentState!.pushNamed(post.path);
+              navKey.currentState?.pushNamed(post.path);
             },
             child: HoverBlogContainer(
               width: cardSize.width,

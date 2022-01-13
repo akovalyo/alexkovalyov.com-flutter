@@ -56,7 +56,7 @@ class AkDrawer extends StatelessWidget {
                               curve: Curves.fastOutSlowIn,
                             );
                           } else {
-                            navKey.currentState!.pushNamed(Routes.home.path);
+                            navKey.currentState?.pushNamed(Routes.home.path);
                           }
                           Scaffold.of(context).openEndDrawer();
                         },
@@ -84,7 +84,7 @@ class AkDrawer extends StatelessWidget {
                 title: Routes.nft.title,
                 fontSize: 18,
                 onPressed: () {
-                  navKey.currentState!.pushNamed(Routes.nft.path);
+                  navKey.currentState?.pushNamed(Routes.nft.path);
                 },
               ),
             ),

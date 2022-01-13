@@ -97,13 +97,14 @@ class _AkAppBarState extends State<AkAppBar> {
       HoverLink(
         title: 'Messages',
         onPressed: () {
-          navKey.currentState!.pushNamed(Routes.messages.path);
+          navKey.currentState?.pushNamed(Routes.messages.path);
         },
       ),
       HoverLink(
         title: 'Logout',
         onPressed: () {
           appState.logout();
+          navKey.currentState?.pushNamed(Routes.home.path);
         },
       ),
     ];
@@ -146,7 +147,7 @@ class _AkAppBarState extends State<AkAppBar> {
                     title: 'Login',
                     fontSize: 16.0,
                     onPressed: () {
-                      navKey.currentState!.pushNamed(Routes.login.path);
+                      navKey.currentState?.pushNamed(Routes.login.path);
                     },
                   ),
           ),

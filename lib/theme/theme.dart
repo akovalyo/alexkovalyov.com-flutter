@@ -34,14 +34,14 @@ class AppThemes {
             bodyText1: ThemeData.light().textTheme.bodyText1!.copyWith(
                   fontFamily: 'DavidLibre',
                   fontWeight: FontWeight.w100,
-                  fontSize: 20,
+                  fontSize: 18,
                   height: 1.5,
                   color: Colors.white,
                 ),
             bodyText2: ThemeData.light().textTheme.bodyText2!.copyWith(
                   fontFamily: 'DavidLibre',
                   fontWeight: FontWeight.w100,
-                  fontSize: 20,
+                  fontSize: 18,
                   height: 1.5,
                 ),
             headline3: ThemeData.light().textTheme.headline3!.copyWith(

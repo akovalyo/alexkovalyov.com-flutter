@@ -1,13 +1,37 @@
 import 'package:flutter/material.dart';
 
 class FormFieldHelper {
-  static Widget textFieldBuilder(
-      {required TextEditingController controller,
-      String hint = "",
-      TextInputType? keyboardType,
-      String? Function(String?)? validator}) {
+  static Widget textFieldBuilder({
+    required TextEditingController controller,
+    required BuildContext context,
+    String? hint,
+    TextInputType? keyboardType,
+    String? Function(String?)? validator,
+    String? label,
+    bool mandatory = false,
+  }) {
+    Widget? buildLabel() {
+      if (label == null) return null;
+      if (mandatory) {
+        return RichText(
+          text: TextSpan(
+            style: Theme.of(context).textTheme.bodyText2,
+            children: [
+              TextSpan(text: label),
+              TextSpan(
+                text: '*',
+                style: TextStyle(color: Colors.red),
+              ),
+            ],
+          ),
+        );
+      }
+      return Text(label, style: Theme.of(context).textTheme.bodyText2);
+    }
+
     return TextFormField(
       decoration: InputDecoration(
+        label: buildLabel(),
         border: const UnderlineInputBorder(),
         hintText: hint,
       ),
