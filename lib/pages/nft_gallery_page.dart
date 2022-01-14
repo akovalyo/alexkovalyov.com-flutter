@@ -8,6 +8,7 @@ import '../page_elements/ak_app_bar.dart';
 import '../consts/consts.dart';
 import '../models/app_state.dart';
 import 'nft_item_edit_screen.dart';
+import '../widgets/nft_item_tile.dart';
 
 class NftGalleryPage extends StatefulWidget {
   const NftGalleryPage({Key? key}) : super(key: key);
@@ -24,30 +25,29 @@ class _NftGalleryPageState extends State<NftGalleryPage> {
     setState(() {
       isLoading = true;
     });
-    var tmpList = <NftItem>[];
+
+    nftItems.clear();
     final Query postsRef = FirebaseFirestore.instance.collection('nft');
     final QuerySnapshot snapshot =
         await postsRef.orderBy('dateAcquired', descending: true).get();
-    snapshot.docs.forEach((e) {
-      NftItem nft = NftItem.fromData(e.data() as Map<String, dynamic>, e.id);
-      tmpList.add(nft);
-    });
+
     setState(() {
-      nftItems = tmpList;
+      snapshot.docs.forEach((e) {
+        NftItem nft = NftItem.fromData(e.data() as Map<String, dynamic>, e.id);
+        nftItems.add(nft);
+      });
+
       isLoading = false;
     });
   }
 
   void saveNft(NftItem nftItem) async {
-    await FirebaseFirestore.instance
-        .collection('messages')
-        .add(nftItem.toJson());
+    await FirebaseFirestore.instance.collection('nft').add(nftItem.toJson());
   }
 
   @override
   void initState() {
-    print('LOAD NFT');
-    // loadNfts();
+    loadNfts();
     super.initState();
   }
 
@@ -87,7 +87,9 @@ class _NftGalleryPageState extends State<NftGalleryPage> {
           : Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Wrap(
-                children: [],
+                children: nftItems.map((e) {
+                  return NftItemTile(item: e);
+                }).toList(),
               ),
             ),
     );

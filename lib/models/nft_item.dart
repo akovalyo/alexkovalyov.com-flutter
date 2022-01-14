@@ -2,6 +2,7 @@ class NftItem {
   final String? id;
   final String title;
   final String imageUrl;
+  final String collection;
   final int tokenId;
   final int totalMinted;
   final String createdBy;
@@ -13,11 +14,14 @@ class NftItem {
   final String blockchain;
   final int? rarityRank;
   final String? rarity;
+  final String? contractAddress;
+  final String? tokenAddress;
 
   NftItem({
     this.id,
     required this.title,
     required this.imageUrl,
+    required this.collection,
     required this.tokenId,
     required this.totalMinted,
     required this.createdBy,
@@ -29,12 +33,15 @@ class NftItem {
     required this.blockchain,
     this.rarityRank,
     required this.rarity,
+    this.contractAddress,
+    this.tokenAddress,
   });
 
   NftItem copyWith({
     String? id,
     String? title,
     String? imageUrl,
+    String? collection,
     int? tokenId,
     int? totalMinted,
     String? createdBy,
@@ -46,11 +53,14 @@ class NftItem {
     String? blockchain,
     int? rarityRank,
     String? rarity,
+    String? contractAddress,
+    String? tokenAddress,
   }) {
     return NftItem(
       id: id ?? this.id,
       title: title ?? this.title,
       imageUrl: imageUrl ?? this.imageUrl,
+      collection: collection ?? this.collection,
       tokenId: tokenId ?? this.tokenId,
       totalMinted: totalMinted ?? this.totalMinted,
       createdBy: createdBy ?? this.createdBy,
@@ -62,6 +72,8 @@ class NftItem {
       blockchain: blockchain ?? this.blockchain,
       rarityRank: rarityRank ?? this.rarityRank,
       rarity: rarity ?? this.rarity,
+      contractAddress: contractAddress ?? this.contractAddress,
+      tokenAddress: tokenAddress ?? this.tokenAddress,
     );
   }
 
@@ -71,6 +83,7 @@ class NftItem {
       id: id,
       title: data['title'] as String,
       imageUrl: data['imageUrl'] as String,
+      collection: data['collection'] as String,
       tokenId: data['tokenId'] as int,
       totalMinted: data['totalMinted'] as int,
       createdBy: data['createdBy'] as String,
@@ -82,6 +95,8 @@ class NftItem {
       blockchain: data['blockchain'] as String,
       rarityRank: data['rarityRank'] as int,
       rarity: data['rarity'] as String,
+      contractAddress: data['contractAddress'] as String,
+      tokenAddress: data['tokenAddress'] as String,
     );
   }
 
@@ -89,6 +104,7 @@ class NftItem {
     return <String, dynamic>{
       'title': title,
       'imageUrl': imageUrl,
+      'collection': collection,
       'tokenId': tokenId,
       'totalMinted': totalMinted,
       'createdBy': createdBy,
@@ -100,6 +116,8 @@ class NftItem {
       'blockchain': blockchain,
       'rarityRank': rarityRank,
       'rarity': rarity,
+      'contractAddress': contractAddress,
+      'tokenAddress': tokenAddress,
     };
   }
 }

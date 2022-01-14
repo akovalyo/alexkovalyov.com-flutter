@@ -49,7 +49,7 @@ class MenuItem extends StatelessWidget {
               preferPosition: AutoScrollPosition.begin,
             );
           } else {
-            navKey.currentState!.pushNamed(path);
+            navKey.currentState?.pushNamed(path);
           }
 
           Scaffold.of(context).openEndDrawer();
