@@ -1,45 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:mysite/widgets/nft_item_tile.dart';
+import 'package:intl/intl.dart';
+
 import '../models/nft_item.dart';
 import '../helpers/nft_helper.dart';
 import '../form/form_field_helper.dart';
+import '../models/variable_wrapper.dart';
 
 class TextController {
   final title = TextEditingController();
   final imageUrl = TextEditingController();
+  final collection = TextEditingController();
   final tokenId = TextEditingController();
   final totalMinted = TextEditingController();
   final createdBy = TextEditingController();
   final createdByUrl = TextEditingController();
   final description = TextEditingController();
   final rarityRank = TextEditingController();
+  final contractAddress = TextEditingController();
+  final tokenAddress = TextEditingController();
 
   void dispose() {
     title.dispose();
     imageUrl.dispose();
+    collection.dispose();
     tokenId.dispose();
     totalMinted.dispose();
     createdBy.dispose();
     createdByUrl.dispose();
     description.dispose();
     rarityRank.dispose();
+    contractAddress.dispose();
+    tokenAddress.dispose();
   }
 
   void clear() {
     title.clear();
     imageUrl.clear();
+    collection.clear();
     tokenId.clear();
     totalMinted.clear();
     createdBy.clear();
     createdByUrl.clear();
     description.clear();
     rarityRank.clear();
+    contractAddress.clear();
+    tokenAddress.clear();
   }
-}
-
-class VariableWrapper {
-  String value;
-  VariableWrapper(this.value);
 }
 
 class NftItemEditScreen extends StatefulWidget {
@@ -63,29 +70,34 @@ class NftItemEditScreen extends StatefulWidget {
 class _NftItemEditScreenState extends State<NftItemEditScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextController _textController = TextController();
-  DateTime _dateMinted = DateTime.now();
-  DateTime _dateAcquired = DateTime.now();
-  String _tokenStandard = TokenStandard.erc721;
-  VariableWrapper _blockchain = VariableWrapper(Blockchain.etherium);
-  VariableWrapper _rarity = VariableWrapper(Rarity.common);
+  VariableWrapper<DateTime> _dateMinted =
+      VariableWrapper<DateTime>(DateTime.now());
+  VariableWrapper<DateTime> _dateAcquired =
+      VariableWrapper<DateTime>(DateTime.now());
+  VariableWrapper<String> _tokenStandard = VariableWrapper<String>('');
+  VariableWrapper<String> _blockchain =
+      VariableWrapper<String>(Blockchain.etherium);
+  VariableWrapper<String> _rarity = VariableWrapper<String>('');
 
   @override
   void initState() {
-    print('NFT_ITEM_EDIT_SCREEN');
     final originalItem = widget.originalItem;
     if (originalItem != null) {
       _textController.title.text = originalItem.title;
       _textController.imageUrl.text = originalItem.imageUrl;
+      _textController.collection.text = originalItem.collection;
       _textController.tokenId.text = originalItem.tokenId.toString();
       _textController.totalMinted.text = originalItem.totalMinted.toString();
       _textController.createdBy.text = originalItem.createdBy;
       _textController.createdByUrl.text = originalItem.createdByUrl ?? '';
       _textController.description.text = originalItem.description;
       _textController.rarityRank.text = originalItem.rarityRank.toString();
-      _dateMinted = originalItem.dateMinted;
-      _dateAcquired = originalItem.dateAcquired;
+      _textController.contractAddress.text = originalItem.contractAddress ?? '';
+      _textController.tokenAddress.text = originalItem.tokenAddress ?? '';
+      _dateMinted.value = originalItem.dateMinted;
+      _dateAcquired.value = originalItem.dateAcquired;
       _blockchain.value = originalItem.blockchain;
-      _tokenStandard = originalItem.tokenStandard ?? _tokenStandard;
+      _tokenStandard.value = originalItem.tokenStandard ?? _tokenStandard.value;
       _rarity.value = originalItem.rarity ?? _rarity.value;
     }
     super.initState();
@@ -93,9 +105,16 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
 
   @override
   void dispose() {
-    print('DISPOSE EDIT');
     _textController.dispose();
     super.dispose();
+  }
+
+  void clearWrappedVars() {
+    _dateMinted.value = DateTime.now();
+    _dateAcquired.value = DateTime.now();
+    _blockchain.value = Blockchain.etherium;
+    _tokenStandard.value = '';
+    _rarity.value = '';
   }
 
   @override
@@ -110,34 +129,33 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
           IconButton(
             icon: const Icon(Icons.check),
             onPressed: () {
-              // print('TITLE CONTROLLER: ${_formKey.currentState!.validate()}');
               if (_formKey.currentState!.validate()) {
                 final nftItem = NftItem(
                   id: widget.updateOriginal ? widget.originalItem?.id : null,
                   title: _textController.title.text,
                   imageUrl: _textController.imageUrl.text,
+                  collection: _textController.collection.text,
                   tokenId: int.parse(_textController.tokenId.text),
                   totalMinted: int.parse(_textController.totalMinted.text),
                   createdBy: _textController.createdBy.text,
                   createdByUrl: _textController.createdByUrl.text,
                   description: _textController.description.text,
-                  dateMinted: _dateMinted,
-                  dateAcquired: _dateAcquired,
-                  tokenStandard: _tokenStandard,
+                  contractAddress: _textController.contractAddress.text,
+                  tokenAddress: _textController.tokenAddress.text,
+                  dateMinted: _dateMinted.value,
+                  dateAcquired: _dateAcquired.value,
+                  tokenStandard: _tokenStandard.value,
                   blockchain: _blockchain.value,
                   rarityRank: _textController.rarityRank.text.isEmpty
                       ? null
                       : int.parse(_textController.rarityRank.text),
                   rarity: _rarity.value,
                 );
-
-                print(nftItem.toJson());
-
-                // if (widget.updateOriginal) {
-                //   widget.onUpdate(nftItem);
-                // } else {
-                //   widget.onCreate(nftItem);
-                // }
+                if (widget.updateOriginal) {
+                  widget.onUpdate(nftItem);
+                } else {
+                  widget.onCreate(nftItem);
+                }
               }
             },
           ),
@@ -147,63 +165,123 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
         padding: const EdgeInsets.all(20),
         child: ListView(
           children: [
+            TextButton(
+              child: const Text('Clear form'),
+              onPressed: () {
+                setState(() {
+                  _textController.clear();
+                  clearWrappedVars();
+                });
+              },
+            ),
             Form(
               key: _formKey,
               child: Column(children: [
                 FormFieldHelper.textFieldBuilder(
                   controller: _textController.title,
-                  hint: 'Title',
+                  context: context,
+                  label: 'Title',
                   validator: FormFieldHelper.validator('empty'),
+                  mandatory: true,
                 ),
                 FormFieldHelper.textFieldBuilder(
                   controller: _textController.imageUrl,
-                  hint: 'Url of the nft',
+                  context: context,
+                  label: 'Url of the nft image',
                   validator: FormFieldHelper.validator('empty'),
+                  mandatory: true,
+                ),
+                FormFieldHelper.textFieldBuilder(
+                  controller: _textController.collection,
+                  context: context,
+                  label: 'Collection',
+                  validator: FormFieldHelper.validator('empty'),
+                  mandatory: true,
                 ),
                 FormFieldHelper.textFieldBuilder(
                   controller: _textController.tokenId,
-                  hint: 'Token ID',
+                  context: context,
+                  label: 'Token ID',
+                  hint: 'Enter number',
                   keyboardType: TextInputType.number,
                   validator: FormFieldHelper.validator('numbers'),
+                  mandatory: true,
                 ),
                 FormFieldHelper.textFieldBuilder(
                   controller: _textController.totalMinted,
-                  hint: 'Total minted',
+                  context: context,
+                  label: 'Total minted',
+                  hint: 'Enter number',
                   keyboardType: TextInputType.number,
                   validator: FormFieldHelper.validator('numbers'),
+                  mandatory: true,
                 ),
                 FormFieldHelper.textFieldBuilder(
                   controller: _textController.createdBy,
-                  hint: 'Created by',
+                  context: context,
+                  label: 'Created by',
                   validator: FormFieldHelper.validator('empty'),
+                  mandatory: true,
                 ),
                 FormFieldHelper.textFieldBuilder(
                   controller: _textController.createdByUrl,
-                  hint: 'Url of the project that minted nft',
+                  context: context,
+                  label: 'Url of the project that minted nft',
                   validator: FormFieldHelper.validator(''),
                 ),
                 FormFieldHelper.textFieldBuilder(
                   controller: _textController.description,
-                  hint: 'Description',
+                  context: context,
+                  label: 'Description',
                   keyboardType: TextInputType.multiline,
                   validator: FormFieldHelper.validator('empty'),
+                  mandatory: true,
                 ),
                 FormFieldHelper.textFieldBuilder(
                   controller: _textController.rarityRank,
-                  hint: 'Rarity rank',
+                  context: context,
+                  label: 'Rarity rank',
+                  hint: 'Enter number',
                   keyboardType: TextInputType.number,
                   validator: FormFieldHelper.validator(''),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: buildChoiceChipField(
-                      Blockchain.all, 'Blockchain', _blockchain),
+                FormFieldHelper.textFieldBuilder(
+                  controller: _textController.contractAddress,
+                  context: context,
+                  label: 'Contract Address',
+                  validator: FormFieldHelper.validator(''),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: buildChoiceChipField(Rarity.all, 'Rarity', _rarity),
+                FormFieldHelper.textFieldBuilder(
+                  controller: _textController.tokenAddress,
+                  context: context,
+                  label: 'Token Address',
+                  validator: FormFieldHelper.validator(''),
                 ),
               ]),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: buildChoiceChipField(Rarity.all, 'Rarity', _rarity,
+                  clear: true),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: buildChoiceChipField(
+                  Blockchain.all, 'Blockchain', _blockchain),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: buildChoiceChipField(
+                  TokenStandard.all, 'Token Standard', _tokenStandard,
+                  clear: true),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: buildDateField(context, 'Date Minted', _dateMinted),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: buildDateField(context, 'Date Acquired', _dateAcquired),
             ),
             const SizedBox(height: 20.0),
             Text('Preview'),
@@ -211,6 +289,7 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
               item: NftItem(
                 title: _textController.title.text,
                 imageUrl: _textController.imageUrl.text,
+                collection: _textController.collection.text,
                 tokenId: _textController.tokenId.text.isEmpty
                     ? 0
                     : int.parse(_textController.tokenId.text),
@@ -220,9 +299,9 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
                 createdBy: _textController.createdBy.text,
                 createdByUrl: _textController.createdByUrl.text,
                 description: _textController.description.text,
-                dateMinted: _dateMinted,
-                dateAcquired: _dateAcquired,
-                tokenStandard: _tokenStandard,
+                dateMinted: _dateMinted.value,
+                dateAcquired: _dateAcquired.value,
+                tokenStandard: _tokenStandard.value,
                 blockchain: _blockchain.value,
                 rarityRank: _textController.rarityRank.text.isEmpty
                     ? null
@@ -237,7 +316,8 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
   }
 
   Widget buildChoiceChipField(
-      List<dynamic> choices, String title, VariableWrapper variable) {
+      List<dynamic> choices, String title, VariableWrapper<String?> variable,
+      {bool? clear}) {
     return FormField(
       builder: (FormFieldState state) {
         return Row(
@@ -245,7 +325,20 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
           children: [
             Text(title),
             const SizedBox(
-              width: 20,
+              width: 10,
+            ),
+            clear != null
+                ? TextButton(
+                    child: const Text('Clear'),
+                    onPressed: () {
+                      setState(() {
+                        variable.value = '';
+                      });
+                    },
+                  )
+                : Container(),
+            const SizedBox(
+              width: 10,
             ),
             Expanded(
               child: Wrap(
@@ -278,5 +371,37 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
     );
   }
 
-  // Widget buildDateField
+  Widget buildDateField(
+      BuildContext context, String title, VariableWrapper date) {
+    return FormField(builder: (FormFieldState state) {
+      return Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Text('$title: '),
+        Text('${DateFormat('LLL dd, yyyy').format(date.value)}'),
+        const SizedBox(
+          width: 20,
+        ),
+        TextButton(
+          child: const Text('Select'),
+          onPressed: () async {
+            final currentDate = date.value;
+
+            final selectedDate = await showDatePicker(
+              context: context,
+              initialDate: currentDate,
+              firstDate: DateTime(currentDate.year - 20),
+              lastDate: DateTime.now(),
+            );
+
+            setState(
+              () {
+                if (selectedDate != null) {
+                  date.value = selectedDate;
+                }
+              },
+            );
+          },
+        ),
+      ]);
+    });
+  }
 }
