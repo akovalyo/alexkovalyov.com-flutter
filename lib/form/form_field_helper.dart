@@ -103,9 +103,9 @@ class FormFieldHelper {
         }
 
       default:
-        return (String? value) {
+        {
           return null;
-        };
+        }
     }
   }
 }

@@ -15,6 +15,8 @@ class Blockchain {
 class TokenStandard {
   static String erc721 = 'ERC-721';
   static String erc1155 = 'ERC-1155';
+
+  static List<String> all = [erc721, erc1155];
 }
 
 class Rarity {
