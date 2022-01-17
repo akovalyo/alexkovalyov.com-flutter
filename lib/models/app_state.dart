@@ -100,29 +100,29 @@ class AppState with ChangeNotifier {
     return _posts.firstWhere((p) => p.path == path);
   }
 
-  List<Widget> getPostCards(
+  List<Widget> getPostTiles(
     BuildContext context,
   ) {
     final isSmall = isSmallScreen(context);
-    final cardSize = isSmall
-        ? Size(postCardSWidth, postCardSHeight)
-        : Size(postCardLWidth, postCardLHeight);
+    final postTileSize = isSmall
+        ? Size(tileSmallWidth, tileSmallHeight)
+        : Size(tileLargeWidth, tileLargeHeight);
     final _cardHoverSize = isSmall
-        ? Size(postCardSHoverWidth, postCardSHoverHeight)
-        : Size(postCardLHoverWidth, postCardLHoverHeight);
+        ? Size(tileSmallWidth + 15, tileSmallHeight + 15)
+        : Size(tileLargeWidth + 15, tileLargeHeight + 15);
 
-    List<Widget> cards = [];
+    List<Widget> tiles = [];
     if (_posts.isNotEmpty)
       _posts.forEach((post) {
-        cards.add(
+        tiles.add(
           GestureDetector(
             onTap: () {
               navKey.currentState?.pushNamed(post.path);
             },
             child: HoverBlogContainer(
-              width: cardSize.width,
+              width: postTileSize.width,
               hoverWidth: _cardHoverSize.width,
-              height: cardSize.height,
+              height: postTileSize.height,
               hoverHeight: _cardHoverSize.height,
               image: post.imageUrl,
               title: post.title,
@@ -132,6 +132,6 @@ class AppState with ChangeNotifier {
           ),
         );
       });
-    return cards;
+    return tiles;
   }
 }

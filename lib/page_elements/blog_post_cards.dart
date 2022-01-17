@@ -9,7 +9,7 @@ class BlogPostCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context);
-    final List<Widget> postCards = appState.getPostCards(context);
+    final List<Widget> postCards = appState.getPostTiles(context);
     return Column(
       children: [
         Padding(
