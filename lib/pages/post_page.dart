@@ -100,7 +100,7 @@ class _PostPageState extends State<PostPage> {
                           SizedBox(
                             width: screenSize.width,
                             height: screenSize.height * 0.4,
-                            child: FadeInImageAny(
+                            child: ImagePlaceholder(
                               imagePath: post.imageUrl,
                               placeholder: SizedBox(
                                 width: screenSize.width,

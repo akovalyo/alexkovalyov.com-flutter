@@ -21,7 +21,7 @@ class Header extends StatelessWidget {
           Container(
             width: _screenSize.width,
             height: _screenSize.height * 0.4,
-            child: FadeInImageAny(
+            child: ImagePlaceholder(
               imagePath: 'assets/images/main/main.jpg',
               placeholder: Container(
                 color: Colors.black,
