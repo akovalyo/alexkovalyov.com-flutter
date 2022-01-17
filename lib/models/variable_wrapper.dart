@@ -1,4 +1,4 @@
-class VariableWrapper<T> {
+class WrappedVariable<T> {
   T value;
-  VariableWrapper(this.value);
+  WrappedVariable(this.value);
 }
