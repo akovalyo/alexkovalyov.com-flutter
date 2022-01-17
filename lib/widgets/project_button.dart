@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:universal_html/js.dart' as js;
 
 import '../navigation/routes.dart';
-import 'button.dart';
+import 'ak_button.dart';
 
 class ProjectButton extends StatelessWidget {
   final String? link;
