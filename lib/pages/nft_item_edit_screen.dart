@@ -6,6 +6,7 @@ import '../models/nft_item.dart';
 import '../helpers/nft_helper.dart';
 import '../form/form_field_helper.dart';
 import '../models/variable_wrapper.dart';
+import '../widgets/link_button.dart';
 
 class TextController {
   final title = TextEditingController();
@@ -70,14 +71,14 @@ class NftItemEditScreen extends StatefulWidget {
 class _NftItemEditScreenState extends State<NftItemEditScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextController _textController = TextController();
-  VariableWrapper<DateTime> _dateMinted =
-      VariableWrapper<DateTime>(DateTime.now());
-  VariableWrapper<DateTime> _dateAcquired =
-      VariableWrapper<DateTime>(DateTime.now());
-  VariableWrapper<String> _tokenStandard = VariableWrapper<String>('');
-  VariableWrapper<String> _blockchain =
-      VariableWrapper<String>(Blockchain.etherium);
-  VariableWrapper<String> _rarity = VariableWrapper<String>('');
+  WrappedVariable<DateTime> _dateMinted =
+      WrappedVariable<DateTime>(DateTime.now());
+  WrappedVariable<DateTime> _dateAcquired =
+      WrappedVariable<DateTime>(DateTime.now());
+  WrappedVariable<String> _tokenStandard = WrappedVariable<String>('');
+  WrappedVariable<String> _blockchain =
+      WrappedVariable<String>(Blockchain.etherium);
+  WrappedVariable<String> _rarity = WrappedVariable<String>('');
 
   @override
   void initState() {
@@ -165,8 +166,8 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
         padding: const EdgeInsets.all(20),
         child: ListView(
           children: [
-            TextButton(
-              child: const Text('Clear form'),
+            LinkButton(
+              title: 'Clear form',
               onPressed: () {
                 setState(() {
                   _textController.clear();
@@ -316,7 +317,7 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
   }
 
   Widget buildChoiceChipField(
-      List<dynamic> choices, String title, VariableWrapper<String?> variable,
+      List<dynamic> choices, String title, WrappedVariable<String?> variable,
       {bool? clear}) {
     return FormField(
       builder: (FormFieldState state) {
@@ -328,8 +329,8 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
               width: 10,
             ),
             clear != null
-                ? TextButton(
-                    child: const Text('Clear'),
+                ? LinkButton(
+                    title: 'Clear',
                     onPressed: () {
                       setState(() {
                         variable.value = '';
@@ -372,7 +373,7 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
   }
 
   Widget buildDateField(
-      BuildContext context, String title, VariableWrapper date) {
+      BuildContext context, String title, WrappedVariable date) {
     return FormField(builder: (FormFieldState state) {
       return Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text('$title: '),
@@ -380,8 +381,8 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
         const SizedBox(
           width: 20,
         ),
-        TextButton(
-          child: const Text('Select'),
+        LinkButton(
+          title: 'Select',
           onPressed: () async {
             final currentDate = date.value;
 
