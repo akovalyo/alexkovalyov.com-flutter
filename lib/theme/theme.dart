@@ -67,6 +67,7 @@ class AppThemes {
                 ),
             button: ThemeData.light().textTheme.button!.copyWith(
                   fontFamily: 'Oswald',
+                  fontSize: 18,
                   color: Colors.white,
                 ),
           ),

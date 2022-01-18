@@ -12,7 +12,7 @@ class ImagePlaceholder extends StatelessWidget {
   final bool loadingIndicator;
 
   ImagePlaceholder({
-    required this.imagePath,
+    this.imagePath = '',
     required this.placeholder,
     this.child,
     this.duration = const Duration(milliseconds: 500),

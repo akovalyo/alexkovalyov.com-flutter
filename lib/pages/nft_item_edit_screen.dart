@@ -101,6 +101,7 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
       _tokenStandard.value = originalItem.tokenStandard ?? _tokenStandard.value;
       _rarity.value = originalItem.rarity ?? _rarity.value;
     }
+
     super.initState();
   }
 
@@ -286,28 +287,39 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
             ),
             const SizedBox(height: 20.0),
             Text('Preview'),
-            NftItemTile(
-              item: NftItem(
-                title: _textController.title.text,
-                imageUrl: _textController.imageUrl.text,
-                collection: _textController.collection.text,
-                tokenId: _textController.tokenId.text.isEmpty
-                    ? 0
-                    : int.parse(_textController.tokenId.text),
-                totalMinted: _textController.totalMinted.text.isEmpty
-                    ? 0
-                    : int.parse(_textController.totalMinted.text),
-                createdBy: _textController.createdBy.text,
-                createdByUrl: _textController.createdByUrl.text,
-                description: _textController.description.text,
-                dateMinted: _dateMinted.value,
-                dateAcquired: _dateAcquired.value,
-                tokenStandard: _tokenStandard.value,
-                blockchain: _blockchain.value,
-                rarityRank: _textController.rarityRank.text.isEmpty
-                    ? null
-                    : int.parse(_textController.rarityRank.text),
-                rarity: _rarity.value,
+            Container(
+              width: 350,
+              height: 400,
+              alignment: Alignment.center,
+              child: NftItemTile(
+                width: 350,
+                height: 400,
+                item: NftItem(
+                  id: 'preview',
+                  title: 'title',
+                  imageUrl: _textController.imageUrl.text,
+                  collection: _textController.collection.text,
+                  tokenId: _textController.tokenId.text.isEmpty
+                      ? 0
+                      : int.parse(_textController.tokenId.text),
+                  totalMinted: _textController.totalMinted.text.isEmpty
+                      ? 0
+                      : int.parse(_textController.totalMinted.text),
+                  createdBy: _textController.createdBy.text,
+                  createdByUrl: _textController.createdByUrl.text,
+                  description: _textController.description.text,
+                  contractAddress: _textController.contractAddress.text,
+                  tokenAddress: _textController.tokenAddress.text,
+                  dateMinted: _dateMinted.value,
+                  dateAcquired: _dateAcquired.value,
+                  tokenStandard: _tokenStandard.value,
+                  blockchain: _blockchain.value,
+                  rarityRank: _textController.rarityRank.text.isEmpty
+                      ? null
+                      : int.parse(_textController.rarityRank.text),
+                  rarity: _rarity.value,
+                ),
+                disableEditButton: true,
               ),
             )
           ],

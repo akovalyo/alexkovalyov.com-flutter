@@ -6,9 +6,12 @@ import '../models/nft_item.dart';
 import '../page_elements/drawer.dart';
 import '../page_elements/ak_app_bar.dart';
 import '../consts/consts.dart';
+import '../helpers/screen_helper.dart';
 import '../models/app_state.dart';
 import 'nft_item_edit_screen.dart';
 import '../widgets/nft_item_tile.dart';
+import '../page_elements/footer.dart';
+import '../consts/consts.dart';
 
 class NftGalleryPage extends StatefulWidget {
   const NftGalleryPage({Key? key}) : super(key: key);
@@ -45,6 +48,26 @@ class _NftGalleryPageState extends State<NftGalleryPage> {
     await FirebaseFirestore.instance.collection('nft').add(nftItem.toJson());
   }
 
+  void openNftItemEditScreen(NftItem? item) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => NftItemEditScreen(
+          originalItem: item,
+          onCreate: (item) {
+            saveNft(item);
+            loadNfts();
+            Navigator.pop(context);
+          },
+          onUpdate: (item) {
+            saveNft(item);
+            loadNfts();
+          },
+        ),
+      ),
+    );
+  }
+
   @override
   void initState() {
     loadNfts();
@@ -60,21 +83,9 @@ class _NftGalleryPageState extends State<NftGalleryPage> {
           ? FloatingActionButton(
               child: const Icon(Icons.add),
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => NftItemEditScreen(
-                              onCreate: (item) {
-                                saveNft(item);
-                                loadNfts();
-                                Navigator.pop(context);
-                              },
-                              onUpdate: (item) {
-                                saveNft(item);
-                                loadNfts();
-                              },
-                            )));
-              })
+                openNftItemEditScreen(null);
+              },
+            )
           : null,
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: PreferredSize(
@@ -82,16 +93,57 @@ class _NftGalleryPageState extends State<NftGalleryPage> {
         child: AkAppBar(),
       ),
       drawer: AkDrawer(),
-      body: isLoading
-          ? Center(child: CircularProgressIndicator())
-          : Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Wrap(
-                children: nftItems.map((e) {
-                  return NftItemTile(item: e);
-                }).toList(),
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Center(
+                  child: Text(
+                'Nft Gallery',
+                style: Theme.of(context).textTheme.headline3,
+              )),
+            ),
+          ),
+          //TODO: Filters
+
+          // Nft tiles list
+          SliverPadding(
+            padding: EdgeInsets.symmetric(
+                horizontal:
+                    isSmallScreen(context) ? paddingSmall : paddingLarge),
+            sliver: SliverGrid(
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                mainAxisExtent: 400,
+                maxCrossAxisExtent: 350,
+                mainAxisSpacing: 20,
+                crossAxisSpacing: 20,
+              ),
+              delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  return NftItemTile(
+                    item: nftItems[index],
+                    onPressedEditButton: () {
+                      openNftItemEditScreen(nftItems[index]);
+                    },
+                  );
+                },
+                childCount: nftItems.length,
               ),
             ),
+          ),
+
+          SliverFillRemaining(),
+
+          // Footer
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Footer(),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
