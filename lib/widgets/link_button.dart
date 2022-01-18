@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../theme/theme_helpers.dart';
+import '../helpers/theme_helper.dart';
 
 class LinkButton extends StatelessWidget {
   final String title;

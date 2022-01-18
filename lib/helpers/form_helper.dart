@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class FormFieldHelper {
+class FormHelper {
   static Widget textFieldBuilder({
     required TextEditingController controller,
     required BuildContext context,

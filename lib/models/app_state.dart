@@ -103,7 +103,7 @@ class AppState with ChangeNotifier {
   List<Widget> getPostTiles(
     BuildContext context,
   ) {
-    final isSmall = isSmallScreen(context);
+    final isSmall = ScreenHelper.isSmallScreen(context);
     final postTileSize = isSmall
         ? Size(tileSmallWidth, tileSmallHeight)
         : Size(tileLargeWidth, tileLargeHeight);

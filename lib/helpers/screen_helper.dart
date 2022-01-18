@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
-bool isSmallScreen(BuildContext context) {
-  return MediaQuery.of(context).size.width < 800;
+class ScreenHelper {
+  static bool isSmallScreen(BuildContext context) {
+    return MediaQuery.of(context).size.width < 800;
+  }
 }
+
+
+
 
 
 

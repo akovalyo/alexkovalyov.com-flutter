@@ -48,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
               Expanded(
                 child: Center(
                   child: SizedBox(
-                    width: isSmallScreen(context)
+                    width: ScreenHelper.isSmallScreen(context)
                         ? screenSize.width * 0.7
                         : screenSize.width * 0.4,
                     child: Card(

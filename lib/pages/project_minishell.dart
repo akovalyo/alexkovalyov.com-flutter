@@ -69,7 +69,7 @@ class _ProjectMinishellState extends State<ProjectMinishell> {
           Center(
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 20),
-              width: isSmallScreen(context)
+              width: ScreenHelper.isSmallScreen(context)
                   ? _screenSize.width * 0.95
                   : _screenSize.width * 0.6,
               height: 600,
@@ -96,7 +96,8 @@ class TextBlock extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(
         vertical: 10,
-        horizontal: isSmallScreen(context) ? paddingSmall : paddingLarge,
+        horizontal:
+            ScreenHelper.isSmallScreen(context) ? paddingSmall : paddingLarge,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

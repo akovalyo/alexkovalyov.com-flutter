@@ -3,7 +3,7 @@ import 'package:hovering/hovering.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 import '../navigation/routes.dart';
-import '../navigation/navigation_helper.dart';
+import '../helpers/navigation_helper.dart';
 
 class MenuItem extends StatelessWidget {
   final String title;

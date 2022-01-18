@@ -29,7 +29,9 @@ class BlogPostCards extends StatelessWidget {
         Container(
           padding: EdgeInsets.symmetric(
               vertical: 20,
-              horizontal: isSmallScreen(context) ? paddingSmall : paddingLarge),
+              horizontal: ScreenHelper.isSmallScreen(context)
+                  ? paddingSmall
+                  : paddingLarge),
           child: Wrap(
             spacing: 40,
             runSpacing: 40,

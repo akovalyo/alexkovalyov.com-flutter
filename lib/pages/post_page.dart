@@ -119,10 +119,10 @@ class _PostPageState extends State<PostPage> {
                               padding: EdgeInsets.only(
                                 top: 20,
                                 bottom: 10,
-                                right: isSmallScreen(context)
+                                right: ScreenHelper.isSmallScreen(context)
                                     ? paddingSmall
                                     : paddingLarge,
-                                left: isSmallScreen(context)
+                                left: ScreenHelper.isSmallScreen(context)
                                     ? paddingSmall
                                     : paddingLarge,
                               ),
@@ -134,10 +134,10 @@ class _PostPageState extends State<PostPage> {
                               alignment: Alignment.center,
                               padding: EdgeInsets.only(
                                 bottom: 20,
-                                left: isSmallScreen(context)
+                                left: ScreenHelper.isSmallScreen(context)
                                     ? paddingSmall
                                     : paddingLarge,
-                                right: isSmallScreen(context)
+                                right: ScreenHelper.isSmallScreen(context)
                                     ? paddingSmall
                                     : paddingLarge,
                               ),
@@ -146,7 +146,7 @@ class _PostPageState extends State<PostPage> {
                               )),
                           Container(
                             padding: EdgeInsets.symmetric(
-                                horizontal: isSmallScreen(context)
+                                horizontal: ScreenHelper.isSmallScreen(context)
                                     ? paddingSmall
                                     : paddingLarge),
                             child: Column(
