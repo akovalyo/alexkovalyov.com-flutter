@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import '../theme/theme_helpers.dart';
 
 class LinkButton extends StatelessWidget {
   final String title;
   final VoidCallback onPressed;
-  const LinkButton({Key? key, required this.title, required this.onPressed})
+  final Color? color;
+  const LinkButton(
+      {Key? key, required this.title, required this.onPressed, this.color})
       : super(key: key);
 
   @override
@@ -13,11 +16,21 @@ class LinkButton extends StatelessWidget {
         title,
       ),
       style: ButtonStyle(
-        overlayColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-          return Colors.transparent; // Defer to the widget's default.
-        }),
-      ),
+          textStyle:
+              MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+            if (states.any(interactiveStates.contains)) {
+              return TextStyle(
+                decoration: TextDecoration.underline,
+                fontWeight: FontWeight.w700,
+              );
+            }
+            return TextStyle(
+              decoration: TextDecoration.underline,
+            );
+          }),
+          foregroundColor: MaterialStateProperty.all(
+              color != null ? color : Theme.of(context).colorScheme.secondary),
+          overlayColor: MaterialStateProperty.all(Colors.transparent)),
       onPressed: onPressed,
     );
   }
