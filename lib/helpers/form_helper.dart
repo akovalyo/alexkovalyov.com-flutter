@@ -8,6 +8,8 @@ class FormHelper {
     TextInputType? keyboardType,
     String? Function(String?)? validator,
     String? label,
+    int minLines = 1,
+    int maxLines = 1,
     bool mandatory = false,
   }) {
     Widget? buildLabel() {
@@ -38,6 +40,8 @@ class FormHelper {
       autofocus: false,
       autocorrect: false,
       keyboardType: keyboardType,
+      minLines: minLines,
+      maxLines: maxLines,
       textCapitalization: TextCapitalization.none,
       controller: controller,
       validator: validator,

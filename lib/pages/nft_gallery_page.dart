@@ -11,7 +11,6 @@ import '../models/app_state.dart';
 import 'nft_item_edit_screen.dart';
 import '../widgets/nft_item_tile.dart';
 import '../page_elements/footer.dart';
-import '../consts/consts.dart';
 import '../widgets/nft_gallery_header.dart';
 
 class NftGalleryPage extends StatefulWidget {
@@ -65,18 +64,22 @@ class _NftGalleryPageState extends State<NftGalleryPage> {
       context,
       MaterialPageRoute(
         builder: (context) => NftItemEditScreen(
-          originalItem: item,
-          onCreate: (item) {
-            saveNft(item);
-            loadNfts();
-            Navigator.pop(context);
-          },
-          onUpdate: (item) {
-            saveNft(item);
-            loadNfts();
-            Navigator.pop(context);
-          },
-        ),
+            originalItem: item,
+            onCreate: (item) {
+              saveNft(item);
+              loadNfts();
+              Navigator.pop(context);
+            },
+            onUpdate: (item) {
+              saveNft(item);
+              loadNfts();
+              Navigator.pop(context);
+            },
+            onDelete: (item) {
+              deleteNft(item);
+              loadNfts();
+              Navigator.pop(context);
+            }),
       ),
     );
   }
@@ -90,9 +93,9 @@ class _NftGalleryPageState extends State<NftGalleryPage> {
   @override
   Widget build(BuildContext context) {
     final _screenSize = MediaQuery.of(context).size;
-    final AppState appState = Provider.of<AppState>(context, listen: false);
+    final AppState _appState = Provider.of<AppState>(context, listen: false);
     return Scaffold(
-      floatingActionButton: appState.isLoggedIn
+      floatingActionButton: _appState.isLoggedIn
           ? FloatingActionButton(
               child: const Icon(Icons.add),
               onPressed: () {
@@ -108,12 +111,12 @@ class _NftGalleryPageState extends State<NftGalleryPage> {
       drawer: AkDrawer(),
       body: CustomScrollView(
         slivers: [
-          // Filters
-          SliverPersistentHeader(
-            delegate: NftGalleryHeader(),
-            pinned: true,
-            floating: false,
-          ),
+          // Header with filters
+          // SliverPersistentHeader(
+          //   delegate: NftGalleryHeader(),
+          //   pinned: true,
+          //   floating: false,
+          // ),
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
@@ -133,8 +136,8 @@ class _NftGalleryPageState extends State<NftGalleryPage> {
                     : paddingLarge),
             sliver: SliverGrid(
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                mainAxisExtent: 430,
-                maxCrossAxisExtent: 400,
+                mainAxisExtent: _appState.isLoggedIn ? 410 : 380,
+                maxCrossAxisExtent: 380,
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 10,
               ),

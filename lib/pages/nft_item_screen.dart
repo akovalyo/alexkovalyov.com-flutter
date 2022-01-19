@@ -27,6 +27,8 @@ class NftItemScreen extends StatelessWidget {
     final double _contaninerHeight =
         ScreenHelper.screenHeightDivided(context, 90);
 
+    final description = item.description.replaceAll("\\n", "\n");
+
     final left = Container(
       width: _isSmallScreen ? _containerWidth * 0.9 : 270,
       child: Column(
@@ -140,7 +142,7 @@ class NftItemScreen extends StatelessWidget {
             'Description:',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          Text(item.description),
+          Text(description),
         ],
       ),
     );

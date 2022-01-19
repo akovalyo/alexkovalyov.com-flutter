@@ -99,12 +99,12 @@ class _NftItemTileState extends State<NftItemTile> {
                     ),
                     NftItemField(
                       leftChild: 'Collection:',
-                      rightChild: widget.item.blockchain,
+                      rightChild: widget.item.collection,
                       color: Theme.of(context).secondaryHeaderColor,
                     ),
                     NftItemField(
                       leftChild: 'Blockchain:',
-                      rightChild: widget.item.collection,
+                      rightChild: widget.item.blockchain,
                       color: Theme.of(context).secondaryHeaderColor,
                     ),
                     NftItemField(

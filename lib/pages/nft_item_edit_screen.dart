@@ -53,6 +53,7 @@ class TextController {
 class NftItemEditScreen extends StatefulWidget {
   final Function(NftItem) onCreate;
   final Function(NftItem) onUpdate;
+  final Function(NftItem) onDelete;
   final NftItem? originalItem;
   final bool updateOriginal;
 
@@ -60,6 +61,7 @@ class NftItemEditScreen extends StatefulWidget {
     Key? key,
     required this.onCreate,
     required this.onUpdate,
+    required this.onDelete,
     this.originalItem,
   })  : updateOriginal = originalItem != null,
         super(key: key);
@@ -242,6 +244,7 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
                   keyboardType: TextInputType.multiline,
                   validator: FormHelper.validator('empty'),
                   mandatory: true,
+                  maxLines: 5,
                 ),
                 FormHelper.textFieldBuilder(
                   controller: _textController.rarityRank,
@@ -345,7 +348,36 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
                 ),
                 disableEditButton: true,
               ),
-            )
+            ),
+            widget.updateOriginal
+                ? LinkButton(
+                    title: 'Delete',
+                    color: Colors.red,
+                    onPressed: () => showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        title: const Text('Delete NFT'),
+                        content: const Text(
+                            'Are you sure you want to delete the NFT?'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text('Cancel'),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                              widget.onDelete(widget.originalItem!);
+                            },
+                            child: const Text('Confirm'),
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+                : Container(),
           ],
         ),
       ),
