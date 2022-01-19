@@ -12,6 +12,7 @@ import 'nft_item_edit_screen.dart';
 import '../widgets/nft_item_tile.dart';
 import '../page_elements/footer.dart';
 import '../consts/consts.dart';
+import '../widgets/nft_gallery_header.dart';
 
 class NftGalleryPage extends StatefulWidget {
   const NftGalleryPage({Key? key}) : super(key: key);
@@ -95,6 +96,12 @@ class _NftGalleryPageState extends State<NftGalleryPage> {
       drawer: AkDrawer(),
       body: CustomScrollView(
         slivers: [
+          // Filters
+          SliverPersistentHeader(
+            delegate: Delegate(),
+            pinned: true,
+            floating: false,
+          ),
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
@@ -105,23 +112,25 @@ class _NftGalleryPageState extends State<NftGalleryPage> {
               )),
             ),
           ),
-          //TODO: Filters
 
           // Nft tiles list
           SliverPadding(
             padding: EdgeInsets.symmetric(
-                horizontal:
-                    isSmallScreen(context) ? paddingSmall : paddingLarge),
+                horizontal: ScreenHelper.isSmallScreen(context)
+                    ? paddingSmall
+                    : paddingLarge),
             sliver: SliverGrid(
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                mainAxisExtent: 400,
-                maxCrossAxisExtent: 350,
-                mainAxisSpacing: 20,
-                crossAxisSpacing: 20,
+                mainAxisExtent: 430,
+                maxCrossAxisExtent: 400,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
               ),
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
                   return NftItemTile(
+                    width: 300,
+                    height: 430,
                     item: nftItems[index],
                     onPressedEditButton: () {
                       openNftItemEditScreen(nftItems[index]);

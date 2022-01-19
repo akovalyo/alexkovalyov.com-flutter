@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 
 import '../models/nft_item.dart';
 import '../helpers/nft_helper.dart';
-import '../form/form_field_helper.dart';
+import '../helpers/form_helper.dart';
 import '../models/variable_wrapper.dart';
 import '../widgets/link_button.dart';
 
@@ -179,85 +179,85 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
             Form(
               key: _formKey,
               child: Column(children: [
-                FormFieldHelper.textFieldBuilder(
+                FormHelper.textFieldBuilder(
                   controller: _textController.title,
                   context: context,
                   label: 'Title',
-                  validator: FormFieldHelper.validator('empty'),
+                  validator: FormHelper.validator('empty'),
                   mandatory: true,
                 ),
-                FormFieldHelper.textFieldBuilder(
+                FormHelper.textFieldBuilder(
                   controller: _textController.imageUrl,
                   context: context,
                   label: 'Url of the nft image',
-                  validator: FormFieldHelper.validator('empty'),
+                  validator: FormHelper.validator('empty'),
                   mandatory: true,
                 ),
-                FormFieldHelper.textFieldBuilder(
+                FormHelper.textFieldBuilder(
                   controller: _textController.collection,
                   context: context,
                   label: 'Collection',
-                  validator: FormFieldHelper.validator('empty'),
+                  validator: FormHelper.validator('empty'),
                   mandatory: true,
                 ),
-                FormFieldHelper.textFieldBuilder(
+                FormHelper.textFieldBuilder(
                   controller: _textController.tokenId,
                   context: context,
                   label: 'Token ID',
                   hint: 'Enter number',
                   keyboardType: TextInputType.number,
-                  validator: FormFieldHelper.validator('numbers'),
+                  validator: FormHelper.validator('numbers'),
                   mandatory: true,
                 ),
-                FormFieldHelper.textFieldBuilder(
+                FormHelper.textFieldBuilder(
                   controller: _textController.totalMinted,
                   context: context,
                   label: 'Total minted',
                   hint: 'Enter number',
                   keyboardType: TextInputType.number,
-                  validator: FormFieldHelper.validator('numbers'),
+                  validator: FormHelper.validator('numbers'),
                   mandatory: true,
                 ),
-                FormFieldHelper.textFieldBuilder(
+                FormHelper.textFieldBuilder(
                   controller: _textController.createdBy,
                   context: context,
                   label: 'Created by',
-                  validator: FormFieldHelper.validator('empty'),
+                  validator: FormHelper.validator('empty'),
                   mandatory: true,
                 ),
-                FormFieldHelper.textFieldBuilder(
+                FormHelper.textFieldBuilder(
                   controller: _textController.createdByUrl,
                   context: context,
                   label: 'Url of the project that minted nft',
-                  validator: FormFieldHelper.validator(''),
+                  validator: FormHelper.validator(''),
                 ),
-                FormFieldHelper.textFieldBuilder(
+                FormHelper.textFieldBuilder(
                   controller: _textController.description,
                   context: context,
                   label: 'Description',
                   keyboardType: TextInputType.multiline,
-                  validator: FormFieldHelper.validator('empty'),
+                  validator: FormHelper.validator('empty'),
                   mandatory: true,
                 ),
-                FormFieldHelper.textFieldBuilder(
+                FormHelper.textFieldBuilder(
                   controller: _textController.rarityRank,
                   context: context,
                   label: 'Rarity rank',
                   hint: 'Enter number',
                   keyboardType: TextInputType.number,
-                  validator: FormFieldHelper.validator(''),
+                  validator: FormHelper.validator(''),
                 ),
-                FormFieldHelper.textFieldBuilder(
+                FormHelper.textFieldBuilder(
                   controller: _textController.contractAddress,
                   context: context,
                   label: 'Contract Address',
-                  validator: FormFieldHelper.validator(''),
+                  validator: FormHelper.validator(''),
                 ),
-                FormFieldHelper.textFieldBuilder(
+                FormHelper.textFieldBuilder(
                   controller: _textController.tokenAddress,
                   context: context,
                   label: 'Token Address',
-                  validator: FormFieldHelper.validator(''),
+                  validator: FormHelper.validator(''),
                 ),
               ]),
             ),
@@ -380,7 +380,7 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
       },
       initialValue: variable.value,
       onSaved: (value) => variable.value = value as String,
-      validator: FormFieldHelper.validator('empty'),
+      validator: FormHelper.validator('empty'),
     );
   }
 

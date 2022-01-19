@@ -5,8 +5,8 @@ class ImagePlaceholder extends StatelessWidget {
   final Widget placeholder;
   final Widget? child;
   final Duration duration;
-  final double? width;
-  final double height;
+  final double width;
+  final double? height;
   final BoxFit fit;
 
   final bool loadingIndicator;
@@ -16,9 +16,9 @@ class ImagePlaceholder extends StatelessWidget {
     required this.placeholder,
     this.child,
     this.duration = const Duration(milliseconds: 500),
-    this.width,
+    required this.width,
     this.loadingIndicator = false,
-    required this.height,
+    this.height,
     required this.fit,
   });
   @override
@@ -42,6 +42,7 @@ class ImagePlaceholder extends StatelessWidget {
                   loadingProgress.cumulativeBytesLoaded as double;
 
               return Container(
+                width: width,
                 height: height,
                 child: Center(
                   child: CircularProgressIndicator(
@@ -63,8 +64,8 @@ class ImagePlaceholder extends StatelessWidget {
       },
       errorBuilder: (context, error, stackTrace) {
         return Container(
-          height: height,
-          width: height,
+          height: width,
+          width: width,
           color: Theme.of(context).primaryColorDark,
           child: Center(
             child: Icon(Icons.error_outline_outlined),

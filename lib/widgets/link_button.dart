@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-import '../helpers/theme_helper.dart';
+import '../theme/theme_helper.dart';
 
 class LinkButton extends StatelessWidget {
   final String title;
+  final Widget? titleWidget;
   final VoidCallback onPressed;
   final Color? color;
   final double fontSize;
   const LinkButton({
     Key? key,
-    required this.title,
+    this.title = '',
     required this.onPressed,
+    this.titleWidget,
     this.color,
     this.fontSize = 18.0,
   }) : super(key: key);
@@ -17,9 +19,11 @@ class LinkButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      child: Text(
-        title,
-      ),
+      child: titleWidget != null
+          ? titleWidget!
+          : Text(
+              title,
+            ),
       style: ButtonStyle(
           padding: MaterialStateProperty.all(EdgeInsets.all(0)),
           textStyle:
