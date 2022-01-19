@@ -8,6 +8,7 @@ import '../models/app_state.dart';
 import '../pages/nft_item_screen.dart';
 import '../widgets/nft_item_field.dart';
 import '../widgets/hyperlink.dart';
+import 'video_player.dart';
 
 class NftItemTile extends StatefulWidget {
   final NftItem item;
@@ -53,18 +54,20 @@ class _NftItemTileState extends State<NftItemTile> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 20.0, bottom: 10),
-                child: ImagePlaceholder(
-                  width: 200,
-                  height: 200,
-                  fit: BoxFit.fitWidth,
-                  imagePath: widget.item.imageUrl,
-                  loadingIndicator: true,
-                  placeholder: Container(
-                    height: 200,
-                    width: 200,
-                    color: Theme.of(context).primaryColorDark,
-                  ),
-                ),
+                child: widget.item.videoMediaType
+                    ? VideoPlayer(path: widget.item.imageUrl)
+                    : ImagePlaceholder(
+                        width: 200,
+                        height: 200,
+                        fit: BoxFit.fitWidth,
+                        imagePath: widget.item.imageUrl,
+                        loadingIndicator: true,
+                        placeholder: Container(
+                          height: 200,
+                          width: 200,
+                          color: Theme.of(context).primaryColorDark,
+                        ),
+                      ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),

@@ -22,6 +22,8 @@ dependencies:
   shared_preferences: ^2.0.12
   url_strategy: ^0.2.0
   dynamic_themes: ^1.1.0
+  mime: ^1.0.1
+
 
 dev_dependencies:
   flutter_test:

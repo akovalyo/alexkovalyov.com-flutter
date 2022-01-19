@@ -21,9 +21,10 @@ class ImagePlaceholder extends StatelessWidget {
     this.height,
     required this.fit,
   });
+
   @override
   Widget build(BuildContext context) {
-    final imageProvider = imagePath.startsWith(RegExp(r'[http|https]'))
+    final imageProvider = imagePath.startsWith('http')
         ? NetworkImage(imagePath)
         : AssetImage(imagePath) as ImageProvider;
 

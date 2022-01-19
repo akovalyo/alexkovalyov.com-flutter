@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Delegate extends SliverPersistentHeaderDelegate {
-  const Delegate();
+class NftGalleryHeader extends SliverPersistentHeaderDelegate {
+  const NftGalleryHeader();
 
   @override
   double get maxExtent => 60;
@@ -11,7 +11,7 @@ class Delegate extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
-    return true;
+    return false;
   }
 
   @override

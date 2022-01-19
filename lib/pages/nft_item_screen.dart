@@ -9,6 +9,7 @@ import '../widgets/image_placeholder.dart';
 import '../models/nft_item.dart';
 import '../widgets/link_button.dart';
 import '../widgets/nft_item_field.dart';
+import '../widgets/video_player.dart';
 
 class NftItemScreen extends StatelessWidget {
   final NftItem item;
@@ -193,16 +194,23 @@ class NftItemScreen extends StatelessWidget {
                             direction: Axis.horizontal,
                             crossAxisAlignment: WrapCrossAlignment.start,
                             children: [
-                              ImagePlaceholder(
-                                width: 250,
-                                fit: BoxFit.fitWidth,
-                                imagePath: item.imageUrl,
-                                placeholder: Container(
-                                  height: 250,
-                                  width: 250,
-                                  color: Theme.of(context).primaryColorDark,
-                                ),
-                              ),
+                              item.videoMediaType
+                                  ? VideoPlayer(
+                                      path: item.imageUrl,
+                                      width: 250,
+                                      height: 250,
+                                    )
+                                  : ImagePlaceholder(
+                                      width: 250,
+                                      fit: BoxFit.fitWidth,
+                                      imagePath: item.imageUrl,
+                                      placeholder: Container(
+                                        height: 250,
+                                        width: 250,
+                                        color:
+                                            Theme.of(context).primaryColorDark,
+                                      ),
+                                    ),
                               Container(
                                 width: 200,
                                 child: Center(
