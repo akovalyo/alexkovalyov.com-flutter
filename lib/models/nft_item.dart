@@ -12,30 +12,31 @@ class NftItem {
   final DateTime dateAcquired;
   final String? tokenStandard;
   final String blockchain;
-  final int? rarityRank;
+  final int rarityRank;
   final String? rarity;
   final String? contractAddress;
   final String? tokenAddress;
+  final bool videoMediaType;
 
-  NftItem({
-    this.id,
-    required this.title,
-    required this.imageUrl,
-    required this.collection,
-    required this.tokenId,
-    required this.totalMinted,
-    required this.createdBy,
-    this.createdByUrl,
-    required this.description,
-    required this.dateMinted,
-    required this.dateAcquired,
-    required this.tokenStandard,
-    required this.blockchain,
-    this.rarityRank,
-    required this.rarity,
-    this.contractAddress,
-    this.tokenAddress,
-  });
+  NftItem(
+      {this.id,
+      required this.title,
+      required this.imageUrl,
+      required this.collection,
+      required this.tokenId,
+      required this.totalMinted,
+      required this.createdBy,
+      this.createdByUrl,
+      required this.description,
+      required this.dateMinted,
+      required this.dateAcquired,
+      this.tokenStandard,
+      required this.blockchain,
+      required this.rarityRank,
+      this.rarity,
+      this.contractAddress,
+      this.tokenAddress,
+      this.videoMediaType = false});
 
   NftItem copyWith({
     String? id,
@@ -55,6 +56,7 @@ class NftItem {
     String? rarity,
     String? contractAddress,
     String? tokenAddress,
+    bool? videoMediaType,
   }) {
     return NftItem(
       id: id ?? this.id,
@@ -74,6 +76,7 @@ class NftItem {
       rarity: rarity ?? this.rarity,
       contractAddress: contractAddress ?? this.contractAddress,
       tokenAddress: tokenAddress ?? this.tokenAddress,
+      videoMediaType: videoMediaType ?? this.videoMediaType,
     );
   }
 
@@ -97,6 +100,7 @@ class NftItem {
       rarity: data['rarity'] as String,
       contractAddress: data['contractAddress'] as String,
       tokenAddress: data['tokenAddress'] as String,
+      videoMediaType: data['videoMediaType'] as bool,
     );
   }
 
@@ -118,6 +122,7 @@ class NftItem {
       'rarity': rarity,
       'contractAddress': contractAddress,
       'tokenAddress': tokenAddress,
+      'videoMediaType': videoMediaType,
     };
   }
 }

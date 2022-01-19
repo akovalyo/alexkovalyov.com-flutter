@@ -38,7 +38,7 @@ class NftItemScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             color: Theme.of(context).primaryColor,
           ),
-          item.rarityRank != null
+          item.rarityRank != 0
               ? NftItemField(
                   leftChild: 'Rarity rank:',
                   bold: true,
@@ -80,7 +80,7 @@ class NftItemScreen extends StatelessWidget {
                   color: Theme.of(context).primaryColor,
                 )
               : Container(),
-          item.contractAddress != null
+          item.contractAddress != null && item.contractAddress!.isNotEmpty
               ? NftItemField(
                   leftChild: 'Token address:',
                   bold: true,
@@ -103,7 +103,7 @@ class NftItemScreen extends StatelessWidget {
                   color: Theme.of(context).primaryColor,
                 )
               : Container(),
-          item.tokenAddress != null
+          item.tokenAddress != null && item.tokenAddress!.isNotEmpty
               ? NftItemField(
                   leftChild: 'Token address:',
                   bold: true,
@@ -289,6 +289,7 @@ class NftItemScreen extends StatelessWidget {
                           ),
                           _containerWidth < 690.0
                               ? Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     left,
@@ -300,7 +301,7 @@ class NftItemScreen extends StatelessWidget {
                                 )
                               : Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     left,
                                     SizedBox(

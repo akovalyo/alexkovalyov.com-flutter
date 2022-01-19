@@ -45,8 +45,19 @@ class _NftGalleryPageState extends State<NftGalleryPage> {
     });
   }
 
-  void saveNft(NftItem nftItem) async {
-    await FirebaseFirestore.instance.collection('nft').add(nftItem.toJson());
+  void saveNft(NftItem item) async {
+    if (item.id != null) {
+      await FirebaseFirestore.instance
+          .collection('nft')
+          .doc(item.id)
+          .update(item.toJson());
+    } else {
+      await FirebaseFirestore.instance.collection('nft').add(item.toJson());
+    }
+  }
+
+  void deleteNft(NftItem item) async {
+    await FirebaseFirestore.instance.collection('nft').doc(item.id).delete();
   }
 
   void openNftItemEditScreen(NftItem? item) {
@@ -63,6 +74,7 @@ class _NftGalleryPageState extends State<NftGalleryPage> {
           onUpdate: (item) {
             saveNft(item);
             loadNfts();
+            Navigator.pop(context);
           },
         ),
       ),
@@ -98,7 +110,7 @@ class _NftGalleryPageState extends State<NftGalleryPage> {
         slivers: [
           // Filters
           SliverPersistentHeader(
-            delegate: Delegate(),
+            delegate: NftGalleryHeader(),
             pinned: true,
             floating: false,
           ),

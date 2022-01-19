@@ -79,6 +79,7 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
   WrappedVariable<String> _blockchain =
       WrappedVariable<String>(Blockchain.etherium);
   WrappedVariable<String> _rarity = WrappedVariable<String>('');
+  bool _videoMediaType = false;
 
   @override
   void initState() {
@@ -100,6 +101,7 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
       _blockchain.value = originalItem.blockchain;
       _tokenStandard.value = originalItem.tokenStandard ?? _tokenStandard.value;
       _rarity.value = originalItem.rarity ?? _rarity.value;
+      _videoMediaType = originalItem.videoMediaType;
     }
 
     super.initState();
@@ -111,12 +113,13 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
     super.dispose();
   }
 
-  void clearWrappedVars() {
+  void clearVars() {
     _dateMinted.value = DateTime.now();
     _dateAcquired.value = DateTime.now();
     _blockchain.value = Blockchain.etherium;
     _tokenStandard.value = '';
     _rarity.value = '';
+    _videoMediaType = false;
   }
 
   @override
@@ -149,9 +152,10 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
                   tokenStandard: _tokenStandard.value,
                   blockchain: _blockchain.value,
                   rarityRank: _textController.rarityRank.text.isEmpty
-                      ? null
+                      ? 0
                       : int.parse(_textController.rarityRank.text),
                   rarity: _rarity.value,
+                  videoMediaType: _videoMediaType,
                 );
                 if (widget.updateOriginal) {
                   widget.onUpdate(nftItem);
@@ -172,7 +176,7 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
               onPressed: () {
                 setState(() {
                   _textController.clear();
-                  clearWrappedVars();
+                  clearVars();
                 });
               },
             ),
@@ -263,6 +267,25 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Nft is video:'),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Checkbox(
+                      value: _videoMediaType,
+                      onChanged: (val) {
+                        setState(() {
+                          _videoMediaType = val as bool;
+                        });
+                      })
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
               child: buildChoiceChipField(Rarity.all, 'Rarity', _rarity,
                   clear: true),
             ),
@@ -315,9 +338,10 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
                   tokenStandard: _tokenStandard.value,
                   blockchain: _blockchain.value,
                   rarityRank: _textController.rarityRank.text.isEmpty
-                      ? null
+                      ? 0
                       : int.parse(_textController.rarityRank.text),
                   rarity: _rarity.value,
+                  videoMediaType: _videoMediaType,
                 ),
                 disableEditButton: true,
               ),
