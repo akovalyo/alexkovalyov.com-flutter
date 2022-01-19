@@ -4,6 +4,16 @@ class ScreenHelper {
   static bool isSmallScreen(BuildContext context) {
     return MediaQuery.of(context).size.width < 800;
   }
+
+  static double screenWidthDivided(BuildContext context, int percentage) {
+    double width = MediaQuery.of(context).size.width;
+    return width / 100 * percentage;
+  }
+
+  static double screenHeightDivided(BuildContext context, int percentage) {
+    double height = MediaQuery.of(context).size.height;
+    return height / 100 * percentage;
+  }
 }
 
 
