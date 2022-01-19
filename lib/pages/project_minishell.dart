@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:universal_html/html.dart' as html;
 import 'package:universal_html/js.dart' as js;
 
-import 'package:mysite/helpers.dart';
-import 'package:mysite/consts/consts.dart';
-import 'package:mysite/page_elements/footer.dart';
-import 'package:mysite/widgets/image_placeholder.dart';
+import '../helpers/screen_helper.dart';
+import '../consts/consts.dart';
+import '../page_elements/footer.dart';
+import '../widgets/image_placeholder.dart';
 
 class ProjectMinishell extends StatefulWidget {
   @override
@@ -40,7 +40,7 @@ class _ProjectMinishellState extends State<ProjectMinishell> {
           SizedBox(
             width: _screenSize.width,
             height: _screenSize.height * 0.4,
-            child: FadeInImageAny(
+            child: ImagePlaceholder(
               imagePath: 'assets/images/projects/project_minishell.png',
               placeholder: SizedBox(
                 width: _screenSize.width,
@@ -69,7 +69,7 @@ class _ProjectMinishellState extends State<ProjectMinishell> {
           Center(
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 20),
-              width: isSmallScreen(context)
+              width: ScreenHelper.isSmallScreen(context)
                   ? _screenSize.width * 0.95
                   : _screenSize.width * 0.6,
               height: 600,
@@ -96,7 +96,8 @@ class TextBlock extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(
         vertical: 10,
-        horizontal: isSmallScreen(context) ? paddingSmall : paddingLarge,
+        horizontal:
+            ScreenHelper.isSmallScreen(context) ? paddingSmall : paddingLarge,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

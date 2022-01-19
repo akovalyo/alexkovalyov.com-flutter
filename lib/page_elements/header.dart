@@ -4,7 +4,7 @@ import 'package:scroll_to_index/scroll_to_index.dart';
 import '../consts/consts.dart';
 import '../navigation/routes.dart';
 import '../widgets/image_placeholder.dart';
-import '../widgets/button.dart';
+import '../widgets/ak_button.dart';
 
 class Header extends StatelessWidget {
   final AutoScrollController controller;
@@ -21,7 +21,7 @@ class Header extends StatelessWidget {
           Container(
             width: _screenSize.width,
             height: _screenSize.height * 0.4,
-            child: FadeInImageAny(
+            child: ImagePlaceholder(
               imagePath: 'assets/images/main/main.jpg',
               placeholder: Container(
                 color: Colors.black,

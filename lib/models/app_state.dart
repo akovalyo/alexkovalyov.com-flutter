@@ -3,15 +3,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'models/post.dart';
-import 'helpers.dart';
-import 'consts/consts.dart';
-import 'navigation/routes.dart';
-import 'widgets/hover_blog_container.dart';
+import 'post.dart';
+import '../helpers/screen_helper.dart';
+import '../consts/consts.dart';
+import '../navigation/routes.dart';
+import '../widgets/hover_blog_container.dart';
 
 class AppState with ChangeNotifier {
   List<Post> _posts = <Post>[];
-  List _nfts = [];
   bool _loggedIn = false;
   bool isLoading = false;
   bool isRightMenuOpen = false;
@@ -101,29 +100,29 @@ class AppState with ChangeNotifier {
     return _posts.firstWhere((p) => p.path == path);
   }
 
-  List<Widget> getPostCards(
+  List<Widget> getPostTiles(
     BuildContext context,
   ) {
-    final isSmall = isSmallScreen(context);
-    final cardSize = isSmall
-        ? Size(postCardSWidth, postCardSHeight)
-        : Size(postCardLWidth, postCardLHeight);
+    final isSmall = ScreenHelper.isSmallScreen(context);
+    final postTileSize = isSmall
+        ? Size(tileSmallWidth, tileSmallHeight)
+        : Size(tileLargeWidth, tileLargeHeight);
     final _cardHoverSize = isSmall
-        ? Size(postCardSHoverWidth, postCardSHoverHeight)
-        : Size(postCardLHoverWidth, postCardLHoverHeight);
+        ? Size(tileSmallWidth + 15, tileSmallHeight + 15)
+        : Size(tileLargeWidth + 15, tileLargeHeight + 15);
 
-    List<Widget> cards = [];
+    List<Widget> tiles = [];
     if (_posts.isNotEmpty)
       _posts.forEach((post) {
-        cards.add(
+        tiles.add(
           GestureDetector(
             onTap: () {
-              navKey.currentState!.pushNamed(post.path);
+              navKey.currentState?.pushNamed(post.path);
             },
             child: HoverBlogContainer(
-              width: cardSize.width,
+              width: postTileSize.width,
               hoverWidth: _cardHoverSize.width,
-              height: cardSize.height,
+              height: postTileSize.height,
               hoverHeight: _cardHoverSize.height,
               image: post.imageUrl,
               title: post.title,
@@ -133,12 +132,6 @@ class AppState with ChangeNotifier {
           ),
         );
       });
-    return cards;
-  }
-
-  Future loadNftCollection() async {
-    final Query postsRef = FirebaseFirestore.instance.collection('posts');
-// TODO
-    notifyListeners();
+    return tiles;
   }
 }

@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../pages/home.dart';
-import '../pages/template_basic.dart';
-import '../pages/login_page.dart';
-import '../pages/project_minishell.dart';
-import '../pages/messages_page.dart';
+import '../pages/pages.dart';
 
 class Rt {
   final String path;
@@ -59,7 +55,7 @@ class Routes {
     homePage: false,
     homeWidgetNum: null,
     title: 'Login',
-    widget: () => TemplateBasic(LoginPage()),
+    widget: () => BasicPageTemplate(LoginPage()),
   );
 
   static final messages = Rt(
@@ -67,7 +63,7 @@ class Routes {
     homePage: false,
     homeWidgetNum: null,
     title: 'Messages',
-    widget: () => TemplateBasic(MessagesPage()),
+    widget: () => BasicPageTemplate(MessagesPage()),
   );
 
   static final minishell = Rt(
@@ -75,7 +71,15 @@ class Routes {
     homePage: false,
     homeWidgetNum: null,
     title: 'Minishell',
-    widget: () => TemplateBasic(ProjectMinishell()),
+    widget: () => BasicPageTemplate(ProjectMinishell()),
+  );
+
+  static final nft = Rt(
+    path: '/nft-gallery',
+    homePage: false,
+    homeWidgetNum: null,
+    title: 'Nft Gallery',
+    widget: () => NftGalleryPage(),
   );
 
   static final List<Rt> all = [
@@ -85,7 +89,8 @@ class Routes {
     Routes.contact,
     Routes.login,
     Routes.messages,
-    Routes.minishell
+    Routes.minishell,
+    Routes.nft,
   ];
 
   static Rt? contains(String? path) {

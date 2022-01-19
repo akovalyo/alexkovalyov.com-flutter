@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'routes.dart';
-import '../appState.dart';
+import '../models/app_state.dart';
 import '../pages/post_page.dart';
 import '../pages/page404.dart';
-import '../pages/template_basic.dart';
+import '../pages/basic_page_template.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   final appState =
@@ -25,7 +25,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       settings,
     );
   }
-  return _getPageRoute(TemplateBasic(Page404()), settings);
+  return _getPageRoute(BasicPageTemplate(Page404()), settings);
 }
 
 PageRoute _getPageRoute(Widget child, RouteSettings settings) {

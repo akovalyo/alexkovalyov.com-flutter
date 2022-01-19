@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:mysite/consts/consts.dart';
-import 'package:mysite/helpers.dart';
-import '../appState.dart';
+import '../consts/consts.dart';
+import '../helpers/screen_helper.dart';
+import '../models/app_state.dart';
 
 class BlogPostCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context);
-    final List<Widget> postCards = appState.getPostCards(context);
+    final List<Widget> postCards = appState.getPostTiles(context);
     return Column(
       children: [
         Padding(
@@ -29,7 +29,9 @@ class BlogPostCards extends StatelessWidget {
         Container(
           padding: EdgeInsets.symmetric(
               vertical: 20,
-              horizontal: isSmallScreen(context) ? paddingSmall : paddingLarge),
+              horizontal: ScreenHelper.isSmallScreen(context)
+                  ? paddingSmall
+                  : paddingLarge),
           child: Wrap(
             spacing: 40,
             runSpacing: 40,

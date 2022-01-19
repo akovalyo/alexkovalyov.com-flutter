@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../consts/consts.dart';
-import '../helpers.dart';
+import '../helpers/screen_helper.dart';
 import '../page_elements/footer.dart';
-import '../widgets/button.dart';
-import '../appState.dart';
+import '../widgets/ak_button.dart';
+import '../models/app_state.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -49,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
               Expanded(
                 child: Center(
                   child: SizedBox(
-                    width: isSmallScreen(context)
+                    width: ScreenHelper.isSmallScreen(context)
                         ? screenSize.width * 0.7
                         : screenSize.width * 0.4,
                     child: Card(

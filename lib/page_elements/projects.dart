@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 import '../consts/consts.dart';
 import '../navigation/routes.dart';
-import '../helpers.dart';
+import '../helpers/screen_helper.dart';
 import '../widgets/project_card.dart';
 import '../widgets/project_button.dart';
 
@@ -29,7 +28,9 @@ class Projects extends StatelessWidget {
         Container(
           padding: EdgeInsets.symmetric(
               vertical: 20,
-              horizontal: isSmallScreen(context) ? paddingSmall : paddingLarge),
+              horizontal: ScreenHelper.isSmallScreen(context)
+                  ? paddingSmall
+                  : paddingLarge),
           child: Wrap(
             spacing: 40,
             runSpacing: 40,

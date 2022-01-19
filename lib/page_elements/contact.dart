@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:mysite/helpers.dart';
-import 'package:mysite/widgets/button.dart';
+import '../helpers/screen_helper.dart';
+import '../widgets/ak_button.dart';
 
 class Contact extends StatefulWidget {
   @override
@@ -90,7 +90,7 @@ class _ContactState extends State<Contact> {
         Container(
           padding: EdgeInsets.only(top: 20, bottom: _screenSize.height * 0.3),
           child: SizedBox(
-            width: isSmallScreen(context)
+            width: ScreenHelper.isSmallScreen(context)
                 ? _screenSize.width * 0.7
                 : _screenSize.width * 0.4,
             child: Container(

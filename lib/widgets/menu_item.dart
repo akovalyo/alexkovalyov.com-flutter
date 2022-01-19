@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:hovering/hovering.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 import '../navigation/routes.dart';
-import '../helpers.dart';
+import '../helpers/navigation_helper.dart';
 
 class MenuItem extends StatelessWidget {
   final String title;
@@ -50,7 +49,7 @@ class MenuItem extends StatelessWidget {
               preferPosition: AutoScrollPosition.begin,
             );
           } else {
-            navKey.currentState!.pushNamed(path);
+            navKey.currentState?.pushNamed(path);
           }
 
           Scaffold.of(context).openEndDrawer();

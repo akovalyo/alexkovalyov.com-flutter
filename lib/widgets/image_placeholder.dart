@@ -1,40 +1,60 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 
-class FadeInImageAny extends StatelessWidget {
+class ImagePlaceholder extends StatelessWidget {
   final String imagePath;
   final Widget placeholder;
   final Widget? child;
   final Duration duration;
   final double width;
-  final double height;
+  final double? height;
   final BoxFit fit;
 
-  const FadeInImageAny({
-    required this.imagePath,
+  final bool loadingIndicator;
+
+  ImagePlaceholder({
+    this.imagePath = '',
     required this.placeholder,
     this.child,
     this.duration = const Duration(milliseconds: 500),
     required this.width,
-    required this.height,
+    this.loadingIndicator = false,
+    this.height,
     required this.fit,
   });
 
   @override
   Widget build(BuildContext context) {
-    ImageProvider _image;
-    if (imagePath.startsWith(RegExp(r'[http|https]'))) {
-      _image = NetworkImage(imagePath);
-    } else {
-      _image = AssetImage(imagePath);
-    }
+    final imageProvider = imagePath.startsWith('http')
+        ? NetworkImage(imagePath)
+        : AssetImage(imagePath) as ImageProvider;
+
     return Image(
-      image: _image,
+      image: imageProvider,
       width: width,
       height: height,
       fit: fit,
+      loadingBuilder: loadingIndicator
+          ? (context, child, loadingProgress) {
+              if (loadingProgress == null) return child;
+
+              double? totalBytes =
+                  loadingProgress.expectedTotalBytes as double?;
+              double bytesLoaded =
+                  loadingProgress.cumulativeBytesLoaded as double;
+
+              return Container(
+                width: width,
+                height: height,
+                child: Center(
+                  child: CircularProgressIndicator(
+                    value: totalBytes != null ? bytesLoaded / totalBytes : null,
+                  ),
+                ),
+              );
+            }
+          : null,
       frameBuilder: (context, child, frame, wasSyncLoaded) {
-        if (wasSyncLoaded || !kIsWeb) {
+        if (wasSyncLoaded) {
           return this.child ?? child;
         } else {
           return AnimatedSwitcher(
@@ -42,6 +62,16 @@ class FadeInImageAny extends StatelessWidget {
             child: frame != null ? this.child ?? child : placeholder,
           );
         }
+      },
+      errorBuilder: (context, error, stackTrace) {
+        return Container(
+          height: width,
+          width: width,
+          color: Theme.of(context).primaryColorDark,
+          child: Center(
+            child: Icon(Icons.error_outline_outlined),
+          ),
+        );
       },
     );
   }

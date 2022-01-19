@@ -3,7 +3,7 @@ import 'package:hovering/hovering.dart';
 import 'package:provider/provider.dart';
 
 import '../navigation/routes.dart';
-import '../appState.dart';
+import '../models/app_state.dart';
 
 class AccountMenu extends StatelessWidget {
   @override
@@ -31,7 +31,7 @@ class AccountMenu extends StatelessWidget {
                   highlightColor: Color(0x00000000),
                   splashColor: Color(0x00000000),
                   onpressed: () {
-                    navKey.currentState!.pushNamed(Routes.messages.path);
+                    navKey.currentState?.pushNamed(Routes.messages.path);
                     Scaffold.of(context).openEndDrawer();
                   },
                 ),
@@ -81,7 +81,7 @@ class AccountMenu extends StatelessWidget {
             highlightColor: Color(0x00000000),
             splashColor: Color(0x00000000),
             onpressed: () {
-              navKey.currentState!.pushNamed(Routes.login.path);
+              navKey.currentState?.pushNamed(Routes.login.path);
 
               Scaffold.of(context).openEndDrawer();
             },

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
-import '../helpers.dart';
+import '../helpers/navigation_helper.dart';
 import '../navigation/routes.dart';
 import '../widgets/menu.dart';
 import '../widgets/hover_icon_button.dart';
 import '../widgets/choice_chip.dart';
 import '../widgets/account_menu.dart';
+import '../widgets/hover_link.dart';
 
 class AkDrawer extends StatelessWidget {
   final AutoScrollController? controller;
@@ -55,7 +56,7 @@ class AkDrawer extends StatelessWidget {
                               curve: Curves.fastOutSlowIn,
                             );
                           } else {
-                            navKey.currentState!.pushNamed(Routes.home.path);
+                            navKey.currentState?.pushNamed(Routes.home.path);
                           }
                           Scaffold.of(context).openEndDrawer();
                         },
@@ -76,6 +77,16 @@ class AkDrawer extends StatelessWidget {
                     fontSize: 18.0,
                     isColumn: true,
                   )),
+            ),
+            Container(
+              padding: const EdgeInsets.only(top: 7),
+              child: HoverLink(
+                title: Routes.nft.title,
+                fontSize: 18,
+                onPressed: () {
+                  navKey.currentState?.pushNamed(Routes.nft.path);
+                },
+              ),
             ),
             Container(
               padding: const EdgeInsets.only(top: 7),

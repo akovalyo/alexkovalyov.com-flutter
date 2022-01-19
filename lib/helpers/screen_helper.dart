@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
-import 'navigation/routes.dart';
 
-bool isSmallScreen(BuildContext context) {
-  return MediaQuery.of(context).size.width < 800;
+class ScreenHelper {
+  static bool isSmallScreen(BuildContext context) {
+    return MediaQuery.of(context).size.width < 800;
+  }
+
+  static double screenWidthDivided(BuildContext context, int percentage) {
+    double width = MediaQuery.of(context).size.width;
+    return width / 100 * percentage;
+  }
+
+  static double screenHeightDivided(BuildContext context, int percentage) {
+    double height = MediaQuery.of(context).size.height;
+    return height / 100 * percentage;
+  }
 }
 
-String? currentRoot() {
-  String? curr;
 
-  navKey.currentState!.popUntil((route) {
-    curr = route.settings.name!;
-    return true;
-  });
-  return curr;
-}
+
+
+
 
 // bool isDesktop() {
 //   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {

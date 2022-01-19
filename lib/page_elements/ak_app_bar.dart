@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:provider/provider.dart';
 
-import '../appState.dart';
-import '../helpers.dart';
+import '../models/app_state.dart';
+import '../helpers/navigation_helper.dart';
 import '../navigation/routes.dart';
 import '../widgets/hover_icon_button.dart';
 import '../widgets/circle_image.dart';
@@ -98,13 +97,14 @@ class _AkAppBarState extends State<AkAppBar> {
       HoverLink(
         title: 'Messages',
         onPressed: () {
-          navKey.currentState!.pushNamed(Routes.messages.path);
+          navKey.currentState?.pushNamed(Routes.messages.path);
         },
       ),
       HoverLink(
         title: 'Logout',
         onPressed: () {
           appState.logout();
+          navKey.currentState?.pushNamed(Routes.home.path);
         },
       ),
     ];
@@ -147,7 +147,7 @@ class _AkAppBarState extends State<AkAppBar> {
                     title: 'Login',
                     fontSize: 16.0,
                     onPressed: () {
-                      navKey.currentState!.pushNamed(Routes.login.path);
+                      navKey.currentState?.pushNamed(Routes.login.path);
                     },
                   ),
           ),
