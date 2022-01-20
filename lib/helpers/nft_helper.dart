@@ -2,7 +2,7 @@ class Blockchain {
   static String etherium = 'Etherium';
   static String wax = 'Wax';
   static String solana = 'Solana';
-  static String palm = 'palm';
+  static String palm = 'Palm';
 
   static List<String> all = [
     etherium,

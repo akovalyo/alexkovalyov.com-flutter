@@ -211,7 +211,7 @@ class NftItemScreen extends StatelessWidget {
                                   : ImagePlaceholder(
                                       width: 250,
                                       height: 250,
-                                      fit: BoxFit.fitWidth,
+                                      fit: BoxFit.fitHeight,
                                       imagePath: item.imageUrl,
                                       placeholder: Container(
                                         height: 250,
@@ -265,7 +265,23 @@ class NftItemScreen extends StatelessWidget {
                                       NftItemField(
                                         leftChild: 'Collection:',
                                         bold: true,
-                                        rightChild: item.collection,
+                                        rightChild: item.collectionUrl !=
+                                                    null &&
+                                                item.collectionUrl!.isNotEmpty
+                                            ? Hyperlink(
+                                                link: item.collectionUrl
+                                                    as String,
+                                                title: item.collection,
+                                              )
+                                            : Text(
+                                                item.collection,
+                                                overflow: TextOverflow.fade,
+                                                softWrap: false,
+                                                style: TextStyle(
+                                                  color: Theme.of(context)
+                                                      .primaryColor,
+                                                ),
+                                              ),
                                         color: Theme.of(context).primaryColor,
                                       ),
                                       NftItemField(

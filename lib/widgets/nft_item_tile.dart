@@ -62,7 +62,7 @@ class _NftItemTileState extends State<NftItemTile> {
                     : ImagePlaceholder(
                         width: 200,
                         height: 200,
-                        fit: BoxFit.fitWidth,
+                        fit: BoxFit.fitHeight,
                         imagePath: widget.item.imageUrl,
                         loadingIndicator: true,
                         placeholder: Container(
@@ -115,6 +115,8 @@ class _NftItemTileState extends State<NftItemTile> {
                             )
                           : Text(
                               widget.item.collection,
+                              overflow: TextOverflow.fade,
+                              softWrap: false,
                               style: TextStyle(
                                 color: Theme.of(context).secondaryHeaderColor,
                               ),
@@ -136,6 +138,8 @@ class _NftItemTileState extends State<NftItemTile> {
                             )
                           : Text(
                               widget.item.blockchain,
+                              overflow: TextOverflow.fade,
+                              softWrap: false,
                               style: TextStyle(
                                 color: Theme.of(context).secondaryHeaderColor,
                               ),
