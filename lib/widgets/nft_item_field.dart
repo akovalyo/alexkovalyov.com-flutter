@@ -15,26 +15,36 @@ class NftItemField extends StatelessWidget {
     this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
   }) : super(key: key);
 
+  Widget flex(Widget child) {
+    return Flexible(
+      child: Container(child: child),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: mainAxisAlignment,
       children: [
         leftChild is String
-            ? Text(
-                leftChild,
-                style: TextStyle(
-                  color: color,
-                  fontWeight: bold ? FontWeight.bold : null,
+            ? flex(
+                Text(
+                  leftChild,
+                  style: TextStyle(
+                    color: color,
+                    fontWeight: bold ? FontWeight.bold : null,
+                  ),
                 ),
               )
-            : leftChild,
+            : flex(leftChild),
         rightChild is String
-            ? Text(
-                rightChild,
-                style: TextStyle(color: color),
+            ? flex(
+                Text(
+                  rightChild,
+                  style: TextStyle(color: color),
+                ),
               )
-            : rightChild,
+            : flex(rightChild),
       ],
     );
   }

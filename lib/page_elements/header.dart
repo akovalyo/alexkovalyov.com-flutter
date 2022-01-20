@@ -49,7 +49,7 @@ class Header extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 20),
                     child: Text(
-                      "Hello, I'm  Alex Kovalyov.\nI'm a software developer.",
+                      'Hello, I\'m  Alex Kovalyov.\nI\'m a software developer.',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 28,

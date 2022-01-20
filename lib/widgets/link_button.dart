@@ -23,6 +23,8 @@ class LinkButton extends StatelessWidget {
           ? titleWidget!
           : Text(
               title,
+              overflow: TextOverflow.fade,
+              softWrap: false,
             ),
       style: ButtonStyle(
           padding: MaterialStateProperty.all(EdgeInsets.all(0)),

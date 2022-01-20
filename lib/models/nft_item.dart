@@ -3,6 +3,7 @@ class NftItem {
   final String title;
   final String imageUrl;
   final String collection;
+  final String? collectionUrl;
   final int tokenId;
   final int totalMinted;
   final String createdBy;
@@ -23,6 +24,7 @@ class NftItem {
       required this.title,
       required this.imageUrl,
       required this.collection,
+      this.collectionUrl,
       required this.tokenId,
       required this.totalMinted,
       required this.createdBy,
@@ -43,6 +45,7 @@ class NftItem {
     String? title,
     String? imageUrl,
     String? collection,
+    String? collectionUrl,
     int? tokenId,
     int? totalMinted,
     String? createdBy,
@@ -63,6 +66,7 @@ class NftItem {
       title: title ?? this.title,
       imageUrl: imageUrl ?? this.imageUrl,
       collection: collection ?? this.collection,
+      collectionUrl: collectionUrl ?? this.collectionUrl,
       tokenId: tokenId ?? this.tokenId,
       totalMinted: totalMinted ?? this.totalMinted,
       createdBy: createdBy ?? this.createdBy,
@@ -87,6 +91,9 @@ class NftItem {
       title: data['title'] as String,
       imageUrl: data['imageUrl'] as String,
       collection: data['collection'] as String,
+      collectionUrl: data['collectionUrl'] == null
+          ? null
+          : data['collectionUrl'] as String,
       tokenId: data['tokenId'] as int,
       totalMinted: data['totalMinted'] as int,
       createdBy: data['createdBy'] as String,
@@ -109,6 +116,7 @@ class NftItem {
       'title': title,
       'imageUrl': imageUrl,
       'collection': collection,
+      'collectionUrl': collectionUrl,
       'tokenId': tokenId,
       'totalMinted': totalMinted,
       'createdBy': createdBy,

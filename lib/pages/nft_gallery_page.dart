@@ -136,7 +136,7 @@ class _NftGalleryPageState extends State<NftGalleryPage> {
                     : paddingLarge),
             sliver: SliverGrid(
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                mainAxisExtent: _appState.isLoggedIn ? 410 : 380,
+                mainAxisExtent: _appState.isLoggedIn ? 420 : 390,
                 maxCrossAxisExtent: 380,
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 10,

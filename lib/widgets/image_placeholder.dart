@@ -47,7 +47,9 @@ class ImagePlaceholder extends StatelessWidget {
                 height: height,
                 child: Center(
                   child: CircularProgressIndicator(
-                    value: totalBytes != null ? bytesLoaded / totalBytes : null,
+                    value: totalBytes != null && totalBytes != 0
+                        ? bytesLoaded / totalBytes
+                        : null,
                   ),
                 ),
               );

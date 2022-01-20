@@ -85,7 +85,7 @@ class NftItemScreen extends StatelessWidget {
               : Container(),
           item.contractAddress != null && item.contractAddress!.isNotEmpty
               ? NftItemField(
-                  leftChild: 'Token address:',
+                  leftChild: 'Contract address:',
                   bold: true,
                   rightChild: item.contractAddress!.startsWith('http')
                       ? Hyperlink(
@@ -99,8 +99,13 @@ class NftItemScreen extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                               )),
                         )
-                      : SelectableText(
-                          item.contractAddress!,
+                      // TODO: copy address on click
+                      : Container(
+                          width: 100,
+                          child: Text(
+                            item.contractAddress!,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   color: Theme.of(context).primaryColor,
@@ -205,6 +210,7 @@ class NftItemScreen extends StatelessWidget {
                                     )
                                   : ImagePlaceholder(
                                       width: 250,
+                                      height: 250,
                                       fit: BoxFit.fitWidth,
                                       imagePath: item.imageUrl,
                                       placeholder: Container(
@@ -215,7 +221,7 @@ class NftItemScreen extends StatelessWidget {
                                       ),
                                     ),
                               Container(
-                                width: 200,
+                                width: 250,
                                 child: Center(
                                   child: Column(
                                     children: [

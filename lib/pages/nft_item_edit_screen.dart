@@ -12,6 +12,7 @@ class TextController {
   final title = TextEditingController();
   final imageUrl = TextEditingController();
   final collection = TextEditingController();
+  final collectionUrl = TextEditingController();
   final tokenId = TextEditingController();
   final totalMinted = TextEditingController();
   final createdBy = TextEditingController();
@@ -25,6 +26,7 @@ class TextController {
     title.dispose();
     imageUrl.dispose();
     collection.dispose();
+    collectionUrl.dispose();
     tokenId.dispose();
     totalMinted.dispose();
     createdBy.dispose();
@@ -39,6 +41,7 @@ class TextController {
     title.clear();
     imageUrl.clear();
     collection.clear();
+    collectionUrl.clear();
     tokenId.clear();
     totalMinted.clear();
     createdBy.clear();
@@ -90,6 +93,7 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
       _textController.title.text = originalItem.title;
       _textController.imageUrl.text = originalItem.imageUrl;
       _textController.collection.text = originalItem.collection;
+      _textController.collectionUrl.text = originalItem.collectionUrl ?? '';
       _textController.tokenId.text = originalItem.tokenId.toString();
       _textController.totalMinted.text = originalItem.totalMinted.toString();
       _textController.createdBy.text = originalItem.createdBy;
@@ -142,6 +146,7 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
                   title: _textController.title.text,
                   imageUrl: _textController.imageUrl.text,
                   collection: _textController.collection.text,
+                  collectionUrl: _textController.collectionUrl.text,
                   tokenId: int.parse(_textController.tokenId.text),
                   totalMinted: int.parse(_textController.totalMinted.text),
                   createdBy: _textController.createdBy.text,
@@ -205,6 +210,12 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
                   label: 'Collection',
                   validator: FormHelper.validator('empty'),
                   mandatory: true,
+                ),
+                FormHelper.textFieldBuilder(
+                  controller: _textController.collectionUrl,
+                  context: context,
+                  label: 'Collection Url',
+                  validator: FormHelper.validator(''),
                 ),
                 FormHelper.textFieldBuilder(
                   controller: _textController.tokenId,

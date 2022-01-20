@@ -79,6 +79,8 @@ class _NftItemTileState extends State<NftItemTile> {
                     NftItemField(
                       leftChild: Text(
                         widget.item.title.toUpperCase(),
+                        overflow: TextOverflow.fade,
+                        softWrap: false,
                         style: TextStyle(
                           color: Theme.of(context).secondaryHeaderColor,
                           fontWeight: FontWeight.w700,
@@ -87,6 +89,8 @@ class _NftItemTileState extends State<NftItemTile> {
                       ),
                       rightChild: Text(
                         '#${widget.item.tokenId.toString()}',
+                        overflow: TextOverflow.fade,
+                        softWrap: false,
                         style: TextStyle(
                           color: Theme.of(context).secondaryHeaderColor,
                           fontWeight: FontWeight.w700,
@@ -102,7 +106,19 @@ class _NftItemTileState extends State<NftItemTile> {
                     ),
                     NftItemField(
                       leftChild: 'Collection:',
-                      rightChild: widget.item.collection,
+                      rightChild: widget.item.collectionUrl != null &&
+                              widget.item.collectionUrl!.isNotEmpty
+                          ? Hyperlink(
+                              link: widget.item.collectionUrl as String,
+                              title: widget.item.collection,
+                              color: Theme.of(context).secondaryHeaderColor,
+                            )
+                          : Text(
+                              widget.item.collection,
+                              style: TextStyle(
+                                color: Theme.of(context).secondaryHeaderColor,
+                              ),
+                            ),
                       color: Theme.of(context).secondaryHeaderColor,
                     ),
                     NftItemField(
@@ -125,6 +141,13 @@ class _NftItemTileState extends State<NftItemTile> {
                               ),
                             ),
                       color: Theme.of(context).secondaryHeaderColor,
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      child: Icon(
+                        Icons.read_more,
+                        semanticLabel: 'Details',
+                      ),
                     ),
                     appState.isLoggedIn && !widget.disableEditButton
                         ? LinkButton(
