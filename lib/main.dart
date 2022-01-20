@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    appState.checkAuth();
     final themeCollection = ThemeCollection(
       themes: {
         AppThemes.light: AppThemes.themeDataLight(),

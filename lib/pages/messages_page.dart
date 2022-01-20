@@ -28,12 +28,15 @@ class MessagesPage extends StatelessWidget {
                 return Center(child: CircularProgressIndicator());
               }
               List<Widget> lst = snapshot.data!.docs.map((element) {
+                Map<String, dynamic> data =
+                    element.data() as Map<String, dynamic>;
+
                 return Column(
                   children: <Widget>[
                     ListTile(
                       tileColor: Theme.of(context).primaryColor,
                       title: SelectableText(
-                        element.data()!['mail'],
+                        data['mail'],
                         style: Theme.of(context).textTheme.bodyText1,
                       ),
                       trailing: IconButton(
@@ -49,13 +52,13 @@ class MessagesPage extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      child: Text(element.data()!['date']),
+                      child: Text(data['date']),
                     ),
                     Container(
                       padding: const EdgeInsets.only(
                         bottom: 20,
                       ),
-                      child: SelectableText(element.data()!['message']),
+                      child: SelectableText(data['message']),
                     ),
                   ],
                 );

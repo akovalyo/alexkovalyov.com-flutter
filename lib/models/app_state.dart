@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import '../helpers/screen_helper.dart';
 import '../consts/consts.dart';
 import '../navigation/routes.dart';
 import '../widgets/hover_blog_container.dart';
+import '../secrets.dart';
 
 class AppState with ChangeNotifier {
   List<Post> _posts = <Post>[];
@@ -21,11 +23,18 @@ class AppState with ChangeNotifier {
 
   Future<void> firebaseInit() async {
     try {
-      await Firebase.initializeApp();
+      await Firebase.initializeApp(options: secrets);
+
+      await FirebaseAppCheck.instance
+          .activate(webRecaptchaSiteKey: reCaptchaSiteKey);
     } catch (error) {
       print('firebase init error: $error');
     }
+  }
+
+  void checkAuth() {
     _loggedIn = FirebaseAuth.instance.currentUser != null;
+    notifyListeners();
   }
 
   void authenticate(String user, String password, BuildContext context) async {
@@ -82,9 +91,8 @@ class AppState with ChangeNotifier {
         await postsRef.orderBy('date', descending: true).get();
 
     snapshot.docs.forEach((pst) {
-      Post post = Post.fromData(pst.data());
+      Post post = Post.fromData(pst.data() as Map<String, dynamic>);
       post.postId = pst.id;
-
       _posts.add(post);
     });
     notifyListeners();

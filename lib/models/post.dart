@@ -79,8 +79,8 @@ class Post {
   List<Widget> decodeBody(BuildContext ctx, AutoScrollController controller,
       DocumentSnapshot snapshot) {
     if (snapshot.data() == null) return <Widget>[];
-    final List<Map> extractedBody = _extractBody(snapshot.data()?['body']);
-
+    Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+    final List<Map> extractedBody = _extractBody(data['body']);
     final List<Widget> listWidget = extractedBody.map((m) {
       final _key = m.keys.toString().replaceAll(RegExp('[()]'), '');
       final _screenSize = MediaQuery.of(ctx).size;
