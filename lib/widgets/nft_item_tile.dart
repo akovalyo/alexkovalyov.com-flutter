@@ -55,7 +55,10 @@ class _NftItemTileState extends State<NftItemTile> {
               Padding(
                 padding: const EdgeInsets.only(top: 20.0, bottom: 10),
                 child: widget.item.videoMediaType
-                    ? VideoPlayer(path: widget.item.imageUrl)
+                    ? VideoPlayer(
+                        path: widget.item.imageUrl,
+                        id: widget.item.id,
+                      )
                     : ImagePlaceholder(
                         width: 200,
                         height: 200,

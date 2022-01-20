@@ -199,6 +199,7 @@ class NftItemScreen extends StatelessWidget {
                               item.videoMediaType
                                   ? VideoPlayer(
                                       path: item.imageUrl,
+                                      id: item.id,
                                       width: 250,
                                       height: 250,
                                     )

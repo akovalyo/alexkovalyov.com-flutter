@@ -5,11 +5,13 @@ import 'package:universal_html/html.dart';
 
 class VideoPlayer extends StatefulWidget {
   final String path;
+  final id;
   final int width;
   final int height;
   const VideoPlayer({
     Key? key,
     required this.path,
+    required this.id,
     this.width = 200,
     this.height = 200,
   }) : super(key: key);
@@ -23,7 +25,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
   void initState() {
     // ignore: undefined_prefixed_name
     ui.platformViewRegistry.registerViewFactory(
-        'video',
+        widget.id,
         (int viewId) => VideoElement()
           ..src = widget.path
           ..width = widget.width
@@ -43,7 +45,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
       width: 200,
       height: 200,
       child: HtmlElementView(
-        viewType: 'video',
+        viewType: widget.id,
       ),
     );
   }
