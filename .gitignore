@@ -51,5 +51,4 @@ app.*.map.json
 .firebaserc
 firebase.json
 
-index.html
 lib/secrets.dart
