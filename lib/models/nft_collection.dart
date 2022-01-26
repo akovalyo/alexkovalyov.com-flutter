@@ -26,8 +26,6 @@ class NftCollection with ChangeNotifier {
       switchStatus();
     }
 
-    print('LOAD NFTS');
-
     _allItems.clear();
     _itemsToShow.clear();
     final Query postsRef = FirebaseFirestore.instance.collection('nft');

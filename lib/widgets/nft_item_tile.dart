@@ -32,7 +32,7 @@ class NftItemTile extends StatefulWidget {
 class _NftItemTileState extends State<NftItemTile> {
   @override
   Widget build(BuildContext context) {
-    final AppState appState = Provider.of<AppState>(context, listen: false);
+    final AppState appState = context.read<AppState>();
 
     return Container(
       decoration: BoxDecoration(
@@ -61,13 +61,13 @@ class _NftItemTileState extends State<NftItemTile> {
                       )
                     : ImagePlaceholder(
                         width: 200,
-                        height: 200,
+                        height: 180,
                         fit: BoxFit.fitHeight,
                         imagePath: widget.item.imageUrl,
                         loadingIndicator: true,
                         placeholder: Container(
                           height: 200,
-                          width: 200,
+                          width: 180,
                           color: Theme.of(context).primaryColorDark,
                         ),
                       ),
@@ -79,7 +79,7 @@ class _NftItemTileState extends State<NftItemTile> {
                     NftItemField(
                       leftChild: Text(
                         widget.item.title.toUpperCase(),
-                        overflow: TextOverflow.fade,
+                        overflow: TextOverflow.clip,
                         softWrap: false,
                         style: TextStyle(
                           color: Theme.of(context).secondaryHeaderColor,
@@ -89,7 +89,7 @@ class _NftItemTileState extends State<NftItemTile> {
                       ),
                       rightChild: Text(
                         '#${widget.item.tokenId.toString()}',
-                        overflow: TextOverflow.fade,
+                        overflow: TextOverflow.clip,
                         softWrap: false,
                         style: TextStyle(
                           color: Theme.of(context).secondaryHeaderColor,
@@ -115,7 +115,7 @@ class _NftItemTileState extends State<NftItemTile> {
                             )
                           : Text(
                               widget.item.collection,
-                              overflow: TextOverflow.fade,
+                              overflow: TextOverflow.clip,
                               softWrap: false,
                               style: TextStyle(
                                 color: Theme.of(context).secondaryHeaderColor,
@@ -138,7 +138,7 @@ class _NftItemTileState extends State<NftItemTile> {
                             )
                           : Text(
                               widget.item.blockchain,
-                              overflow: TextOverflow.fade,
+                              overflow: TextOverflow.clip,
                               softWrap: false,
                               style: TextStyle(
                                 color: Theme.of(context).secondaryHeaderColor,

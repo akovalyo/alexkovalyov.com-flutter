@@ -19,9 +19,9 @@ class AppThemes {
       backgroundColor: ThemeColors.backgroundLight,
       secondaryHeaderColor: ThemeColors.secondaryLight,
       errorColor: ThemeColors.errorLight,
-      splashColor: Color(0x00000000),
-      highlightColor: Color(0x00000000),
-      hoverColor: Color(0x00000000),
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      hoverColor: Colors.transparent,
       textTheme: ThemeData.light().textTheme.copyWith(
             caption: ThemeData.light().textTheme.caption!.copyWith(
                   fontFamily: 'Oswald',
@@ -91,9 +91,9 @@ class AppThemes {
       backgroundColor: ThemeColors.backgroundDark,
       secondaryHeaderColor: ThemeColors.secondaryDark,
       errorColor: ThemeColors.errorDark,
-      splashColor: Color(0x00000000),
-      highlightColor: Color(0x00000000),
-      hoverColor: Color(0x00000000),
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      hoverColor: Colors.transparent,
       textTheme: ThemeData.dark().textTheme.copyWith(
             caption: ThemeData.dark().textTheme.caption!.copyWith(
                   fontFamily: 'Oswald',
@@ -146,11 +146,11 @@ class AppThemes {
       canvasColor: ThemeColors.blackLight,
       iconTheme: akIconTheme(ThemeData.dark().iconTheme, Colors.white),
       buttonTheme: const ButtonThemeData(
-        highlightColor: Color(0x00000000),
-        splashColor: Color(0x00000000),
-        hoverColor: Color(0x00000000),
-        buttonColor: Color(0x00000000),
-        focusColor: Color(0x00000000),
+        highlightColor: Colors.transparent,
+        splashColor: Colors.transparent,
+        hoverColor: Colors.transparent,
+        buttonColor: Colors.transparent,
+        focusColor: Colors.transparent,
         textTheme: ButtonTextTheme.primary,
       ),
       colorScheme: ThemeData.light().colorScheme.copyWith(
@@ -167,9 +167,9 @@ class AppThemes {
       primaryColorDark: ThemeColors.accentBlackLight,
       backgroundColor: ThemeColors.background2077,
       errorColor: ThemeColors.errorLight,
-      splashColor: Color(0x00000000),
-      highlightColor: Color(0x00000000),
-      hoverColor: Color(0x00000000),
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      hoverColor: Colors.transparent,
       textTheme: ThemeData.light().textTheme.copyWith(
             caption: ThemeData.light().textTheme.caption!.copyWith(
                   fontFamily: 'Oswald',

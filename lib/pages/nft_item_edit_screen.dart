@@ -54,16 +54,16 @@ class TextController {
 }
 
 class NftItemEditScreen extends StatefulWidget {
-  final Function(NftItem) onCreate;
-  final Function(NftItem) onUpdate;
+  final Function(NftItem) onSave;
+  // final Function(NftItem) onUpdate;
   final Function(NftItem) onDelete;
   final NftItem? originalItem;
   final bool updateOriginal;
 
   const NftItemEditScreen({
     Key? key,
-    required this.onCreate,
-    required this.onUpdate,
+    required this.onSave,
+    // required this.onUpdate,
     required this.onDelete,
     this.originalItem,
   })  : updateOriginal = originalItem != null,
@@ -164,11 +164,8 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
                   rarity: _rarity.value,
                   videoMediaType: _videoMediaType,
                 );
-                if (widget.updateOriginal) {
-                  widget.onUpdate(nftItem);
-                } else {
-                  widget.onCreate(nftItem);
-                }
+
+                widget.onSave(nftItem);
               }
             },
           ),
