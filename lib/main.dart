@@ -7,6 +7,7 @@ import 'models/app_state.dart';
 import 'theme/theme.dart';
 import 'navigation/routes.dart';
 import 'navigation/route_generator.dart';
+import 'models/nft_collection.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => appState),
+        ChangeNotifierProvider(create: (_) => NftCollection()),
       ],
       child: DynamicTheme(
         themeCollection: themeCollection,
