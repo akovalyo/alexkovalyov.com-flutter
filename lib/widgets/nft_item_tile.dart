@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import '../models/nft_item.dart';
 import '../widgets/image_placeholder.dart';
-import '../widgets/link_button.dart';
 import '../models/app_state.dart';
 import '../pages/nft_item_screen.dart';
 import '../widgets/nft_item_field.dart';
@@ -154,10 +153,10 @@ class _NftItemTileState extends State<NftItemTile> {
                       ),
                     ),
                     appState.isLoggedIn && !widget.disableEditButton
-                        ? LinkButton(
+                        ? Hyperlink(
                             title: 'Edit',
                             color: Theme.of(context).secondaryHeaderColor,
-                            onPressed: widget.onPressedEditButton!,
+                            onTap: widget.onPressedEditButton!,
                           )
                         : Container(),
                   ],

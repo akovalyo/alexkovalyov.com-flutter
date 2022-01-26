@@ -6,7 +6,7 @@ import '../models/nft_item.dart';
 import '../helpers/nft_helper.dart';
 import '../helpers/form_helper.dart';
 import '../models/variable_wrapper.dart';
-import '../widgets/link_button.dart';
+import '../widgets/hyperlink.dart';
 
 class TextController {
   final title = TextEditingController();
@@ -175,9 +175,9 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
         padding: const EdgeInsets.all(20),
         child: ListView(
           children: [
-            LinkButton(
+            Hyperlink(
               title: 'Clear form',
-              onPressed: () {
+              onTap: () {
                 setState(() {
                   _textController.clear();
                   clearVars();
@@ -358,10 +358,10 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
               ),
             ),
             widget.updateOriginal
-                ? LinkButton(
+                ? Hyperlink(
                     title: 'Delete',
                     color: Colors.red,
-                    onPressed: () => showDialog<String>(
+                    onTap: () => showDialog<String>(
                       context: context,
                       builder: (BuildContext context) => AlertDialog(
                         title: const Text('Delete NFT'),
@@ -405,9 +405,9 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
               width: 10,
             ),
             clear != null
-                ? LinkButton(
+                ? Hyperlink(
                     title: 'Clear',
-                    onPressed: () {
+                    onTap: () {
                       setState(() {
                         variable.value = '';
                       });
@@ -457,9 +457,9 @@ class _NftItemEditScreenState extends State<NftItemEditScreen> {
         const SizedBox(
           width: 20,
         ),
-        LinkButton(
+        Hyperlink(
           title: 'Select',
-          onPressed: () async {
+          onTap: () async {
             final currentDate = date.value;
 
             final selectedDate = await showDatePicker(

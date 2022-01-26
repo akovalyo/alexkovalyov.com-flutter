@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mysite/helpers/nft_helper.dart';
-import 'package:mysite/navigation/routes.dart';
 import 'package:provider/provider.dart';
-import 'dart:async';
 
 import '../models/nft_item.dart';
 import '../page_elements/drawer.dart';
@@ -14,9 +11,7 @@ import '../models/app_state.dart';
 import 'nft_item_edit_screen.dart';
 import '../widgets/nft_item_tile.dart';
 import '../page_elements/footer.dart';
-import '../widgets/nft_gallery_header.dart';
 import '../models/nft_collection.dart';
-import '../widgets/hover_link.dart';
 import '../widgets/nft_filter_field.dart';
 
 class NftGalleryPage extends StatefulWidget {
@@ -49,10 +44,6 @@ class _NftGalleryPageState extends State<NftGalleryPage> {
     );
   }
 
-  // Widget buildFilterField(String title,) {
-
-  // }
-
   @override
   Widget build(BuildContext context) {
     final _screenSize = MediaQuery.of(context).size;
@@ -80,7 +71,6 @@ class _NftGalleryPageState extends State<NftGalleryPage> {
       drawer: AkDrawer(),
       body: CustomScrollView(
         slivers: [
-          // Header with filters
           SliverAppBar(
             pinned: true,
             backgroundColor: Theme.of(context).backgroundColor,
@@ -93,8 +83,6 @@ class _NftGalleryPageState extends State<NftGalleryPage> {
                   currentChoice: collection.currentFilterCollectionTitle,
                   choices: collection.titles,
                   onSelected: (String value) {
-                    // print(value);
-
                     collection.filterCollection(value);
                   },
                 ),

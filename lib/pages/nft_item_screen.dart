@@ -1,13 +1,11 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:mysite/widgets/hyperlink.dart';
-import 'package:universal_html/js.dart' as js;
 import 'package:intl/intl.dart';
 
 import 'package:mysite/helpers/screen_helper.dart';
 import '../widgets/image_placeholder.dart';
 import '../models/nft_item.dart';
-import '../widgets/link_button.dart';
 import '../widgets/nft_item_field.dart';
 import '../widgets/video_player.dart';
 
@@ -295,12 +293,10 @@ class NftItemScreen extends StatelessWidget {
                                         leftChild: 'Created by:',
                                         bold: true,
                                         rightChild: item.createdByUrl != null
-                                            ? LinkButton(
+                                            ? Hyperlink(
                                                 title: item.createdBy,
-                                                onPressed: () {
-                                                  js.context.callMethod('open',
-                                                      [item.createdByUrl]);
-                                                },
+                                                link:
+                                                    item.createdByUrl as String,
                                               )
                                             : Text(
                                                 item.blockchain,

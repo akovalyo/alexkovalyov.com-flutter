@@ -32,7 +32,7 @@ class _NftFilterFieldState extends State<NftFilterField> {
 
     return Container(
       constraints: BoxConstraints(
-        maxWidth: (_screenWidth - 40) / 2,
+        maxWidth: (_screenWidth - 60) / 2,
       ),
       padding: EdgeInsets.only(
         top: 5,
@@ -52,7 +52,7 @@ class _NftFilterFieldState extends State<NftFilterField> {
             '${widget.title}: $_currentChoice',
             style: TextStyle(
               fontSize: 14,
-              fontWeight: FontWeight.normal,
+              fontWeight: FontWeight.w200,
               color: Theme.of(context).primaryColor,
             ),
             overflow: TextOverflow.clip,
