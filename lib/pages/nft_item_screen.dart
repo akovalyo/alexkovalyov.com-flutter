@@ -275,7 +275,7 @@ class NftItemScreen extends StatelessWidget {
                                               )
                                             : Text(
                                                 item.collection,
-                                                overflow: TextOverflow.fade,
+                                                overflow: TextOverflow.clip,
                                                 softWrap: false,
                                                 style: TextStyle(
                                                   color: Theme.of(context)

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mysite/helpers/nft_helper.dart';
+import 'package:mysite/navigation/routes.dart';
 import 'package:provider/provider.dart';
+import 'dart:async';
 
 import '../models/nft_item.dart';
 import '../page_elements/drawer.dart';
@@ -12,6 +15,9 @@ import 'nft_item_edit_screen.dart';
 import '../widgets/nft_item_tile.dart';
 import '../page_elements/footer.dart';
 import '../widgets/nft_gallery_header.dart';
+import '../models/nft_collection.dart';
+import '../widgets/hover_link.dart';
+import '../widgets/nft_filter_field.dart';
 
 class NftGalleryPage extends StatefulWidget {
   const NftGalleryPage({Key? key}) : super(key: key);
@@ -21,43 +27,7 @@ class NftGalleryPage extends StatefulWidget {
 }
 
 class _NftGalleryPageState extends State<NftGalleryPage> {
-  var nftItems = <NftItem>[];
-  bool isLoading = false;
-
-  void loadNfts() async {
-    setState(() {
-      isLoading = true;
-    });
-
-    nftItems.clear();
-    final Query postsRef = FirebaseFirestore.instance.collection('nft');
-    final QuerySnapshot snapshot =
-        await postsRef.orderBy('dateAcquired', descending: true).get();
-
-    setState(() {
-      snapshot.docs.forEach((e) {
-        NftItem nft = NftItem.fromData(e.data() as Map<String, dynamic>, e.id);
-        nftItems.add(nft);
-      });
-
-      isLoading = false;
-    });
-  }
-
-  void saveNft(NftItem item) async {
-    if (item.id != null) {
-      await FirebaseFirestore.instance
-          .collection('nft')
-          .doc(item.id)
-          .update(item.toJson());
-    } else {
-      await FirebaseFirestore.instance.collection('nft').add(item.toJson());
-    }
-  }
-
-  void deleteNft(NftItem item) async {
-    await FirebaseFirestore.instance.collection('nft').doc(item.id).delete();
-  }
+  late NftCollection collection;
 
   void openNftItemEditScreen(NftItem? item) {
     Navigator.push(
@@ -65,35 +35,34 @@ class _NftGalleryPageState extends State<NftGalleryPage> {
       MaterialPageRoute(
         builder: (context) => NftItemEditScreen(
             originalItem: item,
-            onCreate: (item) {
-              saveNft(item);
-              loadNfts();
-              Navigator.pop(context);
-            },
-            onUpdate: (item) {
-              saveNft(item);
-              loadNfts();
+            onSave: (item) {
+              collection.saveItem(item);
+              collection.load();
               Navigator.pop(context);
             },
             onDelete: (item) {
-              deleteNft(item);
-              loadNfts();
+              collection.deleteItem(item);
+              collection.load();
               Navigator.pop(context);
             }),
       ),
     );
   }
 
-  @override
-  void initState() {
-    loadNfts();
-    super.initState();
-  }
+  // Widget buildFilterField(String title,) {
+
+  // }
 
   @override
   Widget build(BuildContext context) {
     final _screenSize = MediaQuery.of(context).size;
-    final AppState _appState = Provider.of<AppState>(context, listen: false);
+    final AppState _appState = context.watch<AppState>();
+    collection = context.watch<NftCollection>();
+    collection.load(true);
+    String itemsTitle = collection.itemsToShow.length.toString() + ' item';
+    if (collection.itemsToShow.length != 1) {
+      itemsTitle += 's';
+    }
     return Scaffold(
       floatingActionButton: _appState.isLoggedIn
           ? FloatingActionButton(
@@ -112,14 +81,45 @@ class _NftGalleryPageState extends State<NftGalleryPage> {
       body: CustomScrollView(
         slivers: [
           // Header with filters
-          // SliverPersistentHeader(
-          //   delegate: NftGalleryHeader(),
-          //   pinned: true,
-          //   floating: false,
-          // ),
+          SliverAppBar(
+            pinned: true,
+            backgroundColor: Theme.of(context).backgroundColor,
+            automaticallyImplyLeading: false,
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                NftFilterField(
+                  title: 'Collection',
+                  currentChoice: collection.currentFilterCollectionTitle,
+                  choices: collection.titles,
+                  onSelected: (String value) {
+                    // print(value);
+
+                    collection.filterCollection(value);
+                  },
+                ),
+                Text(
+                  itemsTitle,
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.normal,
+                      color: Theme.of(context).primaryColor),
+                ),
+                NftFilterField(
+                  title: 'Filter by',
+                  choices: NftSortTypes.all,
+                  currentChoice: NftSortTypes.dateNewest,
+                  onSelected: (String value) {
+                    collection.sortCollection(value);
+                  },
+                ),
+              ],
+            ),
+          ),
+
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
+              padding: const EdgeInsets.only(bottom: 20),
               child: Center(
                   child: Text(
                 'Nft Gallery',
@@ -134,27 +134,34 @@ class _NftGalleryPageState extends State<NftGalleryPage> {
                 horizontal: ScreenHelper.isSmallScreen(context)
                     ? paddingSmall
                     : paddingLarge),
-            sliver: SliverGrid(
-              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                mainAxisExtent: _appState.isLoggedIn ? 420 : 390,
-                maxCrossAxisExtent: 380,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-              ),
-              delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-                  return NftItemTile(
-                    width: 300,
-                    height: 430,
-                    item: nftItems[index],
-                    onPressedEditButton: () {
-                      openNftItemEditScreen(nftItems[index]);
-                    },
-                  );
-                },
-                childCount: nftItems.length,
-              ),
-            ),
+            sliver: collection.isLoading == true
+                ? SliverToBoxAdapter(
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  )
+                : SliverGrid(
+                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                      mainAxisExtent: _appState.isLoggedIn ? 420 : 390,
+                      maxCrossAxisExtent: 380,
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10,
+                    ),
+                    delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) {
+                        return NftItemTile(
+                          width: 300,
+                          height: _appState.isLoggedIn ? 420 : 380,
+                          item: collection.itemsToShow[index],
+                          onPressedEditButton: () {
+                            openNftItemEditScreen(
+                                collection.itemsToShow[index]);
+                          },
+                        );
+                      },
+                      childCount: collection.itemsToShow.length,
+                    ),
+                  ),
           ),
 
           SliverFillRemaining(),

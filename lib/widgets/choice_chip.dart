@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:dynamic_themes/dynamic_themes.dart';
 
-import '../consts/colors.dart';
 import '../theme/theme.dart';
+import '../theme/theme_helper.dart';
 
 class ThemeChoiceChip extends StatefulWidget {
   @override
@@ -72,7 +72,7 @@ class _ThemeChoiceChipState extends State<ThemeChoiceChip> {
           labelStyle:
               TextStyle(color: _theme == 2 ? Colors.black : Colors.white),
           backgroundColor: Color(0x00000000),
-          selectedColor: cp2077,
+          selectedColor: ThemeColors.background2077,
           selected: _theme == 2,
           onSelected: (_) {
             DynamicTheme.of(context)?.setTheme(AppThemes.theme2077);

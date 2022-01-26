@@ -23,7 +23,7 @@ class LinkButton extends StatelessWidget {
           ? titleWidget!
           : Text(
               title,
-              overflow: TextOverflow.fade,
+              overflow: TextOverflow.clip,
               softWrap: false,
             ),
       style: ButtonStyle(
@@ -35,18 +35,23 @@ class LinkButton extends StatelessWidget {
                 decoration: TextDecoration.underline,
                 fontFamily: 'Oswald',
                 fontSize: fontSize,
-                fontWeight: FontWeight.w400,
               );
             }
             return TextStyle(
               fontFamily: 'Oswald',
               fontSize: fontSize,
               decoration: TextDecoration.underline,
-              fontWeight: FontWeight.w200,
             );
           }),
-          foregroundColor: MaterialStateProperty.all(
-              color != null ? color : Theme.of(context).colorScheme.secondary),
+          foregroundColor:
+              MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+            final col =
+                color != null ? color : Theme.of(context).colorScheme.secondary;
+            if (states.any(interactiveStates.contains)) {
+              return col!.withOpacity(0.6);
+            }
+            return col;
+          }),
           overlayColor: MaterialStateProperty.all(Colors.transparent)),
       onPressed: onPressed,
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:mysite/consts/colors.dart';
+import 'theme_helper.dart';
 
 class AppThemes {
   static const int light = 0;
@@ -14,21 +14,21 @@ class AppThemes {
   static ThemeData themeDataLight() {
     return ThemeData.light().copyWith(
       // brightness: brightness,
-      primaryColor: akBlackL,
-      primaryColorDark: akBlackLAcc,
-      secondaryHeaderColor: Colors.white,
-      backgroundColor: Colors.white,
-      errorColor: akAlertL,
-      splashColor: Color(0x00000000),
-      highlightColor: Color(0x00000000),
-      hoverColor: Color(0x00000000),
+      primaryColor: ThemeColors.blackLight,
+      primaryColorDark: ThemeColors.accentBlackLight,
+      backgroundColor: ThemeColors.backgroundLight,
+      secondaryHeaderColor: ThemeColors.secondaryLight,
+      errorColor: ThemeColors.errorLight,
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      hoverColor: Colors.transparent,
       textTheme: ThemeData.light().textTheme.copyWith(
             caption: ThemeData.light().textTheme.caption!.copyWith(
                   fontFamily: 'Oswald',
                   fontWeight: FontWeight.w300,
                   fontSize: 20,
                   height: 1.5,
-                  color: akAccentL,
+                  color: ThemeColors.accentLight,
                   decoration: TextDecoration.underline,
                 ),
             bodyText1: ThemeData.light().textTheme.bodyText1!.copyWith(
@@ -46,23 +46,23 @@ class AppThemes {
                 ),
             headline3: ThemeData.light().textTheme.headline3!.copyWith(
                   fontFamily: 'Oswald',
-                  color: akHeadlineL,
+                  color: ThemeColors.headline,
                   fontWeight: FontWeight.w500,
                   fontSize: 40,
                 ),
             headline4: ThemeData.light().textTheme.headline4!.copyWith(
                   fontFamily: 'Oswald',
-                  color: akHeadlineL,
+                  color: ThemeColors.headline,
                   fontWeight: FontWeight.w500,
                 ),
             headline5: ThemeData.light().textTheme.headline5!.copyWith(
                   fontFamily: 'Oswald',
-                  color: akHeadlineL,
+                  color: ThemeColors.headline,
                   fontSize: 28,
                 ),
             headline6: ThemeData.light().textTheme.headline6!.copyWith(
                   fontFamily: 'Oswald',
-                  color: akHeadlineL,
+                  color: ThemeColors.headline,
                   fontSize: 24,
                 ),
             button: ThemeData.light().textTheme.button!.copyWith(
@@ -71,14 +71,14 @@ class AppThemes {
                   color: Colors.white,
                 ),
           ),
-      canvasColor: akBlackL,
+      canvasColor: ThemeColors.blackLight,
       iconTheme: akIconTheme(ThemeData.light().iconTheme, Colors.white),
       buttonTheme: ButtonThemeData(
         textTheme: ButtonTextTheme.primary,
-        buttonColor: akBlackL,
+        buttonColor: ThemeColors.blackLight,
       ),
       colorScheme: ThemeData.light().colorScheme.copyWith(
-            secondary: akAccentL,
+            secondary: ThemeColors.accentLight,
           ),
     );
   }
@@ -86,21 +86,21 @@ class AppThemes {
   static ThemeData themeDataDark() {
     return ThemeData.dark().copyWith(
       // brightness: brightness,
-      primaryColor: akBlackD,
-      primaryColorDark: akBlackDAcc,
-      backgroundColor: akBackD,
-      secondaryHeaderColor: akHeadlineD,
-      errorColor: akAlertD,
-      splashColor: Color(0x00000000),
-      highlightColor: Color(0x00000000),
-      hoverColor: Color(0x00000000),
+      primaryColor: ThemeColors.blackDark,
+      primaryColorDark: ThemeColors.accentBlackDark,
+      backgroundColor: ThemeColors.backgroundDark,
+      secondaryHeaderColor: ThemeColors.secondaryDark,
+      errorColor: ThemeColors.errorDark,
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      hoverColor: Colors.transparent,
       textTheme: ThemeData.dark().textTheme.copyWith(
             caption: ThemeData.dark().textTheme.caption!.copyWith(
                   fontFamily: 'Oswald',
                   fontWeight: FontWeight.w200,
                   fontSize: 20,
                   height: 1.5,
-                  color: akAccentD,
+                  color: ThemeColors.accentDark,
                   decoration: TextDecoration.underline,
                 ),
             bodyText1: ThemeData.dark().textTheme.bodyText1!.copyWith(
@@ -108,34 +108,34 @@ class AppThemes {
                   fontWeight: FontWeight.w200,
                   fontSize: 20,
                   height: 1.5,
-                  color: akHeadlineD,
+                  color: ThemeColors.secondaryDark,
                 ),
             bodyText2: ThemeData.dark().textTheme.bodyText2!.copyWith(
                   fontFamily: 'Oswald',
                   fontWeight: FontWeight.w200,
                   fontSize: 20,
                   height: 1.5,
-                  color: akHeadlineD,
+                  color: ThemeColors.secondaryDark,
                 ),
             headline3: ThemeData.dark().textTheme.headline3!.copyWith(
                   fontFamily: 'Oswald',
-                  color: akHeadlineL,
+                  color: ThemeColors.headline,
                   fontWeight: FontWeight.w500,
                   fontSize: 40,
                 ),
             headline4: ThemeData.dark().textTheme.headline4!.copyWith(
                   fontFamily: 'Oswald',
-                  color: akHeadlineD,
+                  color: ThemeColors.secondaryDark,
                   fontWeight: FontWeight.w500,
                 ),
             headline5: ThemeData.dark().textTheme.headline5!.copyWith(
                   fontFamily: 'Oswald',
-                  color: akHeadlineD,
+                  color: ThemeColors.secondaryDark,
                   fontSize: 28,
                 ),
             headline6: ThemeData.dark().textTheme.headline6!.copyWith(
                   fontFamily: 'Oswald',
-                  color: akHeadlineD,
+                  color: ThemeColors.secondaryDark,
                   fontSize: 24,
                 ),
             button: ThemeData.dark().textTheme.button!.copyWith(
@@ -143,18 +143,18 @@ class AppThemes {
                   color: Colors.white,
                 ),
           ),
-      canvasColor: akBlackL,
+      canvasColor: ThemeColors.blackLight,
       iconTheme: akIconTheme(ThemeData.dark().iconTheme, Colors.white),
       buttonTheme: const ButtonThemeData(
-        highlightColor: Color(0x00000000),
-        splashColor: Color(0x00000000),
-        hoverColor: Color(0x00000000),
-        buttonColor: Color(0x00000000),
-        focusColor: Color(0x00000000),
+        highlightColor: Colors.transparent,
+        splashColor: Colors.transparent,
+        hoverColor: Colors.transparent,
+        buttonColor: Colors.transparent,
+        focusColor: Colors.transparent,
         textTheme: ButtonTextTheme.primary,
       ),
       colorScheme: ThemeData.light().colorScheme.copyWith(
-            secondary: akAccentD,
+            secondary: ThemeColors.accentDark,
           ),
     );
   }
@@ -162,21 +162,21 @@ class AppThemes {
   static ThemeData themeData2077() {
     return ThemeData.light().copyWith(
       // brightness: brightness,
-      primaryColor: akBlackL,
-      secondaryHeaderColor: cp2077,
-      primaryColorDark: akBlackLAcc,
-      backgroundColor: cp2077,
-      errorColor: akAlertL,
-      splashColor: Color(0x00000000),
-      highlightColor: Color(0x00000000),
-      hoverColor: Color(0x00000000),
+      primaryColor: ThemeColors.blackLight,
+      secondaryHeaderColor: ThemeColors.background2077,
+      primaryColorDark: ThemeColors.accentBlackLight,
+      backgroundColor: ThemeColors.background2077,
+      errorColor: ThemeColors.errorLight,
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      hoverColor: Colors.transparent,
       textTheme: ThemeData.light().textTheme.copyWith(
             caption: ThemeData.light().textTheme.caption!.copyWith(
                   fontFamily: 'Oswald',
                   fontWeight: FontWeight.w200,
                   fontSize: 20,
                   height: 1.5,
-                  color: cpBlue,
+                  color: ThemeColors.secondary2077,
                   decoration: TextDecoration.underline,
                 ),
             bodyText1: ThemeData.light().textTheme.bodyText1!.copyWith(
@@ -184,7 +184,7 @@ class AppThemes {
                   fontWeight: FontWeight.w200,
                   fontSize: 20,
                   height: 1.5,
-                  color: cp2077,
+                  color: ThemeColors.secondary2077,
                 ),
             bodyText2: ThemeData.light().textTheme.bodyText2!.copyWith(
                   fontFamily: 'Oswald',
@@ -199,16 +199,16 @@ class AppThemes {
                 ),
             headline4: ThemeData.light().textTheme.headline4!.copyWith(
                   fontFamily: 'Cyberpunk',
-                  color: cpBlue,
+                  color: ThemeColors.secondary2077,
                 ),
             headline5: ThemeData.light().textTheme.headline5!.copyWith(
                   fontFamily: 'Cyberpunk',
-                  color: cpBlue,
+                  color: ThemeColors.secondary2077,
                   fontSize: 28,
                 ),
             headline6: ThemeData.light().textTheme.headline6!.copyWith(
                   fontFamily: 'Cyberpunk',
-                  color: cpBlue,
+                  color: ThemeColors.secondary2077,
                   fontSize: 24,
                 ),
             button: ThemeData.light().textTheme.button!.copyWith(
@@ -216,14 +216,15 @@ class AppThemes {
                   color: Colors.white,
                 ),
           ),
-      canvasColor: akBlackL,
-      iconTheme: akIconTheme(ThemeData.light().iconTheme, cpBlue),
+      canvasColor: ThemeColors.blackLight,
+      iconTheme:
+          akIconTheme(ThemeData.light().iconTheme, ThemeColors.secondary2077),
       buttonTheme: const ButtonThemeData(
         textTheme: ButtonTextTheme.primary,
         buttonColor: Colors.black,
       ),
       colorScheme: ThemeData.light().colorScheme.copyWith(
-            secondary: cpBlue,
+            secondary: ThemeColors.secondary2077,
           ),
     );
   }

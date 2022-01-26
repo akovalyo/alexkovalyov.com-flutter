@@ -8,7 +8,7 @@ import '../models/app_state.dart';
 class BlogPostCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final appState = Provider.of<AppState>(context);
+    final appState = context.watch<AppState>();
     final List<Widget> postCards = appState.getPostTiles(context);
     return Column(
       children: [

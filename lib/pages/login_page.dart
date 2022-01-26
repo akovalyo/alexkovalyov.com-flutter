@@ -31,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final height = screenSize.height - appBarHeight - footerHeight;
-    AppState appState = Provider.of<AppState>(context);
+    final AppState appState = context.watch<AppState>();
 
     return ConstrainedBox(
       constraints: BoxConstraints(
