@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mysite/helpers/nft_helper.dart';
 import 'package:mysite/navigation/routes.dart';
 import 'package:provider/provider.dart';
 import 'dart:async';
@@ -58,6 +59,10 @@ class _NftGalleryPageState extends State<NftGalleryPage> {
     final AppState _appState = context.watch<AppState>();
     collection = context.watch<NftCollection>();
     collection.load(true);
+    String itemsTitle = collection.itemsToShow.length.toString() + ' item';
+    if (collection.itemsToShow.length != 1) {
+      itemsTitle += 's';
+    }
     return Scaffold(
       floatingActionButton: _appState.isLoggedIn
           ? FloatingActionButton(
@@ -88,33 +93,30 @@ class _NftGalleryPageState extends State<NftGalleryPage> {
                   currentChoice: collection.currentFilterCollectionTitle,
                   choices: collection.titles,
                   onSelected: (String value) {
-                    print(value);
+                    // print(value);
 
                     collection.filterCollection(value);
                   },
                 ),
-
                 Text(
-                  collection.itemsToShow.length.toString(),
-                  style:
-                      TextStyle(color: Theme.of(context).secondaryHeaderColor),
+                  itemsTitle,
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.normal,
+                      color: Theme.of(context).primaryColor),
                 ),
-                // Text(
-                //   'Filter by: Date Acquired',
-                //   overflow: TextOverflow.fade,
-                //   softWrap: false,
-                //   style: TextStyle(color: Colors.black),
-                // ),
+                NftFilterField(
+                  title: 'Filter by',
+                  choices: NftSortTypes.all,
+                  currentChoice: NftSortTypes.dateNewest,
+                  onSelected: (String value) {
+                    collection.sortCollection(value);
+                  },
+                ),
               ],
             ),
           ),
-          // SliverPersistentHeader(
-          //   delegate: NftGalleryHeader(
-          //       totalItems: collection.itemsToShow.length,
-          //       collections: collection.titles),
-          //   pinned: true,
-          //   floating: false,
-          // ),
+
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.only(bottom: 20),

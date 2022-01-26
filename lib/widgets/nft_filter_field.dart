@@ -37,7 +37,7 @@ class _NftFilterFieldState extends State<NftFilterField> {
       padding: EdgeInsets.only(
         top: 5,
         bottom: 5,
-        left: 10,
+        left: 5,
         right: 5,
       ),
       decoration: BoxDecoration(

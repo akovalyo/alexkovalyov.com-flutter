@@ -133,4 +133,20 @@ class NftItem {
       'videoMediaType': videoMediaType,
     };
   }
+
+  dynamic getValueByStringProperty(String property) {
+    final dynamic value = this.toJson()[property];
+
+    switch (property) {
+      case 'dateMinted':
+      case 'dateAcquired':
+        {
+          return DateTime.parse(value);
+        }
+      default:
+        {
+          return value;
+        }
+    }
+  }
 }
