@@ -6,7 +6,7 @@ import '../models/app_state.dart';
 class MessagesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final AppState appState = Provider.of<AppState>(context);
+    final AppState appState = context.watch<AppState>();
     late CollectionReference messages;
     if (appState.isLoggedIn) {
       messages = FirebaseFirestore.instance.collection('messages');

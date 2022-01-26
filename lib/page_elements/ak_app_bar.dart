@@ -59,7 +59,7 @@ class _AkAppBarState extends State<AkAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    final appState = Provider.of<AppState>(context);
+    final appState = context.watch<AppState>();
     final leadingMenuButton = IconButton(
       color: Theme.of(context).secondaryHeaderColor,
       icon: const Icon(Icons.menu),

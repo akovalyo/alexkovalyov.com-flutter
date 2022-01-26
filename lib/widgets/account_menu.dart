@@ -8,7 +8,7 @@ import '../models/app_state.dart';
 class AccountMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final AppState appState = Provider.of<AppState>(context);
+    final AppState appState = context.watch<AppState>();
 
     return appState.isLoggedIn
         ? Column(
