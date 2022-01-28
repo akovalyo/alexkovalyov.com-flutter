@@ -42,8 +42,8 @@ class _VideoPlayerState extends State<VideoPlayer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 200,
-      height: 200,
+      width: widget.width as double,
+      height: widget.height as double,
       child: HtmlElementView(
         viewType: widget.id,
       ),

@@ -58,11 +58,13 @@ class _NftItemTileState extends State<NftItemTile> {
                     ? VideoPlayer(
                         path: widget.item.imageUrl,
                         id: widget.item.id,
+                        width: 180,
+                        height: 180,
                       )
                     : ImagePlaceholder(
-                        width: 200,
+                        width: 180,
                         height: 180,
-                        fit: BoxFit.fitHeight,
+                        fit: BoxFit.scaleDown,
                         imagePath: widget.item.imageUrl,
                         loadingIndicator: true,
                         placeholder: Container(
@@ -147,6 +149,9 @@ class _NftItemTileState extends State<NftItemTile> {
                       color: Theme.of(context).secondaryHeaderColor,
                     ),
                     Container(
+                      padding: const EdgeInsets.only(
+                        top: 5,
+                      ),
                       alignment: Alignment.center,
                       child: Icon(
                         Icons.read_more,
