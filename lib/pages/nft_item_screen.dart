@@ -1,6 +1,5 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:mysite/widgets/hyperlink.dart';
 import 'package:intl/intl.dart';
 
 import 'package:mysite/helpers/screen_helper.dart';
@@ -8,6 +7,7 @@ import '../widgets/image_placeholder.dart';
 import '../models/nft_item.dart';
 import '../widgets/nft_item_field.dart';
 import '../widgets/video_player.dart';
+import '../widgets/link_button.dart';
 
 class NftItemScreen extends StatelessWidget {
   final NftItem item;
@@ -86,13 +86,13 @@ class NftItemScreen extends StatelessWidget {
                   leftChild: 'Contract address:',
                   bold: true,
                   rightChild: item.contractAddress!.startsWith('http')
-                      ? Hyperlink(
-                          link: item.contractAddress!,
-                          title: item.contractAddress!.split('/').last,
+                      ? LinkButton(
+                          href: item.contractAddress!,
+                          title: LinkButton.splitHref(item.contractAddress!),
                           titleWidget: Container(
                               width: 100,
                               child: Text(
-                                item.contractAddress!.split('/').last,
+                                LinkButton.splitHref(item.contractAddress!),
                                 softWrap: true,
                                 overflow: TextOverflow.ellipsis,
                               )),
@@ -114,13 +114,13 @@ class NftItemScreen extends StatelessWidget {
                   leftChild: 'Token address:',
                   bold: true,
                   rightChild: item.tokenAddress!.startsWith('http')
-                      ? Hyperlink(
-                          link: item.tokenAddress!,
-                          title: item.tokenAddress!.split('/').last,
+                      ? LinkButton(
+                          href: item.tokenAddress!,
+                          title: LinkButton.splitHref(item.tokenAddress!),
                           titleWidget: Container(
                               width: 100,
                               child: Text(
-                                item.tokenAddress!.split('/').last,
+                                LinkButton.splitHref(item.tokenAddress!),
                                 softWrap: true,
                                 overflow: TextOverflow.ellipsis,
                               )),
@@ -266,8 +266,8 @@ class NftItemScreen extends StatelessWidget {
                                         rightChild: item.collectionUrl !=
                                                     null &&
                                                 item.collectionUrl!.isNotEmpty
-                                            ? Hyperlink(
-                                                link: item.collectionUrl
+                                            ? LinkButton(
+                                                href: item.collectionUrl
                                                     as String,
                                                 title: item.collection,
                                               )
@@ -293,9 +293,9 @@ class NftItemScreen extends StatelessWidget {
                                         leftChild: 'Created by:',
                                         bold: true,
                                         rightChild: item.createdByUrl != null
-                                            ? Hyperlink(
+                                            ? LinkButton(
                                                 title: item.createdBy,
-                                                link:
+                                                href:
                                                     item.createdByUrl as String,
                                               )
                                             : Text(
