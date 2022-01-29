@@ -7,7 +7,6 @@ import '../widgets/link_button.dart';
 import '../models/app_state.dart';
 import '../pages/nft_item_screen.dart';
 import '../widgets/nft_item_field.dart';
-import '../widgets/hyperlink.dart';
 import 'video_player.dart';
 
 class NftItemTile extends StatefulWidget {
@@ -110,8 +109,8 @@ class _NftItemTileState extends State<NftItemTile> {
                       leftChild: 'Collection:',
                       rightChild: widget.item.collectionUrl != null &&
                               widget.item.collectionUrl!.isNotEmpty
-                          ? Hyperlink(
-                              link: widget.item.collectionUrl as String,
+                          ? LinkButton(
+                              href: widget.item.collectionUrl as String,
                               title: widget.item.collection,
                               color: Theme.of(context).secondaryHeaderColor,
                             )
@@ -133,8 +132,8 @@ class _NftItemTileState extends State<NftItemTile> {
                     NftItemField(
                       leftChild: 'Created by:',
                       rightChild: widget.item.createdByUrl != null
-                          ? Hyperlink(
-                              link: widget.item.createdByUrl as String,
+                          ? LinkButton(
+                              href: widget.item.createdByUrl as String,
                               title: widget.item.createdBy,
                               color: Theme.of(context).secondaryHeaderColor,
                             )

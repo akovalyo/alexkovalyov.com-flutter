@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/theme_helper.dart';
+import 'package:universal_html/js.dart' as js;
 
 class LinkButton extends StatelessWidget {
   final String? title;
@@ -38,6 +39,17 @@ class LinkButton extends StatelessWidget {
     );
   }
 
+  VoidCallback _buildOnPressed(VoidCallback? onPressed) {
+    if (href != null) {
+      return () {
+        js.context.callMethod('open', [href]);
+      };
+    } else if (onPressed != null) {
+      return onPressed;
+    }
+    return () {};
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextButton(
@@ -71,7 +83,7 @@ class LinkButton extends StatelessWidget {
             return col;
           }),
           overlayColor: MaterialStateProperty.all(Colors.transparent)),
-      onPressed: onPressed != null ? onPressed : () {},
+      onPressed: _buildOnPressed(onPressed),
     );
   }
 }
