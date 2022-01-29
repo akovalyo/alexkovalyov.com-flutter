@@ -7,6 +7,7 @@ import '../models/app_state.dart';
 import '../pages/nft_item_screen.dart';
 import '../widgets/nft_item_field.dart';
 import 'video_player.dart';
+import '../widgets/link_button.dart';
 
 class NftItemTile extends StatefulWidget {
   final NftItem item;
@@ -157,10 +158,10 @@ class _NftItemTileState extends State<NftItemTile> {
                       ),
                     ),
                     appState.isLoggedIn && !widget.disableEditButton
-                        ? Hyperlink(
+                        ? LinkButton(
                             title: 'Edit',
                             color: Theme.of(context).secondaryHeaderColor,
-                            onTap: widget.onPressedEditButton!,
+                            onPressed: widget.onPressedEditButton!,
                           )
                         : Container(),
                   ],
