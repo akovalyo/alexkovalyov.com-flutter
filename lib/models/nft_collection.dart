@@ -20,6 +20,25 @@ class NftCollection with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> loadNftItemsFromFirestore() async {
+    _allItems.clear();
+    _itemsToShow.clear();
+
+    final Query postsRef = FirebaseFirestore.instance.collection('nft');
+    final QuerySnapshot snapshot = await postsRef.get();
+    snapshot.docs.forEach((e) {
+      NftItem nft = NftItem.fromData(e.data() as Map<String, dynamic>, e.id);
+      _allItems.add(nft);
+    });
+
+    sortCollection(currentSortType);
+    _titles = getCollectionNames();
+    filterCollection(
+      currentFilterCollectionTitle,
+      force: true,
+    );
+  }
+
   Future<void> load([bool initialLoad = false]) async {
     if (initialLoad && _allItems.isNotEmpty) {
       return;
@@ -27,19 +46,8 @@ class NftCollection with ChangeNotifier {
     if (!initialLoad) {
       switchStatus();
     }
+    await loadNftItemsFromFirestore();
 
-    _allItems.clear();
-    _itemsToShow.clear();
-    final Query postsRef = FirebaseFirestore.instance.collection('nft');
-    final QuerySnapshot snapshot = await postsRef.get();
-
-    snapshot.docs.forEach((e) {
-      NftItem nft = NftItem.fromData(e.data() as Map<String, dynamic>, e.id);
-      _allItems.add(nft);
-    });
-    _itemsToShow = [..._allItems];
-    sortCollection(currentSortType);
-    _titles = getCollectionNames();
     switchStatus();
   }
 
@@ -62,17 +70,21 @@ class NftCollection with ChangeNotifier {
     } else {
       await FirebaseFirestore.instance.collection('nft').add(item.toJson());
     }
+
+    await loadNftItemsFromFirestore();
+
     switchStatus();
   }
 
   Future<void> deleteItem(NftItem item) async {
     switchStatus();
     await FirebaseFirestore.instance.collection('nft').doc(item.id).delete();
+    await loadNftItemsFromFirestore();
     switchStatus();
   }
 
-  void filterCollection(String collectionName) {
-    if (currentFilterCollectionTitle == collectionName) return;
+  void filterCollection(String collectionName, {bool force = false}) {
+    if (currentFilterCollectionTitle == collectionName && !force) return;
     switchStatus();
     _itemsToShow.clear();
     if (collectionName == 'All') {

@@ -32,12 +32,10 @@ class _NftGalleryPageState extends State<NftGalleryPage> {
             originalItem: item,
             onSave: (item) {
               collection.saveItem(item);
-              collection.load();
               Navigator.pop(context);
             },
             onDelete: (item) {
               collection.deleteItem(item);
-              collection.load();
               Navigator.pop(context);
             }),
       ),
