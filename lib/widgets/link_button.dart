@@ -55,7 +55,9 @@ class LinkButton extends StatelessWidget {
     return TextButton(
       child: _buildChild(),
       style: ButtonStyle(
-          padding: MaterialStateProperty.all(EdgeInsets.all(0)),
+          minimumSize: MaterialStateProperty.all(Size.zero),
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          padding: MaterialStateProperty.all(EdgeInsets.zero),
           textStyle:
               MaterialStateProperty.resolveWith((Set<MaterialState> states) {
             if (states.any(interactiveStates.contains)) {

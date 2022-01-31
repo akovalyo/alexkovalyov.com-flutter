@@ -29,8 +29,9 @@ class MenuItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          padding: EdgeInsets.symmetric(vertical: 2),
+          padding: EdgeInsets.zero,
           child: HoverButton(
+            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             padding: const EdgeInsets.symmetric(vertical: 0),
             child: Text(title,
                 style: TextStyle(
