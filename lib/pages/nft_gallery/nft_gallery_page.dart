@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:mysite/helpers/nft_helper.dart';
 import 'package:provider/provider.dart';
 
-import '../models/nft_item.dart';
-import '../page_elements/drawer.dart';
-import '../page_elements/ak_app_bar.dart';
-import '../consts/consts.dart';
-import '../helpers/screen_helper.dart';
-import '../models/app_state.dart';
+import '../../models/nft_item.dart';
+import '../../page_elements/drawer.dart';
+import '../../page_elements/ak_app_bar.dart';
+import '../../consts/consts.dart';
+import '../../helpers/screen_helper.dart';
+import '../../models/app_state.dart';
 import 'nft_item_edit_screen.dart';
-import '../widgets/nft_item_tile.dart';
-import '../page_elements/footer.dart';
-import '../models/nft_collection.dart';
-import '../widgets/nft_filter_field.dart';
+import 'nft_item_tile.dart';
+import '../../page_elements/footer.dart';
+import '../../models/nft_collection.dart';
+import 'nft_filter_field.dart';
 
 class NftGalleryPage extends StatefulWidget {
   const NftGalleryPage({Key? key}) : super(key: key);

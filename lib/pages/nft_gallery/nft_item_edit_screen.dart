@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:mysite/widgets/nft_item_tile.dart';
+import 'package:mysite/pages/nft_gallery/nft_item_tile.dart';
 import 'package:intl/intl.dart';
 
-import '../models/nft_item.dart';
-import '../helpers/nft_helper.dart';
-import '../helpers/form_helper.dart';
-import '../models/variable_wrapper.dart';
-import '../widgets/link_button.dart';
+import '../../models/nft_item.dart';
+import '../../helpers/nft_helper.dart';
+import '../../helpers/form_helper.dart';
+import '../../models/variable_wrapper.dart';
+import '../../widgets/link_button.dart';
 
 class TextController {
   final title = TextEditingController();

@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import 'package:mysite/helpers/screen_helper.dart';
-import '../widgets/image_placeholder.dart';
-import '../models/nft_item.dart';
-import '../widgets/nft_item_field.dart';
-import '../widgets/video_player.dart';
-import '../widgets/link_button.dart';
+import '../../widgets/image_placeholder.dart';
+import '../../models/nft_item.dart';
+import 'nft_item_field.dart';
+import '../../widgets/video_player.dart';
+import '../../widgets/link_button.dart';
 
 class NftItemScreen extends StatelessWidget {
   final NftItem item;
