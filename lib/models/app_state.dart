@@ -71,7 +71,7 @@ class AppState with ChangeNotifier {
     }
   }
 
-  void logout() async {
+  Future<void> logout() async {
     final auth = FirebaseAuth.instance;
     isLoading = true;
     notifyListeners();

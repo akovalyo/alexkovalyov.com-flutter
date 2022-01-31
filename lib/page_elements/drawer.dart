@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+import 'package:provider/provider.dart';
 
 import '../helpers/navigation_helper.dart';
 import '../navigation/routes.dart';
-import '../widgets/menu.dart';
 import '../widgets/hover_icon_button.dart';
 import '../widgets/choice_chip.dart';
-import '../widgets/account_menu.dart';
-import '../widgets/hover_link.dart';
+import '../models/app_state.dart';
+import '../models/menu_items_list.dart';
+import '../widgets/menu_item.dart';
 
 class AkDrawer extends StatelessWidget {
   final AutoScrollController? controller;
@@ -17,7 +18,7 @@ class AkDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _screenHeight = MediaQuery.of(context).size.height;
-
+    final AppState appState = context.watch<AppState>();
     FocusScope.of(context).unfocus();
     return Drawer(
       child: Container(
@@ -72,25 +73,31 @@ class AkDrawer extends StatelessWidget {
             Container(
               child: Padding(
                   padding: const EdgeInsets.only(top: 25),
-                  child: AkMenu(
-                    controller: controller == null ? null : controller,
-                    fontSize: 18.0,
-                    isColumn: true,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: menuItemsList
+                        .map((elem) {
+                          if (elem['onlyAdmin'] == true &&
+                              !appState.isLoggedIn) {
+                            return null;
+                          }
+
+                          if (appState.isLoggedIn &&
+                              elem['isLoggedin'] == 'hide') {
+                            return null;
+                          }
+
+                          return MenuItem(
+                            controller: controller == null ? null : controller,
+                            title: elem['title'] as String,
+                            path: elem['path'] as String,
+                            fontSize: 18,
+                          );
+                        })
+                        .where((e) => e != null)
+                        .cast<Widget>()
+                        .toList(),
                   )),
-            ),
-            Container(
-              padding: const EdgeInsets.only(top: 7),
-              child: HoverLink(
-                title: Routes.nft.title,
-                fontSize: 18,
-                onPressed: () {
-                  navKey.currentState?.pushNamed(Routes.nft.path);
-                },
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.only(top: 7),
-              child: AccountMenu(),
             ),
             SizedBox(
               height: 30,
