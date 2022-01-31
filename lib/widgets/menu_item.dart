@@ -12,12 +12,14 @@ class MenuItem extends StatelessWidget {
   final String path;
   final AutoScrollController? controller;
   final double fontSize;
+  final bool inAppbar;
 
   const MenuItem({
     required this.title,
     required this.path,
     this.controller,
     required this.fontSize,
+    this.inAppbar = false,
   });
 
   @override
@@ -43,7 +45,18 @@ class MenuItem extends StatelessWidget {
             splashColor: Color(0x00000000),
             onpressed: () async {
               final currRoot = currentRoot();
-              if (Routes.homePageContains(currRoot) != null &&
+
+              if (path == 'logout') {
+                await appState.logout();
+                navKey.currentState?.pushNamed(Routes.home.path);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Signed out'),
+                    backgroundColor: Colors.green[600]!.withOpacity(0.7),
+                  ),
+                );
+              } else if (!inAppbar &&
+                  Routes.homePageContains(currRoot) != null &&
                   Routes.homePageContains(path) != null) {
                 Rt? route = Routes.homePageContains(path);
                 FocusScope.of(context).unfocus();
@@ -53,20 +66,9 @@ class MenuItem extends StatelessWidget {
                   preferPosition: AutoScrollPosition.begin,
                 );
               } else {
-                if (path == 'logout') {
-                  await appState.logout();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Signed out'),
-                      backgroundColor: Colors.green[600]!.withOpacity(0.7),
-                    ),
-                  );
-                } else {
-                  navKey.currentState?.pushNamed(path);
-                }
+                navKey.currentState?.pushNamed(path);
               }
-              // navKey.currentState?.pushNamed(path);
-              Scaffold.of(context).openEndDrawer();
+              if (!inAppbar) Scaffold.of(context).openEndDrawer();
             },
           ),
         ),

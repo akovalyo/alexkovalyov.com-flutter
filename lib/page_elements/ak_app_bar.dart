@@ -9,7 +9,7 @@ import '../widgets/hover_icon_button.dart';
 import '../widgets/circle_image.dart';
 import '../consts/consts.dart';
 
-import '../widgets/hover_link.dart';
+import '../widgets/menu_item.dart';
 
 class AkAppBar extends StatefulWidget {
   final AutoScrollController? controller;
@@ -93,19 +93,18 @@ class _AkAppBarState extends State<AkAppBar> {
       ),
     );
 
-    List<HoverLink> menuLinks = [
-      HoverLink(
+    List<MenuItem> menuLinks = [
+      MenuItem(
         title: 'Messages',
-        onPressed: () {
-          navKey.currentState?.pushNamed(Routes.messages.path);
-        },
+        path: Routes.messages.path,
+        fontSize: 16,
+        inAppbar: true,
       ),
-      HoverLink(
+      MenuItem(
         title: 'Logout',
-        onPressed: () {
-          appState.logout();
-          navKey.currentState?.pushNamed(Routes.home.path);
-        },
+        path: 'logout',
+        fontSize: 16,
+        inAppbar: true,
       ),
     ];
 
@@ -143,12 +142,11 @@ class _AkAppBarState extends State<AkAppBar> {
                         return PopupMenuItem(child: link);
                       }).toList();
                     })
-                : HoverLink(
+                : MenuItem(
                     title: 'Login',
                     fontSize: 16.0,
-                    onPressed: () {
-                      navKey.currentState?.pushNamed(Routes.login.path);
-                    },
+                    path: Routes.login.path,
+                    inAppbar: true,
                   ),
           ),
         ),

@@ -80,7 +80,7 @@ class _NftItemTileState extends State<NftItemTile> {
                     NftItemField(
                       leftChild: Text(
                         widget.item.title.toUpperCase(),
-                        overflow: TextOverflow.clip,
+                        overflow: TextOverflow.visible,
                         softWrap: false,
                         style: TextStyle(
                           color: Theme.of(context).secondaryHeaderColor,
