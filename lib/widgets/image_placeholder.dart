@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import '../widgets/ak_circular_progress_indicator.dart';
 
 class ImagePlaceholder extends StatelessWidget {
   final String imagePath;
   final Widget placeholder;
   final Widget? child;
   final Duration duration;
-  final double width;
+  final double? width;
   final double? height;
-  final BoxFit fit;
+  final BoxFit? fit;
 
   final bool loadingIndicator;
 
@@ -16,10 +17,10 @@ class ImagePlaceholder extends StatelessWidget {
     required this.placeholder,
     this.child,
     this.duration = const Duration(milliseconds: 500),
-    required this.width,
+    this.width,
     this.loadingIndicator = false,
     this.height,
-    required this.fit,
+    this.fit = BoxFit.fill,
   });
 
   @override
@@ -45,8 +46,9 @@ class ImagePlaceholder extends StatelessWidget {
               return Container(
                 width: width,
                 height: height,
+                color: Theme.of(context).primaryColorDark,
                 child: Center(
-                  child: CircularProgressIndicator(
+                  child: AkCircularProgressIndicator(
                     value: totalBytes != null && totalBytes != 0
                         ? bytesLoaded / totalBytes
                         : null,

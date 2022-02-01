@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/image_placeholder.dart';
+
 class AnimatedImage extends StatelessWidget {
   final String path;
   final Alignment alignment;
@@ -7,14 +9,17 @@ class AnimatedImage extends StatelessWidget {
   final double? enlargedWidth;
   final double? height;
   final double? enlargedHeight;
+  final bool loadingIndicator;
 
-  AnimatedImage(
-      {required this.path,
-      this.alignment = Alignment.center,
-      this.width,
-      this.enlargedWidth,
-      this.height,
-      this.enlargedHeight});
+  AnimatedImage({
+    required this.path,
+    this.alignment = Alignment.center,
+    this.width,
+    this.enlargedWidth,
+    this.height,
+    this.enlargedHeight,
+    this.loadingIndicator = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +36,15 @@ class AnimatedImage extends StatelessWidget {
         mouseCursor: SystemMouseCursors.zoomIn,
         child: Hero(
           tag: id,
-          child: Image(
-            image: _image,
+          child: ImagePlaceholder(
+            loadingIndicator: loadingIndicator,
+            imagePath: path,
+            width: width,
+            placeholder: Container(
+              height: width,
+              width: height,
+              color: Theme.of(context).primaryColorDark,
+            ),
           ),
         ),
         onTap: () {
