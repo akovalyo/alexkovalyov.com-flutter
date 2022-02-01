@@ -11,6 +11,7 @@ import '../consts/consts.dart';
 import '../widgets/image_placeholder.dart';
 import '../helpers/screen_helper.dart';
 import '../widgets/scroll_upward.dart';
+import '../widgets/ak_circular_progress_indicator.dart';
 
 class PostPage extends StatefulWidget {
   final Post post;
@@ -77,7 +78,7 @@ class _PostPageState extends State<PostPage> {
       ),
       drawer: AkDrawer(controller: controller),
       body: isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? Center(child: AkCircularProgressIndicator())
           : Stack(
               children: <Widget>[
                 VsScrollbar(

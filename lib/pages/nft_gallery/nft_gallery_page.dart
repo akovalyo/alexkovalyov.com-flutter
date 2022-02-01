@@ -13,6 +13,7 @@ import 'nft_item_tile.dart';
 import '../../page_elements/footer.dart';
 import '../../models/nft_collection.dart';
 import 'nft_filter_field.dart';
+import '../../widgets/ak_circular_progress_indicator.dart';
 
 class NftGalleryPage extends StatefulWidget {
   const NftGalleryPage({Key? key}) : super(key: key);
@@ -123,7 +124,7 @@ class _NftGalleryPageState extends State<NftGalleryPage> {
             sliver: collection.isLoading == true
                 ? SliverToBoxAdapter(
                     child: Center(
-                      child: CircularProgressIndicator(),
+                      child: AkCircularProgressIndicator(),
                     ),
                   )
                 : SliverGrid(

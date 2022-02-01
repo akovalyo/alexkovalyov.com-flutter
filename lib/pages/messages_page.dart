@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
+
 import '../models/app_state.dart';
+import '../widgets/ak_circular_progress_indicator.dart';
 
 class MessagesPage extends StatelessWidget {
   @override
@@ -25,7 +27,7 @@ class MessagesPage extends StatelessWidget {
                 );
               }
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
+                return Center(child: AkCircularProgressIndicator());
               }
               List<Widget> lst = snapshot.data!.docs.map((element) {
                 Map<String, dynamic> data =

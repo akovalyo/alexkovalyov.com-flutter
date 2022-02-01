@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../navigation/routes.dart';
 import '../helpers/navigation_helper.dart';
 import '../models/app_state.dart';
+import 'ak_circular_progress_indicator.dart';
 
 class MenuItem extends StatelessWidget {
   final String title;
@@ -74,7 +75,7 @@ class MenuItem extends StatelessWidget {
           ),
         ),
         path == 'logout' && appState.isLoading
-            ? CircularProgressIndicator()
+            ? AkCircularProgressIndicator()
             : Container(),
       ],
     );

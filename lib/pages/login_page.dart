@@ -6,6 +6,7 @@ import '../helpers/screen_helper.dart';
 import '../page_elements/footer.dart';
 import '../widgets/ak_button.dart';
 import '../models/app_state.dart';
+import '../widgets/ak_circular_progress_indicator.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -117,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                                 SizedBox(height: 20),
                                 appState.isLoading
                                     ? Center(
-                                        child: CircularProgressIndicator(),
+                                        child: AkCircularProgressIndicator(),
                                       )
                                     : AkButton(
                                         onPressed: () =>

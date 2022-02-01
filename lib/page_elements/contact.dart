@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../helpers/screen_helper.dart';
 import '../widgets/ak_button.dart';
+import '../widgets/ak_circular_progress_indicator.dart';
 
 class Contact extends StatefulWidget {
   @override
@@ -146,7 +147,7 @@ class _ContactState extends State<Contact> {
                       ),
                       Container(height: 20),
                       _isLoading
-                          ? Center(child: CircularProgressIndicator())
+                          ? Center(child: AkCircularProgressIndicator())
                           : AkButton(
                               onPressed: _trySubmit,
                               child: Text(
