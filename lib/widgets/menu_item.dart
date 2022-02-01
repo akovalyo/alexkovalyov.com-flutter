@@ -29,7 +29,7 @@ class MenuItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          padding: EdgeInsets.zero,
+          padding: EdgeInsets.symmetric(vertical: 3),
           child: HoverButton(
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             padding: const EdgeInsets.symmetric(vertical: 0),

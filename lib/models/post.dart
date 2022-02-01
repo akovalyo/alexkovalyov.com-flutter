@@ -252,11 +252,12 @@ class Post {
           } else if (_atribute == '[right]') {
             _alignment = Alignment.centerRight;
           }
-          final _child = Container(
-            alignment: _alignment,
-            width: _screenSize.width * 0.6,
-            child: AnimatedImage(_path),
-          );
+          final _child = AnimatedImage(
+              alignment: _alignment,
+              width: _screenSize.width * 0.5,
+              enlargedWidth: _screenSize.width * 0.8,
+              path: _path);
+
           if (_widgetIdx == 0) return _child;
           return WrapScrollTag(
               child: _child, controller: controller, index: _widgetIdx);
