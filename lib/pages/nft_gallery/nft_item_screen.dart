@@ -8,6 +8,7 @@ import '../../models/nft_item.dart';
 import 'nft_item_field.dart';
 import '../../widgets/video_player.dart';
 import '../../widgets/link_button.dart';
+import '../../widgets/animated_image.dart';
 
 class NftItemScreen extends StatelessWidget {
   final NftItem item;
@@ -206,17 +207,11 @@ class NftItemScreen extends StatelessWidget {
                                       width: 250,
                                       height: 250,
                                     )
-                                  : ImagePlaceholder(
+                                  : AnimatedImage(
                                       width: 250,
                                       height: 250,
                                       fit: BoxFit.fitHeight,
-                                      imagePath: item.imageUrl,
-                                      placeholder: Container(
-                                        height: 250,
-                                        width: 250,
-                                        color:
-                                            Theme.of(context).primaryColorDark,
-                                      ),
+                                      path: item.imageUrl,
                                     ),
                               Container(
                                 width: 250,

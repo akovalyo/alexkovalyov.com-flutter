@@ -10,6 +10,7 @@ class AnimatedImage extends StatelessWidget {
   final double? height;
   final double? enlargedHeight;
   final bool loadingIndicator;
+  final BoxFit? fit;
 
   AnimatedImage({
     required this.path,
@@ -19,6 +20,7 @@ class AnimatedImage extends StatelessWidget {
     this.height,
     this.enlargedHeight,
     this.loadingIndicator = false,
+    this.fit,
   });
 
   @override
@@ -40,6 +42,7 @@ class AnimatedImage extends StatelessWidget {
             loadingIndicator: loadingIndicator,
             imagePath: path,
             width: width,
+            fit: fit,
             placeholder: Container(
               height: width,
               width: height,

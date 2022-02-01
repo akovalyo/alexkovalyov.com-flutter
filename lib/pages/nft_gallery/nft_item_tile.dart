@@ -55,21 +55,7 @@ class _NftItemTileState extends State<NftItemTile> {
                       width: 180,
                       height: 180,
                       loadingIndicator: true,
-                    )
-
-              // ImagePlaceholder(
-              //     width: 180,
-              //     height: 180,
-              //     fit: BoxFit.scaleDown,
-              //     imagePath: widget.item.imageUrl,
-              //     loadingIndicator: true,
-              //     placeholder: Container(
-              //       height: 200,
-              //       width: 180,
-              //       color: Theme.of(context).primaryColorDark,
-              //     ),
-              //   ),
-              ),
+                    )),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
