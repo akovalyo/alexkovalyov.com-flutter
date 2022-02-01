@@ -254,7 +254,8 @@ class Post {
           }
           final _child = AnimatedImage(
               alignment: _alignment,
-              width: _screenSize.width * 0.5,
+              fit: BoxFit.fitWidth,
+              // width: _screenSize.width * 0.5,
               enlargedWidth: _screenSize.width * 0.8,
               path: _path);
 

@@ -2,8 +2,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'package:mysite/helpers/screen_helper.dart';
-import '../../widgets/image_placeholder.dart';
+import '../../helpers/screen_helper.dart';
+import '../../widgets/TextToClipboard.dart';
 import '../../models/nft_item.dart';
 import 'nft_item_field.dart';
 import '../../widgets/video_player.dart';
@@ -98,13 +98,9 @@ class NftItemScreen extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                               )),
                         )
-                      // TODO: copy address on click
-                      : Container(
-                          width: 100,
-                          child: Text(
-                            item.contractAddress!,
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                      : TextToClipboard(
+                          textToCopy: item.contractAddress!,
+                          description: 'Contract address',
                         ),
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   color: Theme.of(context).primaryColor,
@@ -126,8 +122,9 @@ class NftItemScreen extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                               )),
                         )
-                      : SelectableText(
-                          item.tokenAddress!,
+                      : TextToClipboard(
+                          textToCopy: item.tokenAddress!,
+                          description: 'Token address',
                         ),
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   color: Theme.of(context).primaryColor,

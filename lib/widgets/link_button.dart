@@ -52,40 +52,44 @@ class LinkButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      child: _buildChild(),
-      style: ButtonStyle(
-          minimumSize: MaterialStateProperty.all(Size.zero),
-          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          padding: MaterialStateProperty.all(EdgeInsets.zero),
-          textStyle:
-              MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-            if (states.any(interactiveStates.contains)) {
+    return Tooltip(
+      message: href != null ? href : '',
+      child: TextButton(
+        child: _buildChild(),
+        style: ButtonStyle(
+            minimumSize: MaterialStateProperty.all(Size.zero),
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            padding: MaterialStateProperty.all(EdgeInsets.zero),
+            textStyle:
+                MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+              if (states.any(interactiveStates.contains)) {
+                return TextStyle(
+                  decoration: TextDecoration.underline,
+                  fontFamily: 'Oswald',
+                  fontSize: fontSize,
+                  fontWeight: FontWeight.w200,
+                );
+              }
               return TextStyle(
-                decoration: TextDecoration.underline,
                 fontFamily: 'Oswald',
                 fontSize: fontSize,
+                decoration: TextDecoration.underline,
                 fontWeight: FontWeight.w200,
               );
-            }
-            return TextStyle(
-              fontFamily: 'Oswald',
-              fontSize: fontSize,
-              decoration: TextDecoration.underline,
-              fontWeight: FontWeight.w200,
-            );
-          }),
-          foregroundColor:
-              MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-            final col =
-                color != null ? color : Theme.of(context).colorScheme.secondary;
-            if (states.any(interactiveStates.contains)) {
-              return col!.withOpacity(0.6);
-            }
-            return col;
-          }),
-          overlayColor: MaterialStateProperty.all(Colors.transparent)),
-      onPressed: _buildOnPressed(onPressed),
+            }),
+            foregroundColor:
+                MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+              final col = color != null
+                  ? color
+                  : Theme.of(context).colorScheme.secondary;
+              if (states.any(interactiveStates.contains)) {
+                return col!.withOpacity(0.6);
+              }
+              return col;
+            }),
+            overlayColor: MaterialStateProperty.all(Colors.transparent)),
+        onPressed: _buildOnPressed(onPressed),
+      ),
     );
   }
 }
