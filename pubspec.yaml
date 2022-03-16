@@ -1,7 +1,7 @@
 name: mysite
-description: A new Flutter project.
+description: Alex Kovalyov Personal site
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
-version: 2.3.4+3
+version: 2.3.5+30
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -62,6 +62,7 @@ flutter:
     - assets/images/projects/project_minishell.png
     - assets/images/projects/instaharvest.png
     - assets/images/projects/css_tree.png
+    - assets/images/projects/wcdonalds_app.jpg
     - assets/images/marvin.png
     - assets/images/python.png
     - assets/images/null.png

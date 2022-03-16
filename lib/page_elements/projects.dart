@@ -35,6 +35,33 @@ class Projects extends StatelessWidget {
             spacing: 40,
             runSpacing: 40,
             children: [
+              // ProjectCard(
+              //   imageProvider: NetworkImage(
+              //       'https://github.com/akovalyo/wcdonalds_app/blob/main/assets/images/android_app.jpg'),
+              //   label: 'app',
+              //   description: 'Android app for NFT project made in Flutter',
+              //   firstButton: ProjectButton(
+              //       title: 'Play Store',
+              //       link:
+              //           'https://play.google.com/store/apps/details?id=com.wcdonalds.app'),
+              //   secondButton: ProjectButton(
+              //       title: 'Code',
+              //       link: 'https://github.com/akovalyo/wcdonalds_app'),
+              // ),
+              ProjectCard(
+                imageProvider:
+                    AssetImage('assets/images/projects/wcdonalds_app.jpg'),
+                label: 'android',
+                title: 'Android App',
+                description: 'Android app for NFT project made in Flutter',
+                firstButton: ProjectButton(
+                    title: 'Play Store',
+                    link:
+                        'https://play.google.com/store/apps/details?id=com.wcdonalds.app'),
+                secondButton: ProjectButton(
+                    title: 'Code',
+                    link: 'https://github.com/akovalyo/wcdonalds_app'),
+              ),
               ProjectCard(
                 imageProvider:
                     AssetImage('assets/images/projects/css_tree.png'),
